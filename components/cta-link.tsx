@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { publicUrl } from "@/lib/public-url";
 
 export function CtaLink({
   href,
@@ -19,11 +20,11 @@ export function CtaLink({
     className,
   );
   const icon = (
-    <span
-      className={cn(
-        "inline-block h-6 w-6 shrink-0 rounded-full border-2 transition-transform group-hover:scale-110",
-        light ? "border-white" : "border-black",
-      )}
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={publicUrl(light ? "/media/FlrcoDiRgKnutLY8XFLHsozkAE.png" : "/media/iWgN0bK1Gy8ikvnb2jS91LrzNQ.png")}
+      alt=""
+      className="h-6 w-6 shrink-0 transition-transform group-hover:scale-110"
       aria-hidden
     />
   );
