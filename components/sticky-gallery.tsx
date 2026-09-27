@@ -1,48 +1,122 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+type GalleryImageData = { src: string; alt: string };
+
+function GalleryPicture({
+  image,
+  className = "",
+  decorative = false,
+}: {
+  image: GalleryImageData;
+  className?: string;
+  decorative?: boolean;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={image.src} alt={decorative ? "" : image.alt} className={className} aria-hidden={decorative || undefined} />
+  );
+}
 
 export function StickyGallery({
   caption,
   images,
 }: {
   caption: string;
-  images: { src: string; alt: string }[];
+  images: GalleryImageData[];
 }) {
   const ref = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
-      const el = ref.current;
-      if (!el) return;
-      const total = el.offsetHeight - window.innerHeight;
-      const scrolled = Math.min(Math.max(-el.getBoundingClientRect().top, 0), total);
-      setProgress(total > 0 ? scrolled / total : 0);
+    const section = ref.current;
+    if (!section) return;
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let sectionTop = 0;
+    let range = 1;
+    let raf = 0;
+
+    const measure = () => {
+      sectionTop = section.offsetTop;
+      range = Math.max(section.offsetHeight - window.innerHeight, 1);
     };
-    onScroll();
+
+    const write = () => {
+      raf = 0;
+      const progress = Math.min(Math.max((window.scrollY - sectionTop) / range, 0), 1);
+      section.style.setProperty("--gallery-progress", String(progress));
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(write);
+    };
+
+    const configure = () => {
+      measure();
+      window.cancelAnimationFrame(raf);
+      raf = 0;
+      section.style.setProperty("--gallery-progress", media.matches ? "1" : "0");
+      if (!media.matches) onScroll();
+    };
+
+    configure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", configure);
+    window.visualViewport?.addEventListener("resize", configure);
+    media.addEventListener("change", configure);
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", configure);
+      window.visualViewport?.removeEventListener("resize", configure);
+      media.removeEventListener("change", configure);
+    };
   }, []);
 
   return (
-    <section ref={ref} className="relative h-[240vh] bg-paper" aria-label={caption}>
-      <div className="sticky top-0 flex h-screen items-end overflow-hidden">
-        <p className="absolute left-6 top-28 z-10 max-w-xs font-serif text-xl font-medium leading-tight tracking-[-0.02em] text-white mix-blend-difference md:left-16 md:max-w-sm md:text-[22px]">
-          {caption}
-        </p>
-        <div
-          className="flex h-[78vh] items-end gap-3 pl-6 md:gap-4 md:pl-16"
-          style={{ transform: `translateX(${-progress * (images.length - 2) * 18}vw)` }}
-        >
-          {images.map((image) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+    <section ref={ref} className="gallery-scroll" aria-label={caption}>
+      <div className="gallery-desktop" aria-hidden="true">
+        <div className="gallery-half gallery-left">
+          <GalleryPicture image={images[0]} className="gallery-cover" decorative />
+          <div className="gallery-caption">{caption}</div>
+          <div className="gallery-left-console">
+            <GalleryPicture image={images[1]} className="gallery-cover" decorative />
+          </div>
+        </div>
+        <div className="gallery-half gallery-right">
+          <GalleryPicture image={images[2]} className="gallery-cover" decorative />
+          <GalleryPicture image={images[3]} className="gallery-prop gallery-typewriter" decorative />
+          <GalleryPicture image={images[4]} className="gallery-prop gallery-record" decorative />
+          <GalleryPicture image={images[5]} className="gallery-prop gallery-fish" decorative />
+          <div className="gallery-stationery">
+            <GalleryPicture image={images[6]} className="gallery-cover" decorative />
+          </div>
+          {images.slice(7).map((image, index) => (
+            <GalleryPicture
               key={image.src}
-              src={image.src}
-              alt={image.alt}
-              className="h-full w-[68vw] shrink-0 object-cover md:w-[24vw]"
+              image={image}
+              decorative
+              className={`gallery-float gallery-float-${index + 1}`}
             />
+          ))}
+        </div>
+      </div>
+
+      <div className="gallery-mobile">
+        <GalleryPicture image={images[0]} className="gallery-mobile-hero" />
+        <p className="gallery-mobile-caption">{caption}</p>
+        <GalleryPicture image={images[2]} className="gallery-mobile-palette" />
+        <div className="gallery-mobile-icons">
+          {images.slice(3, 6).map((image) => (
+            <GalleryPicture key={image.src} image={image} />
+          ))}
+        </div>
+        <GalleryPicture image={images[6]} className="gallery-mobile-stationery" />
+        <div className="gallery-mobile-collage">
+          {images.slice(7).map((image) => (
+            <GalleryPicture key={image.src} image={image} />
           ))}
         </div>
       </div>

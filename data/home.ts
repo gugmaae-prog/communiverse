@@ -9,8 +9,13 @@ export const home = {
       "Communiverse is the platform where the world’s most passionate makers, artists and collector communities learn, make, sell, experience and grow together.",
     line: "We are built for the Culture.",
     cta: { label: "JOIN THE WAITLIST", href: "/contact" },
-    image: { src: publicUrl("/media/4NAEH88XBwujx0KjZpZjevVKU.jpg"), alt: "Nesting dolls portrait" },
-    imageMobile: { src: publicUrl("/media/F62NYdlNldBd9GBgYl583lpEw.jpg"), alt: "Crochet portrait" },
+    images: [
+      { src: publicUrl("/media/F62NYdlNldBd9GBgYl583lpEw.jpg"), alt: "Crochet portrait" },
+      { src: publicUrl("/media/4NAEH88XBwujx0KjZpZjevVKU.jpg"), alt: "Nesting dolls portrait" },
+      { src: publicUrl("/media/1Z64gtzorj7i2VsFYfrA1yolVs.jpg"), alt: "Electric guitar" },
+      { src: publicUrl("/media/WAXPk7BX9KEtAYQBb3Vl0dUMfw.jpg"), alt: "Clock and framed painting" },
+      { src: publicUrl("/media/FLoZf4YTzZeiXPsxSJURn2XBzv0.jpg"), alt: "Empty ornate frame" },
+    ],
     meta: {
       contactLabel: "(Contact)",
       scrollLabel: "(Scroll Down)",
@@ -23,7 +28,8 @@ export const home = {
     eyebrow: "(About Communiverse)",
     body: "Communiverse is designed as a powerful infrastructure. We didn’t build another social app. We built a platform where the people who live and breathe their niche can finally own a piece of it, governing their club, running their store, and earning from the culture they created.",
     cta: { label: "JOIN THE WAITLIST", href: "/contact" },
-    image: { src: media.passion, alt: "Elegant figure with cormorants" },
+    image: { src: media.passion, alt: "Hands shaping a tactile object" },
+    imageAlt: { src: media.passionAlt, alt: "Collected shells and natural forms" },
   },
   steps: {
     id: "how-it-works",

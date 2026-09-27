@@ -56,13 +56,12 @@ export function WaitlistForm() {
   }
 
   return (
-    <form id="contact" onSubmit={onSubmit} noValidate className="flex flex-col pt-2">
+    <form id="contact" onSubmit={onSubmit} noValidate className="waitlist-form">
       {contactPage.fields.map((field, index) => {
         const key = field.name as keyof Values;
         const error = errors[key];
-        const gap = ["mb-[55px]", "mb-[56px]", "mb-12", "mb-10"][index];
         return (
-          <div key={field.name} className={gap}>
+          <div key={field.name} className={`waitlist-row waitlist-row-${index + 1}`}>
             <Label htmlFor={field.name} className="sr-only">
               {field.label}
             </Label>
@@ -93,11 +92,11 @@ export function WaitlistForm() {
                 }
               />
             )}
-            {error ? <p className="text-sm text-red-700">{error}</p> : null}
+            {error ? <p className="waitlist-error text-sm text-red-700">{error}</p> : null}
           </div>
         );
       })}
-      <Button type="submit" className="h-12 w-full rounded-full text-base font-medium tracking-normal">
+      <Button type="submit" className="waitlist-submit h-12 w-full rounded-full text-base font-medium tracking-normal">
         {contactPage.submit}
       </Button>
     </form>
