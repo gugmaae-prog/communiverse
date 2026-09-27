@@ -22,7 +22,7 @@ export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
           <Wordmark scale="scale-[0.1067] lg:scale-[0.183]" />
         </Link>
         <nav
-          className="pointer-events-auto absolute left-[540px] top-5 hidden items-center gap-6 lg:flex"
+          className="site-header-nav pointer-events-auto absolute left-[540px] top-5 hidden items-center gap-6 lg:flex"
           aria-label="Primary"
         >
           {site.nav.map((item) => (
