@@ -14,6 +14,10 @@
     {
       "pattern": "espacios.me/communiverse*",
       "zone_name": "espacios.me"
+    },
+    {
+      "pattern": "www.espacios.me/communiverse*",
+      "zone_name": "espacios.me"
     }
   ]
 }

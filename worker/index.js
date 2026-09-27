@@ -9,6 +9,8 @@ function strip(pathname) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Path rewriting ignores the host, so espacios.me and www.espacios.me
+    // serve the same /communiverse paths.
     const stripped = strip(url.pathname);
     if (stripped == null) {
       return new Response("Not found", { status: 404 });
