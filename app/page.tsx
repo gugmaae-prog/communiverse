@@ -19,7 +19,7 @@ function NichesSection({ mobile = false }: { mobile?: boolean }) {
       </CtaLink>
       <div className="home-niches-grid">
         {home.niches.items.map((item) => (
-          <Link key={item.n} href="/" className="home-niche-card">
+          <Link key={item.n} href={home.niches.cta.href} className="home-niche-card">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={item.image} alt={item.alt} />
             <span>

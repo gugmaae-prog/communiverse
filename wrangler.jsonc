@@ -10,6 +10,16 @@
     "html_handling": "auto-trailing-slash",
     "run_worker_first": true
   },
+  "d1_databases": [
+    {
+      "binding": "WAITLIST_DB",
+      "database_name": "communiverse-waitlist",
+      "database_id": "6126080a-3d53-4043-baa5-3d2ebb4781bb"
+    }
+  ],
+  // The live Worker also binds WAITLIST_LIMITER and WAITLIST_NETWORK_LIMITER.
+  // workers_get_worker did not return their namespace ids. Add those ratelimits
+  // here before the next deploy, or wrangler will drop the dashboard bindings.
   "routes": [
     {
       "pattern": "espacios.me/communiverse*",
