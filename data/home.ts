@@ -217,8 +217,8 @@ export const home = {
     {
       category: "Novelty cards",
       title: "A card, turning in 3D",
-      image: publicUrl("/media/csi2c4MekSygIHDswE8yEM2REs.jpg"),
-      alt: "A collector holding novelty trading cards in clear protective sleeves",
+      image: publicUrl("/media/BWHVQZxXzgYuHT08ngu6CGA12Mo.jpg"),
+      alt: "A wall of small novelty figures, collected the way people collect cards",
       story:
         "Collecting novelty cards: trading cards, novelty cards, and other small collectibles people keep, trade, and turn over in the hand. The face, the edge, the sleeve — a card is something you hold onto.",
     },
