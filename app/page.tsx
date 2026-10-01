@@ -55,7 +55,7 @@ export default function HomePage() {
             <h2 className="mt-4 font-serif text-4xl font-medium leading-[0.95] tracking-tight md:text-6xl">{home.passion.heading}</h2>
             <p className="mt-6 max-w-xl text-base leading-7 text-[#f5f4f1]/80">{home.passion.body}</p>
             <p className="mt-4 max-w-xl text-base leading-7 text-[#f5f4f1]/80">
-              Communiverse is the platform where the world’s most passionate makers, artists and collector communities learn, make, sell, experience and grow together.
+              Communiverse is where people who share an interest gather: makers and the people who collect what they make, including crafts, art, and collectibles such as cards, records, and other novelty objects. Clubs connect people of the same interest.
             </p>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}

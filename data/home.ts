@@ -6,7 +6,7 @@ export const home = {
     wordmark: "Communiverse",
     eyebrow: "Learn. Make. Collect. Belong.",
     title: "Find Your People.",
-    intro: "For makers, collectors and the culturally obsessed.",
+    intro: "For makers, collectors, and anyone with a shared interest in crafts, art, and collectibles.",
     line: "We are built for the Culture.",
     cta: { label: "Join the waitlist", href: "/contact#contact" },
     images: [
@@ -73,14 +73,14 @@ export const home = {
   },
   culture: {
     heading: "The culture has always been here. It just never had a home.",
-    body: "Every collector, every hobbyist, every obsessive who ever built a community from scratch. This is built for you.",
+    body: "Every maker, every collector, and every club built around a shared interest, from a craft to a collectible. This is built for you.",
     cta: { label: "Join the waitlist", href: "/contact" },
     image: { src: media.culture, alt: "Fine art photography" },
   },
   founders: {
     heading: "You Built the Community. Now Build the Business.",
     eyebrow: "(For Founders)",
-    body: "We are looking for the curators, the artists, the specialists in their crafts and the obsessives who already have a following or the conviction to build one. If you know your niche better than anyone else, we will give you the tools to turn that passion into a club worth joining.",
+    body: "We are looking for curators, makers, and collectors who already gather people around one interest: a craft, an art, or a collectible. If you know your niche better than anyone else, we will give you the tools to turn that into a club worth joining.",
     cta: { label: "JOIN THE WAITLIST", href: "/contact" },
     image: { src: media.founders, alt: "Portrait of a founder" },
     imageAlt: { src: media.foundersAlt, alt: "Studio portrait" },
@@ -109,14 +109,14 @@ export const home = {
     id: "for-brands",
     heading: "Stop Sponsoring Audiences. Start Partnering With Communities.",
     eyebrow: "(For Brands)",
-    body: "Communiverse lets brands collaborate directly with the artists themselves. Not agencies, not audiences, not ad slots. Commission a maker, co-create a limited run, or put your name behind a craft that people already care about. The work is real, the maker is verified, and the community sees who made it.",
+    body: "Communiverse lets brands work with the makers and the clubs around them. Not agencies, not audiences, not ad slots. Commission a maker, co-create a limited run, or put your name behind a craft, an artwork, or a collectible people already share an interest in. The work is real, the maker is verified, and the community sees who made it.",
     cta: { label: "Explore brand partnerships", href: "/for-brands" },
     image: { src: media.brands, alt: "Still life for a brand collaboration" },
   },
   provenance: {
     eyebrow: "(The Provenance)",
     heading: "Every Product Has a Story. We Make Sure It's Never Lost.",
-    body: "Behind items sold through Communiverse is a maker, a designer, an artist. We surface their story, permanently. Through on-chain provenance, every product carries its origin, its creator, and its journey from hands to community. Because ownership means nothing without knowing where something truly came from.",
+    body: "Behind items sold through Communiverse is a maker, a designer, an artist, or a collectible people keep. We surface that story, permanently. Through on-chain provenance, every product carries its origin, its creator, and its journey from hands to community. Because ownership means nothing without knowing where something truly came from.",
     image: { src: media.provenance, alt: "Object with its maker’s mark" },
   },
   niches: {
@@ -147,7 +147,7 @@ export const home = {
       { n: "01", title: "Learn", body: "Workshops and private sessions with verified makers. For individuals and for teams." },
       { n: "02", title: "Make", body: "Kits, commissions and made to order goods, straight from the maker’s bench or studio." },
       { n: "03", title: "Collect", body: "One of one pieces, each signed and provenance backed." },
-      { n: "04", title: "Belong", body: "Join the club around a craft and stay close to the people making it." },
+      { n: "04", title: "Belong", body: "Clubs connect people of the same interest, whether they make the work or collect it." },
     ],
   },
   join: {

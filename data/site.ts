@@ -4,7 +4,7 @@ export const site = {
   name: "Communiverse",
   title: "Communiverse Clubs",
   description:
-    "A marketplace for collector communities, crafts, arts and experiences. Buy, sell, earn and authenticate collectibles within trusted clubs. A home for the makers, find Your People",
+    "Where people who share an interest gather. Makers and the people who collect what they make: crafts, art, and collectibles such as cards and records. Buy, sell, earn and authenticate within trusted clubs. Find Your People.",
   url: "https://espacios.me/communiverse",
   email: "hello@communiverseclubs.com",
   launch: "Q4 2026 LAUNCH",

@@ -46,7 +46,7 @@ export function StoryRail() {
   }, [paused, open]);
 
   return (
-    <section className="pb-8" aria-label="Maker stories">
+    <section className="pb-8" aria-label="Stories">
       <div
         ref={scroller}
         className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"

@@ -5,7 +5,7 @@ export const howItWorks = {
   eyebrow: "(How It Works)",
   heading: "A CLUB THAT RUNS ITSELF.",
   intro:
-    "Communiverse gives the people who make culture the structure to keep it alive. Bring your people together, build a shared home, and let the value move back to the people who created it.",
+    "Communiverse gives people of the same interest a place to keep it alive: makers, collectors, crafts, art, and collectibles. Bring your people together, build a shared home, and let the value move back to the people who created it.",
   stepsHeading: "THREE STEPS TO A CLUB THAT RUNS ITSELF.",
   steps: [
     {
@@ -26,7 +26,7 @@ export const howItWorks = {
   ],
   closeHeading: "START WITH YOUR PEOPLE.",
   close:
-    "Whether you make, collect, teach, want to learn or gather people around a shared idea, there is a place for you Communiverse.",
+    "Whether you make, collect, teach, or gather people around the same interest — a craft, an artwork, or a collectible — there is a place for you on Communiverse.",
   cta: { label: "JOIN THE WAITLIST", href: "/contact" },
 };
 
@@ -34,7 +34,7 @@ export const makersPage = {
   eyebrow: "(For Makers)",
   heading: "YOU MADE THE WORK. YOU SHOULD OWN WHAT IT BECOMES.",
   intro:
-    "Communiverse is a home for emerging artists and craftspeople. One maker per craft, signed and verified, selling and teaching on their own terms. We are opening in waves. This is how you get in early.",
+    "Communiverse is a home for makers and the people who collect what they make, from crafts and art to collectibles of the same interest. One maker per craft, signed and verified, selling and teaching on their own terms. We are opening in waves. This is how you get in early.",
   cta: { label: "JOIN THE MAKER WAITLIST", href: "/contact" },
   keep: {
     heading: "WHAT YOU KEEP",
@@ -72,7 +72,7 @@ export const makersPage = {
       { n: "01", title: "TEACH", body: "Run workshops and private sessions, for individuals or for company teams." },
       { n: "02", title: "MAKE", body: "Sell kits, made to order goods and commissions." },
       { n: "03", title: "SELL", body: "List one of one pieces to collectors who want provenance, not volume." },
-      { n: "04", title: "BELONG", body: "Build the club around your craft and earn from the culture you created." },
+      { n: "04", title: "BELONG", body: "Build the club around your craft and the people who share that interest, including the collectors who keep the work." },
     ],
   },
   close: {
@@ -85,7 +85,7 @@ export const makersPage = {
 export const contactPage = {
   heading: "Find Your People",
   intro:
-    "Join the Communiverse waitlist. Tell us whether you are a maker, brand, or collector and we will be in touch.",
+    "Join the Communiverse waitlist. Tell us whether you make, collect, or bring together people of the same interest — crafts, art, or collectibles — and we will be in touch.",
   submit: "Join the waitlist",
   emailDisplay: "Hello@communiverseclubs.com",
   fields: [
@@ -102,19 +102,19 @@ export const articles = {
     eyebrow: "(About Communiverse)",
     kicker: "Communiverse / About",
     heading: "Where Passion Becomes Power.",
-    lede: "Communiverse is the platform where the world’s most passionate makers, artists and collector communities learn, make, sell, experience and grow together.",
+    lede: "Communiverse is where people who share an interest gather: makers and the people who collect what they make, including crafts, art, and collectibles such as cards, records, and other novelty objects. Clubs connect people of the same interest.",
     note: "We are built for the culture.",
     cta: { label: "Join the waitlist", href: "/contact" },
     sections: [
       {
         eyebrow: "(For the culture)",
         heading: "The culture has always been here. It just never had a home.",
-        body: "Every collector, every hobbyist, every obsessive who ever built a community from scratch. This is built for you.",
+        body: "Every maker, every collector, and every club built around a shared interest, from a craft to a collectible. This is built for you.",
       },
       {
         eyebrow: "(The provenance)",
         heading: "Every Product Has a Story. We Make Sure It's Never Lost.",
-        body: "Behind items sold through Communiverse is a maker, a designer, an artist. We surface their story, permanently. Through on-chain provenance, every product carries its origin, its creator, and its journey from hands to community. Because ownership means nothing without knowing where something truly came from.",
+        body: "Behind items sold through Communiverse is a maker, a designer, an artist, or a collectible people keep. We surface that story, permanently. Through on-chain provenance, every product carries its origin, its creator, and its journey from hands to community. Because ownership means nothing without knowing where something truly came from.",
       },
     ],
   },
@@ -123,14 +123,14 @@ export const articles = {
     eyebrow: "(For Founders)",
     kicker: "Communiverse / For Founders",
     heading: "You Built the Community. Now Build the Business.",
-    lede: "We are looking for the curators, the artists, the specialists in their crafts and the obsessives who already have a following or the conviction to build one. If you know your niche better than anyone else, we will give you the tools to turn that passion into a club worth joining.",
+    lede: "We are looking for curators, makers, and collectors who already gather people around one interest: a craft, an art, or a collectible. If you know your niche better than anyone else, we will give you the tools to turn that into a club worth joining.",
     note: "A space for the passionate, from everywhere.",
     cta: { label: "Join the waitlist", href: "/contact" },
     sections: [
       {
         eyebrow: "(Your community)",
         heading: "The culture has always been here. It just never had a home.",
-        body: "Every collector, every hobbyist, every obsessive who ever built a community from scratch. This is built for you.",
+        body: "Every maker, every collector, and every club built around a shared interest, from a craft to a collectible. This is built for you.",
       },
       {
         eyebrow: "(How it works)",
@@ -144,7 +144,7 @@ export const articles = {
     eyebrow: "(For Brands)",
     kicker: "Communiverse / For Brands",
     heading: "Stop Sponsoring Audiences. Start Partnering With Communities.",
-    lede: "Communiverse lets brands collaborate directly with the artists themselves. Not agencies, not audiences, not ad slots. Commission a maker, co-create a limited run, or put your name behind a craft that people already care about. The work is real, the maker is verified, and the community sees who made it.",
+    lede: "Communiverse lets brands work with the makers and the clubs around them. Not agencies, not audiences, not ad slots. Commission a maker, co-create a limited run, or put your name behind a craft, an artwork, or a collectible people already share an interest in. The work is real, the maker is verified, and the community sees who made it.",
     note: "The work is real. The maker is verified.",
     cta: { label: "Join the brand waitlist", href: "/contact" },
     sections: [
@@ -165,8 +165,8 @@ export const articles = {
     eyebrow: "(For Startups)",
     kicker: "Communiverse / For Startups",
     heading: "A Club That Runs Itself.",
-    lede: "Communiverse gives the people who make culture the structure to keep it alive. Bring your people together, build a shared home, and let the value move back to the people who created it.",
-    note: "A home for the makers. Find your people.",
+    lede: "Communiverse gives people of the same interest a place to keep it alive: makers, collectors, crafts, art, and collectibles. Bring your people together, build a shared home, and let the value move back to the people who created it.",
+    note: "Makers, collectors, and people of the same interest. Find your people.",
     cta: { label: "Join the waitlist", href: "/contact" },
     sections: [
       {
