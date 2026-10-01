@@ -4,11 +4,12 @@
 
 :root {
   --paper: #e9ecef;
-  --ink: #000000;
-  --muted: #686a62;
+  --ink: #121814;
+  --ivory: #f5f4f1;
+  --muted: #a39e94;
   --sage: #b3bcb6;
-  --background: #e9ecef;
-  --foreground: #000000;
+  --background: #121814;
+  --foreground: #f5f4f1;
 }
 
 @theme inline {
@@ -26,37 +27,14 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-poppins), sans-serif;
+  background: var(--background);
+  color: var(--foreground);
 }
 
-/*
- * The desktop scenes are authored against the 1440px reference canvas. Compact
- * desktop viewports keep the captured vertical scroll map while fitting that
- * canvas horizontally. The fixed header stays outside the transformed content
- * so it remains pinned to the viewport while the page scrolls.
- */
-@media (min-width: 1024px) and (max-width: 1439px) {
-  html,
-  body {
-    overflow-x: clip;
-  }
-
-  body > main,
-  body > footer,
-  body > div > main {
-    width: 1440px;
-    max-width: none;
-    margin-inline: 0;
-    transform: scaleX(calc(100vw / 1440px));
-    transform-origin: top left;
-  }
-
-  .site-header-nav {
-    left: 37.5vw;
-  }
+body {
+  font-family: var(--font-poppins), sans-serif;
 }
 
 .font-serif {

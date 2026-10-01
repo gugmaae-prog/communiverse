@@ -2,39 +2,46 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Wordmark } from "@/components/wordmark";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
+const menu = [
+  { n: "01", label: "How it works", href: "/#how-it-works" },
+  { n: "02", label: "Makers", href: "/makers" },
+  { n: "03", label: "Brands", href: "/#for-brands" },
+  { n: "04", label: "Experiences", href: "/#experiences" },
+  { n: "05", label: "Contact", href: "/contact#contact" },
+];
+
+export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const ink = tone === "light" ? "text-black lg:text-white" : "text-black";
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-      <div className="absolute inset-x-0 top-0 h-[49px] bg-paper lg:hidden" />
-      <div className={cn("relative mx-auto h-12 w-full max-w-[1440px] lg:h-[84px]", ink)}>
-        <Link
-          href="/"
-          aria-label="Communiverse"
-          className="pointer-events-auto absolute left-6 top-[15px] block h-[15.3px] w-[140px] overflow-hidden lg:left-16 lg:top-[29px] lg:h-[26.3px] lg:w-[240px]"
-        >
-          <Wordmark scale="scale-[0.1067] lg:scale-[0.183]" />
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[rgba(15,22,18,0.94)] text-[#f5f4f1] backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:h-[72px] md:px-10">
+        <Link href="/" className="font-sans text-lg font-medium tracking-[-0.04em]" aria-label="Communiverse">
+          Communiverse
         </Link>
-        <nav
-          className="site-header-nav pointer-events-auto absolute left-[540px] top-5 hidden items-center gap-6 lg:flex"
-          aria-label="Primary"
-        >
-          {site.nav.map((item) => (
-            <Link key={item.label} href={item.href} className="group relative font-sans text-base font-medium leading-[22px]">
-              {item.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-current transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          {site.nav.map((item) =>
+            item.label === "Contact" ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white hover:text-[#121814]"
+              >
+                Contact <span aria-hidden>+</span>
+              </Link>
+            ) : (
+              <Link key={item.label} href={item.href} className="text-sm text-[#f5f4f1]/85 hover:text-white">
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
         <button
           type="button"
-          className="pointer-events-auto absolute right-6 top-3 font-serif text-base font-medium leading-[21px] lg:hidden"
+          className="font-serif text-base italic lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
@@ -42,22 +49,22 @@ export function SiteHeader({ tone = "dark" }: { tone?: "dark" | "light" }) {
           ( {open ? "Close" : "Menu"} )
         </button>
       </div>
-
       <div
         id="mobile-menu"
         className={cn(
-          "pointer-events-auto fixed inset-0 z-40 flex flex-col bg-[#171716] px-6 pt-28 text-white transition-transform duration-500 lg:hidden",
-          open ? "translate-x-0" : "translate-x-full",
+          "fixed inset-0 z-40 flex flex-col bg-[#121814] px-6 pt-28 text-[#f5f4f1] lg:hidden",
+          open ? "translate-x-0" : "pointer-events-none translate-x-full",
         )}
       >
         <nav className="flex flex-col gap-6" aria-label="Mobile">
-          {site.nav.map((item) => (
+          {menu.map((item) => (
             <Link
-              key={item.label}
+              key={item.n}
               href={item.href}
               onClick={() => setOpen(false)}
               className="font-sans text-3xl font-medium uppercase tracking-[-0.03em]"
             >
+              <span className="mr-3 font-serif text-base italic text-[#a39e94]">{item.n}</span>
               {item.label}
             </Link>
           ))}

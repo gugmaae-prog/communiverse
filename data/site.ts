@@ -5,13 +5,13 @@ export const site = {
   title: "Communiverse Clubs",
   description:
     "A marketplace for collector communities, crafts, arts and experiences. Buy, sell, earn and authenticate collectibles within trusted clubs. A home for the makers, find Your People",
-  url: "https://www.communiverseclubs.com",
+  url: "https://espacios.me/communiverse",
   email: "hello@communiverseclubs.com",
   launch: "Q4 2026 LAUNCH",
   copyright: "2026 © COMMUNIVERSE. All Rights Reserved",
   poweredBy: {
     label: "XDC Network",
-    href: "https://framer.link/jenkatemw",
+    href: "https://xdc.org/",
   },
   founder: {
     label: "Find Your People",
@@ -20,11 +20,20 @@ export const site = {
   footerNote: "Let's build Together!",
   ogImage: publicUrl("/media/xXdYhZAFRTBsbncmKuApxDc3TO8.png"),
   nav: [
-    { label: "HOW IT WORKS", href: "/#how-it-works" },
-    { label: "FOR MAKERS", href: "/makers" },
-    { label: "FOR BRANDS", href: "/#for-brands" },
-    { label: "EXPERIENCES", href: "/" },
-    { label: "CONTACT", href: "/contact" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Makers", href: "/makers" },
+    { label: "Experiences", href: "/#experiences" },
+    { label: "Brands", href: "/#for-brands" },
+    { label: "Contact", href: "/contact#contact" },
+  ],
+  footerNav: [
+    { label: "About", href: "/about" },
+    { label: "How it works", href: "/how-it-works" },
+    { label: "Makers", href: "/makers" },
+    { label: "Founders", href: "/for-founders" },
+    { label: "Brands", href: "/for-brands" },
+    { label: "Startups", href: "/for-startups" },
+    { label: "Waitlist", href: "/contact" },
   ],
   socials: [
     { short: "IG", label: "Instagram", href: "https://instagram.com" },

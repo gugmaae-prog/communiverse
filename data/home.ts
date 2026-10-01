@@ -4,11 +4,11 @@ import { media } from "./site";
 export const home = {
   hero: {
     wordmark: "Communiverse",
-    title: "Find Your People",
-    intro:
-      "Communiverse is the platform where the world’s most passionate makers, artists and collector communities learn, make, sell, experience and grow together.",
+    eyebrow: "Learn. Make. Collect. Belong.",
+    title: "Find Your People.",
+    intro: "For makers, collectors and the culturally obsessed.",
     line: "We are built for the Culture.",
-    cta: { label: "JOIN THE WAITLIST", href: "/contact" },
+    cta: { label: "Join the waitlist", href: "/contact#contact" },
     images: [
       { src: publicUrl("/media/F62NYdlNldBd9GBgYl583lpEw.jpg"), alt: "Crochet portrait" },
       { src: publicUrl("/media/4NAEH88XBwujx0KjZpZjevVKU.jpg"), alt: "Nesting dolls portrait" },
@@ -35,7 +35,9 @@ export const home = {
     id: "how-it-works",
     eyebrow: "(HOW IT WORKS)",
     href: "/how-it-works",
-    heading: "Three Steps to a Club That Runs Itself.",
+    heading: "A Club That Runs Itself.",
+    lede: "Find the people who share your obsession, build a place worth returning to, and let the value move back to the people who created it.",
+    cta: { label: "Explore how it works", href: "/how-it-works" },
     items: [
       {
         n: "01",
@@ -58,7 +60,7 @@ export const home = {
     heading: "Made by hand. Signed by name.",
     eyebrow: "(For Makers)",
     body: "Communiverse is built for the people who actually make things. Painters, woodworkers, potters, perfumers, watchmakers, calligraphers, stone carvers. We do not list anyone we have not met. Every maker is signed and verified, one per craft, and every piece carries a maker’s mark that travels with it. You keep your name on your work and the relationship with the people who buy it.",
-    cta: { label: "JOIN AS A MAKER", href: "/makers" },
+    cta: { label: "Explore makers", href: "/makers" },
     image: { src: media.makers, alt: "Maker at the bench" },
   },
   experiences: {
@@ -66,13 +68,13 @@ export const home = {
     heading: "Some things you cannot ship.",
     eyebrow: "(Experiences)",
     body: "Beyond the object is the hour you spend making it. Communiverse runs live workshops and private sessions with the same verified makers who sell on the platform. Learn the craft from the person who has given their life to it, in their studio or in your space. Teams book it for something real. Collectors book it to understand what they own. Everyone leaves with something they made.",
-    cta: { label: "JOIN THE WAITLIST", href: "/contact" },
+    cta: { label: "Join the waitlist", href: "/contact" },
     image: { src: media.experiences, alt: "Hands at work in a studio" },
   },
   culture: {
     heading: "The culture has always been here. It just never had a home.",
     body: "Every collector, every hobbyist, every obsessive who ever built a community from scratch. This is built for you.",
-    cta: { label: "JOIN THE WAITLIST", href: "/contact" },
+    cta: { label: "Join the waitlist", href: "/contact" },
     image: { src: media.culture, alt: "Fine art photography" },
   },
   founders: {
@@ -108,7 +110,7 @@ export const home = {
     heading: "Stop Sponsoring Audiences. Start Partnering With Communities.",
     eyebrow: "(For Brands)",
     body: "Communiverse lets brands collaborate directly with the artists themselves. Not agencies, not audiences, not ad slots. Commission a maker, co-create a limited run, or put your name behind a craft that people already care about. The work is real, the maker is verified, and the community sees who made it.",
-    cta: { label: "JOIN THE BRAND WAITLIST", href: "/contact" },
+    cta: { label: "Explore brand partnerships", href: "/for-brands" },
     image: { src: media.brands, alt: "Still life for a brand collaboration" },
   },
   provenance: {
@@ -119,16 +121,24 @@ export const home = {
   },
   niches: {
     eyebrow: "(ANY NICHE WORKS!)",
-    cta: { label: "APPLY TO FOUND A CLUB", href: "/" },
+    cta: { label: "Explore founding a club", href: "/for-founders" },
     items: [
       { n: "01", title: "Toy Collectibles", image: publicUrl("/media/BWHVQZxXzgYuHT08ngu6CGA12Mo.jpg"), alt: "African woman portrait" },
       { n: "02", title: "Timeless Accessories", image: publicUrl("/media/CrfxGO5aCA0519rjZlj90xqehmg.jpg"), alt: "Black and white beauty portrait" },
       { n: "03", title: "Stamps for your Soul", image: publicUrl("/media/mKQtsvi79D5bCm4eXUSPzKDCzYM.jpg"), alt: "Blooming portrait" },
       { n: "04", title: "Iconic Streetwear", image: publicUrl("/media/Zx2LRBHg5qLLL87avzgUqpewxUs.jpg"), alt: "Elegant figure with cormorants" },
       { n: "05", title: "Gifts from Earth", image: publicUrl("/media/IHnqjxOhiKPGRANyDfhUU6SCaU.jpg"), alt: "Dramatic close-up of a man's face" },
-      { n: "06", title: "Fine Craftsmenship", image: publicUrl("/media/8Xra8HWtvbLsXOLT3Gl3Hg0eoI.jpg"), alt: "Expressive eye portrait" },
+      { n: "06", title: "Fine Craftsmanship", image: publicUrl("/media/8Xra8HWtvbLsXOLT3Gl3Hg0eoI.jpg"), alt: "Decorative silverware arranged in a case" },
     ],
     ticker: ["FOUND YOUR CLUB", "APPLY NOW"],
+    blurbs: [
+      "An object kept. A story carried.",
+      "Skill that lasts beyond a season.",
+      "A small piece of somewhere.",
+      "Identity, made visible.",
+      "From material to meaning.",
+      "The process is part of the piece.",
+    ],
   },
   fourWays: {
     eyebrow: "(Four Ways In)",
@@ -155,4 +165,66 @@ export const home = {
       { src: publicUrl("/media/KmGAixPZvFQeOVD6D7d8PhFC0hQ.jpg"), alt: "Modern editorial portrait" },
     ],
   },
+  stories: [
+    {
+      category: "Painting",
+      title: "Colour in motion",
+      image: publicUrl("/media/5PuwaR1yxXEfewCxWT7T1vHN7i4.jpg"),
+      alt: "An abstract painting in blue, orange, yellow and green",
+    },
+    {
+      category: "Crochet",
+      title: "A garden in yarn",
+      image: publicUrl("/media/F62NYdlNldBd9GBgYl583lpEw.jpg"),
+      alt: "Crocheted flowers in blue, yellow and burgundy yarn",
+    },
+    {
+      category: "Painting",
+      title: "A portrait, stroke by stroke",
+      image: publicUrl("/media/painter-eye.jpg"),
+      alt: "Close-up of a painted portrait: a grey-brown eye and dark eyebrow built from thick ochre and cream brushstrokes",
+    },
+    {
+      category: "Colour & process",
+      title: "Before the painting",
+      image: publicUrl("/media/MCDdnTKAK8jbxOHmI4U0u7Fbl1o.jpg"),
+      alt: "An artist mixing colours on a paint-covered palette",
+    },
+    {
+      category: "Ceramics",
+      title: "Two vessels, one conversation",
+      image: publicUrl("/media/HTFJGSykXStJ6eJ1MKGE5b9mFy8.jpg"),
+      alt: "Two blue and white ceramic vases against an orange background",
+    },
+    {
+      category: "Music & space",
+      title: "A wall of sleeves",
+      image: publicUrl("/media/record-wall.jpg"),
+      alt: "A woman in white headphones standing in front of a lit wall of vinyl record sleeves",
+    },
+    {
+      category: "Painted objects",
+      title: "Small objects, shared stories",
+      image: publicUrl("/media/4NAEH88XBwujx0KjZpZjevVKU.jpg"),
+      alt: "A line of blue hand-painted nesting dolls",
+    },
+    {
+      category: "Leatherwork",
+      title: "A cover worth keeping",
+      image: publicUrl("/media/rK3gmhexaOVt30L3r4ZmH3afJ5s.jpg"),
+      alt: "An ornate orange and green tooled-leather book cover",
+    },
+    {
+      category: "Music & space",
+      title: "A record and a coffee",
+      image: publicUrl("/media/latte-turntable.jpg"),
+      alt: "A red vinyl record on a turntable beside a yellow cup of latte",
+    },
+    {
+      category: "Pottery",
+      title: "From clay to form",
+      image: publicUrl("/media/kZ2JxGufuXrPgs3dUt3JxBMxoM.jpg"),
+      alt: "A potter shaping a clay vessel on a pottery wheel",
+    },
+  ],
 };

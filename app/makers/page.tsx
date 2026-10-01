@@ -1,107 +1,85 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
+import { PillLink } from "@/components/pill-link";
 import { SiteFooter } from "@/components/site-footer";
-import { CtaLink } from "@/components/cta-link";
+import { SiteHeader } from "@/components/site-header";
 import { makersPage } from "@/data/pages";
-import { site } from "@/data/site";
+import { media } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: { absolute: site.title },
-  description: site.description,
+  title: { absolute: "For Makers | Communiverse" },
+  description: makersPage.intro,
   alternates: { canonical: "/makers" },
 };
 
-const display = "font-sans font-semibold uppercase lg:tracking-[-2.16px]";
-
 export default function MakersPage() {
   return (
-    <>
+    <div className="bg-[#121814] text-[#f5f4f1]">
       <SiteHeader />
-      <main className="mx-auto max-w-[1440px] px-6 pb-24 pt-[112px] lg:px-0 lg:pb-32 lg:pl-[184px] lg:pt-[160px]">
-        <p className="font-serif text-base font-medium leading-4 text-muted lg:text-[22.08px] lg:leading-[26.496px] lg:tracking-[-0.4416px]">
-          {makersPage.eyebrow}
-        </p>
-        <h1 className={`${display} mt-12 w-[342px] text-[32px] leading-8 tracking-[-0.03em] lg:w-[858px] lg:text-[72px] lg:leading-[72px]`}>
-          {makersPage.heading}
+      <main className="mx-auto max-w-[1120px] px-5 pb-24 pt-28 md:px-10 md:pt-36">
+        <h1 className="max-w-4xl font-serif text-4xl font-medium leading-[0.95] tracking-tight md:text-6xl">
+          You made the work. You should own what it becomes.
         </h1>
-        <p className="mt-12 text-balance font-sans text-base font-medium uppercase leading-[19.2px] lg:w-[429px] lg:leading-[22.4px]">
-          {makersPage.intro}
+        <p className="mt-6 max-w-md text-lg text-[#f5f4f1]/80">{makersPage.intro.split(".")[0]}.</p>
+        <div className="mt-8">
+          <PillLink href={makersPage.cta.href}>{makersPage.cta.label}</PillLink>
+        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={media.provenance}
+          alt="A maker engraving a design by hand"
+          className="mt-12 h-[480px] w-full object-cover"
+        />
+        <p className="mt-8 max-w-xl text-base leading-7 text-[#f5f4f1]/80">
+          One maker per craft, signed and verified, selling and teaching on their own terms. We are opening in waves. This is how you get in early.
         </p>
-        <CtaLink href={makersPage.cta.href} className="mt-12">
-          {makersPage.cta.label}
-        </CtaLink>
 
-        <section className="mt-44 lg:mt-[258px]">
-          <h2 className={`${display} text-[32px] leading-8 lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
-            {makersPage.keep.heading}
-          </h2>
-          <div className="mt-16 grid gap-14 lg:mt-[209px] lg:w-[1072px] lg:grid-cols-3 lg:gap-x-[129px]">
+        <section className="mt-24">
+          <h2 className="font-serif text-4xl font-medium tracking-tight md:text-5xl">What you keep</h2>
+          <div className="mt-10 grid gap-10 md:grid-cols-3">
             {makersPage.keep.items.map((item) => (
-              <div key={item.n} className="lg:w-[271px]">
-                <p className="font-serif text-[22.08px] font-medium leading-[26.496px] tracking-[-0.4416px]">{item.n}</p>
-                <h3 className="mt-5 font-sans text-[40px] font-semibold uppercase leading-[48px] tracking-[-1.2px] lg:text-[64px] lg:leading-[76.8px] lg:tracking-[-1.92px]">
-                  {item.title}
-                </h3>
-                <p className="mt-5 font-sans text-base font-medium leading-[22.4px]">{item.body}</p>
+              <div key={item.title}>
+                <h3 className="text-2xl font-medium">{item.title.charAt(0) + item.title.slice(1).toLowerCase()}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#f5f4f1]/75">{item.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-28 lg:mt-60">
-          <p className="font-serif text-base font-medium text-muted lg:text-[22.08px] lg:leading-[26.496px] lg:tracking-[-0.4416px]">
-            {makersPage.standard.eyebrow}
-          </p>
-          <h2 className={`${display} mt-12 text-[32px] leading-8 lg:w-[804px] lg:text-[72px] lg:leading-[72px]`}>
-            {makersPage.standard.heading}
+        <section className="mt-24 max-w-3xl">
+          <p className="font-serif text-sm italic text-[#a39e94]">{makersPage.standard.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl font-medium leading-tight tracking-tight md:text-5xl">
+            We do not list anyone we have not met.
           </h2>
-          <p className="mt-10 font-sans text-base font-medium uppercase leading-[22.4px] lg:w-[429px]">
-            {makersPage.standard.body}
-          </p>
+          <p className="mt-5 text-base leading-7 text-[#f5f4f1]/80">{makersPage.standard.body}</p>
         </section>
 
-        <section className="mt-28 lg:mt-60">
-          <p className="font-serif text-base font-medium text-muted lg:text-[22.08px] lg:leading-[26.496px] lg:tracking-[-0.4416px]">
-            {makersPage.mark.eyebrow}
-          </p>
-          <h2 className={`${display} mt-12 text-[32px] leading-8 lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
-            {makersPage.mark.heading}
-          </h2>
-          <p className="mt-10 font-sans text-base font-medium uppercase leading-[22.4px] lg:w-[429px]">
-            {makersPage.mark.body}
-          </p>
+        <section className="mt-24 max-w-3xl">
+          <p className="font-serif text-sm italic text-[#a39e94]">{makersPage.mark.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight md:text-5xl">The maker’s mark</h2>
+          <p className="mt-5 text-base leading-7 text-[#f5f4f1]/80">{makersPage.mark.body}</p>
         </section>
 
-        <section className="mt-28 lg:mt-60">
-          <h2 className={`${display} text-[32px] leading-8 lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
-            {makersPage.earn.heading}
-          </h2>
-          <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:mt-[209px] lg:w-[1072px] lg:grid-cols-4 lg:gap-x-[81px]">
+        <section className="mt-24">
+          <h2 className="font-serif text-4xl font-medium tracking-tight md:text-5xl">Four ways to earn</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-4">
             {makersPage.earn.items.map((item) => (
-              <div key={item.n} className="lg:w-[207px]">
-                <p className="font-serif text-[22.08px] font-medium leading-[26.496px] tracking-[-0.4416px]">{item.n}</p>
-                <h3 className="mt-5 font-sans text-[40px] font-semibold uppercase leading-10 tracking-[-1.2px]">
-                  {item.title}
-                </h3>
-                <p className="mt-5 font-sans text-base font-medium leading-[22.4px]">{item.body}</p>
+              <div key={item.title}>
+                <h3 className="text-2xl font-medium">{item.title.charAt(0) + item.title.slice(1).toLowerCase()}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#f5f4f1]/75">{item.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-28 lg:mt-60">
-          <h2 className={`${display} text-[32px] leading-8 lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
-            {makersPage.close.heading}
-          </h2>
-          <p className="mt-10 font-sans text-base font-medium uppercase leading-[22.4px] lg:w-[429px]">
-            {makersPage.close.body}
-          </p>
-          <CtaLink href={makersPage.close.cta.href} className="mt-12">
-            {makersPage.close.cta.label}
-          </CtaLink>
+        <section className="mt-24">
+          <h2 className="font-serif text-4xl font-medium tracking-tight md:text-5xl">We are signing makers now.</h2>
+          <p className="mt-5 max-w-xl text-base leading-7 text-[#f5f4f1]/80">{makersPage.close.body}</p>
+          <div className="mt-8">
+            <PillLink href={makersPage.close.cta.href}>{makersPage.close.cta.label}</PillLink>
+          </div>
         </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }
