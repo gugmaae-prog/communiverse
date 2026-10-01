@@ -234,7 +234,7 @@ export const home = {
       image: publicUrl("/media/1Z64gtzorj7i2VsFYfrA1yolVs.jpg"),
       alt: "An electric guitar, a novelty people keep so they can listen together",
       story:
-        "Listening together is also about novelty. The record, the sleeve, the instrument: objects people collect so the music has something to hold. The gathering is built around those keepsakes.",
+        "Listening together is also about novelty. The record, the sleeve, and the instrument are objects people collect so the music has something to hold. The gathering is built around those keepsakes.",
     },
     {
       category: "Pottery",
