@@ -215,10 +215,26 @@ export const home = {
       alt: "An ornate orange and green tooled-leather book cover",
     },
     {
+      category: "Novelty cards",
+      title: "A card, turning in 3D",
+      image: publicUrl("/media/csi2c4MekSygIHDswE8yEM2REs.jpg"),
+      alt: "A collector holding novelty trading cards in clear protective sleeves",
+      story:
+        "Collecting novelty cards: trading cards, novelty cards, and other small collectibles people keep, trade, and turn over in the hand. The face, the edge, the sleeve — a card is something you hold onto.",
+    },
+    {
       category: "Music & space",
       title: "A record and a coffee",
       image: publicUrl("/media/latte-turntable.jpg"),
       alt: "A red vinyl record on a turntable beside a yellow cup of latte",
+    },
+    {
+      category: "Music & space",
+      title: "Listening together",
+      image: publicUrl("/media/1Z64gtzorj7i2VsFYfrA1yolVs.jpg"),
+      alt: "An electric guitar, a novelty people keep so they can listen together",
+      story:
+        "Listening together is also about novelty. The record, the sleeve, the instrument: objects people collect so the music has something to hold. The gathering is built around those keepsakes.",
     },
     {
       category: "Pottery",
