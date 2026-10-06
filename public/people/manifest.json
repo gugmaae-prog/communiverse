@@ -1,0 +1,82 @@
+[
+  {
+    "id": "haseeb-wasim",
+    "name": "Haseeb Wasim",
+    "group": "Team",
+    "file": "haseeb-wasim.png",
+    "sha256": "94cde59e0003aee49becb4b3b7996a83c7b386cafa597ab859345942204ab4af",
+    "bytes": 100450
+  },
+  {
+    "id": "alison-gonzalez",
+    "name": "Alison Gonzalez",
+    "group": "Team",
+    "file": "alison-gonzalez.png",
+    "sha256": "ae15a505c0e2b14cf8f5807278ad1a9f33dc69aa2f0ba0c9edd5f2a69fe4db81",
+    "bytes": 120164
+  },
+  {
+    "id": "abel-thomas",
+    "name": "Abel Thomas",
+    "group": "Team",
+    "file": "abel-thomas.png",
+    "sha256": "004e58d0334666d39f6f37d1b7484075e0c7235b42b87147936565c8baf5690d",
+    "bytes": 284286
+  },
+  {
+    "id": "louis-mitchell",
+    "name": "Louis Mitchell",
+    "group": "Team",
+    "file": "louis-mitchell.png",
+    "sha256": "c643cbbb334d56a30d3100c919b73a14b190306f6f8054a98cf2d3b2f985ab20",
+    "bytes": 55804
+  },
+  {
+    "id": "elferah-saidil",
+    "name": "Elferah Saidil",
+    "group": "Team",
+    "file": "elferah-saidil.png",
+    "sha256": "43658ea47ff5bf225b4342283169f7463346914742d0d366ac0953f4c7099ace",
+    "bytes": 77201
+  },
+  {
+    "id": "keiffer",
+    "name": "Keiffer",
+    "group": "Team",
+    "file": "keiffer.png",
+    "sha256": "747b9008fa060f5780ee36f15dbeea4c805903fbf687138100fd607a82f91e47",
+    "bytes": 110240
+  },
+  {
+    "id": "hassan-b-mirza",
+    "name": "Hassan B. Mirza",
+    "group": "Team",
+    "file": "hassan-b-mirza.png",
+    "sha256": "4c14e632f488eca4d920e1e9f7860b7be5fa3316fc4b59c675255508429efb06",
+    "bytes": 119849
+  },
+  {
+    "id": "luna",
+    "name": "Luna",
+    "group": "Ambassadors",
+    "file": "luna.png",
+    "sha256": "a7e3d9cdc91b4bb558726530d976015f3b650c44e2144109de7a76733dc7100d",
+    "bytes": 135864
+  },
+  {
+    "id": "turbooz",
+    "name": "@_turbooz",
+    "group": "Ambassadors",
+    "file": "turbooz.png",
+    "sha256": "52a89abacc1e8358412eb840474b1c0ad2eb5c166bcba58782854419b42140c0",
+    "bytes": 183404
+  },
+  {
+    "id": "abdallah-mahmoudd",
+    "name": "@abdallah_mahmoudd",
+    "group": "Ambassadors",
+    "file": "abdallah-mahmoudd.png",
+    "sha256": "f7469e0077e6f8c09a7e6d595bea4d0353790327f9b9f3ae24e12fa7c0ce0a41",
+    "bytes": 124999
+  }
+]
