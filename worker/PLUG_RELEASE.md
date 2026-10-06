@@ -1,4 +1,4 @@
-# Communiverse Plug — repo note 20261006-plug-2
+# Communiverse Plug — repo note 20261006-plug-3
 
 This repository change adds Plug as a public people page inside Communiverse. It does not deploy onto the live stacked `communiverse` Worker, and it does not move Plug’s private handlers.
 
@@ -6,13 +6,21 @@ This repository change adds Plug as a public people page inside Communiverse. It
 
 Canonical page: `https://espacios.me/communiverse/plug/`
 
-`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-2.css` and `.js`.
+`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-3.css` and `.js`.
 
 `worker/plug.js` handles those paths only, and only when the host is `espacios.me` or `www.espacios.me`. `worker/index.js` calls it before static assets. Other Communiverse routes stay with the existing handlers.
 
 ## How members load
 
-Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug` and reads the public profile cards. Portraits sit in an organic cluster on a dotted gray field. The pills are **All**, **Founders** (profession), **Design** (skill or profession), and **Dubai** (location). Plug profiles do not have an ambassador or employee field, so those labels are not invented. Choosing a pill fades and scales everyone else out, and springs the matching portraits into a tighter cluster around one focal circle. Choosing All springs the wider scatter back. Each circle links to `https://espacios.me/plug/u/<slug>`.
+Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug` and reads the public profile cards.
+
+The pills are **Communiverse**, **Ambassadors**, **Artists**, and **All**, in that order. They filter on `plugCategory` tags: `communiverse`, `ambassador`, and `artist`. A profile can have more than one. The directory reads them from `data-plug-category`, `data-plug-categories`, or a skill chip whose text is exactly one of those three words. No one is assigned a category in this repo. Until a profile is tagged, only **All** has people.
+
+To tag someone now, add a skill chip of exactly `communiverse`, `ambassador`, or `artist` on their Plug profile. Those chips are already saved and printed on the public card. A later `data-plug-category` attribute on the card is read the same way.
+
+Placeholder and brand cards are not shown: `hello`, `espacios me`, `gugma ae`, `Member`, PSR Homes, Oak Residency, Dilfaz, and TNT. The Keiffer Japeth cards, including the Cantara spelling, are folded into the single richest profile.
+
+Portraits use a spring on position, diameter, and scale (about one second to settle, with overshoot). Leaving portraits fade out and scale to 55% in place. Each circle opens `/communiverse/plug/u/<slug>`, which patches the known `replace(//$/,"")` syntax error on the Plug profile and adds a link back to Communiverse. The full cleaned directory is listed under the cluster.
 
 ## Preview
 

@@ -6,13 +6,20 @@ import {
   handlePlug,
   loadPlugDirectory,
   matchPlug,
-  memberFacets,
   parseDirectory,
   RELEASE,
   safeImageUrl,
+} from "./plug.js";
+import {
+  circlesOverlap,
+  layoutCircles,
+  patchProfileHtml,
+  presentMembers,
+  readPlugCategories,
   stepEase,
   stepSpring,
-} from "./plug.js";
+  tidyName,
+} from "./plug-present.js";
 
 const DIRECTORY_URL = "https://espacios-auth-central.thekeifferjapeth.workers.dev/plug";
 
@@ -23,25 +30,49 @@ function article({ slug = "hello", name = "Keiffer Japeth", href = `/plug/u/${sl
   return `<article class="pc" data-slug="${slug}"><div class="pc-head">${avatar}<div><a class="pc-name" href="${href}">${name}</a><div class="pc-spec">${spec}</div><div class="pc-loc">${location}</div></div></div><div class="pc-more"><p>${summary}</p><div class="chips">${chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div>${extra}</article>`;
 }
 
-test("facets follow profession, skill, and place, and the cluster uses a spring", () => {
-  assert.deepEqual(
-    memberFacets({ spec: "Founder", summary: "", chips: ["Architecture"], location: "Dubai, United Arab Emirates" }),
-    ["all", "founders", "dubai"],
-  );
-  assert.deepEqual(memberFacets({ spec: "Designer", summary: "", chips: [], location: "Iloilo" }), ["all", "design"]);
-  assert.deepEqual(memberFacets({ spec: "Member", summary: "", chips: ["real estate"], location: "" }), ["all"]);
+test("categories, names, layout, and spring overshoot", () => {
+  assert.deepEqual(readPlugCategories({ chips: ["Architecture", "ambassador"], plugCategory: "artist" }), ["artist", "ambassador"]);
+  assert.deepEqual(readPlugCategories({ chips: ["marketing"] }), []);
+  assert.equal(tidyName("VINAYA G S"), "Vinaya G S");
+  assert.equal(tidyName("keiffer japeth cantara"), "Keiffer Japeth Cantara");
+
+  const shown = presentMembers([
+    { slug: "hello", name: "Keiffer Japeth", spec: "Founder", image: "https://example.com/a.jpg", chips: [], profileUrl: "/communiverse/plug/u/hello" },
+    { slug: "keiffer-japeth-25693b", name: "Keiffer Japeth", spec: "Member", image: "/plug/asset/x.jpg", chips: [], profileUrl: "/communiverse/plug/u/keiffer-japeth-25693b" },
+    { slug: "keiffer-japeth-57832a", name: "Keiffer Japeth", spec: "Founder", image: "https://example.com/face.jpg", chips: ["ambassador"], profileUrl: "/communiverse/plug/u/keiffer-japeth-57832a" },
+    { slug: "keiffer-japeth-cantara-6ed4b8", name: "keiffer japeth cantara", spec: "Founder", image: "https://example.com/c.jpg", chips: [], profileUrl: "/x" },
+    { slug: "dilfaz-group-30f2eb", name: "Dilfaz Group", spec: "Founder", image: "https://example.com/logo.jpg", chips: [], profileUrl: "/x" },
+    { slug: "gugma-ae-4e8b34", name: "gugma ae", spec: "Baker", chips: [], profileUrl: "/x" },
+    { slug: "member-11a676", name: "Member", spec: "Member", chips: [], profileUrl: "/x" },
+    { slug: "naina-singh-47e7ca", name: "Naina Singh", spec: "Designer", image: "https://example.com/n.jpg", chips: ["artist"], profileUrl: "/communiverse/plug/u/naina-singh-47e7ca" },
+  ]);
+  assert.equal(shown.filter((member) => member.name === "Keiffer Japeth").length, 1);
+  assert.equal(shown.find((member) => member.name === "Keiffer Japeth").slug, "keiffer-japeth-57832a");
+  assert.equal(shown.some((member) => member.slug === "hello" || member.name === "Dilfaz Group" || member.name === "Member"), false);
+  assert.equal(shown.find((member) => member.slug === "naina-singh-47e7ca").plugCategories.join(" "), "artist");
+
+  for (const mode of ["wide", "tight"]) {
+    const layout = layoutCircles(["a", "b", "c", "d", "e", "f", "g", "h"], mode);
+    assert.equal(circlesOverlap(layout), false);
+  }
 
   let pos = 0;
   let vel = 0;
-  let overshot = false;
-  for (let i = 0; i < 180; i += 1) {
+  let peak = 0;
+  for (let i = 0; i < 60; i += 1) {
     [pos, vel] = stepSpring(pos, vel, 100, 1 / 60);
-    if (pos > 100) overshot = true;
+    peak = Math.max(peak, pos);
   }
-  assert.ok(overshot, "spring should pass the target before settling");
-  assert.ok(Math.abs(pos - 100) < 1, `expected to settle near 100, got ${pos}`);
-  const eased = stepEase(0, 100, 0.16, 0.16);
-  assert.ok(eased > 60 && eased < 70, `ease should move partway, got ${eased}`);
+  assert.ok(peak > 108, `expected overshoot, peak ${peak}`);
+  assert.ok(Math.abs(pos - 100) < 3, `expected to settle within a second, at ${pos}`);
+  const eased = stepEase(0, 100, 0.22, 0.22);
+  assert.ok(eased > 50 && eased < 80);
+
+  const broken = `<body><script>var ap=location.pathname.replace(//$/,"");var next=1;</script></body>`;
+  const fixed = patchProfileHtml(broken);
+  assert.equal(fixed.includes('replace(//$/,"")'), false);
+  assert.match(fixed, /Back to Communiverse/);
+  assert.doesNotThrow(() => new Function(fixed.match(/<script>([\s\S]*?)<\/script>/)[1]));
 });
 
 test("parseDirectory keeps public cards and drops unsafe ones", () => {
@@ -61,7 +92,7 @@ test("parseDirectory keeps public cards and drops unsafe ones", () => {
   ].join("");
   const members = parseDirectory(html);
   assert.equal(members.length, 2);
-  assert.equal(members[0].profileUrl, "https://espacios.me/plug/u/hello");
+  assert.equal(members[0].profileUrl, "/communiverse/plug/u/hello");
   assert.equal(members[0].name, "Keiffer Japeth");
   assert.equal(members[0].chips[0], "Architecture");
   assert.equal(members[1].name, "Ada alert(1) Lovelace");
@@ -77,7 +108,7 @@ test("matchPlug serves the people page and ignores other routes and hosts", () =
   assert.equal(matchPlug(new URL("https://www.espacios.me/communiverse/plug/")), "page");
   assert.equal(matchPlug(new URL("https://espacios.me/communiverse/people/")), "people");
   assert.equal(matchPlug(new URL(`https://espacios.me/communiverse/_public/${RELEASE}.css`)), "css");
-  assert.equal(matchPlug(new URL("https://espacios.me/communiverse/plug/u/hello")), null);
+  assert.deepEqual(matchPlug(new URL("https://espacios.me/communiverse/plug/u/hello")), { kind: "profile", slug: "hello" });
   assert.equal(matchPlug(new URL("https://espacios.me/communiverse/ambassadors/")), null);
   assert.equal(matchPlug(new URL("https://espacios.me/communiverse/makers/")), null);
   assert.equal(matchPlug(new URL("https://espacios.me/communiverse/")), null);
@@ -99,12 +130,12 @@ test("handler renders members, redirects people, and rejects other methods", asy
   assert.match(page.headers.get("content-type"), /text\/html/);
   const body = await page.text();
   assert.match(body, /Find your people/);
-  assert.match(body, /data-filter="founders"/);
-  assert.match(body, /data-filter="design"/);
-  assert.match(body, /data-filter="dubai"/);
-  assert.match(body, /data-facets="all founders dubai"/);
-  assert.match(body, /class="node hero"/);
-  assert.match(body, /https:\/\/espacios\.me\/plug\/u\/hello/);
+  assert.match(body, /data-filter="communiverse"/);
+  assert.match(body, /data-filter="ambassador"/);
+  assert.match(body, /data-filter="artist"/);
+  assert.match(body, />All</);
+  assert.match(body, /\/communiverse\/plug\/u\/naina-singh-47e7ca/);
+  assert.doesNotMatch(body, /plug\/u\/hello/);
   assert.match(body, /Naina Singh/);
   assert.doesNotMatch(body, /Send an Offer|Ask Aether|mailto:/);
   assert.equal(await handlePlug(new Request("https://example.com/communiverse/plug/"), { fetchImpl }), null);
@@ -165,9 +196,11 @@ test("worker routing serves plug and leaves other communiverse paths alone", asy
   const local = await worker.fetch(new Request("http://127.0.0.1/communiverse/plug/"), env);
   assert.match(await local.text(), /^asset:/);
 
-  const nested = await worker.fetch(new Request("https://espacios.me/communiverse/plug/u/hello"), env);
-  assert.match(await nested.text(), /^asset:/);
-  assert.deepEqual(seen, ["/makers/", "/plug/", "/plug/u/hello/"]);
+  const nested = await worker.fetch(new Request("https://espacios.me/communiverse/plug/u/haseeb-wasim-5626fe"), env);
+  const profile = await nested.text();
+  assert.match(profile, /Back to Communiverse/);
+  assert.equal(profile.includes('replace(//$/,"")'), false);
+  assert.deepEqual(seen, ["/makers/", "/plug/"]);
 });
 
 test("loadPlugDirectory reads the live public directory", async () => {
@@ -175,7 +208,7 @@ test("loadPlugDirectory reads the live public directory", async () => {
   assert.equal(directory.ok, true);
   assert.ok(directory.members.length > 10, `expected public profiles, got ${directory.members.length}`);
   for (const member of directory.members) {
-    assert.match(member.profileUrl, /^https:\/\/espacios\.me\/plug\/u\/[a-z0-9-]+$/i);
+    assert.match(member.profileUrl, /^\/communiverse\/plug\/u\/[a-z0-9-]+$/i);
     assert.ok(member.name);
     assert.equal(member.name.includes("<"), false);
   }
