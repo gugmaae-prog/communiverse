@@ -1,0 +1,46 @@
+name: Import labelled portrait assets
+on:
+  push:
+    branches: [codex/plug-people-portraits-20261006]
+    paths: [.github/workflows/import-people-portraits.yml]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/plug-people-portraits-20261006
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch only approved PNGs and verify their source checksums
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import {mkdir,writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import {PORTRAITS,PORTRAIT_PREFIX} from './worker/releases/plug-people-20261006.mjs';
+          await mkdir('public/people',{recursive:true});
+          for(const p of PORTRAITS){
+            if(!/^[a-z0-9-]+\.png$/.test(p.file))throw Error('Unexpected filename');
+            const r=await fetch('https://espacios.me'+PORTRAIT_PREFIX+p.file,{headers:{'Cloudflare-Workers-Version-Overrides':'communiverse="aaf30fae-52e3-4b59-8ac7-e067e024b3d6"'},signal:AbortSignal.timeout(30000)});
+            if(!r.ok)throw Error(p.file+': HTTP '+r.status);
+            const bytes=Buffer.from(await r.arrayBuffer());
+            if(bytes.length!==p.bytes||createHash('sha256').update(bytes).digest('hex')!==p.sha256)throw Error('Checksum mismatch: '+p.file);
+            if(bytes.readUInt32BE(0)!==0x89504e47)throw Error('Not a PNG');
+            await writeFile('public/people/'+p.file,bytes);
+            console.log(p.file+' verified ('+bytes.length+' bytes)');
+          }
+          await writeFile('public/people/manifest.json',JSON.stringify(PORTRAITS,null,2)+'\n');
+          JS
+      - name: Commit only imported portraits and their manifest
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- public/people/*.png public/people/manifest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Add ten labelled Communiverse portrait crops'
+          git push origin HEAD:codex/plug-people-portraits-20261006
