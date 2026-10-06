@@ -35,7 +35,7 @@ The dev server listens on [http://127.0.0.1:43123/communiverse/](http://127.0.0.
 
 The site is a static export (`output: 'export'`) with `basePath: '/communiverse'` and `trailingSlash: true`. `worker/index.js` strips that prefix before the asset binding, and serves the home page for `/communiverse` with or without a trailing slash. `wrangler.jsonc` publishes the worker as `communiverse` on `espacios.me/communiverse*` and `www.espacios.me/communiverse*`.
 
-From this repo, after a build:
+From this repo, after a build, the asset worker can be published with Wrangler. That command replaces whatever is currently deployed as `communiverse`. The live Espacios worker is a stacked module worker, so publishing this repo over it would drop those modules. See [`worker/PLUG_RELEASE.md`](worker/PLUG_RELEASE.md) and [`worker/AMBASSADORS_RELEASE.md`](worker/AMBASSADORS_RELEASE.md). A production publish has to wrap the existing live modules.
 
 ```bash
 npm run build
@@ -74,6 +74,7 @@ Preview the export locally with `npm run preview`, then open [http://127.0.0.1:8
 | `/communiverse/how-it-works/` | How it works |
 | `/communiverse/makers/` | For makers |
 | `/communiverse/contact/` | Waitlist form |
+| `/communiverse/plug/` | Plug, the public member network |
 | `/communiverse/about/` | Shared chrome only, as on the live site |
 | `/communiverse/for-founders/` | Shared chrome only |
 | `/communiverse/for-brands/` | Shared chrome only |
