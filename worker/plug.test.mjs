@@ -54,6 +54,13 @@ test("categories, names, layout, and spring overshoot", () => {
   for (const mode of ["wide", "tight"]) {
     const layout = layoutCircles(["a", "b", "c", "d", "e", "f", "g", "h"], mode);
     assert.equal(circlesOverlap(layout), false);
+    const everyone = layoutCircles(Array.from({ length: 68 }, (_, index) => `p${index}`), mode);
+    assert.equal(everyone.length, 68);
+    assert.equal(circlesOverlap(everyone), false);
+    for (const spot of everyone) {
+      assert.ok(spot.x - spot.d / 2 >= 2 && spot.x + spot.d / 2 <= 98);
+      assert.ok(spot.y - spot.d / 2 >= 2 && spot.y + spot.d / 2 <= 98);
+    }
   }
 
   let pos = 0;

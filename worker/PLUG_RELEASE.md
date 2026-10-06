@@ -1,4 +1,4 @@
-# Communiverse Plug — repo note 20261006-plug-3
+# Communiverse Plug — repo note 20261006-plug-4
 
 This repository change adds Plug as a public people page inside Communiverse. It does not deploy onto the live stacked `communiverse` Worker, and it does not move Plug’s private handlers.
 
@@ -6,7 +6,7 @@ This repository change adds Plug as a public people page inside Communiverse. It
 
 Canonical page: `https://espacios.me/communiverse/plug/`
 
-`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-3.css` and `.js`.
+`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-4.css` and `.js`.
 
 `worker/plug.js` handles those paths only, and only when the host is `espacios.me` or `www.espacios.me`. `worker/index.js` calls it before static assets. Other Communiverse routes stay with the existing handlers.
 

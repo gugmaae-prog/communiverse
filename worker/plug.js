@@ -13,8 +13,8 @@ import {
 
 export { STYLE };
 
-export const RELEASE = "20261006-plug-3";
-export const SCRIPT = `window.__cvPlugRelease=${JSON.stringify("20261006-plug-3")};${buildDirectoryScript()}`;
+export const RELEASE = "20261006-plug-4";
+export const SCRIPT = `window.__cvPlugRelease=${JSON.stringify("20261006-plug-4")};${buildDirectoryScript()}`;
 
 const ROOT = "/communiverse";
 const CSS_PATH = `${ROOT}/_public/${RELEASE}.css`;
@@ -209,9 +209,7 @@ function richness(member) {
 }
 
 function clusterPeople(members) {
-  const photos = members.filter((member) => member.image);
-  const pool = photos.length >= 8 ? photos : members;
-  return pool.slice().sort((a, b) => richness(b) - richness(a) || a.name.localeCompare(b.name)).slice(0, 12);
+  return members.slice().sort((a, b) => richness(b) - richness(a) || a.name.localeCompare(b.name));
 }
 
 function renderPortrait(member, className) {
@@ -228,7 +226,7 @@ function renderNode(member, slot) {
 function renderFilters() {
   return PLUG_CATEGORIES.map(
     (filter) =>
-      `<button type="button" data-filter="${filter.id}" aria-pressed="${filter.id === "all" ? "true" : "false"}">${filter.label}</button>`,
+      `<button type="button" data-filter="${filter.id}" aria-pressed="${filter.id === "communiverse" ? "true" : "false"}">${filter.label}</button>`,
   ).join("");
 }
 

@@ -153,48 +153,67 @@ function separatedAngles(ids) {
 
 export function layoutCircles(ids, mode) {
   const people = [...ids];
-  if (!people.length) return [];
-  const wideSize = (index) => (index === 0 ? 22 : [14, 11, 12, 10, 13, 9, 12][(index - 1) % 7]);
+  const count = people.length;
+  if (!count) return [];
+  const base = mode === "tight" ? 16 : Math.max(5.5, Math.min(20, 150 / Math.sqrt(count)));
+  const wobble = [1, 0.78, 0.9, 0.7, 0.96, 0.74];
   const diameters = people.map((_, index) => {
-    const open = wideSize(index);
-    if (mode !== "tight" || index === 0) return index === 0 && mode === "tight" ? Math.max(open * 1.35, 26) : open;
-    return index % 2 === 0 ? open * 1.5 : open * 0.65;
+    if (index === 0) return base * (mode === "tight" ? 1.45 : 1.28);
+    if (mode === "tight") return index % 2 === 0 ? base * 1.15 : base * 0.68;
+    return base * wobble[(index - 1) % wobble.length];
   });
-  const gapFor = (a, b) => (mode === "tight" ? Math.min(a, b) * 0.9 : Math.max(a, b) * 0.16);
-  const overshoot = 1.22;
-  const focal = { id: people[0], x: 50, y: 48, d: diameters[0] };
-  if (people.length === 1) return [focal];
-  const around = separatedAngles(people.slice(1));
-  const otherD = around.map((row) => diameters[people.indexOf(row.id)]);
-  let radius = diameters[0] / 2 + Math.max(...otherD) / 2 + gapFor(diameters[0], Math.max(...otherD));
-  for (let iter = 0; iter < 10; iter += 1) {
-    let grow = radius;
-    for (let i = 0; i < around.length; i += 1) {
-      const needFocal = (diameters[0] / 2 + otherD[i] / 2) * overshoot + gapFor(diameters[0], otherD[i]);
-      grow = Math.max(grow, needFocal);
-      for (let j = i + 1; j < around.length; j += 1) {
-        const dx = Math.cos(around[i].angle) - Math.cos(around[j].angle);
-        const dy = Math.sin(around[i].angle) - Math.sin(around[j].angle);
-        const chord = Math.hypot(dx, dy) || 0.001;
-        const need = ((otherD[i] / 2 + otherD[j] / 2) * overshoot + gapFor(otherD[i], otherD[j])) / chord;
-        grow = Math.max(grow, need);
+  const gapFor = (a, b) => (mode === "tight" ? Math.min(a, b) * 0.85 : Math.max(a, b) * 0.14);
+  const positions = new Array(count);
+  positions[0] = { id: people[0], x: 50, y: 50, d: diameters[0] };
+  let cursor = 1;
+  let innerEdge = diameters[0] / 2;
+  while (cursor < count) {
+    const remaining = count - cursor;
+    const seed = diameters[cursor];
+    const gap = gapFor(seed, diameters[0]);
+    const trialRadius = innerEdge + gap + seed / 2;
+    const slot = seed + gap;
+    const around = Math.max(1, Math.floor((2 * Math.PI * trialRadius) / slot));
+    const ringCount = Math.min(remaining, Math.max(6, around));
+    const slice = people.slice(cursor, cursor + ringCount);
+    const angled = separatedAngles(slice);
+    const sizes = angled.map((row) => diameters[people.indexOf(row.id)]);
+    const maxD = Math.max(...sizes);
+    const ringGap = gapFor(maxD, diameters[0]);
+    let radius = innerEdge + ringGap + maxD / 2;
+    for (let iter = 0; iter < 8; iter += 1) {
+      let needed = radius;
+      for (let i = 0; i < angled.length; i += 1) {
+        const j = (i + 1) % angled.length;
+        let delta = angled[j].angle - angled[i].angle;
+        if (j === 0) delta += Math.PI * 2;
+        const chord = 2 * Math.sin(delta / 2) || 0.001;
+        needed = Math.max(needed, (sizes[i] / 2 + sizes[j] / 2 + ringGap) / chord);
+        needed = Math.max(needed, diameters[0] / 2 + sizes[i] / 2 + gapFor(diameters[0], sizes[i]));
       }
+      if (needed <= radius * 1.001) break;
+      radius = needed;
     }
-    if (grow <= radius * 1.001) break;
-    radius = grow;
-  }
-  const reach = radius + Math.max(...otherD) / 2;
-  const fit = reach > 34 ? 34 / reach : 1;
-  const placed = new Map([[focal.id, { ...focal, d: focal.d * fit }]]);
-  around.forEach((row, index) => {
-    placed.set(row.id, {
-      id: row.id,
-      x: 50 + Math.cos(row.angle) * radius * fit,
-      y: 48 + Math.sin(row.angle) * radius * fit,
-      d: otherD[index] * fit,
+    angled.forEach((row, index) => {
+      positions[people.indexOf(row.id)] = {
+        id: row.id,
+        x: 50 + Math.cos(row.angle) * radius,
+        y: 50 + Math.sin(row.angle) * radius,
+        d: sizes[index],
+      };
     });
-  });
-  return people.map((id) => placed.get(id));
+    innerEdge = radius + maxD / 2;
+    cursor += ringCount;
+  }
+  let reach = 0;
+  for (const spot of positions) reach = Math.max(reach, Math.hypot(spot.x - 50, spot.y - 50) + spot.d / 2);
+  const fit = reach > 46 ? 46 / reach : 1;
+  return positions.map((spot) => ({
+    id: spot.id,
+    x: 50 + (spot.x - 50) * fit,
+    y: 50 + (spot.y - 50) * fit,
+    d: spot.d * fit,
+  }));
 }
 
 export function circlesOverlap(layout, pad = 0) {
@@ -238,7 +257,7 @@ const empty=root.querySelector('.cluster-empty');
 const focal=root.querySelector('.focal');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const allowed=['communiverse','ambassador','artist','all'];
-let filter=(new URLSearchParams(location.search).get('filter')||'all').toLowerCase();
+let filter=(new URLSearchParams(location.search).get('filter')||'communiverse').toLowerCase();
 if(!allowed.includes(filter))filter='all';
 function useFallback(img){
   if(!img||img.dataset.fallback)return;
@@ -269,19 +288,20 @@ function assign(){
     node.home=point(wideBy.get(node),size.width,size.height);
     var on=show(node);
     var slot=on?tightBy.get(node):null;
-    var target=filter==='all'?node.home:(slot?point(slot,size.width,size.height):node.home);
+    var spread=filter==='all'||filter==='communiverse';
+    var target=spread?node.home:(slot?point(slot,size.width,size.height):node.home);
     node.tx=target.x;node.ty=target.y;node.td=on?target.d:node.home.d;node.tscale=on?1:0.55;node.topacity=on?1:0;
     node.el.classList.toggle('is-on',on);
     node.el.tabIndex=on?0:-1;
     node.el.setAttribute('aria-hidden',on?'false':'true');
   });
-  if(roster){[...roster.querySelectorAll('[data-categories]')].forEach(function(row){var cats=(row.dataset.categories||'').split(' ');row.hidden=filter!=='all'&&!cats.includes(filter);});}
-  if(empty)empty.hidden=matching.length!==0||filter==='all';
+  if(roster){[...roster.querySelectorAll('[data-categories]')].forEach(function(row){var cats=(row.dataset.categories||'').split(' ');row.hidden=filter!=='all'&&filter!=='communiverse'&&!cats.includes(filter);});}
+  if(empty)empty.hidden=matching.length!==0||filter==='all'||filter==='communiverse';
   var lead=matching[0];
   if(focal){focal.hidden=!lead;if(lead)focal.innerHTML='<b>'+lead.el.dataset.label+'</b><small>'+lead.el.dataset.role+'</small>';}
   buttons.forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.filter===filter));});
 }
-function show(node){if(filter==='all')return true;return (node.el.dataset.categories||'').split(' ').includes(filter);}
+function show(node){if(filter==='all'||filter==='communiverse')return true;return (node.el.dataset.categories||'').split(' ').includes(filter);}
 function apply(node){node.el.style.width=node.d+'px';node.el.style.height=node.d+'px';node.el.style.left=node.x+'px';node.el.style.top=node.y+'px';node.el.style.opacity=String(Math.max(0,node.opacity));node.el.style.transform='translate(-50%, -50%) scale('+node.scale+')';node.el.style.pointerEvents=node.opacity<0.25?'none':'auto';}
 var frame=0,running=false;
 function tick(now){
