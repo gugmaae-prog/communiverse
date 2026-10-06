@@ -177,8 +177,12 @@ test("handler renders members, redirects people, and rejects other methods", asy
 
   const css = await handlePlug(new Request(`https://espacios.me/communiverse/_public/${RELEASE}.css`));
   const cssText = await css.text();
+  assert.match(body, /id="cv-person-name"/);
+  assert.match(body, /class="cv-plug is-focused"/);
   assert.match(cssText, /\.cv-plug/);
   assert.match(cssText, /radial-gradient/);
+  assert.match(cssText, /#cv-person-name\{[^}]*Fraunces/);
+  assert.match(cssText, /Instrument Sans/);
 });
 
 test("a failed directory fetch still explains Plug and invents nobody", async () => {

@@ -13,7 +13,7 @@ import {
 
 export { STYLE };
 
-export const RELEASE = "20261006-plug-5";
+export const RELEASE = "20261006-plug-6";
 export const SCRIPT = `window.__cvPlugRelease=${JSON.stringify(RELEASE)};${buildDirectoryScript()}`;
 
 const ROOT = "/communiverse";
@@ -217,10 +217,27 @@ function renderPortrait(member, className) {
   return `<img class="${className}" src="${escapeHtml(member.image)}" alt="" data-initial="${escapeHtml(member.initial)}" width="480" height="480" decoding="async" referrerpolicy="no-referrer">`;
 }
 
+function categoryLabel(member) {
+  const ids = member.plugCategories || [];
+  const match = PLUG_CATEGORIES.find((item) => item.id !== "all" && ids.includes(item.id));
+  return match ? match.label : "";
+}
+
+function focusScore(member) {
+  return (member.plugCategories || []).length + (member.image ? 3 : 0) + (member.summary ? 1 : 0);
+}
+
+function renderPersonCard(member) {
+  if (!member) return "";
+  const group = categoryLabel(member);
+  const eye = `<p class="glass-eyebrow"${group ? "" : " hidden"}>${escapeHtml(group)}</p>`;
+  return `<aside class="glass-panel" id="cv-person-work" role="region" aria-labelledby="cv-person-name"><div class="glass-panel-body"><article class="glass-card">${eye}<h2 id="cv-person-name">${escapeHtml(member.name)}</h2><p class="glass-role">${escapeHtml(member.spec || "Member")}</p></article></div></aside>`;
+}
+
 function renderNode(member, slot) {
   const categories = (member.plugCategories || []).join(" ");
   const style = ` style="left:${slot.x}%;top:${slot.y}%;width:${slot.d}%;aspect-ratio:1;opacity:1;transform:translate(-50%, -50%)"`;
-  return `<a class="node"${style} data-slug="${escapeHtml(member.slug)}" data-name="${escapeHtml(member.name)}" data-label="${escapeHtml(member.name)}" data-role="${escapeHtml(member.spec || "Member")}" data-score="${(member.plugCategories || []).length + (member.image ? 3 : 0) + (member.summary ? 1 : 0)}" data-categories="${escapeHtml(categories)}" href="${escapeHtml(member.profileUrl)}">${renderPortrait(member, "")}<span class="ph" hidden>${escapeHtml(member.initial)}</span></a>`;
+  return `<a class="node"${style} data-slug="${escapeHtml(member.slug)}" data-name="${escapeHtml(member.name)}" data-label="${escapeHtml(member.name)}" data-role="${escapeHtml(member.spec || "Member")}" data-group="${escapeHtml(categoryLabel(member))}" data-score="${focusScore(member)}" data-categories="${escapeHtml(categories)}" href="${escapeHtml(member.profileUrl)}">${renderPortrait(member, "")}<span class="ph" hidden>${escapeHtml(member.initial)}</span></a>`;
 }
 
 function renderFilters() {
@@ -254,7 +271,8 @@ function renderDirectory(directory) {
   const cluster = clusterPeople(people);
   const layout = layoutCircles(cluster.map((member) => member.slug), "wide");
   const nodes = cluster.map((member, index) => renderNode(member, layout[index])).join("");
-  return `<div class="field"><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="cluster"><div class="stage" id="constellation"><div class="plot">${nodes}</div><p class="cluster-empty" hidden>No public profiles are tagged for this yet. Add the category on their Plug profile to show them here.</p></div><p class="focal" hidden></p></div></div>${renderRoster(people)}`;
+  const lead = cluster.slice().sort((a, b) => focusScore(b) - focusScore(a) || a.name.localeCompare(b.name))[0];
+  return `<div class="field"><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="cluster"><div class="stage" id="constellation"><div class="plot">${nodes}</div>${renderPersonCard(lead)}<p class="cluster-empty" hidden>No public profiles are tagged for this yet. Add the category on their Plug profile to show them here.</p></div><p class="focal" hidden></p></div></div>${renderRoster(people)}`;
 }
 
 export function renderPlugShell(directory) {
@@ -262,6 +280,8 @@ export function renderPlugShell(directory) {
 }
 
 function renderDocument(directory, assets) {
+  const shell = renderPlugShell(directory);
+  const rootClass = shell.includes('id="cv-person-name"') ? "cv-plug is-focused" : "cv-plug";
   const assetLinks =
     assets === "inline"
       ? `<style>${STYLE}</style>`
@@ -269,7 +289,7 @@ function renderDocument(directory, assets) {
   const inlineScript = assets === "inline" ? `<script>${SCRIPT}</script>` : "";
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Plug | Communiverse</title><meta name="description" content="Find your people. Plug is the Communiverse member network: public profiles, with messages, offers, teams, courses, and ratings on Plug."><link rel="canonical" href="https://espacios.me${PAGE_PATH}"><meta property="og:title" content="Plug | Communiverse"><meta property="og:description" content="Find your people. The Communiverse member network."><meta property="og:url" content="https://espacios.me${PAGE_PATH}"><meta property="og:type" content="website"><meta property="og:site_name" content="Communiverse"><meta name="twitter:card" content="summary"><meta name="cv-public-release" content="${RELEASE}"><link rel="icon" href="/communiverse/icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap">${assetLinks}</head>
-<body><div class="cv-plug">${renderPlugShell(directory)}</div>${inlineScript}</body></html>`;
+<body><div class="${rootClass}">${shell}</div>${inlineScript}</body></html>`;
 }
 
 export function renderPlugDocument(directory) {
