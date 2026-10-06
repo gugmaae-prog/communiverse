@@ -1,67 +1,57 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
+import { PillLink } from "@/components/pill-link";
 import { SiteFooter } from "@/components/site-footer";
-import { CtaLink } from "@/components/cta-link";
+import { SiteHeader } from "@/components/site-header";
 import { howItWorks } from "@/data/pages";
 
 export const metadata: Metadata = {
   title: { absolute: howItWorks.metaTitle },
   description: howItWorks.metaDescription,
   alternates: { canonical: "/how-it-works" },
-  openGraph: {
-    title: howItWorks.metaTitle,
-    description: howItWorks.metaDescription,
-  },
 };
-
-const display =
-  "font-sans font-semibold uppercase tracking-[-0.03em] lg:tracking-[-2.16px]";
 
 export default function HowItWorksPage() {
   return (
-    <>
+    <div className="bg-[#121814] text-[#f5f4f1]">
       <SiteHeader />
-      <main className="mx-auto max-w-[1440px] px-6 pb-24 pt-[112px] lg:px-0 lg:pb-32 lg:pl-[184px] lg:pt-[160px]">
-        <p className="font-serif text-base font-medium leading-4 text-muted lg:text-[22.08px] lg:leading-[26.496px] lg:tracking-[-0.4416px]">
-          {howItWorks.eyebrow}
-        </p>
-        <h1 className="mt-6 w-[342px] font-sans text-[80px] font-semibold uppercase leading-[80px] tracking-[-4.8px] lg:mt-6 lg:w-[804px] lg:text-[160px] lg:leading-[160px] lg:tracking-[-9.6px]">
+      <main className="mx-auto max-w-[1120px] px-5 pb-24 pt-28 md:px-10 md:pt-36">
+        <p className="font-serif text-sm italic text-[#a39e94]">{howItWorks.eyebrow}</p>
+        <p className="mt-8 text-xs uppercase tracking-[0.18em] text-[#f5f4f1]/55">01 / The structure</p>
+        <h1 className="mt-4 max-w-4xl font-serif text-4xl font-medium leading-[0.95] tracking-tight md:text-6xl">
           {howItWorks.heading}
         </h1>
-        <p className="mt-6 text-balance font-sans text-base font-medium uppercase leading-[19.2px] lg:w-[429px] lg:leading-[22.4px]">
-          {howItWorks.intro}
-        </p>
+        <p className="mt-6 max-w-xl text-base leading-7 text-[#f5f4f1]/80">{howItWorks.intro}</p>
+        <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[#f5f4f1]/60">Find · Build · Earn</p>
+        <div className="mt-8">
+          <PillLink href={howItWorks.cta.href}>{howItWorks.cta.label}</PillLink>
+        </div>
 
-        <section className="mt-40 lg:mt-[244px]">
-          <h2 className={`${display} w-full text-[32px] leading-[32px] lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
+        <section className="mt-24">
+          <p className="font-serif text-sm italic text-[#a39e94]">(How it works)</p>
+          <p className="mt-6 text-xs uppercase tracking-[0.18em] text-[#f5f4f1]/55">02 / Three steps</p>
+          <h2 className="mt-4 max-w-3xl font-serif text-4xl font-medium leading-tight tracking-tight md:text-5xl">
             {howItWorks.stepsHeading}
           </h2>
-          <div className="mt-16 grid gap-14 lg:mt-[209px] lg:w-[1072px] lg:grid-cols-3 lg:gap-x-[137px]">
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
             {howItWorks.steps.map((step) => (
-              <div key={step.n} className="lg:w-[266px]">
-                <p className="font-serif text-[22.08px] font-medium leading-[26.496px] tracking-[-0.4416px]">{step.n}</p>
-                <h3 className="mt-5 font-sans text-[64px] font-semibold uppercase leading-[76.8px] tracking-[-1.92px]">
-                  {step.title}
-                </h3>
-                <p className="mt-5 font-sans text-base font-medium leading-[22.4px]">{step.body}</p>
+              <div key={step.n}>
+                <p className="font-serif text-sm italic text-[#a39e94]">{step.n}</p>
+                <h3 className="mt-3 text-3xl font-medium uppercase tracking-[-0.04em]">{step.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#f5f4f1]/75">{step.body}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-28 lg:mt-[284px]">
-          <h2 className={`${display} text-[32px] leading-none lg:w-[697px] lg:text-[72px] lg:leading-[72px]`}>
-            {howItWorks.closeHeading}
-          </h2>
-          <p className="mt-8 font-sans text-base font-medium uppercase leading-[22.4px] lg:mt-10 lg:w-[429px]">
-            {howItWorks.close}
-          </p>
-          <CtaLink href={howItWorks.cta.href} className="mt-12">
-            {howItWorks.cta.label}
-          </CtaLink>
+        <section className="mt-24">
+          <h2 className="font-serif text-4xl font-medium tracking-tight md:text-5xl">{howItWorks.closeHeading}</h2>
+          <p className="mt-5 max-w-xl text-base leading-7 text-[#f5f4f1]/80">{howItWorks.close}</p>
+          <div className="mt-8">
+            <PillLink href={howItWorks.cta.href}>{howItWorks.cta.label}</PillLink>
+          </div>
         </section>
       </main>
       <SiteFooter />
-    </>
+    </div>
   );
 }

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { ShellPage } from "@/components/shell-page";
-import { site } from "@/data/site";
+import { ArticlePage } from "@/components/article-page";
+import { articles } from "@/data/pages";
 
 export const metadata: Metadata = {
-  title: { absolute: site.title },
-  description: site.description,
+  title: { absolute: articles.brands.metaTitle },
   alternates: { canonical: "/for-brands" },
 };
 
 export default function ForBrandsPage() {
-  return <ShellPage />;
+  return <ArticlePage article={articles.brands} />;
 }

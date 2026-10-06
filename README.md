@@ -1,6 +1,6 @@
 # Communiverse Clubs
 
-A working replica of [communiverseclubs.com](https://www.communiverseclubs.com/). The live site is a Framer project. This copy is a Next.js app with the same pages, copy, and photography, laid out so the words and image paths can be rebranded from the files in `data/`.
+The Communiverse site published at [espacios.me/communiverse](https://espacios.me/communiverse/). This Next.js app is that dark gallery experience. Copy and image paths live in `data/`. [`AUDIT.md`](AUDIT.md) records the earlier Framer site at communiverseclubs.com.
 
 Use this repository as the reference when replicating the site. The audit records what the live site contains; the `data/` files are the copy and image paths the app actually renders.
 
