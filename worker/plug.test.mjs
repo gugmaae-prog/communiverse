@@ -6,9 +6,12 @@ import {
   handlePlug,
   loadPlugDirectory,
   matchPlug,
+  memberFacets,
   parseDirectory,
   RELEASE,
   safeImageUrl,
+  stepEase,
+  stepSpring,
 } from "./plug.js";
 
 const DIRECTORY_URL = "https://espacios-auth-central.thekeifferjapeth.workers.dev/plug";
@@ -19,6 +22,27 @@ function article({ slug = "hello", name = "Keiffer Japeth", href = `/plug/u/${sl
     : `<div class="pc-av pc-av-fb">K</div>`;
   return `<article class="pc" data-slug="${slug}"><div class="pc-head">${avatar}<div><a class="pc-name" href="${href}">${name}</a><div class="pc-spec">${spec}</div><div class="pc-loc">${location}</div></div></div><div class="pc-more"><p>${summary}</p><div class="chips">${chips.map((chip) => `<span class="chip">${chip}</span>`).join("")}</div></div>${extra}</article>`;
 }
+
+test("facets follow profession, skill, and place, and the cluster uses a spring", () => {
+  assert.deepEqual(
+    memberFacets({ spec: "Founder", summary: "", chips: ["Architecture"], location: "Dubai, United Arab Emirates" }),
+    ["all", "founders", "dubai"],
+  );
+  assert.deepEqual(memberFacets({ spec: "Designer", summary: "", chips: [], location: "Iloilo" }), ["all", "design"]);
+  assert.deepEqual(memberFacets({ spec: "Member", summary: "", chips: ["real estate"], location: "" }), ["all"]);
+
+  let pos = 0;
+  let vel = 0;
+  let overshot = false;
+  for (let i = 0; i < 180; i += 1) {
+    [pos, vel] = stepSpring(pos, vel, 100, 1 / 60);
+    if (pos > 100) overshot = true;
+  }
+  assert.ok(overshot, "spring should pass the target before settling");
+  assert.ok(Math.abs(pos - 100) < 1, `expected to settle near 100, got ${pos}`);
+  const eased = stepEase(0, 100, 0.16, 0.16);
+  assert.ok(eased > 60 && eased < 70, `ease should move partway, got ${eased}`);
+});
 
 test("parseDirectory keeps public cards and drops unsafe ones", () => {
   const html = [
@@ -76,6 +100,9 @@ test("handler renders members, redirects people, and rejects other methods", asy
   const body = await page.text();
   assert.match(body, /Find your people/);
   assert.match(body, /data-filter="founders"/);
+  assert.match(body, /data-filter="design"/);
+  assert.match(body, /data-filter="dubai"/);
+  assert.match(body, /data-facets="all founders dubai"/);
   assert.match(body, /class="node hero"/);
   assert.match(body, /https:\/\/espacios\.me\/plug\/u\/hello/);
   assert.match(body, /Naina Singh/);
@@ -91,7 +118,9 @@ test("handler renders members, redirects people, and rejects other methods", asy
   assert.equal(denied.status, 405);
 
   const css = await handlePlug(new Request(`https://espacios.me/communiverse/_public/${RELEASE}.css`));
-  assert.match(await css.text(), /\.cv-plug/);
+  const cssText = await css.text();
+  assert.match(cssText, /\.cv-plug/);
+  assert.match(cssText, /radial-gradient/);
 });
 
 test("a failed directory fetch still explains Plug and invents nobody", async () => {

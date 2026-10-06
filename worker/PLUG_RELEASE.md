@@ -1,4 +1,4 @@
-# Communiverse Plug — repo note 20261006-plug-1
+# Communiverse Plug — repo note 20261006-plug-2
 
 This repository change adds Plug as a public people page inside Communiverse. It does not deploy onto the live stacked `communiverse` Worker, and it does not move Plug’s private handlers.
 
@@ -6,13 +6,22 @@ This repository change adds Plug as a public people page inside Communiverse. It
 
 Canonical page: `https://espacios.me/communiverse/plug/`
 
-`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-1.css` and `.js`.
+`/communiverse/plug` and `/communiverse/plug/` both serve the page. `/communiverse/people` and `/communiverse/people/` redirect to the canonical path. The page CSS and script live at `/communiverse/_public/20261006-plug-2.css` and `.js`.
 
-`worker/plug.js` handles those paths only, and only when the host is `espacios.me` or `www.espacios.me`. `worker/index.js` calls it after the ambassadors handler and before static assets. Other Communiverse routes stay with the existing handlers.
+`worker/plug.js` handles those paths only, and only when the host is `espacios.me` or `www.espacios.me`. `worker/index.js` calls it before static assets. Other Communiverse routes stay with the existing handlers.
 
 ## How members load
 
-Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug`, reads the public profile cards, and places them in a constellation: circular portraits on a gray field, with All, Founders, Design, and Market filters. A filter collapses the other circles onto the people in that group. The mark under the cluster cycles the next group. Each circle links to `https://espacios.me/plug/u/<slug>`.
+Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug` and reads the public profile cards. Portraits sit in an organic cluster on a dotted gray field. The pills are **All**, **Founders** (profession), **Design** (skill or profession), and **Dubai** (location). Plug profiles do not have an ambassador or employee field, so those labels are not invented. Choosing a pill fades and scales everyone else out, and springs the matching portraits into a tighter cluster around one focal circle. Choosing All springs the wider scatter back. Each circle links to `https://espacios.me/plug/u/<slug>`.
+
+## Preview
+
+```bash
+npm test
+npm run dev
+```
+
+Open `http://127.0.0.1:43123/communiverse/plug/`. The worker handler itself only answers on `espacios.me` and `www.espacios.me`, so local Next is the preview. A production publish still has to wrap the live Communiverse modules.
 
 Message, offer, team invite, course suggestion, and rating stay on that Plug profile. This page does not send them. Offers, bids, rates, and contracts are not a payment flow. Espacios does not process payments.
 

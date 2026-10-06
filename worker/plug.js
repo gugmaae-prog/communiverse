@@ -1,7 +1,7 @@
 // Public Plug directory inside Communiverse. Reads the public auth-central page
 // and links each member to the existing Plug profile. No messages, offers,
 // invites, course suggestions, ratings, or profile writes.
-export const RELEASE = "20261006-plug-1";
+export const RELEASE = "20261006-plug-2";
 
 const ROOT = "/communiverse";
 const CSS_PATH = `${ROOT}/_public/${RELEASE}.css`;
@@ -189,93 +189,127 @@ export async function loadPlugDirectory(fetchImpl = fetch) {
   return { ok: true, members: parseDirectory(html) };
 }
 
+export const STIFFNESS = 170;
+export const DAMPING = 22;
+
+export function stepSpring(pos, vel, target, dt) {
+  const acc = -STIFFNESS * (pos - target) - DAMPING * vel;
+  const nextVel = vel + acc * dt;
+  return [pos + nextVel * dt, nextVel];
+}
+
+export function stepEase(current, target, dt, tau) {
+  const blend = 1 - Math.exp(-dt / tau);
+  return current + (target - current) * blend;
+}
+
+export function memberFacets(member) {
+  const text = [member.spec, member.summary, ...(member.chips || [])].join(" ").toLowerCase();
+  const place = (member.location || "").toLowerCase();
+  const facets = ["all"];
+  if (/\bfounder\b/.test(text)) facets.push("founders");
+  if (/\b(design|designer|architect|interior|brand)\b/.test(text)) facets.push("design");
+  if (/\bdubai\b/.test(place)) facets.push("dubai");
+  return facets;
+}
+
+const FILTERS = [
+  { id: "all", label: "All" },
+  { id: "founders", label: "Founders" },
+  { id: "design", label: "Design" },
+  { id: "dubai", label: "Dubai" },
+];
+
+const WIDE = [
+  { x: 52, y: 48, s: 28 },
+  { x: 31, y: 33, s: 15 },
+  { x: 72, y: 27, s: 12 },
+  { x: 76, y: 46, s: 10 },
+  { x: 26, y: 55, s: 13 },
+  { x: 39, y: 71, s: 9 },
+  { x: 65, y: 68, s: 11 },
+  { x: 18, y: 29, s: 8 },
+  { x: 55, y: 18, s: 7 },
+  { x: 78, y: 61, s: 8 },
+  { x: 34, y: 82, s: 7 },
+  { x: 74, y: 80, s: 9 },
+  { x: 46, y: 32, s: 8 },
+  { x: 60, y: 56, s: 7 },
+];
+
+const TIGHT = [
+  { x: 50, y: 46, s: 32 },
+  { x: 33, y: 34, s: 14 },
+  { x: 67, y: 33, s: 12 },
+  { x: 30, y: 58, s: 11 },
+  { x: 69, y: 57, s: 13 },
+  { x: 50, y: 70, s: 9 },
+  { x: 42, y: 22, s: 8 },
+  { x: 61, y: 21, s: 8 },
+];
+
 export const STYLE = `
-.cv-plug{min-height:100vh;background:#efefef;color:#111;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-synthesis:none}
-body:has(.cv-plug){background:#efefef}
+.cv-plug{min-height:100vh;background-color:#f2f2f2;background-image:radial-gradient(rgba(17,17,17,.22) .7px, transparent .8px);background-size:18px 18px;color:#111;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-synthesis:none}
+body:has(.cv-plug){background-color:#f2f2f2;background-image:radial-gradient(rgba(17,17,17,.22) .7px, transparent .8px);background-size:18px 18px}
 .cv-plug *{box-sizing:border-box}
 .cv-plug a{color:inherit;text-decoration:none}
 .cv-plug button{font:inherit}
 .cv-plug button,.cv-plug a{-webkit-tap-highlight-color:transparent}
-.cv-plug :focus-visible{outline:2px solid #111;outline-offset:4px}
+.cv-plug :focus-visible{outline:2px solid #111;outline-offset:3px}
 .cv-plug .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.cv-plug .home{position:fixed;z-index:5;top:22px;left:28px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
-.cv-plug .field{min-height:100vh;display:flex;align-items:center;justify-content:center;gap:28px;padding:64px 32px 36px}
-.cv-plug .filters{display:flex;flex-direction:column;gap:8px;width:128px;flex:none}
-.cv-plug .filters button{min-height:32px;padding:7px 10px;border:1px solid #e6e6e6;border-radius:8px;background:#fff;color:#161616;letter-spacing:.14em;text-transform:uppercase;font-size:10px;font-weight:650;text-align:left;cursor:pointer}
-.cv-plug .filters button[aria-pressed="true"]{background:#111;border-color:#111;color:#fff}
-.cv-plug .stage{position:relative;width:min(620px,calc(100vw - 220px));aspect-ratio:4/5;flex:none}
-.cv-plug .node{position:absolute;display:block;border-radius:50%;aspect-ratio:1;transform:translate(-50%,-50%);transition:left .55s cubic-bezier(.22,1,.36,1),top .55s cubic-bezier(.22,1,.36,1),width .55s cubic-bezier(.22,1,.36,1),opacity .45s ease}
-.cv-plug .node img,.cv-plug .node .ph{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;background:#dedede}
-.cv-plug .node .ph{display:flex;align-items:center;justify-content:center;font-size:22px;letter-spacing:.04em}
-.cv-plug .node .cap{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);display:none;text-align:center;white-space:nowrap;pointer-events:none}
+.cv-plug .home{position:fixed;z-index:5;top:22px;left:28px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.cv-plug .field{min-height:100vh;display:flex;align-items:center;justify-content:center;gap:36px;padding:72px 32px 40px}
+.cv-plug .filters{display:flex;flex-direction:column;gap:8px;width:132px;flex:none}
+.cv-plug .filters button{min-height:28px;padding:6px 12px;border:0;border-radius:999px;background:rgba(255,255,255,.62);color:#161616;letter-spacing:.14em;text-transform:uppercase;font-size:10px;font-weight:600;text-align:left;cursor:pointer}
+.cv-plug .filters button[aria-pressed="true"]{background:#111;color:#fff}
+.cv-plug .stage{position:relative;width:min(640px,calc(100vw - 220px));aspect-ratio:4/5;flex:none}
+.cv-plug .node{position:absolute;left:0;top:0;display:block;border-radius:50%;transform-origin:center center;will-change:transform,opacity}
+.cv-plug .node img,.cv-plug .node .ph{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;background:#e4e4e4}
+.cv-plug .node .ph{display:flex;align-items:center;justify-content:center;font-size:18px;letter-spacing:.04em}
+.cv-plug .node .cap{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);display:none;text-align:center;white-space:nowrap;pointer-events:none}
 .cv-plug .node.hero{z-index:3}
 .cv-plug .node.hero .cap{display:block}
-.cv-plug .node .cap b{display:block;font-size:11px;font-weight:650;letter-spacing:.12em;text-transform:uppercase}
-.cv-plug .node .cap small{display:block;margin-top:3px;color:#8a8a8a;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.cv-plug .node.dim img,.cv-plug .node.dim .ph{filter:grayscale(1) brightness(1.35);opacity:.5}
-.cv-plug .node.gone{opacity:0;pointer-events:none;width:6%!important}
-.cv-plug .mark{position:absolute;z-index:4;left:68%;top:86%;width:14%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
-.cv-plug .mark svg{width:58%;height:58%;stroke:#111;fill:none;stroke-width:1.4;stroke-linecap:round}
-.cv-plug .mark:disabled{opacity:.35;cursor:default}
-.cv-plug .fallback{max-width:36ch;font-size:15px;line-height:1.5;text-align:center}
+.cv-plug .node .cap b{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.cv-plug .node .cap small{display:block;margin-top:3px;color:#8a8a8a;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.cv-plug .fallback{max-width:36ch;font-size:14px;line-height:1.5;text-align:center;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
 .cv-plug .fallback a{text-decoration:underline;text-underline-offset:3px}
-.cv-plug .plain{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.cv-plug .plain{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:800px){
   .cv-plug .home{top:16px;left:16px}
-  .cv-plug .field{flex-direction:column;gap:18px;padding:64px 12px 28px}
+  .cv-plug .field{flex-direction:column;align-items:center;gap:18px;padding:64px 12px 28px}
   .cv-plug .filters{flex-direction:row;flex-wrap:wrap;width:min(640px,100%);justify-content:center}
   .cv-plug .filters button{text-align:center}
-  .cv-plug .stage{width:min(640px,calc(100vw - 16px))}
+  .cv-plug .stage{width:min(640px,calc(100vw - 36px))}
 }
-@media(prefers-reduced-motion:reduce){.cv-plug .node{transition:none}}
+@media(prefers-reduced-motion:reduce){.cv-plug .node{will-change:auto}}
 `;
 
-export const SCRIPT = `(()=>{'use strict';window.__cvPlugRelease='${RELEASE}';const root=document.querySelector('.cv-plug');if(!root)return;const stage=root.querySelector('.stage');const nodes=[...root.querySelectorAll('.node')];const buttons=[...root.querySelectorAll('[data-filter]')];const mark=root.querySelector('.mark');if(!stage||!nodes.length)return;const SLOTS=[{x:54,y:46,s:30},{x:33,y:31,s:16},{x:74,y:24,s:13},{x:79,y:44,s:11},{x:27,y:52,s:14},{x:41,y:68,s:10},{x:67,y:66,s:11},{x:18,y:27,s:8},{x:57,y:16,s:7},{x:86,y:60,s:8},{x:34,y:80,s:7}];const allowed=new Set(['all','founders','design','market']);let filter=(new URLSearchParams(location.search).get('filter')||'all').toLowerCase();if(!allowed.has(filter))filter='all';let offset=0;function match(node){const t=(node.dataset.blob||'').toLowerCase();if(filter==='founders')return /\\bfounder\\b/.test(t);if(filter==='design')return /\\b(design|designer|architect|interior|brand)\\b/.test(t);if(filter==='market')return /\\b(market|marketing|sales|real estate)\\b/.test(t);return true}function pool(){return nodes.filter(match).slice().sort((a,b)=>(Number(b.dataset.score)||0)-(Number(a.dataset.score)||0)||(a.dataset.name||'').localeCompare(b.dataset.name||''))}function place(){const list=pool();const count=list.length;const start=count?offset%count:0;const ordered=list.slice(start).concat(list.slice(0,start));const visible=new Map(ordered.slice(0,SLOTS.length).map((node,i)=>[node,i]));for(const node of nodes){const i=visible.has(node)?visible.get(node):-1;const on=i>=0;node.classList.toggle('gone',!on);node.classList.toggle('hero',i===0);node.classList.toggle('dim',on&&i>0&&filter!=='all');node.tabIndex=on?0:-1;node.setAttribute('aria-hidden',on?'false':'true');if(!on)continue;const slot=SLOTS[i];node.style.left=slot.x+'%';node.style.top=slot.y+'%';node.style.width=slot.s+'%'}if(mark)mark.disabled=count<=SLOTS.length;for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.filter===filter));stage.classList.add('ready')}for(const button of buttons){button.addEventListener('click',()=>{filter=button.dataset.filter;offset=0;const url=new URL(location.href);if(filter==='all')url.searchParams.delete('filter');else url.searchParams.set('filter',filter);history.replaceState(null,'',url);place()})}if(mark)mark.addEventListener('click',()=>{const count=pool().length;if(count>SLOTS.length){offset=(offset+(SLOTS.length-1))%count;place()}})}window.addEventListener('resize',place);place()})();`;
-
-const MARK = `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="10"/><path d="M32 8v8M32 48v8M8 32h8M48 32h8M14 14l6 6M44 44l6 6M50 14l-6 6M20 44l-6 6"/></svg>`;
-
-function memberBlob(member) {
-  return [member.spec, member.summary, member.location, ...member.chips].join(" ");
-}
+export const SCRIPT = `(()=>{'use strict';window.__cvPlugRelease='${RELEASE}';const STIFF=${STIFFNESS};const DAMP=${DAMPING};const WIDE=${JSON.stringify(WIDE)};const TIGHT=${JSON.stringify(TIGHT)};const FILTERS=${JSON.stringify(FILTERS.map((filter) => filter.id))};const root=document.querySelector('.cv-plug');if(!root)return;const stage=root.querySelector('.stage');const buttons=[...root.querySelectorAll('[data-filter]')];const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!stage)return;const nodes=[...root.querySelectorAll('.node')].map(el=>({el,x:0,y:0,vx:0,vy:0,opacity:1,scale:1,width:40,tx:0,ty:0,topacity:1,tscale:1,twidth:40}));if(!nodes.length)return;let filter=(new URLSearchParams(location.search).get('filter')||'all').toLowerCase();if(!FILTERS.includes(filter))filter='all';let frame=0;function matches(node){const facets=(node.el.dataset.facets||'').split(' ');return filter==='all'||facets.includes(filter)}function layout(){const box=stage.getBoundingClientRect();const slots=filter==='all'?WIDE:TIGHT;const list=nodes.filter(matches).slice().sort((a,b)=>(Number(b.el.dataset.score)||0)-(Number(a.el.dataset.score)||0)||(a.el.dataset.name||'').localeCompare(b.el.dataset.name||''));const visible=new Map(list.slice(0,slots.length).map((node,i)=>[node,i]));for(const node of nodes){const i=visible.has(node)?visible.get(node):-1;const on=i>=0;const slot=on?slots[i]:{x:50,y:48,s:8};node.tx=box.width*slot.x/100;node.ty=box.height*slot.y/100;node.twidth=box.width*slot.s/100;node.topacity=on?1:0;node.tscale=on?1:0.35;node.el.classList.toggle('hero',i===0);node.el.tabIndex=on?0:-1;node.el.setAttribute('aria-hidden',on?'false':'true')}}function apply(node){node.el.style.width=node.width+'px';node.el.style.height=node.width+'px';node.el.style.left=node.x+'px';node.el.style.top=node.y+'px';node.el.style.opacity=String(node.opacity);node.el.style.transform='translate(-50%, -50%) scale('+node.scale+')'}function snap(){for(const node of nodes){node.x=node.tx;node.y=node.ty;node.vx=0;node.vy=0;node.opacity=node.topacity;node.scale=node.tscale;node.width=node.twidth;apply(node)}}function tick(now){const dt=Math.min(0.032,frame? (now-frame)/1000 : 0.016);frame=now;let moving=false;for(const node of nodes){const [x,vx]=spring(node.x,node.vx,node.tx,dt);const [y,vy]=spring(node.y,node.vy,node.ty,dt);node.x=x;node.y=y;node.vx=vx;node.vy=vy;node.opacity=ease(node.opacity,node.topacity,dt,0.16);node.scale=ease(node.scale,node.tscale,dt,0.18);node.width=ease(node.width,node.twidth,dt,0.2);apply(node);if(Math.abs(node.x-node.tx)>0.4||Math.abs(node.y-node.ty)>0.4||Math.abs(node.vx)>0.4||Math.abs(node.vy)>0.4||Math.abs(node.opacity-node.topacity)>0.01||Math.abs(node.scale-node.tscale)>0.01||Math.abs(node.width-node.twidth)>0.4)moving=true}if(moving)requestAnimationFrame(tick)}function spring(pos,vel,target,dt){const acc=-STIFF*(pos-target)-DAMP*vel;const next=vel+acc*dt;return [pos+next*dt,next]}function ease(current,target,dt,tau){const blend=1-Math.exp(-dt/tau);return current+(target-current)*blend}function go(snapNow){layout();for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.filter===filter));if(snapNow||reduced)snap();else requestAnimationFrame(tick)}for(const button of buttons){button.addEventListener('click',()=>{filter=button.dataset.filter;const url=new URL(location.href);if(filter==='all')url.searchParams.delete('filter');else url.searchParams.set('filter',filter);history.replaceState(null,'',url);go(false)})}window.addEventListener('resize',()=>go(reduced));go(true)})();`;
 
 function memberScore(member) {
-  const founder = /\bfounder\b/i.test(member.spec || "") ? 2 : 0;
-  return (member.image ? 3 : 0) + (member.location ? 1 : 0) + (member.summary ? 1 : 0) + member.chips.length + founder;
+  const founder = memberFacets(member).includes("founders") ? 2 : 0;
+  return (member.image ? 3 : 0) + (member.location ? 1 : 0) + (member.summary ? 1 : 0) + (member.chips?.length || 0) + founder;
 }
 
-const SLOTS = [
-  { x: 54, y: 46, s: 30 },
-  { x: 33, y: 31, s: 16 },
-  { x: 74, y: 24, s: 13 },
-  { x: 79, y: 44, s: 11 },
-  { x: 27, y: 52, s: 14 },
-  { x: 41, y: 68, s: 10 },
-  { x: 67, y: 66, s: 11 },
-  { x: 18, y: 27, s: 8 },
-  { x: 57, y: 16, s: 7 },
-  { x: 86, y: 60, s: 8 },
-  { x: 34, y: 80, s: 7 },
-];
-
 function renderNode(member, index) {
-  const slot = SLOTS[index];
+  const slot = index < WIDE.length ? WIDE[index] : null;
   const portrait = member.image
     ? `<img src="${escapeHtml(member.image)}" alt="" width="480" height="480" decoding="async" referrerpolicy="no-referrer">`
     : `<span class="ph" aria-hidden="true">${escapeHtml(member.initial)}</span>`;
   const role = member.spec || member.location || "Member";
-  const placed = Boolean(slot);
-  const cls = placed ? (index === 0 ? "node hero" : "node") : "node gone";
-  const style = placed ? ` style="left:${slot.x}%;top:${slot.y}%;width:${slot.s}%"` : "";
-  return `<a class="${cls}"${style} data-slug="${escapeHtml(member.slug)}" data-name="${escapeHtml(member.name)}" data-score="${memberScore(member)}" data-blob="${escapeHtml(memberBlob(member))}" href="${escapeHtml(member.profileUrl)}">${portrait}<span class="cap"><b>${escapeHtml(member.name)}</b><small>${escapeHtml(role)}</small></span></a>`;
+  const hidden = !slot;
+  const cls = index === 0 ? "node hero" : "node";
+  const style = slot
+    ? ` style="left:${slot.x}%;top:${slot.y}%;width:${slot.s}%;height:auto;aspect-ratio:1;opacity:1;transform:translate(-50%, -50%)"`
+    : ` style="left:50%;top:48%;width:8%;aspect-ratio:1;opacity:0;transform:translate(-50%, -50%) scale(.35)"`;
+  return `<a class="${cls}"${style} data-slug="${escapeHtml(member.slug)}" data-name="${escapeHtml(member.name)}" data-score="${memberScore(member)}" data-facets="${escapeHtml(memberFacets(member).join(" "))}" href="${escapeHtml(member.profileUrl)}"${hidden ? ` tabindex="-1" aria-hidden="true"` : ""}>${portrait}<span class="cap"><b>${escapeHtml(member.name)}</b><small>${escapeHtml(role)}</small></span></a>`;
 }
 
-function renderFilters() {
-  return ["all", "founders", "design", "market"]
-    .map((id) => {
-      const label = id === "all" ? "All" : id[0].toUpperCase() + id.slice(1);
-      return `<button type="button" data-filter="${id}" aria-pressed="${id === "all" ? "true" : "false"}">${label}</button>`;
-    })
-    .join("");
+function renderFilters(active = "all") {
+  return FILTERS.map(
+    (filter) =>
+      `<button type="button" data-filter="${filter.id}" aria-pressed="${filter.id === active ? "true" : "false"}">${filter.label}</button>`,
+  ).join("");
 }
 
 function renderDirectory(directory) {
@@ -289,7 +323,7 @@ function renderDirectory(directory) {
     .map((member) => `<li><a href="${escapeHtml(member.profileUrl)}">${escapeHtml(member.name)}</a></li>`)
     .join("");
   const ordered = directory.members.slice().sort((a, b) => memberScore(b) - memberScore(a) || a.name.localeCompare(b.name));
-  return `<h1 class="sr" id="plug-title">Find your people.</h1><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="stage" id="constellation">${ordered.map(renderNode).join("")}<button class="mark" type="button" aria-label="Show more people">${MARK}</button></div><noscript><ul class="plain">${links}</ul></noscript>`;
+  return `<h1 class="sr" id="plug-title">Find your people.</h1><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="stage" id="constellation">${ordered.map(renderNode).join("")}</div><noscript><ul class="plain">${links}</ul></noscript>`;
 }
 
 export function renderPlugShell(directory) {
