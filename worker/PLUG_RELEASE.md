@@ -12,7 +12,7 @@ Canonical page: `https://espacios.me/communiverse/plug/`
 
 ## How members load
 
-Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug`, reads the public profile cards, and renders them here. Each card links to `https://espacios.me/plug/u/<slug>`.
+Each page view fetches the public directory HTML from `https://espacios-auth-central.thekeifferjapeth.workers.dev/plug`, reads the public profile cards, and places them in a constellation: circular portraits on a gray field, with All, Founders, Design, and Market filters. A filter collapses the other circles onto the people in that group. The mark under the cluster cycles the next group. Each circle links to `https://espacios.me/plug/u/<slug>`.
 
 Message, offer, team invite, course suggestion, and rating stay on that Plug profile. This page does not send them. Offers, bids, rates, and contracts are not a payment flow. Espacios does not process payments.
 

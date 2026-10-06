@@ -75,6 +75,8 @@ test("handler renders members, redirects people, and rejects other methods", asy
   assert.match(page.headers.get("content-type"), /text\/html/);
   const body = await page.text();
   assert.match(body, /Find your people/);
+  assert.match(body, /data-filter="founders"/);
+  assert.match(body, /class="node hero"/);
   assert.match(body, /https:\/\/espacios\.me\/plug\/u\/hello/);
   assert.match(body, /Naina Singh/);
   assert.doesNotMatch(body, /Send an Offer|Ask Aether|mailto:/);
