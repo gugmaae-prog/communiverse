@@ -11,6 +11,7 @@ import {
   safeImageUrl,
 } from "./plug.js";
 import {
+  buildDirectoryScript,
   circlesOverlap,
   layoutCircles,
   patchProfileHtml,
@@ -52,16 +53,35 @@ test("categories, names, layout, and spring overshoot", () => {
   assert.equal(shown.find((member) => member.slug === "naina-singh-47e7ca").plugCategories.join(" "), "artist");
 
   for (const mode of ["wide", "tight"]) {
-    const layout = layoutCircles(["a", "b", "c", "d", "e", "f", "g", "h"], mode);
-    assert.equal(circlesOverlap(layout), false);
-    const everyone = layoutCircles(Array.from({ length: 68 }, (_, index) => `p${index}`), mode);
-    assert.equal(everyone.length, 68);
-    assert.equal(circlesOverlap(everyone), false);
-    for (const spot of everyone) {
-      assert.ok(spot.x - spot.d / 2 >= 2 && spot.x + spot.d / 2 <= 98);
-      assert.ok(spot.y - spot.d / 2 >= 2 && spot.y + spot.d / 2 <= 98);
+    for (let count = 1; count <= 72; count += 1) {
+      const layout = layoutCircles(Array.from({ length: count }, (_, index) => `p${index}`), mode);
+      assert.equal(layout.length, count);
+      assert.equal(circlesOverlap(layout), false, `${mode} ${count} overlaps`);
+      let minRatio = Infinity;
+      let minD = Infinity;
+      for (let i = 0; i < layout.length; i += 1) {
+        const spot = layout[i];
+        minD = Math.min(minD, spot.d);
+        assert.ok(spot.x - spot.d / 2 >= 2 && spot.x + spot.d / 2 <= 98, `${mode} ${count} x ${spot.x} d ${spot.d}`);
+        assert.ok(spot.y - spot.d / 2 >= 2 && spot.y + spot.d / 2 <= 98, `${mode} ${count} y ${spot.y} d ${spot.d}`);
+        for (let j = i + 1; j < layout.length; j += 1) {
+          const other = layout[j];
+          const gap = Math.hypot(spot.x - other.x, spot.y - other.y) - spot.d / 2 - other.d / 2;
+          minRatio = Math.min(minRatio, gap / Math.max(spot.d, other.d));
+        }
+      }
+      assert.ok(minD > 3, `${mode} ${count} diameter ${minD}`);
+      if (count > 1) assert.ok(minRatio >= (mode === "tight" ? 0.45 : 0.2), `${mode} ${count} gap ratio ${minRatio}`);
     }
   }
+
+  const script = buildDirectoryScript();
+  assert.match(script, /function separateCircles/);
+  assert.doesNotMatch(script, /Math\.abs\(node\.vx\)>8/);
+  const bundled = new Function(
+    `${script.slice(script.indexOf("function stepSpring"), script.indexOf("const root"))} return layoutCircles(Array.from({length:68}, (_,i)=>'p'+i), 'wide');`,
+  )();
+  assert.equal(circlesOverlap(bundled), false);
 
   let pos = 0;
   let vel = 0;

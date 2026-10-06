@@ -13,8 +13,8 @@ import {
 
 export { STYLE };
 
-export const RELEASE = "20261006-plug-4";
-export const SCRIPT = `window.__cvPlugRelease=${JSON.stringify("20261006-plug-4")};${buildDirectoryScript()}`;
+export const RELEASE = "20261006-plug-5";
+export const SCRIPT = `window.__cvPlugRelease=${JSON.stringify(RELEASE)};${buildDirectoryScript()}`;
 
 const ROOT = "/communiverse";
 const CSS_PATH = `${ROOT}/_public/${RELEASE}.css`;
@@ -254,7 +254,7 @@ function renderDirectory(directory) {
   const cluster = clusterPeople(people);
   const layout = layoutCircles(cluster.map((member) => member.slug), "wide");
   const nodes = cluster.map((member, index) => renderNode(member, layout[index])).join("");
-  return `<div class="field"><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="cluster"><div class="stage" id="constellation">${nodes}<p class="cluster-empty" hidden>No public profiles are tagged for this yet. Add the category on their Plug profile to show them here.</p></div><p class="focal" hidden></p></div></div>${renderRoster(people)}`;
+  return `<div class="field"><div class="filters" role="toolbar" aria-label="Filter people">${renderFilters()}</div><div class="cluster"><div class="stage" id="constellation"><div class="plot">${nodes}</div><p class="cluster-empty" hidden>No public profiles are tagged for this yet. Add the category on their Plug profile to show them here.</p></div><p class="focal" hidden></p></div></div>${renderRoster(people)}`;
 }
 
 export function renderPlugShell(directory) {

@@ -125,95 +125,101 @@ export function presentMembers(members) {
   return people.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-function hashAngle(id) {
-  let hash = 0;
-  for (const char of String(id)) hash = (hash * 33 + char.charCodeAt(0)) >>> 0;
-  return ((hash % 10000) / 10000) * Math.PI * 2;
-}
-
-function separatedAngles(ids) {
-  const rows = ids.map((id) => ({ id, angle: hashAngle(id) })).sort((a, b) => a.angle - b.angle || a.id.localeCompare(b.id));
-  if (rows.length < 2) return rows;
-  const minDelta = (Math.PI * 2) / rows.length;
-  const angles = rows.map((row) => row.angle);
-  for (let iter = 0; iter < 6; iter += 1) {
-    for (let i = 0; i < angles.length; i += 1) {
-      const j = (i + 1) % angles.length;
-      let delta = angles[j] - angles[i];
-      if (j === 0) delta = angles[0] + Math.PI * 2 - angles[i];
-      if (delta >= minDelta) continue;
-      const push = (minDelta - delta) / 2;
-      angles[i] -= push;
-      if (j === 0) angles[0] += push;
-      else angles[j] += push;
+export function separateCircles(spots, gapRatio = 0.18) {
+  const placed = spots.map((spot) => ({ ...spot }));
+  for (let iter = 0; iter < 120; iter += 1) {
+    let moved = false;
+    for (let i = 0; i < placed.length; i += 1) {
+      for (let j = i + 1; j < placed.length; j += 1) {
+        let dx = placed[j].x - placed[i].x;
+        let dy = placed[j].y - placed[i].y;
+        let dist = Math.hypot(dx, dy);
+        const gap = gapRatio * Math.max(placed[i].d, placed[j].d);
+        const min = placed[i].d / 2 + placed[j].d / 2 + gap;
+        if (dist >= min) continue;
+        if (dist < 0.001) {
+          const angle = ((i + 1) * 2.399) + j;
+          dx = Math.cos(angle);
+          dy = Math.sin(angle);
+          dist = 1;
+        }
+        const push = (min - dist) / 2;
+        const ux = dx / dist;
+        const uy = dy / dist;
+        placed[i].x -= ux * push;
+        placed[i].y -= uy * push;
+        placed[j].x += ux * push;
+        placed[j].y += uy * push;
+        moved = true;
+      }
     }
+    if (!moved) break;
   }
-  return rows.map((row, index) => ({ ...row, angle: angles[index] }));
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const spot of placed) {
+    minX = Math.min(minX, spot.x - spot.d / 2);
+    minY = Math.min(minY, spot.y - spot.d / 2);
+    maxX = Math.max(maxX, spot.x + spot.d / 2);
+    maxY = Math.max(maxY, spot.y + spot.d / 2);
+  }
+  const span = Math.max(maxX - minX, maxY - minY, 1);
+  const scale = 92 / span;
+  const originX = (minX + maxX) / 2;
+  const originY = (minY + maxY) / 2;
+  return placed.map((spot) => ({
+    ...spot,
+    x: 50 + (spot.x - originX) * scale,
+    y: 50 + (spot.y - originY) * scale,
+    d: spot.d * scale,
+  }));
 }
 
 export function layoutCircles(ids, mode) {
   const people = [...ids];
   const count = people.length;
   if (!count) return [];
-  const base = mode === "tight" ? 16 : Math.max(5.5, Math.min(20, 150 / Math.sqrt(count)));
-  const wobble = [1, 0.78, 0.9, 0.7, 0.96, 0.74];
+  const tight = mode === "tight";
+  const gapRatio = tight ? 0.5 : 0.24;
+  const base = tight ? 12 : 16;
+  const wobble = [1, 0.84, 0.94, 0.76, 0.9, 0.72];
   const diameters = people.map((_, index) => {
-    if (index === 0) return base * (mode === "tight" ? 1.45 : 1.28);
-    if (mode === "tight") return index % 2 === 0 ? base * 1.15 : base * 0.68;
+    if (index === 0) return base * (tight ? 1.35 : 1.2);
+    if (tight) return index % 2 === 0 ? base * 1.05 : base * 0.72;
     return base * wobble[(index - 1) % wobble.length];
   });
-  const gapFor = (a, b) => (mode === "tight" ? Math.min(a, b) * 0.85 : Math.max(a, b) * 0.14);
-  const positions = new Array(count);
-  positions[0] = { id: people[0], x: 50, y: 50, d: diameters[0] };
+  const positions = [{ id: people[0], x: 0, y: 0, d: diameters[0] }];
   let cursor = 1;
-  let innerEdge = diameters[0] / 2;
+  let ring = 0;
+  let innerRadius = diameters[0] / 2;
   while (cursor < count) {
     const remaining = count - cursor;
-    const seed = diameters[cursor];
-    const gap = gapFor(seed, diameters[0]);
-    const trialRadius = innerEdge + gap + seed / 2;
-    const slot = seed + gap;
-    const around = Math.max(1, Math.floor((2 * Math.PI * trialRadius) / slot));
-    const ringCount = Math.min(remaining, Math.max(6, around));
-    const slice = people.slice(cursor, cursor + ringCount);
-    const angled = separatedAngles(slice);
-    const sizes = angled.map((row) => diameters[people.indexOf(row.id)]);
+    const ideal = 5 + ring * 4;
+    let ringCount = Math.min(remaining, ideal);
+    if (remaining > ringCount && remaining - ringCount < 3) ringCount = remaining;
+    const sizes = diameters.slice(cursor, cursor + ringCount);
     const maxD = Math.max(...sizes);
-    const ringGap = gapFor(maxD, diameters[0]);
-    let radius = innerEdge + ringGap + maxD / 2;
-    for (let iter = 0; iter < 8; iter += 1) {
-      let needed = radius;
-      for (let i = 0; i < angled.length; i += 1) {
-        const j = (i + 1) % angled.length;
-        let delta = angled[j].angle - angled[i].angle;
-        if (j === 0) delta += Math.PI * 2;
-        const chord = 2 * Math.sin(delta / 2) || 0.001;
-        needed = Math.max(needed, (sizes[i] / 2 + sizes[j] / 2 + ringGap) / chord);
-        needed = Math.max(needed, diameters[0] / 2 + sizes[i] / 2 + gapFor(diameters[0], sizes[i]));
-      }
-      if (needed <= radius * 1.001) break;
-      radius = needed;
-    }
-    angled.forEach((row, index) => {
-      positions[people.indexOf(row.id)] = {
-        id: row.id,
-        x: 50 + Math.cos(row.angle) * radius,
-        y: 50 + Math.sin(row.angle) * radius,
+    const gap = gapRatio * maxD;
+    const step = (Math.PI * 2) / ringCount;
+    const chord = ringCount < 2 ? 0 : 2 * Math.sin(step / 2);
+    const neighbor = chord > 0 ? (maxD + gap) / chord : 0;
+    const radius = Math.max(innerRadius + gap + maxD / 2, neighbor);
+    for (let index = 0; index < ringCount; index += 1) {
+      const angle = -Math.PI / 2 + step * index + ring * 0.31;
+      positions.push({
+        id: people[cursor + index],
+        x: Math.cos(angle) * radius,
+        y: Math.sin(angle) * radius,
         d: sizes[index],
-      };
-    });
-    innerEdge = radius + maxD / 2;
+      });
+    }
+    innerRadius = radius + maxD / 2;
     cursor += ringCount;
+    ring += 1;
   }
-  let reach = 0;
-  for (const spot of positions) reach = Math.max(reach, Math.hypot(spot.x - 50, spot.y - 50) + spot.d / 2);
-  const fit = reach > 46 ? 46 / reach : 1;
-  return positions.map((spot) => ({
-    id: spot.id,
-    x: 50 + (spot.x - 50) * fit,
-    y: 50 + (spot.y - 50) * fit,
-    d: spot.d * fit,
-  }));
+  return separateCircles(positions, gapRatio);
 }
 
 export function circlesOverlap(layout, pad = 0) {
@@ -242,8 +248,7 @@ export function buildDirectoryScript() {
   return `(()=>{'use strict';
 ${stepSpring.toString()}
 ${stepEase.toString()}
-${hashAngle.toString()}
-${separatedAngles.toString()}
+${separateCircles.toString()}
 ${layoutCircles.toString()}
 const root=document.querySelector('.cv-plug');
 if(!root)return;
@@ -272,9 +277,10 @@ root.querySelectorAll('img').forEach(function(img){
   if(img.complete&&img.naturalWidth===0)useFallback(img);
 });
 if(!stage)return;
-const nodes=[...stage.querySelectorAll('.node')].map(function(el){return {el:el,x:0,y:0,vx:0,vy:0,d:40,vd:0,scale:1,vs:0,opacity:+el.style.opacity||1,tx:0,ty:0,td:40,tscale:1,topacity:1,home:null,tight:null};});
-function box(){return stage.getBoundingClientRect();}
-function point(slot,width,height){return {x:width*slot.x/100,y:height*slot.y/100,d:width*slot.d/100};}
+const plot=stage.querySelector('.plot')||stage;
+const nodes=[...plot.querySelectorAll('.node')].map(function(el){return {el:el,x:0,y:0,vx:0,vy:0,d:40,vd:0,scale:1,vs:0,opacity:+el.style.opacity||1,tx:0,ty:0,td:40,tscale:1,topacity:1,home:null,tight:null};});
+function box(){var rect=plot.getBoundingClientRect();var side=Math.min(rect.width,rect.height)||rect.width;return {width:side,height:side};}
+function point(slot,width,height){var side=Math.min(width,height);return {x:side*slot.x/100,y:side*slot.y/100,d:side*slot.d/100};}
 function byScore(a,b){return (+b.el.dataset.score)-(+a.el.dataset.score)||(a.el.dataset.name||'').localeCompare(b.el.dataset.name||'');}
 function assign(){
   var ordered=nodes.slice().sort(byScore);
@@ -303,9 +309,39 @@ function assign(){
 }
 function show(node){if(filter==='all'||filter==='communiverse')return true;return (node.el.dataset.categories||'').split(' ').includes(filter);}
 function apply(node){node.el.style.width=node.d+'px';node.el.style.height=node.d+'px';node.el.style.left=node.x+'px';node.el.style.top=node.y+'px';node.el.style.opacity=String(Math.max(0,node.opacity));node.el.style.transform='translate(-50%, -50%) scale('+node.scale+')';node.el.style.pointerEvents=node.opacity<0.25?'none':'auto';}
+function keepApart(){
+  for(var iter=0;iter<10;iter++){
+    var hit=false;
+    for(var i=0;i<nodes.length;i++){
+      for(var j=i+1;j<nodes.length;j++){
+        var a=nodes[i],b=nodes[j];
+        if(a.opacity<0.04&&b.opacity<0.04)continue;
+        var dx=b.x-a.x,dy=b.y-a.y,dist=Math.hypot(dx,dy);
+        var ra=a.d*Math.max(a.scale,0)/2,rb=b.d*Math.max(b.scale,0)/2,min=ra+rb+2;
+        if(dist>=min)continue;
+        hit=true;
+        if(dist<0.001){var angle=i*2.399+j;dx=Math.cos(angle);dy=Math.sin(angle);dist=1;}
+        var push=(min-dist)/2,ux=dx/dist,uy=dy/dist;
+        a.x-=ux*push;a.y-=uy*push;b.x+=ux*push;b.y+=uy*push;
+        var va=a.vx*ux+a.vy*uy,vb=b.vx*ux+b.vy*uy;
+        if(va>0){a.vx-=va*ux;a.vy-=va*uy;}
+        if(vb<0){b.vx-=vb*ux;b.vy-=vb*uy;}
+      }
+    }
+    if(!hit)break;
+  }
+}
+function resting(){
+  for(var i=0;i<nodes.length;i++){
+    var node=nodes[i];
+    if(Math.abs(node.x-node.tx)>0.4||Math.abs(node.y-node.ty)>0.4||Math.abs(node.d-node.td)>0.4||Math.abs(node.scale-node.tscale)>0.01||Math.abs(node.opacity-node.topacity)>0.02||Math.abs(node.vx)>0.35||Math.abs(node.vy)>0.35||Math.abs(node.vd)>0.35||Math.abs(node.vs)>0.02)return false;
+  }
+  return true;
+}
+function snap(){nodes.forEach(function(node){node.x=node.tx;node.y=node.ty;node.vx=node.vy=node.vd=node.vs=0;node.d=node.td;node.scale=node.tscale;node.opacity=node.topacity;apply(node);});}
 var frame=0,running=false;
 function tick(now){
-  var dt=Math.min(0.032,frame?(now-frame)/1000:0.016);frame=now;var moving=false;
+  var dt=Math.min(0.032,frame?(now-frame)/1000:0.016);frame=now;
   for(var i=0;i<nodes.length;i++){
     var node=nodes[i];
     var sx=stepSpring(node.x,node.vx,node.tx,dt);node.x=sx[0];node.vx=sx[1];
@@ -313,17 +349,15 @@ function tick(now){
     var sd=stepSpring(node.d,node.vd,node.td,dt);node.d=sd[0];node.vd=sd[1];
     var ss=stepSpring(node.scale,node.vs,node.tscale,dt);node.scale=ss[0];node.vs=ss[1];
     node.opacity=stepEase(node.opacity,node.topacity,dt,0.22);
-    apply(node);
-    if(Math.abs(node.x-node.tx)>0.6||Math.abs(node.y-node.ty)>0.6||Math.abs(node.d-node.td)>0.6||Math.abs(node.scale-node.tscale)>0.02||Math.abs(node.opacity-node.topacity)>0.02||Math.abs(node.vx)>8||Math.abs(node.vy)>8)moving=true;
   }
-  if(moving)requestAnimationFrame(tick);else running=false;
+  keepApart();
+  for(var n=0;n<nodes.length;n++)apply(nodes[n]);
+  if(!resting())requestAnimationFrame(tick);
+  else{snap();running=false;}
 }
-function go(snap){
+function go(immediate){
   assign();
-  if(snap||reduced){
-    nodes.forEach(function(node){node.x=node.tx;node.y=node.ty;node.vx=node.vy=node.vd=node.vs=0;node.d=node.td;node.scale=node.tscale;node.opacity=node.topacity;apply(node);});
-    return;
-  }
+  if(immediate||reduced){snap();return;}
   if(!running){running=true;frame=0;requestAnimationFrame(tick);}
 }
 buttons.forEach(function(button){button.addEventListener('click',function(){filter=button.dataset.filter;var url=new URL(location.href);if(filter==='all')url.searchParams.delete('filter');else url.searchParams.set('filter',filter);history.replaceState(null,'',url);go(false);});});
@@ -360,14 +394,15 @@ body:has(.cv-plug){margin:0;background-color:#f3f3f1;background-image:radial-gra
 .cv-plug .filters button{min-height:44px;padding:0 16px;border:0;border-radius:999px;background:rgba(255,255,255,.72);color:#161616;letter-spacing:.06em;text-transform:uppercase;font-size:14px;font-weight:650;text-align:left;cursor:pointer}
 .cv-plug .filters button[aria-pressed="true"]{background:#111;color:#fff}
 .cv-plug .cluster{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}
-.cv-plug .stage{position:relative;width:min(720px,100%);aspect-ratio:1;flex:none}
-.cv-plug .node{position:absolute;left:0;top:0;display:block;border-radius:50%;text-decoration:none;color:inherit;transform-origin:center center}
+.cv-plug .stage{position:relative;width:min(880px,100%);flex:none}
+.cv-plug .plot{position:relative;width:100%;height:0;padding-bottom:100%}
+.cv-plug .node{position:absolute;left:0;top:0;display:block;overflow:hidden;border-radius:50%;text-decoration:none;color:inherit;transform-origin:center center;background:#e4e4e1}
 .cv-plug .node img,.cv-plug .node .ph,.cv-plug .mini{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#dedede;display:block}
 .cv-plug .node .ph,.cv-plug .mini.ph{display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:650}
 .cv-plug .focal{min-height:48px;margin:18px 0 0;text-align:center}
 .cv-plug .focal b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
 .cv-plug .focal small{display:block;margin-top:3px;color:#6d756f;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.cv-plug .cluster-empty{max-width:36ch;text-align:center;color:#3d4742;font-size:16px;line-height:1.5}
+.cv-plug .cluster-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;max-width:none;margin:0;padding:24px;text-align:center;color:#3d4742;font-size:16px;line-height:1.5}
 .cv-plug .roster{width:min(1100px,calc(100% - 48px));margin:28px auto 72px}
 .cv-plug .roster h2{margin:0 0 16px;font:500 28px/1.2 Georgia,"Times New Roman",serif}
 .cv-plug .roster-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
