@@ -1,3 +1,5 @@
+import { handleAmbassadors } from "./ambassadors.js";
+
 const PREFIX = "/communiverse";
 
 function strip(pathname) {
@@ -8,6 +10,9 @@ function strip(pathname) {
 
 export default {
   async fetch(request, env) {
+    const ambassadors = handleAmbassadors(request);
+    if (ambassadors) return ambassadors;
+
     const url = new URL(request.url);
     // Path rewriting ignores the host, so espacios.me and www.espacios.me
     // serve the same /communiverse paths.
