@@ -22,6 +22,7 @@ export const site = {
   nav: [
     { label: "HOW IT WORKS", href: "/#how-it-works" },
     { label: "FOR MAKERS", href: "/makers" },
+    { label: "PLUG", href: "/plug" },
     { label: "FOR BRANDS", href: "/#for-brands" },
     { label: "EXPERIENCES", href: "/" },
     { label: "CONTACT", href: "/contact" },

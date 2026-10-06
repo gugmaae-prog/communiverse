@@ -1,4 +1,5 @@
 import { handleAmbassadors } from "./ambassadors.js";
+import { handlePlug } from "./plug.js";
 
 const PREFIX = "/communiverse";
 
@@ -12,6 +13,10 @@ export default {
   async fetch(request, env) {
     const ambassadors = handleAmbassadors(request);
     if (ambassadors) return ambassadors;
+
+    // Plug is a public directory page. It does not replace other Communiverse routes.
+    const plug = await handlePlug(request);
+    if (plug) return plug;
 
     const url = new URL(request.url);
     // Path rewriting ignores the host, so espacios.me and www.espacios.me
