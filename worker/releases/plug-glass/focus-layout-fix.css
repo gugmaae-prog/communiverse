@@ -1,0 +1,2 @@
+/* Append to focus.css: vertical-only mobile entrance avoids a 2px layout-viewport expansion. */
+@media(max-width:759px){.glass-panel{transform:translate3d(0,8px,0)}.is-focused .glass-panel{transform:none}}
