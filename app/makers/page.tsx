@@ -3,12 +3,17 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CtaLink } from "@/components/cta-link";
 import { makersPage } from "@/data/pages";
-import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: { absolute: site.title },
-  description: site.description,
+  title: { absolute: "Makers | Communiverse" },
+  description:
+    "A home for verified makers. Keep your name on the work, sell and teach on your own terms, and join the maker waitlist.",
   alternates: { canonical: "/makers" },
+  openGraph: {
+    title: "Makers | Communiverse",
+    description:
+      "A home for verified makers. Keep your name on the work, sell and teach on your own terms, and join the maker waitlist.",
+  },
 };
 
 const display = "font-sans font-semibold uppercase lg:tracking-[-2.16px]";

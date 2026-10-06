@@ -33,7 +33,7 @@ The dev server listens on [http://127.0.0.1:43123/communiverse/](http://127.0.0.
 
 ## Deploy to Cloudflare Workers
 
-The site is a static export (`output: 'export'`) with `basePath: '/communiverse'` and `trailingSlash: true`. `worker/index.js` strips that prefix before the asset binding, and serves the home page for `/communiverse` with or without a trailing slash. `wrangler.jsonc` publishes the worker as `communiverse` on `espacios.me/communiverse*` and `www.espacios.me/communiverse*`.
+The site is a static export (`output: 'export'`) with `basePath: '/communiverse'` and `trailingSlash: true`. `worker/index.js` strips that prefix before the asset binding, serves the home page for `/communiverse` with or without a trailing slash, and posts `/communiverse/api/waitlist` to D1. `wrangler.jsonc` publishes the worker as `communiverse` on `espacios.me/communiverse*` and `www.espacios.me/communiverse*`.
 
 From this repo, after a build:
 
@@ -74,9 +74,9 @@ Preview the export locally with `npm run preview`, then open [http://127.0.0.1:8
 | `/communiverse/how-it-works/` | How it works |
 | `/communiverse/makers/` | For makers |
 | `/communiverse/contact/` | Waitlist form |
-| `/communiverse/about/` | Shared chrome only, as on the live site |
-| `/communiverse/for-founders/` | Shared chrome only |
-| `/communiverse/for-brands/` | Shared chrome only |
-| `/communiverse/for-startups/` | Shared chrome only |
+| `/communiverse/about/` | About Communiverse |
+| `/communiverse/for-founders/` | Founding a club |
+| `/communiverse/for-brands/` | Brand partnerships |
+| `/communiverse/for-startups/` | Same club path, for people starting a studio, label, or shop |
 
-The contact form validates in the browser and does not submit. Wiring it to a backend is marked with a `TODO` in `components/waitlist-form.tsx`.
+The contact form POSTs JSON to `/communiverse/api/waitlist`. `worker/waitlist.js` checks the payload and writes `waitlist_submissions` in the D1 database `communiverse-waitlist`. The schema is `migrations/0001_waitlist.sql` (already applied in production). Subject is optional; an empty subject is stored as `General enquiry`. The Worker also expects rate-limiter bindings `WAITLIST_LIMITER` and `WAITLIST_NETWORK_LIMITER`. Their namespace ids were not in the Worker details this repo can see, so they are documented in `wrangler.jsonc` but not declared. Add them before the next deploy.

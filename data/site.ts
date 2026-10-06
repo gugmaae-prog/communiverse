@@ -4,14 +4,14 @@ export const site = {
   name: "Communiverse",
   title: "Communiverse Clubs",
   description:
-    "A marketplace for collector communities, crafts, arts and experiences. Buy, sell, earn and authenticate collectibles within trusted clubs. A home for the makers, find Your People",
-  url: "https://www.communiverseclubs.com",
+    "A marketplace for collector communities, crafts, arts and experiences. Buy, sell, earn and authenticate collectibles within trusted clubs. A home for the makers. Find your people.",
+  url: "https://espacios.me/communiverse",
   email: "hello@communiverseclubs.com",
   launch: "Q4 2026 LAUNCH",
   copyright: "2026 © COMMUNIVERSE. All Rights Reserved",
   poweredBy: {
     label: "XDC Network",
-    href: "https://framer.link/jenkatemw",
+    href: "https://xdc.org/",
   },
   founder: {
     label: "Find Your People",
@@ -23,13 +23,20 @@ export const site = {
     { label: "HOW IT WORKS", href: "/#how-it-works" },
     { label: "FOR MAKERS", href: "/makers" },
     { label: "FOR BRANDS", href: "/#for-brands" },
-    { label: "EXPERIENCES", href: "/" },
+    { label: "EXPERIENCES", href: "/#experiences" },
     { label: "CONTACT", href: "/contact" },
   ],
+  explore: [
+    { label: "About", href: "/about" },
+    { label: "How it works", href: "/how-it-works" },
+    { label: "Makers", href: "/makers" },
+    { label: "Founders", href: "/for-founders" },
+    { label: "Brands", href: "/for-brands" },
+    { label: "Startups", href: "/for-startups" },
+    { label: "Waitlist", href: "/contact" },
+  ],
   socials: [
-    { short: "IG", label: "Instagram", href: "https://instagram.com" },
-    { short: "IN", label: "Linkedin", href: "https://www.linkedin.com/" },
-    { short: "X", label: "X/Twitter", href: "https://x.com/" },
+    { short: "X", label: "Jennifer Kate Matthews on X", href: "https://x.com/jenkatemw" },
   ],
 } as const;
 

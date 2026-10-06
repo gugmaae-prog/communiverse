@@ -5,16 +5,20 @@ import { contactPage } from "@/data/pages";
 import { media, site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: { absolute: site.title },
-  description: site.description,
+  title: { absolute: "Contact | Communiverse" },
+  description: contactPage.intro,
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact | Communiverse",
+    description: contactPage.intro,
+  },
 };
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-paper">
       <SiteHeader />
-      <main className="relative mx-auto h-[1146px] w-full max-w-[1440px] lg:h-[900px]">
+      <main className="relative mx-auto min-h-[1200px] w-full max-w-[1440px] lg:min-h-[960px]">
         <div className="absolute left-0 top-0 h-[480px] w-full bg-black lg:left-16 lg:top-[90px] lg:h-[810px] lg:w-[624px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={media.contactMark} alt="" className="absolute inset-0 h-full w-full object-fill opacity-40 blur-[1px]" />
@@ -33,7 +37,7 @@ export default function ContactPage() {
           {contactPage.intro}
         </p>
 
-        <section className="absolute left-6 top-[656px] z-10 h-[371px] w-[342px] bg-white p-6 lg:left-[752px] lg:top-[287px] lg:h-[495px] lg:w-[624px]">
+        <section className="absolute left-6 top-[656px] z-10 min-h-[420px] w-[342px] bg-white p-6 lg:left-[752px] lg:top-[287px] lg:min-h-[520px] lg:w-[624px]">
           <WaitlistForm />
         </section>
 

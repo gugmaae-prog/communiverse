@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
-import { ShellPage } from "@/components/shell-page";
-import { site } from "@/data/site";
+import { AudiencePage, audienceMetadata } from "@/components/audience-page";
+import { foundersPage } from "@/data/pages";
 
-export const metadata: Metadata = {
-  title: { absolute: site.title },
-  description: site.description,
-  alternates: { canonical: "/for-founders" },
-};
+export const metadata = audienceMetadata(foundersPage, "/for-founders");
 
 export default function ForFoundersPage() {
-  return <ShellPage />;
+  return <AudiencePage page={foundersPage} />;
 }

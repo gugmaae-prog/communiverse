@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { site } from "@/data/site";
 
 export function SiteFooter() {
@@ -19,7 +20,7 @@ export function SiteFooter() {
   return (
     <footer className="relative h-[796px] bg-black text-white lg:h-[780px]">
       <p className="absolute left-6 top-0 font-serif text-[14px] font-medium leading-[17px] text-sage lg:left-16 lg:text-[20px] lg:leading-7">
-        (Marketplace Loading)
+        (Launch)
       </p>
       <p className="absolute left-[39px] top-[18px] font-sans text-[38px] font-semibold uppercase leading-[49.4px] tracking-[-0.76px] lg:left-16 lg:top-[37px]">
         {site.launch}
@@ -38,6 +39,16 @@ export function SiteFooter() {
         ))}
       </ul>
 
+      <nav
+        aria-label="Explore Communiverse"
+        className="absolute inset-x-6 top-[530px] flex flex-wrap justify-center gap-x-5 gap-y-2 text-center font-sans text-[13px] font-medium uppercase leading-5 lg:inset-x-16 lg:top-[500px] lg:text-base"
+      >
+        {site.explore.map((item) => (
+          <Link key={item.href} href={item.href} className="hover:text-sage">
+            {item.label}
+          </Link>
+        ))}
+      </nav>
       <h2 className="absolute inset-x-0 top-[411px] text-center font-sans text-base font-semibold uppercase leading-[19px] tracking-[-0.02em] text-sage lg:top-[325px] lg:text-[28px] lg:leading-[39.2px] lg:tracking-[-0.56px]">
         {site.footerNote}
       </h2>

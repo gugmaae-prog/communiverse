@@ -156,6 +156,13 @@ body {
   top: 275px;
 }
 
+.waitlist-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 332px;
+}
+
 @media (min-width: 64rem) {
   .waitlist-row-1,
   .waitlist-row-2,
@@ -182,6 +189,10 @@ body {
 
   .waitlist-submit {
     top: 399px;
+  }
+
+  .waitlist-status {
+    top: 460px;
   }
 }
 
@@ -1768,6 +1779,10 @@ main.home-page + footer > div:nth-of-type(3) {
 
   main.home-page + footer > button {
     top: 493px;
+  }
+
+  main.home-page + footer > nav {
+    top: 760px;
   }
 
   main.home-page + footer > div:nth-of-type(1),
