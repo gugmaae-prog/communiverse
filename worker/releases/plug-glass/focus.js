@@ -1,6 +1,6 @@
 /* Communiverse Plug: one interruptible spring scene; no navigation or account writes on selection. */
 (()=>{'use strict';
-const RELEASE='20261006-plug-streamline-3';
+const RELEASE='20261006-plug-streamline-4';
 if(window.__cvPlugFocusRelease)return;
 const root=document.querySelector('.cv-plug'),stage=root?.querySelector('.stage');
 if(!root||!stage)return;
@@ -52,7 +52,7 @@ function renderPanel(n){
  const contact=link('Contact Communiverse','/communiverse/contact/#contact','glass-link glass-contact');if(contact)links.append(contact);connect.append(links);
  body.append(main,work,connect);identity.replaceChildren(make('strong','',p.name),make('span','',p.group||'Member'));
  panel.scrollTop=0;
- if(!reduced.matches&&body.animate)panelAnimation=body.animate([{opacity:.2,transform:'translate3d(16px,8px,0)'},{opacity:1,transform:'none'}],{duration:380,easing:'cubic-bezier(.22,1,.36,1)'});
+ if(!reduced.matches&&body.animate)panelAnimation=body.animate([{opacity:.2,transform:'translate3d(16px,8px,0)'},{opacity:1,transform:'none'}],{duration:1100,easing:'cubic-bezier(.22,1,.36,1)'});
  announcer.textContent=p.name+'. '+(p.role||'Member')+'. Details open.';
 }
 function select(n,writeHistory=true){
@@ -78,10 +78,14 @@ function measure(){const r=stage.getBoundingClientRect(),mobile=innerWidth<760,b
 function assignPeers(peers,slots){const n=peers.length;if(!n)return new Map();const end=1<<n,cost=new Float64Array(end),choice=new Int16Array(end),count=new Uint8Array(end);cost.fill(Infinity);cost[0]=0;for(let mask=1;mask<end;mask++)count[mask]=count[mask>>1]+(mask&1);for(let mask=0;mask<end;mask++){const i=count[mask];if(i>=n||!Number.isFinite(cost[mask]))continue;for(let j=0;j<n;j++)if(!(mask&(1<<j))){const next=mask|(1<<j),a=peers[i],b=slots[j],c=cost[mask]+(a.x-b.x)**2+(a.y-b.y)**2;if(c<cost[next]){cost[next]=c;choice[next]=j;}}}const map=new Map();let mask=end-1;for(let i=n-1;i>=0;i--){const j=choice[mask];map.set(peers[i],j);mask^=1<<j;}return map;}
 function targets(){if(!layout)return;const{w,h,mobile}=layout,cols=mobile?(w<330?1:2):3,focusD=mobile?Math.min(112,w*.35):Math.min(236,w*.18),focusY=mobile?124:h*.43,peers=visible.filter(n=>n!==selected),rows=Math.ceil(peers.length/cols),out=[];
 if(selected){const key=selected.p.slug+":"+w+":"+h+":"+visible.map(n=>n.p.slug).join(",");if(key!==peerKey){peerKey=key;const dia=mobile?44:Math.min(76,Math.max(52,w*.055)),step=dia+(mobile?16:26),slots=peers.map((_,i)=>({x:mobile?27+(i%cols)*60:w*.067+(i%cols)*step+(Math.floor(i/cols)%2?8:0),y:mobile?40+Math.floor(i/cols)*60:focusY-(rows-1)*step/2+Math.floor(i/cols)*step+(i%cols===1?10:0)}));peerAssignment=assignPeers(peers,slots);}}else peerKey="";
-for(const n of nodes){const shown=visible.includes(n);n.to=shown?1:0;n.el.style.pointerEvents=shown?'auto':'none';n.el.tabIndex=shown?0:-1;n.el.setAttribute('aria-hidden',String(!shown));n.el.setAttribute('aria-expanded',String(n===selected));n.el.classList.toggle('is-selected',n===selected);n.el.style.zIndex=n===selected?'4':'2';let a={n,x:n.rest.x,y:n.rest.y,d:shown?n.rest.d:1};if(selected&&shown){if(n===selected)a={n,x:w/2,y:focusY,d:focusD};else{const i=peerAssignment.get(n)??peers.indexOf(n),col=i%cols,row=Math.floor(i/cols),dia=mobile?44:Math.min(76,Math.max(52,w*.055)),step=dia+(mobile?16:26);a={n,d:dia,x:mobile?27+col*60:w*.067+col*step+(row%2?8:0),y:mobile?40+row*60:focusY-(rows-1)*step/2+row*step+(col===1?10:0),hiX:w/2-focusD/2-layout.gap-2-dia/2};}}if(shown)out.push(a);else{n.tx=n.x||w/2;n.ty=n.y||h/2;n.td=1;}}separate(out,layout.gap+4,w,Math.max(h,rows*60+70),out.find(a=>a.n===selected));if(out.some(a=>Math.hypot(a.n.tx-a.x,a.n.ty-a.y)>2))compactMotion=true;out.forEach(a=>{a.n.tx=a.x;a.n.ty=a.y;a.n.td=a.d;});}
-function spring(p,v,t,dt){const nv=v+(78*(t-p)-17*v)*dt;return[p+nv*dt,nv];}
+for(const n of nodes){const shown=visible.includes(n);n.to=shown?1:0;n.el.style.pointerEvents=shown?'auto':'none';n.el.tabIndex=shown?0:-1;n.el.setAttribute('aria-hidden',String(!shown));n.el.setAttribute('aria-expanded',String(n===selected));n.el.classList.toggle('is-selected',n===selected);n.el.style.zIndex=n===selected?'4':'2';let a={n,x:n.rest.x,y:n.rest.y,d:shown?n.rest.d:1};if(selected&&shown){if(n===selected)a={n,x:w/2,y:focusY,d:focusD};else{const i=peerAssignment.get(n)??peers.indexOf(n),col=i%cols,row=Math.floor(i/cols),dia=mobile?44:Math.min(76,Math.max(52,w*.055)),step=dia+(mobile?16:26);a={n,d:dia,x:mobile?27+col*60:w*.067+col*step+(row%2?8:0),y:mobile?40+row*60:focusY-(rows-1)*step/2+row*step+(col===1?10:0),hiX:w/2-focusD/2-layout.gap-2-dia/2};}}if(shown)out.push(a);else{n.tx=n.x||w/2;n.ty=n.y||h/2;n.td=1;}}separate(out,layout.gap+4,w,Math.max(h,rows*60+70),out.find(a=>a.n===selected));if(out.some(a=>Math.hypot(a.n.tx-a.x,a.n.ty-a.y)>2))compactMotion=true;out.forEach(a=>{a.n.tx=a.x;a.n.ty=a.y;a.n.td=a.d;});calm();}
+// Stiffness 18, damping 7.8: about 1.2s to settle, still moving at 400ms, overshoot under 0.1%.
+function spring(p,v,t,dt){const nv=v+(18*(t-p)-7.8*v)*dt;return[p+nv*dt,nv];}
+function calm(){for(const n of nodes){if((n.tx-n.x)*n.vx<0)n.vx=0;if((n.ty-n.y)*n.vy<0)n.vy=0;if((n.td-n.d)*n.vd<0)n.vd=0;}}
+// Cap closing speed from the gap still left, so a crossing eases around instead of hitting and stopping.
+function easeApart(){const items=nodes.filter(n=>n.o>.04||n.to>.5),gap=layout.gap,margin=120,accel=3000;for(let pass=0;pass<3;pass++)for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){const a=items[i],b=items[j];let dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);if(len<.0001){dx=1;dy=0;len=1;}const slack=len-((a.d+b.d)/2+gap);if(slack>=margin)continue;const nx=dx/len,ny=dy/len,rel=(b.vx-a.vx)*nx+(b.vy-a.vy)*ny,closing=Math.max(0,(a.vd+b.vd)/2)-rel;if(closing<=0)continue;const maxClose=Math.sqrt(2*accel*Math.max(slack,0));if(closing<=maxClose)continue;const excess=closing-maxClose,wa=a===selected?0.35:1,wb=b===selected?0.35:1,den=wa+wb||1;a.vx-=nx*excess*wa/den;a.vy-=ny*excess*wa/den;b.vx+=nx*excess*wb/den;b.vy+=ny*excess*wb/den;}}
 function paint(n,p=n){const d=Math.max(.1,p.d);n.el.style.width='240px';n.el.style.height='240px';n.el.style.left='0px';n.el.style.top='0px';n.el.style.transform='translate3d('+(p.x-d/2).toFixed(4)+'px,'+(p.y-d/2).toFixed(4)+'px,0) scale('+(d/240).toFixed(7)+')';n.el.style.opacity=bound(n.o,0,1).toFixed(5);n.el.style.visibility=n.o<.002?'hidden':'visible';n.rendered={x:p.x,y:p.y,d};if(n===selected){identity.style.left=p.x+'px';identity.style.top=p.y+d/2+18+'px';}}
-function rebase(){for(const n of nodes)if(n.rendered){n.x=n.rendered.x;n.y=n.rendered.y;n.d=n.rendered.d;n.vx=0;n.vy=0;}}
+function rebase(){for(const n of nodes)if(n.rendered){n.x=n.rendered.x;n.y=n.rendered.y;n.d=n.rendered.d;}}
 function resolveFrame(){const points=nodes.filter(n=>n.o>=.002).map(n=>({source:n,x:n.x,y:n.y,d:n.d}));separate(points,layout.gap,layout.w,layout.sceneH||layout.h,points.find(p=>p.source===selected));// Last-mile radius bound: projection convergence cannot cause a single-frame overlap.
 // Radii only decrease in this pass, so a later pair cannot invalidate an earlier pair.
 for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++){
@@ -94,7 +98,9 @@ for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++){
 let minimum=Infinity;for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)minimum=Math.min(minimum,Math.hypot(points[i].x-points[j].x,points[i].y-points[j].y)-(points[i].d+points[j].d)/2);root.dataset.renderedPortraitGap=Number.isFinite(minimum)?minimum.toFixed(3):'none';const positions=new Map(points.map(p=>[p.source,p]));for(const n of nodes)paint(n,positions.get(n)||n);}
 function snap(){compactMotion=false;for(const n of nodes)Object.assign(n,{x:n.tx,y:n.ty,d:n.td,o:n.to,vx:0,vy:0,vd:0});resolveFrame();root.dataset.animating='false';}
 function tick(t){frame=0;if(document.hidden)return;const dt=Math.min(.025,last?(t-last)/1000:1/60);last=t;let moving=false;compactMotion=false;
- for(const n of nodes){[n.x,n.vx]=spring(n.x,n.vx,n.tx,dt);[n.y,n.vy]=spring(n.y,n.vy,n.ty,dt);n.d+=(n.td-n.d)*(1-Math.exp(-dt*12));n.d=Math.max(.1,n.d);n.o+=(n.to-n.o)*(1-Math.exp(-dt*14));if(Math.abs(n.x-n.tx)>.2||Math.abs(n.y-n.ty)>.2||Math.abs(n.d-n.td)>.2||Math.abs(n.vx)>.2||Math.abs(n.vy)>.2||Math.abs(n.o-n.to)>.002)moving=true;}
+ for(const n of nodes){n.vx=spring(n.x,n.vx,n.tx,dt)[1];n.vy=spring(n.y,n.vy,n.ty,dt)[1];n.vd=spring(n.d,n.vd,n.td,dt)[1];}
+ easeApart();
+ for(const n of nodes){n.x+=n.vx*dt;n.y+=n.vy*dt;n.d=Math.max(.1,n.d+n.vd*dt);n.o+=(n.to-n.o)*(1-Math.exp(-dt*2.8));if(Math.abs(n.x-n.tx)>=.05||Math.abs(n.y-n.ty)>=.05||Math.abs(n.d-n.td)>=.05||Math.abs(n.vx)>=.25||Math.abs(n.vy)>=.25||Math.abs(n.vd)>=.25||Math.abs(n.o-n.to)>=.001)moving=true;}
  // Projection affects display only; the spring state always converges, avoiding collision deadlocks.
  resolveFrame();root.dataset.animating=String(moving);if(moving)frame=requestAnimationFrame(tick);else snap();}
 function wake(){if(reduced.matches){cancelAnimationFrame(frame);frame=0;snap();return;}if(!frame){last=0;frame=requestAnimationFrame(tick);}}
