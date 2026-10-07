@@ -1,0 +1,57 @@
+[
+  {
+    "after": 2,
+    "type": "video",
+    "src": "/communiverse/media/gallery-20261007/fine-lettering.mp4",
+    "poster": "/communiverse/media/gallery-20261007/fine-lettering-poster.jpg",
+    "alt": "A fine pointed tool forming tiny white letters on a dark lined surface",
+    "title": "Letters at a tiny scale",
+    "category": "Fine lettering",
+    "facet": "Make",
+    "story": "Rows of tiny characters cover a dark surface. The clip brings the fine tool, close spacing and repeated hand movements into view."
+  },
+  {
+    "after": 8,
+    "type": "video",
+    "src": "/communiverse/media/gallery-20261007/draped-wood-sculpture.mp4",
+    "poster": "/communiverse/media/gallery-20261007/draped-wood-sculpture-poster.jpg",
+    "alt": "A sculptor using a mallet and chisel on a large wooden figure with folded drapery",
+    "title": "Drapery carved in wood",
+    "category": "Wood sculpture",
+    "facet": "Make",
+    "story": "A mallet and chisel work along the folds of a large wooden sculpture. The unfinished surface reveals how carved lines become fabric-like forms."
+  },
+  {
+    "after": 8,
+    "type": "video",
+    "src": "/communiverse/media/gallery-20261007/carved-dog.mp4",
+    "poster": "/communiverse/media/gallery-20261007/carved-dog-poster.jpg",
+    "alt": "Hands sanding a carved wooden dog with upright ears",
+    "title": "A face shaped in wood",
+    "category": "Wood carving",
+    "facet": "Make",
+    "story": "Hands refine the cheeks and muzzle of a wooden dog sculpture. Carved texture and gentle sanding bring the form into focus."
+  },
+  {
+    "after": 3,
+    "type": "video",
+    "src": "/communiverse/media/gallery-20261007/mirror-metal-sculpture.mp4",
+    "poster": "/communiverse/media/gallery-20261007/mirror-metal-sculpture-poster.jpg",
+    "alt": "A large circular polished metal sculpture standing in a workshop",
+    "title": "A circle in polished metal",
+    "category": "Metal sculpture",
+    "facet": "Make",
+    "story": "Polished metal reflects the workshop around a circular sculpture. Curved forms and small figures occupy its interior."
+  },
+  {
+    "after": 6,
+    "type": "video",
+    "src": "/communiverse/media/gallery-20261007/wire-sculpture.mp4",
+    "poster": "/communiverse/media/gallery-20261007/wire-sculpture-poster.jpg",
+    "alt": "A worker shaping a large metal wire sculpture in a workshop",
+    "title": "Lines becoming a figure",
+    "category": "Wire sculpture",
+    "facet": "Make",
+    "story": "Bent metal lines gather into a large sculptural figure. The clip follows the workshop process and the structure taking shape."
+  }
+]
