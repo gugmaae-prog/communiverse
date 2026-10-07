@@ -22,6 +22,6 @@ for(const m of manifest.modules){
   await writeFile(resolve(dest,m.name),bytes);
   modules.push({...m,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
 }
-await writeFile(resolve(dest,'manifest.json'),JSON.stringify({...manifest,release:'20261007-plug-team-1',baselineVersion:manifest.version,modules},null,2));
+await writeFile(resolve(dest,'manifest.json'),JSON.stringify({...manifest,release:'20261007-plug-team-2',baselineVersion:manifest.version,modules},null,2));
 await writeFile(resolve(dest,'wrangler.jsonc'),JSON.stringify({name:'communiverse',main:manifest.main_module,compatibility_date:manifest.compatibility_date,compatibility_flags:manifest.compatibility_flags||[],no_bundle:true,find_additional_modules:true,rules:[{type:'ESModule',globs:['**/*.js'],fallthrough:true},{type:'Text',globs:['**/*.txt','**/*.css','**/*.html'],fallthrough:true},{type:'Data',globs:['**/*.jpg','**/*.png','**/*.mp4','**/*.webp'],fallthrough:true}]},null,2));
 console.log(JSON.stringify({baseline:manifest.version,totalModules:modules.length,changedModules:modules.filter(m=>m.sha256!==manifest.modules.find(o=>o.name===m.name).sha256).map(m=>m.name)}));

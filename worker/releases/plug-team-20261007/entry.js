@@ -2,15 +2,19 @@
 import previous from './home-plug-20261007-v4-entry.js';
 import STYLE from './shared-plug-ui-20261007.css';
 import SCRIPT from './shared-plug-ui-20261007.txt';
-export const RELEASE='20261007-plug-team-1';
+export const RELEASE='20261007-plug-team-2';
 const ORIGINAL_RELEASE='20261007-shared-plug-ui-1';
+const PREVIOUS_RELEASE='20261007-plug-team-1';
+const PREVIOUS_SCRIPT=SCRIPT.replaceAll(ORIGINAL_RELEASE,PREVIOUS_RELEASE).replace("['Plug','/communiverse/plug/']","['Communiverse','/communiverse/plug/']");
+const NAV_STYLE=STYLE+'\nhtml[data-cv-design] .cv-plug .filters{top:calc(var(--cv-ui-header-height,84px) + 12px)!important}';
 const NAV_SCRIPT=SCRIPT.replaceAll(ORIGINAL_RELEASE,RELEASE).replace("['Plug','/communiverse/plug/']","['Communiverse','/communiverse/plug/']");
 const ROOT='/communiverse',PREFIX=ROOT+'/_public/'+RELEASE;
 const pages=new Set([ROOT,ROOT+'/',...['about','how-it-works','makers','for-founders','for-brands','for-startups','contact','ambassadors','plug'].flatMap(p=>[ROOT+'/'+p,ROOT+'/'+p+'/'])]);
 const hosts=new Set(['espacios.me','www.espacios.me']);
 export default {async fetch(request,env,ctx){const u=new URL(request.url);if(!hosts.has(u.hostname))return previous.fetch(request,env,ctx);
 const OLD_PREFIX=ROOT+'/_public/'+ORIGINAL_RELEASE;
-const asset=u.pathname===PREFIX+'.css'||u.pathname===OLD_PREFIX+'.css'?['text/css; charset=utf-8',STYLE]:u.pathname===PREFIX+'.js'?['application/javascript; charset=utf-8',NAV_SCRIPT]:u.pathname===OLD_PREFIX+'.js'?['application/javascript; charset=utf-8',SCRIPT]:null;
+const PREVIOUS_PREFIX=ROOT+'/_public/'+PREVIOUS_RELEASE;
+const asset=u.pathname===PREFIX+'.css'?['text/css; charset=utf-8',NAV_STYLE]:u.pathname===OLD_PREFIX+'.css'||u.pathname===PREVIOUS_PREFIX+'.css'?['text/css; charset=utf-8',STYLE]:u.pathname===PREFIX+'.js'?['application/javascript; charset=utf-8',NAV_SCRIPT]:u.pathname===OLD_PREFIX+'.js'?['application/javascript; charset=utf-8',SCRIPT]:u.pathname===PREVIOUS_PREFIX+'.js'?['application/javascript; charset=utf-8',PREVIOUS_SCRIPT]:null;
 if(asset){const h={'Content-Type':asset[0],'Cache-Control':'public, max-age=31536000, immutable','X-Communiverse-Release':RELEASE,'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'SAMEORIGIN','Permissions-Policy':'camera=(), microphone=(), geolocation=()'};if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers:{...h,'Cache-Control':'no-store',Allow:'GET, HEAD'}});return new Response(request.method==='HEAD'?null:asset[1],{headers:h});}
 const page=pages.has(u.pathname)||/^\/communiverse\/plug\/(?:person|u)\/[^/]+\/?$/.test(u.pathname);
 if(!page||!['GET','HEAD'].includes(request.method))return previous.fetch(request,env,ctx);

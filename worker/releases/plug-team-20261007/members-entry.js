@@ -27,7 +27,7 @@ export default {async fetch(request,env,ctx){
   }
   const response=await previous.fetch(request,env,ctx);
   if(!page||!['GET','HEAD'].includes(request.method)||response.status!==200)return response;
-  const headers=new Headers(response.headers);headers.set('X-Communiverse-People','20261007-plug-team-1');headers.delete('Content-Length');headers.delete('ETag');
+  const headers=new Headers(response.headers);headers.set('X-Communiverse-People','20261007-plug-team-2');headers.delete('Content-Length');headers.delete('ETag');
   if(request.method==='HEAD')return new Response(null,{status:200,headers});
   const source=await response.text();
   const pattern=/(<script\b[^>]*\bid="cv-focus-data"[^>]*>)([\s\S]*?)(<\/script>)/;
@@ -38,7 +38,7 @@ export default {async fetch(request,env,ctx){
   const html=source.replace(pattern,(_all,start,_json,end)=>start+serializePeople(people)+end)
     .replaceAll('/communiverse/_public/20261007-plug-ios-2.js',PHOTO_ROOT+'focus.js');
   const rewrite=new HTMLRewriter()
-    .on('.cv-plug',{element(el){el.setAttribute('data-cv-people-release','20261007-plug-team-1');}})
+    .on('.cv-plug',{element(el){el.setAttribute('data-cv-people-release','20261007-plug-team-2');}})
     .on('button[data-filter="artisans"]',{element(el){el.remove();}})
     .on('a.node[data-slug]',{element(el){if(!people.some(p=>p.slug===el.getAttribute('data-slug')))el.remove();}})
     .on('#constellation',{element(el){el.append(added.map(portraitNode).join(''),{html:true});}})
