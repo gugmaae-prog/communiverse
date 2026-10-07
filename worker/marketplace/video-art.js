@@ -3,7 +3,6 @@
 export const videoArt = [
   { title: "Threads under tension", craft: "Loom weaving", kind: "Making process", src: "/communiverse/_public/media/loom-weaving.mp4" },
   { title: "Letters at a tiny scale", craft: "Microcalligraphy and text art", kind: "Making process", src: "/communiverse/media/gallery-20261007/fine-lettering.mp4" },
-  { title: "A card, turning in 3D", craft: "Digital 3D animation", kind: "Digital animation", src: "/communiverse/_public/media/arceus-3d-render.mp4" },
   { title: "A circle in polished metal", craft: "Metal sculpture and kinetic art", kind: "Making and display", src: "/communiverse/media/gallery-20261007/mirror-metal-sculpture.mp4" },
   { title: "Another life for a cup", craft: "Ceramic restoration", kind: "Making process", src: "/communiverse/_public/media/ceramic-repair.mp4" },
   { title: "Stories inside stories", craft: "Decorative wood painting", kind: "Finished objects", src: "/communiverse/_public/media/nesting-dolls.mp4" },
