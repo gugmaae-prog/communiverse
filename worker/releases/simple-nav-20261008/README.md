@@ -1,0 +1,7 @@
+# Simplified shared navigation
+
+Legacy How it works, About, Makers, Founders, Brands, Startups, Contact, Ambassadors and local Plug-person pages now use the same four primary destinations as the marketplace: Discover, Artists, Workshops and Plug. The old More button and six-tab desktop menu are replaced. Contact stays outside the desktop tab pill. On mobile all four tabs remain visible with 44px touch targets, and the brand/contact controls are hidden as on the compact marketplace header. Existing footer links and routes remain available.
+
+The scoped wrapper streams the retained HTML through HTMLRewriter, replaces only the old shared-header script reference and embeds its new header CSS under the existing policy. The client waits for the retained Next hydration signal, preserves the skip link and header-height contract, marks the active section and adapts to route/resize/page restoration. It does not change page content, marketplace headers, Plug cards, artist galleries, forms, media or directory data.
+
+All fourteen current marketplace modules remain byte-identical, with three navigation modules added. The legacy service and D1 bindings, runtime settings, security headers and observability remain. Old immutable assets are still served unchanged. Assemble with scripts/prepare-simple-nav.mjs against a fresh verified production capture; do not rebuild or deploy the legacy Next project.
