@@ -4,7 +4,7 @@ Public site: https://espacios.me/communiverse/
 
 ## Production release — 7 October 2026
 
-**Live:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
+**Delegated Plug and people pages:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker. The main `/communiverse/` route is now served by the separate `communiverse-marketplace` Worker at release `20261007-marketplace-3`.
 
 - Worker version: `4a09f1da-b076-43e5-9663-c93dc1a188bd`
 - Deployment: `81b6d569-6434-4c57-8388-cc80d5829e5b`
@@ -23,6 +23,8 @@ A read-only exact-module capture workflow and `scripts/snapshot-production.py` a
 After the repository secret is configured, run **Sync exact Communiverse production source** against `main`. The pinned capture records all 125 Worker modules, including 55 binary modules, with SHA-256 verification. Until that run succeeds, `production/modules/` must not be described as complete. The separate Cloudflare ASSETS collection is retained by version uploads using `keep_assets:true`; the content API does not export that collection.
 
 ## Marketplace layer
+
+The live marketplace deployment is recorded in [`deployments/20261007-marketplace-3.json`](deployments/20261007-marketplace-3.json).
 
 The separate `communiverse-marketplace` Worker owns the marketplace landing page, artist previews, story and catalogue pages, the Join paths, and the application API at `/communiverse/api/applications`. It delegates Plug, ambassadors, the existing team, film media, and `/communiverse/api/waitlist` to the original `communiverse` Worker through the `LEGACY` service binding. The ambassador page's application link is rewritten to `/communiverse/apply/ambassador/` without replacing its people or stories.
 
