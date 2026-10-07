@@ -9,7 +9,7 @@ createServer(async (incoming, outgoing) => {
     outgoing.end();
     return;
   }
-  if (url.pathname === '/communiverse/api/waitlist') {
+  if (url.pathname === '/communiverse/api/waitlist' || url.pathname === '/communiverse/api/applications') {
     outgoing.writeHead(501, {'Content-Type': 'application/json'});
     outgoing.end(JSON.stringify({error:'Local preview does not submit requests.'}));
     return;

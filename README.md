@@ -22,9 +22,17 @@ A read-only exact-module capture workflow and `scripts/snapshot-production.py` a
 
 After the repository secret is configured, run **Sync exact Communiverse production source** against `main`. The pinned capture records all 125 Worker modules, including 55 binary modules, with SHA-256 verification. Until that run succeeds, `production/modules/` must not be described as complete. The separate Cloudflare ASSETS collection is retained by version uploads using `keep_assets:true`; the content API does not export that collection.
 
-## Scope still in planning
+## Marketplace layer
 
-The broader marketplace, paid bookings, kit entitlements, applications and film-chapter product plan is not activated by this typography/header release. Sample content must remain labelled; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
+The separate `communiverse-marketplace` Worker owns the marketplace landing page, artist previews, story and catalogue pages, the Join paths, and the application API at `/communiverse/api/applications`. It delegates Plug, ambassadors, the existing team, film media, and `/communiverse/api/waitlist` to the original `communiverse` Worker through the `LEGACY` service binding. The ambassador page's application link is rewritten to `/communiverse/apply/ambassador/` without replacing its people or stories.
+
+Six generated artisan portraits and their profiles are labelled **fictional previews**. They represent craft categories from the supplied video inventory and are not portrayed as people in the existing films. Artist search and craft filters work on these previews. Real artist listings remain empty until approved and published. Workshops and works do not accept bookings or payments.
+
+Join has separate artist, ambassador, client, and Belong flows. Ambassador questions cover the fourteen topics in the onboarding brief, split into four short steps. Belong's Google and LinkedIn links reuse the existing Espacios OAuth routes and verify the signed-in user's email with `/api/auth/me`; email application remains available. Applications are validated by the new Worker and stored through the existing D1-backed waitlist handler, including consent and a request reference. They are enquiries, not approved memberships, contracts, bookings, or public profiles.
+
+No new Supabase project was created: its $10/month recurring cost was declined. The optional catalogue integration in `worker/marketplace/index.js` remains dormant until a dedicated project and publication process are approved. Internal RAL material remains outside public pages.
+
+Build with `npm run build:marketplace`; test with `npm test`. `scripts/preview-marketplace.mjs` provides local read-only preview and blocks application submissions. Do not deploy the top-level Next.js app over either Worker.
 
 ## Development and retained history
 
