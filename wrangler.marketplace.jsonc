@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "communiverse-marketplace",
+  "main": "worker/marketplace/index.js",
+  "compatibility_date": "2026-09-27",
+  "workers_dev": true,
+  "preview_urls": true,
+  "services": [
+    { "binding": "LEGACY", "service": "communiverse" }
+  ]
+}
