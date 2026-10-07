@@ -1,36 +1,31 @@
-name: Deploy
-
+name: Verify Communiverse production release
+# This replaces the unsafe legacy static-export deployment; no Cloudflare writes.
 on:
   workflow_dispatch:
-
+  push:
+    branches: [main]
+    paths:
+      - worker/releases/shared-plug-ui-20261007/**
+      - deployments/20261007-shared-plug-ui-1.json
+      - scripts/verify-live-release.mjs
+      - .github/workflows/deploy.yml
 permissions:
   contents: read
-
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
-    name: Build and deploy
+    timeout-minutes: 8
     steps:
-      - name: Check out
-        uses: actions/checkout@v6
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install image tooling
-        run: python3 -m pip install --disable-pip-version-check pillow
-
-      - name: Build static export
-        run: npm run build
-
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v4
+      - name: Verify public release and source checksums
+        run: node scripts/verify-live-release.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          name: communiverse-live-release-verification
+          path: verification-results.json
+          if-no-files-found: warn
+          retention-days: 30

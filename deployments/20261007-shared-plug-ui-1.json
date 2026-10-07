@@ -1,0 +1,23 @@
+{
+  "release": "20261007-shared-plug-ui-1",
+  "worker": "communiverse",
+  "worker_version_id": "4a09f1da-b076-43e5-9663-c93dc1a188bd",
+  "deployment_id": "81b6d569-6434-4c57-8388-cc80d5829e5b",
+  "traffic_percentage": 100,
+  "rollback_version_id": "428c7e34-252c-4ef7-97c4-62ce49cd11ab",
+  "source_commit": "6316dec964efb9a4cfa7c12e70a70b40b30e33e3",
+  "source_directory": "worker/releases/shared-plug-ui-20261007",
+  "served_assets": ["/communiverse/_public/20261007-shared-plug-ui-1.js", "/communiverse/_public/20261007-shared-plug-ui-1.css"],
+  "scope": "Approved Plug typography, palette and responsive shared header across existing Communiverse public pages and local person profiles",
+  "retained_runtime_module_count": 122,
+  "added_design_module_count": 3,
+  "total_worker_modules": 125,
+  "binary_modules": 55,
+  "gallery_cards": 25,
+  "database_changes": false,
+  "supabase_changes": false,
+  "github_full_runtime_snapshot": "blocked: Actions secret CLOUDFLARE_API_TOKEN missing; capture workflow run 37633325029 failed before Cloudflare reads",
+  "source_coverage": "All three approved design files committed; full historical Worker module archive not yet committed; separate ASSETS collection remains retained remotely",
+  "staged_verification": {"viewports": [[390,844],[1440,1000]], "all_11_sampled_public_routes": 200, "internal_and_ral": 404, "one_shared_header": true, "gallery_moves": true, "gallery_viewer_opens": true, "scroll_restored": true, "horizontal_overflow": false, "captured_hydration_errors": 0},
+  "pending_product_scope": "Marketplace, payments, session bookings, kit entitlements and full reference-content integration are not activated by this design-only release"
+}

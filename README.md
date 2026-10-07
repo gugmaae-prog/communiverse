@@ -1,82 +1,33 @@
-# Communiverse Clubs
+# Communiverse
 
-A working replica of [communiverseclubs.com](https://www.communiverseclubs.com/). The live site is a Framer project. This copy is a Next.js app with the same pages, copy, and photography, laid out so the words and image paths can be rebranded from the files in `data/`.
+Public site: https://espacios.me/communiverse/
 
-Use this repository as the reference when replicating the site. The audit records what the live site contains; the `data/` files are the copy and image paths the app actually renders.
+## Production release — 7 October 2026
 
-## How to use this repo to replicate the site
+**Live:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
 
-1. Read [`AUDIT.md`](AUDIT.md). It is the page-by-page record of the live site: sitemap, navigation, copy, and which routes have a real page body.
-2. Open [`audit/screenshots/`](audit/screenshots/) for the visual reference. Screenshots are JPEG. Each page folder (`home`, `how-it-works`, `makers`, `contact`, `about`, `for-founders`, `for-brands`, `for-startups`, `not-found`) holds frames from desktop (1440×900), tablet (768×1024), and mobile (390×844):
-   - full-page shots: `desktop-full.jpg`, `tablet-full.jpg`, `mobile-full.jpg`
-   - scroll frames: `desktop-scroll-*.jpg`, `tablet-scroll-*.jpg`, `mobile-scroll-*.jpg`
-   - hover states: `hover-*.jpg`
-   - the open mobile menu: `mobile-menu-open.jpg`
+- Worker version: `4a09f1da-b076-43e5-9663-c93dc1a188bd`
+- Deployment: `81b6d569-6434-4c57-8388-cc80d5829e5b`
+- Traffic: 100%, promoted using the Cloudflare connector after staged 390px/1440px checks.
+- Scope: Plug's system-sans typography, light/dark palette and a single consistent header across the existing Communiverse pages and local person profiles.
+- Preserved: source copy, 25-card gallery, media, public Plug profiles, D1 waitlist, optional Subject and both rate limiters. No database/account mutations.
 
-   `not-found` only has `desktop-full.jpg`.
-3. Compare the replica with the live site using the side-by-side JPEGs in [`audit/comparison/`](audit/comparison/) (`<page>-desktop.jpg` and `<page>-mobile.jpg`).
-4. Change words and image paths in `data/`, not by editing copy inside components:
-   - [`data/site.ts`](data/site.ts) — name, email, navigation, social links, shared images
-   - [`data/home.ts`](data/home.ts) — homepage sections
-   - [`data/pages.ts`](data/pages.ts) — how it works, makers, contact, and the empty routes
+The complete editable source of this approved design change is in [`worker/releases/shared-plug-ui-20261007/`](worker/releases/shared-plug-ui-20261007/). Runtime references and verification are in [`deployments/20261007-shared-plug-ui-1.json`](deployments/20261007-shared-plug-ui-1.json). Run `node scripts/verify-live-release.mjs` to compare the published CSS/JS checksums and check all listed public routes.
 
-Photographs in [`public/media/`](public/media/) are capped at 1600px on the long side.
+## Important: the repository is not yet a complete production rebuild
 
-## Run locally
+The top-level Next.js app is retained legacy source, not the entire live 125-module Worker. Do not run a blind `npx wrangler deploy`: it would replace retained production functionality and bindings. The old workflow is archived in `docs/legacy/deploy.yml.example`; the active workflow now verifies instead of blindly deploying. A pre-build guard blocks accidental legacy Wrangler deployment.
 
-```bash
-npm install
-npm run dev
-```
+A read-only exact-module capture workflow and `scripts/snapshot-production.py` are included, but its first run failed because this repository's Actions environment has **no `CLOUDFLARE_API_TOKEN` secret**. `CLOUDFLARE_ACCOUNT_ID` is present. The Cloudflare chat connector is independently authorized and was able to promote the release. No credentials or database records have been exported.
 
-The dev server listens on [http://127.0.0.1:43123/communiverse/](http://127.0.0.1:43123/communiverse/). Every route is under the `/communiverse` base path.
+After the repository secret is configured, run **Sync exact Communiverse production source** against `main`. The pinned capture records all 125 Worker modules, including 55 binary modules, with SHA-256 verification. Until that run succeeds, `production/modules/` must not be described as complete. The separate Cloudflare ASSETS collection is retained by version uploads using `keep_assets:true`; the content API does not export that collection.
 
-## Deploy to Cloudflare Workers
+## Scope still in planning
 
-The site is a static export (`output: 'export'`) with `basePath: '/communiverse'` and `trailingSlash: true`. `worker/index.js` strips that prefix before the asset binding, and serves the home page for `/communiverse` with or without a trailing slash. `wrangler.jsonc` publishes the worker as `communiverse` on `espacios.me/communiverse*` and `www.espacios.me/communiverse*`.
+The broader marketplace, paid bookings, kit entitlements, applications and film-chapter product plan is not activated by this typography/header release. Sample content must remain labelled; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
 
-From this repo, after a build:
+## Development and retained history
 
-```bash
-npm run build
-npx wrangler deploy
-```
+The existing `app/`, `components/`, `data/`, `public/`, audit files and source branches are preserved. Development: `npm install`, then `npm run dev` at `/communiverse/`. The old readme is preserved verbatim at [`docs/legacy/README-before-production-reconciliation.md`](docs/legacy/README-before-production-reconciliation.md); its deployment directions are historical and superseded by this notice.
 
-[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs only when someone starts it with `workflow_dispatch`. A push or merge to `main` does not deploy. Add repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, then run the Deploy workflow from the Actions tab.
-
-To deploy again on every push to `main`, put the push trigger back in that workflow:
-
-```yaml
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-```
-
-Add the two secrets before turning the push trigger back on. The workflow installs dependencies, runs `npm run build`, and publishes with `cloudflare/wrangler-action`.
-
-The packaged artifact `communiverse-deploy.zip` is the same worker, config, and export (images resized for the 25 MB limit). From the unzipped folder:
-
-```bash
-unzip communiverse-deploy.zip -d communiverse-deploy
-cd communiverse-deploy
-npx wrangler deploy
-```
-
-Preview the export locally with `npm run preview`, then open [http://127.0.0.1:8788/communiverse/](http://127.0.0.1:8788/communiverse/).
-
-## Pages
-
-| Path | What it is |
-| --- | --- |
-| `/communiverse/` | Home |
-| `/communiverse/how-it-works/` | How it works |
-| `/communiverse/makers/` | For makers |
-| `/communiverse/contact/` | Waitlist form |
-| `/communiverse/about/` | Shared chrome only, as on the live site |
-| `/communiverse/for-founders/` | Shared chrome only |
-| `/communiverse/for-brands/` | Shared chrome only |
-| `/communiverse/for-startups/` | Shared chrome only |
-
-The contact form validates in the browser and does not submit. Wiring it to a backend is marked with a `TODO` in `components/waitlist-form.tsx`.
+See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
