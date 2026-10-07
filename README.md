@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Latest directory update: `20261008-plug-artists-1a` adds ten sample artist stories and video-first cards to Plug. Communiverse now contains 23 people, including ten Cool Kids and three ambassadors. The supplied glass clip is on Elias’s profile; portraits use centered random sizing; social logos stand alone. [Release evidence](deployments/20261008-plug-artists-1a.json).
+Latest Plug update: `20261008-plug-gallery-1a` adds standalone named gallery links, workshop/group-session requests, store enquiries and restored mobile orb animation with smaller separate cards. All 23 people, three ambassadors and ten Cool Kids remain. Artist galleries follow the shared theme with inline CSS under their unchanged security policy. [Release evidence](deployments/20261008-plug-gallery-1a.json).
 
 ## Production release — 7 October 2026
 

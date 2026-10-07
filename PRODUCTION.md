@@ -1,6 +1,16 @@
 # Communiverse production reconciliation
 
-## Latest live Plug refinement
+## Latest artist galleries and mobile animation
+
+Release `20261008-plug-gallery-1a` on `communiverse-marketplace`; version `83f1bdb4-e7e4-44ef-8679-967a5cb4b382`; deployment `d9b82c9a-1801-4100-af5d-869b37d43426`; 100% traffic. Full checks are recorded in `deployments/20261008-plug-gallery-1a.json`. Presentation assets remain `20261008-plug-gallery-1`.
+
+All ten artisans have a named gallery CTA outside the Plug detail cards. Each gallery includes separate films and descriptions, workshop/group-session request links and a concept store enquiry. Actions sit outside the gallery cards as well. Date and estimated group-size fields feed the existing message payload; no automatic booking, payment, inventory, schema or form submissions were added. Artist gallery CSS is embedded in their HTML under the unchanged inline-only style CSP.
+
+Mobile selection restores the 640ms selected-orb and peer animation. Cards stay in a fixed compact tray; opening an artist leaves scene height unchanged. At 390x844, video is 112x199, detail cards are 224x204 and page scrollWidth remains 390. Communiverse still includes 23 people, ten artists, ten Cool Kids and three ambassadors, with six back-office people.
+
+Source: `worker/releases/plug-gallery-20261008/`; assembly: `scripts/prepare-plug-gallery.mjs`; live checks: `scripts/verify-plug-gallery.mjs <verified candidate> live`. All ten prior refine runtime modules remain identical. The final styling fix retains thirteen of fourteen gallery-1 modules and changes only the entrypoint. Legacy content, original glass bytes, old immutable assets, D1/service bindings and observability remain. Existing route/media/source checks passed: `deployments/20261008-plug-gallery-retained-checks.json`.
+
+## Previous Plug refinement
 
 Release `20261008-plug-refine-3`; Worker `communiverse-marketplace`; version `383cdd17-a26a-449e-ad98-526be3d64748`; deployment `a2a3d3c2-c38c-46fa-9c1a-3391ed416661`; 100% traffic. Rollback version `413ac851-8d29-4f00-8b14-0717de155364`.
 
