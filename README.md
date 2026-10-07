@@ -33,3 +33,5 @@ The broader marketplace, paid bookings, kit entitlements, applications and film-
 The existing `app/`, `components/`, `data/`, `public/`, audit files and source branches are preserved. Development: `npm install`, then `npm run dev` at `/communiverse/`. The old readme is preserved verbatim at [`docs/legacy/README-before-production-reconciliation.md`](docs/legacy/README-before-production-reconciliation.md); its deployment directions are historical and superseded by this notice.
 
 See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
+
+Latest people curation source: `worker/releases/plug-team-20261007/` restores ten Cool Kids and three ambassadors in the Communiverse directory while retaining removal of imported artist entries.
