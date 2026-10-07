@@ -2,7 +2,8 @@
 import previous from './plug-refine-entry.js';
 import STYLE from './plug-gallery.css';
 import FOCUS from './plug-gallery-focus.txt';
-import {ARTISTS,RELEASE,PREFIX,profileContent,serialize,escapeHTML} from './plug-gallery-data.js';
+import {ARTISTS,PREFIX,profileContent,serialize,escapeHTML} from './plug-gallery-data.js';
+const RELEASE='20261008-plug-gallery-1a';
 const profiles=new Map(ARTISTS.map(p=>[p.profileUrl.replace(/\/$/,''),p]));
 const intents=new Set(['workshop','group-session','order']);
 export default {async fetch(request,env,ctx){
@@ -20,9 +21,9 @@ export default {async fetch(request,env,ctx){
  if((!plug&&!profile&&!enquiry)||!['GET','HEAD'].includes(request.method)||r.status!==200||!r.headers.get('Content-Type')?.includes('text/html'))return r;
  const headers=new Headers(r.headers);headers.set('X-Communiverse-Plug',RELEASE);headers.set('Cache-Control','no-store');['Content-Length','Content-Encoding','ETag','Last-Modified'].forEach(k=>headers.delete(k));
  if(request.method==='HEAD'){await r.body?.cancel();return new Response(null,{status:200,headers});}
- const rewrite=new HTMLRewriter().on('head',{element(el){el.append(`<link rel="stylesheet" href="${PREFIX}.css">${plug?'':`<script defer src="${PREFIX}.js"></script>`}`,{html:true});}});
+ const rewrite=new HTMLRewriter().on('head',{element(el){el.append(`${profile?`<style data-cv-gallery="${RELEASE}">${STYLE}</style>`:`<link rel="stylesheet" href="${PREFIX}.css">`}${plug?'':`<script defer src="${PREFIX}.js"></script>`}`,{html:true});}});
  if(enquiry)return rewrite.on('body',{element(el){el.append(`<script type="application/json" id="cv-enquiry-data">${serialize({name:person.name,role:person.role,slug:person.slug,intent,itemTitle:person.itemTitle})}</script>`,{html:true});}}).transform(new Response(r.body,{headers}));
- if(profile)return rewrite.on('script[src]',{element(el){if(['/communiverse/_public/20261008-plug-refine-3.js','/communiverse/_public/20261008-plug-artists-1.js'].includes(el.getAttribute('src')))el.remove();}})
+ if(profile)return rewrite.on('link[rel=stylesheet]',{element(el){if(['/communiverse/_public/20261008-plug-artists-1.css','/communiverse/_public/20261008-plug-refine-3.css'].includes(el.getAttribute('href')))el.remove();}}).on('script[src]',{element(el){if(['/communiverse/_public/20261008-plug-refine-3.js','/communiverse/_public/20261008-plug-artists-1.js'].includes(el.getAttribute('src')))el.remove();}})
  .on('title',{element(el){el.setInnerContent(escapeHTML(profile.galleryLabel+' | Communiverse'),{html:true});}})
  .on('main',{element(el){el.setInnerContent(profileContent(profile),{html:true});}}).transform(new Response(r.body,{headers}));
  const source=await r.text(),pattern=/(<script\b[^>]*\bid="cv-focus-data"[^>]*>)([\s\S]*?)(<\/script>)/,match=source.match(pattern);
