@@ -39,12 +39,17 @@ test('unowned paths and the existing waitlist API delegate to the current Worker
   assert.equal(seen.length,4);
 });
 
-test('Plug keeps its people but hides the superseded shared header', async () => {
+test('Plug shows shared marketplace tabs above its people while hiding the superseded header', async () => {
   const env={LEGACY:{fetch:async()=>new Response('<html><head></head><body><div id="cv-shared-header">old navigation</div><main>People constellation</main></body></html>',{headers:{'Content-Type':'text/html'}})}};
-  const response=await marketplace.fetch(request('/communiverse/plug/'),env);
-  const html=await response.text();
-  assert.match(html,/#cv-shared-header\{display:none!important\}/);
-  assert.match(html,/People constellation/);
+  for (const route of ['/communiverse/plug/','/communiverse/plug/person/haseeb-wasim/']) {
+    const response=await marketplace.fetch(request(route),env);
+    const html=await response.text();
+    assert.match(html,/#cv-shared-header\{display:none!important\}/);
+    assert.match(html,/<nav id="cv-marketplace-nav" aria-label="Main navigation">/);
+    assert.match(html,/<a href="\/communiverse\/plug\/" aria-current="page">Plug<\/a>/);
+    assert.match(html,/People constellation/);
+    assert.equal((html.match(/id="cv-marketplace-nav"/g)||[]).length,1);
+  }
 });
 
 test('role directory and ambassador metrics use existing identities and reviewed counts', async () => {

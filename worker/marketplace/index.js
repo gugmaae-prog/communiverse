@@ -7,7 +7,7 @@ import { extraCss } from './extra-css.js';
 import { publicPeople } from './public-people.js';
 import { ambassadorMetrics, submitAmbassadorActivity, reviewAmbassadorActivity } from './metrics.js';
 
-export const RELEASE = '20261008-marketplace-5';
+export const RELEASE = '20261008-marketplace-6';
 const ROOT = '/communiverse';
 const email = 'hello@communiverseclubs.com';
 const e = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -21,6 +21,8 @@ const safeUrl = (value) => {
   } catch { return ''; }
 };
 const button = (label, href, secondary = false) => `<a class="button ${secondary ? 'button-secondary' : ''}" href="${e(href)}">${e(label)} <span aria-hidden="true">↗</span></a>`;
+const plugNavigation = `<nav id="cv-marketplace-nav" aria-label="Main navigation"><a href="${path()}">Discover</a><a href="${path('artists/')}">Artists</a><a href="${path('workshops/')}">Workshops</a><a href="${path('plug/')}" aria-current="page">Plug</a></nav>`;
+const plugNavigationCss = `#cv-shared-header{display:none!important}html{--header-space:0px!important}#cv-marketplace-nav{position:fixed;z-index:150;top:max(12px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:3px;box-sizing:border-box;max-width:calc(100vw - 24px);padding:5px;border:1px solid #e3e8ef;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 7px 22px rgba(22,33,51,.07);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;white-space:nowrap}#cv-marketplace-nav a{display:grid;place-items:center;box-sizing:border-box;min-height:44px;padding:10px 18px;border-radius:999px;color:#172033;font:400 14px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;text-decoration:none}#cv-marketplace-nav a[aria-current=page]{background:#e7f0ff;color:#0758d4}#cv-marketplace-nav a:hover{background:#eef4fc}#cv-marketplace-nav a:focus-visible{outline:3px solid #7eb0ff;outline-offset:2px}html[data-cv-design] .cv-plug .filters,html[data-cv-design] .cv-plug.is-focused .filters{top:80px!important}.cv-plug .glass-instruction{display:none!important}body>.back.cv-control{margin-top:88px!important}@media(max-width:600px){#cv-marketplace-nav{width:calc(100vw - 24px);justify-content:space-between;padding:4px}#cv-marketplace-nav a{flex:1;min-width:0;padding:9px 5px;font-size:12px}}`;
 
 const css = `
 :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#172033;background:#f5f5f7;font-synthesis:none}
@@ -207,7 +209,7 @@ const marketplace = { async fetch(request,env={}) {
     const response=await legacy(request,env);
     if (!response.ok || method==='HEAD' || !response.headers.get('Content-Type')?.includes('text/html')) return response;
     const source=await response.text();
-    const revised=source.replace('</head>','<style id="cv-marketplace-plug-header-removal">#cv-shared-header{display:none!important}html{--header-space:0px!important}</style></head>');
+    const revised=source.replace('</head>',`<style id="cv-marketplace-plug-navigation">${plugNavigationCss}</style></head>`).replace(/<body([^>]*)>/i,(tag)=>`${tag}${plugNavigation}`);
     const headers=new Headers(response.headers);headers.delete('Content-Length');headers.delete('Content-Encoding');headers.set('Cache-Control','no-store');headers.set('X-Communiverse-Marketplace',RELEASE);
     return new Response(revised,{status:response.status,headers});
   }
