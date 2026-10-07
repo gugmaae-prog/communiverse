@@ -1,0 +1,92 @@
+/* Shared Communiverse palette, typography and shapes. Media has no enclosing frame. */
+.cv-plug .glass-instruction{display:none!important}
+.cv-plug .glass-panel .glass-card[data-card]{border-radius:24px!important}
+.cv-plug .glass-panel .cv-video-orbit[data-card],.cv-plug .glass-panel .cv-social-orbit[data-card]{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:0!important}
+.cv-plug .glass-panel .cv-video-orbit::before,.cv-plug .glass-panel .cv-social-orbit::before{display:none!important}
+.cv-video-orbit video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:22px;background:transparent}
+.cv-video-orbit .cv-films{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;border-radius:22px}
+.cv-video-orbit video{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+.cv-plug .glass-panel .cv-social-orbit{overflow:visible;isolation:auto}
+.cv-social-orbit .glass-social-grid{display:flex!important;justify-content:center;gap:12px!important;flex-wrap:wrap;margin:0}
+.cv-social-orbit .glass-social{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;width:48px!important;height:48px!important;min-height:48px;padding:0!important}
+.cv-social-orbit .glass-social svg{width:34px!important;height:34px!important}
+.cv-social-orbit .glass-social[data-service=linkedin]{color:#0a66c2!important}
+.cv-social-orbit .glass-social[data-service=behance]{color:#1769ff!important}
+.cv-social-orbit .glass-social[data-service=dribbble]{color:#ea4c89!important}
+.cv-plug .glass-panel .cv-gallery-link{display:flex;width:100%;gap:8px;background:#0066e5!important;color:white!important;border-color:#0066e5!important;margin-top:12px}
+.cv-gallery-link svg{width:18px;height:18px;flex:none}
+.cv-plug .glass-panel .cv-film-label{font-size:12px;line-height:1.5;color:var(--plug-muted);margin:12px 0 0}
+.cv-plug .glass-panel .cv-attribution{font-size:11px;line-height:1.5;opacity:.72;margin:12px 0 0}
+.cv-plug .glass-panel .cv-work-thumb{display:block;width:100%;height:100px;object-fit:cover;border-radius:14px;margin-top:14px}
+.cv-plug .glass-panel .cv-photo-caption{font-size:11px;line-height:1.4;margin:6px 0 0;color:var(--plug-muted)}
+.cv-artist-profile{--cv-ink:#172033;--cv-muted:#526075;--cv-surface:#f5f5f7;--cv-card:#fcfdff;--cv-border:#dde2ec;max-width:1180px;margin:auto;padding:32px clamp(20px,5vw,64px) 80px;color:var(--cv-ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+.cv-artist-profile :is(h1,h2,p,a,span){font-family:inherit}
+body:has(.cv-artist-profile){background:#f5f5f7}
+.cv-artist-back{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#0066e5;margin-bottom:24px;text-decoration:none}
+.cv-artist-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,360px);gap:64px;align-items:start}
+.cv-artist-portrait{width:112px;height:112px;object-fit:cover;border-radius:50%;margin-bottom:20px}
+.cv-artist-profile h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.045em;line-height:1.1;font-weight:650;margin:12px 0}
+.cv-artist-kicker{font-size:14px;color:var(--cv-muted);line-height:1.5}
+.cv-artist-card{padding:24px;background:var(--cv-card);border:1px solid var(--cv-border);border-radius:24px;box-shadow:0 7px 22px #17203309;margin:22px 0 0}
+.cv-artist-card h2{font-size:20px;line-height:1.3;letter-spacing:-.025em;font-weight:600;margin:0 0 14px}
+.cv-artist-card p{font-size:15px;line-height:1.65;color:var(--cv-muted);margin:12px 0}
+.cv-artist-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.cv-artist-tags span{font-size:12px;border:1px solid var(--cv-border);border-radius:999px;padding:6px 10px}
+.cv-artist-note{font-size:12px;line-height:1.6;color:var(--cv-muted);max-width:48ch;margin:20px 0}
+.cv-profile-film{margin:0;max-width:300px;margin-inline:auto}
+.cv-profile-film video{display:block;width:100%;aspect-ratio:9/16;max-height:534px;object-fit:cover;border-radius:24px;background:transparent}
+.cv-film-details{margin:16px 0 24px;padding:20px}.cv-film-details p{font-size:13px;margin-bottom:0}
+.cv-work-photos figure{margin:24px 0 0}.cv-work-photos img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:24px}.cv-work-photos figcaption{font-size:12px;line-height:1.5;margin-top:10px;color:var(--cv-muted)}
+.cv-artist-profile .cv-gallery-link{display:flex;gap:10px;align-items:center;justify-content:center;min-height:48px;padding:10px 16px;border-radius:999px;background:#0066e5;color:white;text-decoration:none;font-size:14px;line-height:1.4}
+.cv-gallery-link:hover{filter:brightness(.94)}.cv-gallery-link:focus-visible{outline:3px solid #0066e5;outline-offset:4px}
+.cv-enquiry-date{margin:20px 0;padding:20px;border:1px solid #dde2ec;border-radius:20px;background:#fcfdff}.cv-enquiry-date label{display:block;margin-bottom:10px;font-size:14px}.cv-enquiry-date input{display:block;width:100%;min-height:44px;color:inherit;background:transparent;border:0;font:inherit}.cv-enquiry-date p{font-size:13px;line-height:1.5;margin:10px 0 0;color:#526075}
+@media(max-width:1049px){.cv-plug .filters,.cv-plug.is-focused .filters{grid-template-columns:1.25fr 1fr 1.14fr .8fr!important}.cv-plug .filters button{font-size:11px!important}}
+@media(max-width:759px){
+ .cv-plug .glass-panel{position:fixed!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;width:100%!important;height:auto!important;z-index:10!important;padding:8px 12px max(12px,env(safe-area-inset-bottom))!important;background:rgb(245 245 247 / 96%);border-top:1px solid #dde2ec;border-radius:24px 24px 0 0;box-sizing:border-box;box-shadow:0 -8px 30px #1720330d;pointer-events:auto}
+ .cv-plug .glass-panel-top{display:flex!important;align-items:center;justify-content:space-between;padding:0 0 6px!important;gap:8px}.cv-plug .glass-panel-top>span{font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--plug-ink)}
+ .cv-plug .glass-close{display:grid!important;width:44px;height:44px;flex:none;border:0;box-shadow:none;background:transparent}
+ .cv-plug .glass-panel-body{display:flex!important;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:thin;max-height:min(254px,34svh);padding-bottom:4px;isolation:isolate}
+ .cv-plug .glass-panel-body:before{display:none!important}
+ .cv-plug .glass-panel-body .glass-card[data-card]{position:relative!important;left:auto!important;top:auto!important;flex:0 0 232px;width:232px!important;height:236px;max-height:32svh;overflow:auto;padding:14px!important;scroll-snap-align:start}
+ .cv-plug .glass-card[data-card=identity]{display:none!important}
+ .cv-plug .glass-panel-body .cv-video-orbit[data-card]{flex-basis:124px;width:124px!important;overflow:hidden;padding:0!important;height:min(221px,32svh)}
+ .cv-plug .cv-video-orbit video{width:124px;height:min(221px,32svh);border-radius:20px}
+ .cv-plug .glass-panel-body .cv-social-orbit[data-card]{flex-basis:64px;width:64px!important;overflow:visible;padding:0!important}
+ .cv-social-orbit .glass-social-grid{flex-direction:column;gap:6px!important}
+ .cv-plug .glass-card .glass-eyebrow{font-size:11px}.cv-plug .glass-card .glass-description{font-size:13px;line-height:1.5;margin-top:8px}.cv-plug .glass-card .cv-gallery-link{margin-top:8px;font-size:12px;min-height:44px;padding:8px}
+ .cv-plug .glass-card .glass-extra{margin-top:4px}.cv-plug .glass-card .glass-tags{margin-top:6px}.cv-plug .glass-card .cv-work-thumb{height:88px}
+ .cv-artist-grid{grid-template-columns:1fr;gap:28px}.cv-artist-profile{padding-top:24px}.cv-artist-card{padding:20px}.cv-profile-film{max-width:220px}.cv-profile-film video{max-height:392px}.cv-artist-media{max-width:460px;width:100%;margin-inline:auto}
+ .cv-plug.is-focused .field{padding-bottom:330px!important}
+}
+@media(max-height:600px) and (max-width:759px){.cv-plug .glass-panel-body{max-height:40svh}.cv-plug .glass-panel-body .glass-card[data-card]{max-height:38svh}.cv-plug .glass-panel-body .cv-video-orbit[data-card]{flex-basis:90px;width:90px!important}.cv-plug .cv-video-orbit video{width:90px;height:160px}}
+@media(prefers-color-scheme:dark){.cv-artist-profile{--cv-ink:#e9eef8;--cv-muted:#bcc8dc;--cv-surface:#161c28;--cv-card:#252b37;--cv-border:#424a59}body:has(.cv-artist-profile){background:#161c28}.cv-plug .glass-panel{background:rgb(22 28 40 / 96%);border-color:#424a59}.cv-enquiry-date{background:#252b37;border-color:#424a59;color:#e9eef8}.cv-enquiry-date p{color:#bcc8dc}}
+@media(prefers-reduced-motion:reduce){.cv-social-orbit .glass-social{transition:none!important}.cv-social-orbit .glass-social:hover{transform:none!important}}
+
+.cv-plug .glass-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+
+/* Gallery actions float outside the cards, sharing the site’s control palette. */
+.cv-plug .cv-gallery-orbit{position:absolute;pointer-events:none;opacity:0;transition:opacity 160ms ease}
+.cv-plug.is-details-ready .cv-gallery-orbit{opacity:1;pointer-events:auto}
+.cv-plug .cv-gallery-orbit .cv-gallery-link{display:flex!important;justify-content:center;gap:12px;width:100%;min-height:48px;padding:12px 18px;background:#0066e5!important;color:white!important;border:0!important;border-radius:999px;box-shadow:0 6px 18px #0066e51a;text-decoration:none;font-size:14px}
+.cv-gallery-orbit .cv-gallery-link span{margin-left:auto}
+.cv-gallery-hero{display:flex;align-items:center;gap:28px}.cv-gallery-hero .cv-artist-portrait{flex:none;margin:0}.cv-gallery-hero h1{margin:8px 0}
+.cv-gallery-nav{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0}.cv-gallery-nav a,.cv-action-link{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:48px;padding:10px 20px;border-radius:999px;background:var(--cv-card);color:var(--cv-ink);border:1px solid var(--cv-border);font-size:14px;line-height:1.5;text-decoration:none}.cv-gallery-nav a:hover{border-color:#0066e5}.cv-action-link{background:#0066e5;color:#fff;border-color:#0066e5;margin-top:16px;font-weight:550}
+.cv-gallery-page :is(a,input):focus-visible{outline:3px solid #0066e5;outline-offset:4px}
+.cv-gallery-section{padding-top:52px;scroll-margin-top:100px}.cv-section-heading{margin-bottom:24px}.cv-section-heading h2{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.04em;line-height:1.2;margin:8px 0 12px;font-weight:600}.cv-section-heading>p{max-width:56ch;font-size:15px;line-height:1.6;color:var(--cv-muted)}
+.cv-gallery-work-grid{display:grid;grid-template-columns:minmax(220px,380px) minmax(0,1fr);gap:48px;align-items:start}.cv-gallery-about{margin:0}.cv-gallery-page h3{font-size:20px;font-weight:600;line-height:1.3;letter-spacing:-.025em;margin:0 0 14px}
+.cv-session-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.cv-session-grid .cv-artist-card{margin:0;min-height:190px;box-sizing:border-box}.cv-session-grid .cv-action-link{width:100%;box-sizing:border-box}
+.cv-store-grid{display:grid;grid-template-columns:minmax(220px,380px) minmax(0,1fr);gap:48px;align-items:center}.cv-store-photo{margin:0}.cv-store-photo img{display:block;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover;border-radius:24px}.cv-store-photo figcaption{font-size:12px;line-height:1.5;margin-top:10px;color:var(--cv-muted)}.cv-store-grid .cv-artist-card{margin:0}
+.cv-enquiry-date label:not(:first-child){margin-top:20px}
+@media(max-width:759px){
+ .cv-plug .cv-gallery-orbit{position:relative!important;left:auto!important;top:auto!important;width:100%!important;margin-top:8px}
+ .cv-plug .cv-gallery-orbit .cv-gallery-link{min-height:44px;padding:10px 16px;font-size:13px}
+ .cv-plug .glass-panel-body{max-height:min(216px,29svh)}
+ .cv-plug .glass-panel-body .glass-card[data-card]{height:204px;max-height:28svh;flex-basis:224px;width:224px!important}
+ .cv-plug .glass-panel-body .cv-video-orbit[data-card]{width:112px!important;flex-basis:112px;height:min(199px,28svh)}
+ .cv-plug .cv-video-orbit video{width:112px;height:min(199px,28svh)}
+ .cv-plug.is-focused .field{padding-bottom:350px!important}
+ .cv-gallery-hero{align-items:flex-start;gap:16px}.cv-gallery-hero .cv-artist-portrait{width:76px;height:76px}.cv-gallery-hero h1{font-size:32px}.cv-gallery-hero .cv-artist-kicker{font-size:12px}.cv-gallery-nav{gap:6px}.cv-gallery-nav a{font-size:12px;padding:10px 14px}
+ .cv-gallery-work-grid,.cv-session-grid,.cv-store-grid{grid-template-columns:1fr;gap:24px}.cv-gallery-section{padding-top:40px}.cv-gallery-page .cv-profile-film{max-width:240px}.cv-gallery-page .cv-profile-film video{max-height:427px}.cv-session-grid .cv-artist-card{min-height:0}.cv-store-grid .cv-action-link{display:flex}
+}
+@media(max-height:600px) and (max-width:759px){.cv-plug .glass-panel-body{max-height:34svh}.cv-plug .glass-panel-body .glass-card[data-card]{max-height:32svh}.cv-plug .glass-panel-body .cv-video-orbit[data-card]{width:90px!important;flex-basis:90px}.cv-plug .cv-video-orbit video{width:90px;height:160px}}
+@media(prefers-reduced-motion:reduce){.cv-plug .cv-gallery-orbit{transition:none}}
