@@ -1,0 +1,211 @@
+{
+  "deployment": {
+    "version": "383cdd17-a26a-449e-ad98-526be3d64748",
+    "deployment": {
+      "id": "a2a3d3c2-c38c-46fa-9c1a-3391ed416661"
+    },
+    "rollbackVersion": "413ac851-8d29-4f00-8b14-0717de155364"
+  },
+  "sourceProof": {
+    "pass": true,
+    "version": "383cdd17-a26a-449e-ad98-526be3d64748",
+    "release": "20261008-plug-refine-3",
+    "verifiedAt": "2026-10-07T22:21:45.357Z",
+    "modulesVerified": 10,
+    "originalModulesRetained": 6,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "liveChecks": {
+    "pass": true,
+    "mode": "live",
+    "version": "383cdd17-a26a-449e-ad98-526be3d64748",
+    "release": "20261008-plug-refine-3",
+    "people": 23,
+    "coolKids": 10,
+    "ambassadors": 3,
+    "artists": 10,
+    "backOffice": 6,
+    "profiles": [
+      {
+        "name": "Amina Rahmani",
+        "path": "/communiverse/artists/amina-rahmani/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Luc\u00eda Quintero",
+        "path": "/communiverse/artists/lucia-quintero/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Matteo Bellini",
+        "path": "/communiverse/artists/matteo-bellini/",
+        "videos": 2,
+        "status": 200
+      },
+      {
+        "name": "Nia Okafor",
+        "path": "/communiverse/artists/nia-okafor/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Sora Nakamura",
+        "path": "/communiverse/artists/sora-nakamura/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Leila Al Mansouri",
+        "path": "/communiverse/artists/leila-al-mansouri/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Priya Mehta",
+        "path": "/communiverse/artists/priya-mehta/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Diego Salazar",
+        "path": "/communiverse/artists/diego-salazar/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Awa Diop",
+        "path": "/communiverse/artists/awa-diop/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Elias Korhonen",
+        "path": "/communiverse/artists/elias-korhonen/",
+        "videos": 1,
+        "status": 200
+      }
+    ],
+    "sourceBytesVerified": true,
+    "glassRangeVerified": true,
+    "glassOriginalBytes": 1838802,
+    "checkedAt": "2026-10-07T22:24:09.134Z"
+  },
+  "browserChecks": {
+    "pass": true,
+    "mobile": {
+      "h": 844,
+      "paused": false,
+      "readyState": 4,
+      "release": "20261008-plug-refine-3",
+      "sceneHeight": 480,
+      "scrollWidth": 390,
+      "video": {
+        "bottom": 813,
+        "height": 221,
+        "left": 12,
+        "right": 136,
+        "top": 592,
+        "width": 124,
+        "x": 12,
+        "y": 592
+      },
+      "w": 390,
+      "circleMovement": 0
+    },
+    "desktop": {
+      "cards": [
+        {
+          "box": {
+            "bottom": 385.0859375,
+            "height": 194.0859375,
+            "left": 272.796875,
+            "right": 512.796875,
+            "top": 191,
+            "width": 240,
+            "x": 272.796875,
+            "y": 191
+          },
+          "kind": "identity"
+        },
+        {
+          "box": {
+            "bottom": 531.8828125,
+            "height": 312.8828125,
+            "left": 680.796875,
+            "right": 856.796875,
+            "top": 219,
+            "width": 176,
+            "x": 680.796875,
+            "y": 219
+          },
+          "kind": "video"
+        },
+        {
+          "box": {
+            "bottom": 552.5859375,
+            "height": 333.5859375,
+            "left": 876.796875,
+            "right": 1176.796875,
+            "top": 219,
+            "width": 300,
+            "x": 876.796875,
+            "y": 219
+          },
+          "kind": "work"
+        },
+        {
+          "box": {
+            "bottom": 539,
+            "height": 48,
+            "left": 520.796875,
+            "right": 672.796875,
+            "top": 491,
+            "width": 152,
+            "x": 520.796875,
+            "y": 491
+          },
+          "kind": "connect"
+        }
+      ],
+      "frameBackground": "rgba(0, 0, 0, 0)",
+      "portraitGap": "10.477",
+      "scrollWidth": 1440,
+      "videoPaused": false,
+      "videoReady": 4,
+      "width": 1440
+    },
+    "contact": {
+      "craftPrefilled": "Glassblowing",
+      "preferredDateField": true,
+      "controlledStatePersists": true,
+      "submissions": 0
+    },
+    "localChecks": {
+      "close": true,
+      "filterSwitch": true,
+      "reducedMotionPausesVideo": true,
+      "darkMode": true,
+      "profilePhotosLoaded": true
+    },
+    "screenshots": [
+      "outputs/communiverse-plug-mobile-refined-live.png",
+      "outputs/communiverse-plug-separated-cards-live.png"
+    ]
+  },
+  "release": "20261008-plug-refine-3",
+  "worker": "communiverse-marketplace",
+  "sourceCommit": "4ba8a4c8ef758c5e8eecbe65fb418f6ff6cb9415",
+  "routePatterns": [
+    "espacios.me/communiverse*",
+    "www.espacios.me/communiverse*"
+  ],
+  "previousModulesRetained": 6,
+  "newModules": 4,
+  "databaseWrites": false,
+  "formSubmissions": 0
+}

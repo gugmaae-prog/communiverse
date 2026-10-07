@@ -35,3 +35,5 @@ The existing `app/`, `components/`, `data/`, `public/`, audit files and source b
 See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
 
 Latest people presentation source: `worker/releases/plug-artists-20261008/` wraps the active marketplace Worker and preserves its compact header, public records, applications and database bindings.
+
+Latest Plug presentation refinement: `20261008-plug-refine-3`. See `PRODUCTION.md` and `worker/releases/plug-refine-20261008/README.md` for source, live verification and the retained-runtime assembly boundary.

@@ -1,6 +1,17 @@
 # Communiverse production reconciliation
 
-## Latest live artist and Plug update
+## Latest live Plug refinement
+
+Release `20261008-plug-refine-3`; Worker `communiverse-marketplace`; version `383cdd17-a26a-449e-ad98-526be3d64748`; deployment `a2a3d3c2-c38c-46fa-9c1a-3391ed416661`; 100% traffic. Rollback version `413ac851-8d29-4f00-8b14-0717de155364`.
+
+Artists is a fourth filter alongside Communiverse, Cool Kids and Ambassadors. All 23 people remain. Videos are independent rounded media elements; craft details and concept photos are in their own card. Mobile selection opens a compact fixed tray and leaves circles in place. Transparent social marks preserve real supplied destinations. The ten artist pages use the shared site theme and separate film/detail/photo elements.
+
+Request a commission opens the retained contact form, prefills the craft and offers a preferred date. The date is part of the existing message payload. Requests are saved by the retained waitlist endpoint, not confirmed bookings or orders. No schema, bindings, credentials or database records changed; no test enquiries were submitted.
+
+Source: `worker/releases/plug-refine-20261008/`; assembly: `scripts/prepare-plug-refine.mjs`. Six previous runtime modules and old immutable asset URLs are retained byte-for-byte; four scoped modules are added. Live verification: `deployments/20261008-plug-refine-3.json`. Existing route/media/source checks: `deployments/20261008-plug-refine-retained-checks.json`. Mobile 390x844: width/scrollWidth 390, circle movement 0, video 124x221. Desktop 1440x900: no horizontal page overflow, film ready and playing. Contact prefill/date state, close, filters, dark mode and reduced motion checked in browser. Ten work photos returned image/jpeg HTTP 200.
+
+## Previous artist and Plug update
+
 
 Release `20261008-plug-artists-1a`; active Worker `communiverse-marketplace`; version `413ac851-8d29-4f00-8b14-0717de155364`; deployment `85fefe9a-a2c5-4d5b-8a3e-091eb99856ba`; 100% traffic. Presentation asset URLs remain `20261008-plug-artists-1`. The final revision only fixes biography wording and preserves those immutable asset bytes.
 
