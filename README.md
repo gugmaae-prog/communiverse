@@ -2,6 +2,8 @@
 
 Public site: https://espacios.me/communiverse/
 
+Latest navigation update: `20261008-simple-nav-1` replaces the remaining legacy header with Discover, Artists, Workshops and Plug. All four tabs stay visible on mobile. [Release evidence](deployments/20261008-simple-nav-1.json).
+
 Latest Plug update: `20261008-plug-gallery-1a` adds standalone named gallery links, workshop/group-session requests, store enquiries and restored mobile orb animation with smaller separate cards. All 23 people, three ambassadors and ten Cool Kids remain. Artist galleries follow the shared theme with inline CSS under their unchanged security policy. [Release evidence](deployments/20261008-plug-gallery-1a.json).
 
 ## Production release — 7 October 2026

@@ -1,6 +1,16 @@
 # Communiverse production reconciliation
 
-## Latest artist galleries and mobile animation
+## Latest simplified shared navigation
+
+Release `20261008-simple-nav-1`; Worker `communiverse-marketplace`; version `62b35c00-4a47-4a11-a02e-aedd41d2dad5`; deployment `cbf4c477-ab75-48fd-8363-6b0db47071d0`; 100% traffic. Rollback version: `83f1bdb4-e7e4-44ef-8679-967a5cb4b382`.
+
+The remaining legacy pages use Discover, Artists, Workshops and Plug in place of the six-tab shared header and More menu. All four tabs stay visible on mobile. Contact stays outside the desktop tab pill; existing footer links and legacy routes remain available. Marketplace and Plug headers are retained.
+
+Source: `worker/releases/simple-nav-20261008/`; assembly: `scripts/prepare-simple-nav.mjs`; verification: `scripts/verify-simple-nav.mjs <verified candidate> live`. Fourteen current runtime modules remain byte-identical; three header modules are added. Streaming HTML rewrites preserve the existing security policies, content, forms, directory, galleries, media, D1/service bindings and observability. No records or form submissions changed.
+
+Live proof: `deployments/20261008-simple-nav-1.json`; retained route/media/source checks: `deployments/20261008-simple-nav-retained-checks.json`. All nine legacy page GET/HEAD requests and the new immutable script checksum passed. Desktop 1440x900, mobile 390x844 and 320px width showed one simplified header, four destinations and no horizontal page overflow; mobile links are 44px tall. Browser navigation into Artists and Plug, ambassador content and group-session prefill were checked in preview.
+
+## Previous artist galleries and mobile animation
 
 Release `20261008-plug-gallery-1a` on `communiverse-marketplace`; version `83f1bdb4-e7e4-44ef-8679-967a5cb4b382`; deployment `d9b82c9a-1801-4100-af5d-869b37d43426`; 100% traffic. Full checks are recorded in `deployments/20261008-plug-gallery-1a.json`. Presentation assets remain `20261008-plug-gallery-1`.
 
