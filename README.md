@@ -2,6 +2,8 @@
 
 Public site: https://espacios.me/communiverse/
 
+Latest Plug directory update: `20261007-plug-haseeb-only-1` keeps only Haseeb Wasim on the public Communiverse Plug page. The 70 other displayed entries are removed. Existing Espacios Plug accounts and profiles are retained. [Release evidence](deployments/20261007-plug-haseeb-only-1.json).
+
 ## Production release — 7 October 2026
 
 **Live:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
