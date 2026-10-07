@@ -22,6 +22,6 @@ node scripts/prepare-gallery-media.mjs <recovered-production-directory> <new-can
 
 The assembler verifies every retained module SHA-256, patches the existing gallery media list, copies the ten new assets, and creates a homepage-only entry. Only the homepage gallery script reference changes. Other routes, existing modules, bindings and assets stay with the retained production entry.
 
-Baseline: `bd2a1a7d-f8a5-4578-b2ed-30d8094811e4`, 82 retained modules. Recover the then-current production version before each upload. New release id: `20261007-gallery-media-1`.
+Baseline: `274fb6c1-664c-4637-9c6b-63553ef4158b`, 98 retained modules. Recover the then-current production version before each upload. New release id: `20261007-gallery-media-1`.
 
 Validation: script syntax; Worker dry run; inherited-header and route-delegation checks; full, partial, suffix, invalid and HEAD video responses; all five videos decoded; desktop and 390px mobile viewer preview. The local preview uses the retained server HTML without Next hydration and is not evidence of production acceptance. Follow independent live verification after release.
