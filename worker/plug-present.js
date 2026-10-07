@@ -313,15 +313,15 @@ go(true);
 }
 
 export const STYLE = `
-.cv-plug{min-height:100vh;background-color:#f3f3f1;background-image:radial-gradient(rgba(17,17,17,.2) .75px, transparent .85px);background-size:18px 18px;color:#151c19;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
-body:has(.cv-plug){margin:0;background-color:#f3f3f1;background-image:radial-gradient(rgba(17,17,17,.2) .75px, transparent .85px);background-size:18px 18px}
+.cv-plug{min-height:100vh;background-color:#f3f6fb;background-image:none;color:#172033;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+body:has(.cv-plug){margin:0;background-color:#f3f6fb;background-image:none}
 .cv-plug *{box-sizing:border-box}
 .cv-plug a{color:inherit}
 .cv-plug button{font:inherit}
 .cv-plug button,.cv-plug a{-webkit-tap-highlight-color:transparent}
 .cv-plug :focus-visible{outline:2px solid #111;outline-offset:3px}
 .cv-plug .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.cv-plug .header-wrap{position:sticky;top:0;z-index:40;padding:12px 16px;background:#f3f3f1}
+.cv-plug .header-wrap{position:sticky;top:0;z-index:40;padding:12px 16px;background:#f3f6fb}
 .cv-plug .header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;max-width:1184px;min-height:64px;margin:auto;padding:8px 14px 8px 22px;border-radius:999px;background:#151c19;color:#f4f4f1}
 .cv-plug .brand{font:500 22px Georgia,"Times New Roman",serif;letter-spacing:-.03em;text-decoration:none;color:#f4f4f1}
 .cv-plug .desktop-nav{display:flex;gap:2px;padding:2px;border:1px solid rgba(255,255,255,.18);border-radius:999px}
