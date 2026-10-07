@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Latest directory update: `20261007-plug-team-2` shows all ten Cool Kids and three ambassadors under Communiverse. Imported artist entries remain removed. The highlighted Plug navigation link is relabelled Communiverse, and group filters are visible below the shared header. [Release evidence](deployments/20261007-plug-team-2.json).
+Latest directory update: `20261008-plug-artists-1a` adds ten sample artist stories and video-first cards to Plug. Communiverse now contains 23 people, including ten Cool Kids and three ambassadors. The supplied glass clip is on Elias’s profile; portraits use centered random sizing; social logos stand alone. [Release evidence](deployments/20261008-plug-artists-1a.json).
 
 ## Production release — 7 October 2026
 
@@ -34,4 +34,4 @@ The existing `app/`, `components/`, `data/`, `public/`, audit files and source b
 
 See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
 
-Latest people curation source: `worker/releases/plug-team-20261007/` restores ten Cool Kids and three ambassadors in the Communiverse directory while retaining removal of imported artist entries.
+Latest people presentation source: `worker/releases/plug-artists-20261008/` wraps the active marketplace Worker and preserves its compact header, public records, applications and database bindings.

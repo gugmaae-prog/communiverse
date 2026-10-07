@@ -9,3 +9,5 @@ Plug portraits use per-document random diameters and collision-free centered pla
 The active host route is owned by communiverse-marketplace, with LEGACY delegating to communiverse. This release wraps a checksum-verified capture of the current marketplace script (one bundled module) and retains it byte-for-byte. It adds five modules: presentation entrypoint, data, CSS, browser script and glass MP4. The compact marketplace header, databases, application flows, metrics, private admin behavior, service binding and existing media remain retained. Only Plug and the ten supplied artist detail pages are rewritten.
 
 Assembly: `node scripts/prepare-plug-artists.mjs <current-marketplace-capture> <candidate>`. Always recover current traffic first. Never deploy the legacy top-level app or overwrite the marketplace with its branch source without a current capture.
+
+Final deployment tag: `20261008-plug-artists-1a`. It only polishes biography wording. The existing immutable presentation/MP4 asset URLs remain `20261008-plug-artists-1` with identical bytes. Reassembly now supports subsequent captures of this wrapper and verifies unchanged modules before replacement.

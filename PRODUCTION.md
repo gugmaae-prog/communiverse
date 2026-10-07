@@ -1,6 +1,15 @@
 # Communiverse production reconciliation
 
-## Latest live directory update
+## Latest live artist and Plug update
+
+Release `20261008-plug-artists-1a`; active Worker `communiverse-marketplace`; version `413ac851-8d29-4f00-8b14-0717de155364`; deployment `85fefe9a-a2c5-4d5b-8a3e-091eb99856ba`; 100% traffic. Presentation asset URLs remain `20261008-plug-artists-1`. The final revision only fixes biography wording and preserves those immutable asset bytes.
+
+The active marketplace route delegates legacy content and media to `communiverse`. Its exact original marketplace bundle was retained, with five scoped presentation/media modules added. Ten supplied artist concepts join the existing 13 people; sample labels and craft-reference attribution remain explicit. Plug circles, video cards, social icons and mobile details are refined. The ten linked artist pages replace concept-work stills with craft films. The supplied glass clip is preserved byte-for-byte. No account, database, service binding, route, metrics or application changes.
+
+Source: `worker/releases/plug-artists-20261008/`. Assemble using `scripts/prepare-plug-artists.mjs` against a verified current marketplace capture. Deployment and all ten live profile checks: `deployments/20261008-plug-artists-1a.json`. Existing retained-route/media checks: `deployments/20261008-plug-artists-retained-checks.json`. Never redeploy the older marketplace branch wholesale against the live system.
+
+
+## Previous directory update
 
 Release `20261007-plug-team-2`; Worker version `fb1e0cac-7c50-4a38-a8f3-18cc0b0effc6`; deployment `4d0fa6b2-a0fa-4294-b040-5d10dda62bd3`; 100% traffic. Ten Cool Kids and three ambassadors appear together under Communiverse. The highlighted Plug navigation link is relabelled Communiverse and group filters sit below the header. The 58 imported artists remain removed. Source: `worker/releases/plug-team-20261007/`; verification: `deployments/20261007-plug-team-2.json`. No database or account changes. The root `/communiverse/` currently returns the separate `X-Communiverse-Marketplace: 20261007-marketplace-2` page; its ownership and content were retained. The verifier checks that root as marketplace content rather than requiring this directory release header.
 
