@@ -31,8 +31,8 @@ npm run build:marketplace
 npm run preview:marketplace
 ```
 
-The local preview never submits Join requests; its API returns 501. The staged
-Worker URL is `https://communiverse-marketplace.thekeifferjapeth.workers.dev/communiverse/`.
+The local preview never submits Join requests; its API returns 501. The Worker
+was checked at its `workers.dev` stage URL before the route cutover.
 
 Production routing uses the existing two zone routes:
 
@@ -41,9 +41,18 @@ Production routing uses the existing two zone routes:
 | `espacios.me/communiverse*` | `communiverse` |
 | `www.espacios.me/communiverse*` | `communiverse` |
 
-After staged responsive and delegation checks, those route **script values**
-can be changed to `communiverse-marketplace` while retaining the exact patterns
-and `request_limit_fail_open` setting. The original Worker remains deployed and
-available through the service binding. Rollback is the reverse route update,
-followed by checks on the root, Plug, media and waitlist API. Never run the
-repository's root `wrangler deploy` over the stacked production Worker.
+On 7 October 2026, both route **script values** were changed to
+`communiverse-marketplace` while retaining the exact patterns and
+`request_limit_fail_open: false`. The deployed marketplace version is
+`88c89ca0-0504-41b7-bcba-a18eb00fb489` (`20261007-marketplace-2`). The
+original Worker remains deployed at version
+`4a09f1da-b076-43e5-9663-c93dc1a188bd` and is available through the
+service binding. Live checks covered new routes, Plug, ambassadors, media,
+desktop/390px layout and a QA Join request. The QA row was removed after D1
+verification.
+
+Rollback is a route script update back to `communiverse` on both route IDs
+`101a07d7a75c46c59cbd17f8d3e9c98f` and
+`195499dcf0d341e5a5a80c79d0438588`, followed by root, Plug, media and
+waitlist API checks. Never run the repository's root `wrangler deploy` over
+the stacked production Worker.
