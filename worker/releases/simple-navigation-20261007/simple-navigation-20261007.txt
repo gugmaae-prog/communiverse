@@ -1,0 +1,15 @@
+/* Two discovery links. No menu maze; Plug keeps its own full-screen layout. */
+(()=>{'use strict';
+const RELEASE='20261007-simple-navigation-1';
+const isPlug=()=>/^\/communiverse\/plug(?:\/|$)/.test(location.pathname);
+if(isPlug()||window.__cvSimpleNavigation===RELEASE)return;
+window.__cvSimpleNavigation=RELEASE;window.__cvSharedUIRelease=RELEASE;
+let host,observer,frame=0,timer=0,lastPath='';const html=document.documentElement;
+function measure(){if(!host?.isConnected)return;const value=Math.ceil(host.getBoundingClientRect().height)+'px';if(html.style.getPropertyValue('--cv-ui-header-height')!==value)html.style.setProperty('--cv-ui-header-height',value);}
+function update(){const p=location.pathname.replace(/\/$/,'');document.body.dataset.cvPageKind=p==='/communiverse'?'home':p==='/communiverse/ambassadors'?'ambassadors':p==='/communiverse/contact'?'contact':'content';if(p!==lastPath){lastPath=p;host?.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href,location.href);if(!u.hash&&u.pathname.replace(/\/$/,'')===p)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}}
+function mount(){if(!document.body)return;if(isPlug()){host?.remove();html.removeAttribute('data-cv-shared-header');return;}
+ if(!host?.isConnected){host=document.createElement('div');host.id='cv-shared-header';host.dataset.release=RELEASE;host.innerHTML='<a class="cvs-skip" href="#cv-shared-main">Skip to content</a><header class="cvs-bar" aria-label="Communiverse header"><a class="cvs-brand" href="/communiverse/" aria-label="Communiverse home">Communiverse</a><nav class="cvs-nav" aria-label="Primary navigation"><a data-home href="/communiverse/">Discover</a><a href="/communiverse/plug/">Plug</a></nav><a class="cvs-contact" href="/communiverse/contact/#contact">Contact</a></header>';document.body.prepend(host);host.querySelector('.cvs-skip').addEventListener('click',e=>{const main=document.querySelector('main');if(!main)return;e.preventDefault();if(!main.hasAttribute('tabindex'))main.setAttribute('tabindex','-1');main.focus({preventScroll:true});main.scrollIntoView({block:'start',behavior:'auto'});});observer?.disconnect();observer=new ResizeObserver(()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure)});observer.observe(host);lastPath='';}
+ html.dataset.cvSharedHeader='ready';update();measure();}
+function start(){mount();new MutationObserver(ms=>{if(!host?.isConnected||ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&!n.closest?.('#cv-shared-header')))){clearTimeout(timer);timer=setTimeout(mount,100)}}).observe(document.body,{childList:true,subtree:true});addEventListener('resize',measure);addEventListener('popstate',()=>{update();measure()});addEventListener('pageshow',mount);}
+const ready=()=>requestAnimationFrame(()=>requestAnimationFrame(start));if(document.querySelector('script[src*="/_next/"]')){if(window.__cvHydrated)ready();else addEventListener('cv:hydrated',ready,{once:true});}else if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})();
