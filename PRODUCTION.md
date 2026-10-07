@@ -1,6 +1,11 @@
 # Communiverse production reconciliation
 
-## Live approved update
+## Latest live directory update
+
+Release `20261007-plug-team-2`; Worker version `fb1e0cac-7c50-4a38-a8f3-18cc0b0effc6`; deployment `4d0fa6b2-a0fa-4294-b040-5d10dda62bd3`; 100% traffic. Ten Cool Kids and three ambassadors appear together under Communiverse. The highlighted Plug navigation link is relabelled Communiverse and group filters sit below the header. The 58 imported artists remain removed. Source: `worker/releases/plug-team-20261007/`; verification: `deployments/20261007-plug-team-2.json`. No database or account changes. The root `/communiverse/` currently returns the separate `X-Communiverse-Marketplace: 20261007-marketplace-2` page; its ownership and content were retained. The verifier checks that root as marketplace content rather than requiring this directory release header.
+
+
+## Shared design baseline
 
 Release `20261007-shared-plug-ui-1`; Worker version `4a09f1da-b076-43e5-9663-c93dc1a188bd`; deployment `81b6d569-6434-4c57-8388-cc80d5829e5b`; 100% traffic. Previous production version: `428c7e34-252c-4ef7-97c4-62ce49cd11ab`.
 

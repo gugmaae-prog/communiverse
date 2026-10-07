@@ -1,6 +1,6 @@
 # Communiverse people and navigation
 
-The directory retains all ten Cool Kids (including Haseeb) and the three ambassadors: Luna, @_turbooz and Abd Allah Mahmoud. The 58 imported Artisans entries remain removed. All 13 people appear under the default Communiverse filter; Cool Kids and Ambassadors remain usable subgroup filters. The empty Artisans filter is removed.
+The directory retains all ten Cool Kids (including Haseeb) and the three ambassadors: Luna, @_turbooz and Abd Allah Mahmoud. The 58 imported Artisans entries remain removed. All 13 people appear under the default Communiverse filter; Cool Kids and Ambassadors remain usable subgroup filters. The empty Artisans filter is removed. All three group filters are positioned below the shared header so the header cannot cover their click targets.
 
 The shared navigation now labels the directory Communiverse instead of Plug, matching the highlighted tab in the user screenshot. The existing /communiverse/plug/ route and profile links remain valid. The separate Ambassadors information page remains available. No account, database or biography changes.
 

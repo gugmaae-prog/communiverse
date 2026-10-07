@@ -2,11 +2,11 @@
 
 Public site: https://espacios.me/communiverse/
 
-Latest Plug directory update: `20261007-plug-haseeb-only-1` keeps only Haseeb Wasim on the public Communiverse Plug page. The 70 other displayed entries are removed. Existing Espacios Plug accounts and profiles are retained. [Release evidence](deployments/20261007-plug-haseeb-only-1.json).
+Latest directory update: `20261007-plug-team-2` shows all ten Cool Kids and three ambassadors under Communiverse. Imported artist entries remain removed. The highlighted Plug navigation link is relabelled Communiverse, and group filters are visible below the shared header. [Release evidence](deployments/20261007-plug-team-2.json).
 
 ## Production release — 7 October 2026
 
-**Live:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
+**Shared design baseline:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
 
 - Worker version: `4a09f1da-b076-43e5-9663-c93dc1a188bd`
 - Deployment: `81b6d569-6434-4c57-8388-cc80d5829e5b`
