@@ -7,3 +7,7 @@
 @media(max-width:759px){.cv-market-intro h1{font-size:38px;margin:14px 0 18px}.cv-market-intro{padding-top:12px}}
 
 .cv-process-grid video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:24px;background:transparent}@media(max-width:759px){.cv-process-grid video{grid-row:span 2;aspect-ratio:1;border-radius:18px}}
+
+@media(prefers-color-scheme:dark){html[data-cv-market-theme]{background:#161c28;color:#eef3fb;color-scheme:dark}html[data-cv-market-theme] body{background:#161c28}html[data-cv-market-theme] .top{background:#161c28e8;border-color:#354457}html[data-cv-market-theme] .top .nav{background:#202c3c;border-color:#354457}html[data-cv-market-theme] .top .nav a{color:#eef3fb}html[data-cv-market-theme] .top .nav a.active{color:#5b9fff;background:#283950}html[data-cv-market-theme] footer{color:#a6b6ca;border-color:#354457}}
+
+.cv-process-steps{padding-left:24px;line-height:1.7}.cv-process-steps li{padding:12px 0;border-bottom:1px solid var(--cv-line)}
