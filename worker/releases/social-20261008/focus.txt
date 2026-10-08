@@ -600,7 +600,7 @@
     throw Error("Cannot fit the public portraits in the constellation");
   }
   function nearbyPositions(items, w, zones) {
-    const placed = new Map(), positions = [], r = 22, gap = 10;
+    const placed = new Map(), positions = [], r = Math.max(22,...items.map(n=>Math.max(44,n.restD*.88)/2)), gap = 10;
     const inZone = (x, y) => zones.some((z) =>
       x + r + gap > z.x && x - r - gap < z.x + z.w &&
       y + r + gap > z.y && y - r - gap < z.y + z.h,
@@ -610,7 +610,7 @@
     const add = (n, p) => { placed.set(n, p); positions.push(p); };
     const displaced = [];
     for (const n of items) {
-      if (free(n.rest.x, n.rest.y)) add(n, { ...n.rest, d: 44 });
+      if (free(n.rest.x, n.rest.y)) add(n, { ...n.rest, d: Math.max(44,n.restD*.88) });
       else displaced.push(n);
     }
     for (const n of displaced) {
@@ -621,7 +621,7 @@
           const angle = phase + k * Math.PI / 32;
           const x = n.rest.x + Math.cos(angle) * distance;
           const y = n.rest.y + Math.sin(angle) * distance;
-          if (free(x, y)) { destination = { x, y, d: 44 }; break; }
+          if (free(x, y)) { destination = { x, y, d: Math.max(44,n.restD*.88) }; break; }
         }
       }
       add(n, destination);
@@ -750,7 +750,7 @@
           const point = layout.peers.get(n);
           x = point.x;
           y = point.y;
-          diameter = 44;
+          diameter = Math.max(44,n.restD*.88);
         }
       }
       if (!shown) {

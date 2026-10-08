@@ -19,3 +19,6 @@ CREATE INDEX IF NOT EXISTS cv_posts_author ON cv_posts(member_id,status);
 CREATE INDEX IF NOT EXISTS cv_feed_snapshots_expiry ON cv_feed_snapshots(expires_at);
 CREATE INDEX IF NOT EXISTS cv_login_links_member ON cv_login_links(member_id);
 CREATE INDEX IF NOT EXISTS cv_join_limits_expiry ON cv_join_limits(expires_at);
+
+CREATE TABLE IF NOT EXISTS cv_hosted_events(id TEXT PRIMARY KEY,member_id TEXT NOT NULL,title TEXT NOT NULL,type TEXT NOT NULL,region TEXT NOT NULL,city TEXT NOT NULL,venue TEXT NOT NULL,description TEXT NOT NULL,start TEXT NOT NULL,end TEXT NOT NULL,url TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT 'active',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX IF NOT EXISTS cv_hosted_events_region ON cv_hosted_events(region,status,start);
