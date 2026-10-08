@@ -1,5 +1,11 @@
 const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function readBody(request,max){
+ const reader=request.body?.getReader();if(!reader)return '';
+ const chunks=[];let size=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>max){await reader.cancel();throw Object.assign(Error('Please shorten your answers.'),{status:413})}chunks.push(value)}}finally{reader.releaseLock()}
+ const bytes=new Uint8Array(size);let offset=0;for(const c of chunks){bytes.set(c,offset);offset+=c.byteLength}return new TextDecoder('utf-8',{fatal:true}).decode(bytes);
+}
 export const hash=async v=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v))),x=>x.toString(16).padStart(2,'0')).join('');
 export function validateSignup(b){
  const clean=(key,max)=>typeof b[key]==='string'?b[key].trim().slice(0,max+1):'';
@@ -26,7 +32,7 @@ export function welcome(p,token){
 export async function signup(request,env){
  if(request.headers.get('Origin')!==new URL(request.url).origin)return json({error:'Open the signup form on Communiverse.'},403);
  if(!request.headers.get('content-type')?.includes('application/json'))return json({error:'Use the signup form.'},415);
- let raw;try{raw=await request.text();if(raw.length>6000)return json({error:'Please shorten your answers.'},413);}catch{return json({error:'Unable to read the form.'},400);}
+ let raw;try{raw=await readBody(request,6000);if(raw.length>6000)return json({error:'Please shorten your answers.'},413);}catch(e){return json({error:e.status===413?'Please shorten your answers.':'Unable to read the form.'},e.status||400);}
  let b,p;try{b=JSON.parse(raw);if(b.website)return json({error:'Unable to submit.'},400);p=validateSignup(b);}catch(e){return json({error:e.message},400);}
  // Atomic D1 limits protect the email sender. No address/IP is stored in this table.
  const hour=Math.floor(Date.now()/3600000),bucket=await hash('cv-join:'+hour+':'+(request.headers.get('CF-Connecting-IP')||'local'));
@@ -45,7 +51,7 @@ export async function signup(request,env){
 }
 export async function confirm(request,env){
  if(request.headers.get('Origin')!==new URL(request.url).origin)return json({error:'Open the confirmation page.'},403);
- let b;try{const raw=await request.text();if(raw.length>300)throw Error();b=JSON.parse(raw);}catch{return json({error:'Invalid confirmation.'},400);}
+ let b;try{const raw=await readBody(request,300);if(raw.length>300)throw Error();b=JSON.parse(raw);}catch{return json({error:'Invalid confirmation.'},400);}
  if(!/^[a-f0-9]{64}$/.test(b.token||''))return json({error:'This link is invalid or has expired.'},400);
  const value=await hash(b.token),now=new Date().toISOString(),remove=b.action==='remove';
  const p=await env.COMMUNIVERSE_DB.prepare(`UPDATE cv_members SET ${remove?"status='hidden'":"email_verified_at=?"},confirmation_hash='' WHERE confirmation_hash=? AND confirmation_expires_at>? RETURNING id`).bind(...(remove?[value,now]:[now,value,now])).first();
@@ -53,7 +59,7 @@ export async function confirm(request,env){
 }
 export async function sessionRequest(request,env,artists){
  if(request.headers.get('Origin')!==new URL(request.url).origin)return json({error:'Open the session form on Communiverse.'},403);
- let b;try{const text=await request.text();if(text.length>4000)throw Error();b=JSON.parse(text)}catch{return json({error:'Unable to read the request.'},400)}
+ let b;try{const text=await readBody(request,4000);if(text.length>4000)throw Error();b=JSON.parse(text)}catch{return json({error:'Unable to read the request.'},400)}
  const artist=artists.find(a=>a.slug===b.artist),clean=v=>typeof v==='string'?v.trim():'';
  const name=clean(b.name),email=clean(b.email).toLowerCase(),phone=clean(b.phone),city=clean(b.city),date=clean(b.date),people=Number(b.people);
  if(b.website||!artist||b.craft!==artist.role||!name||name.length>60||!city||city.length>100||!/^\+?[\d\s().-]{7,30}$/.test(phone)||phone.replace(/\D/g,'').length<7||phone.replace(/\D/g,'').length>15||!/^\S+@\S+\.\S+$/.test(email)||email.length>254||!Number.isInteger(people)||people<1||people>40||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!Number.isFinite(Date.parse(date))||new Date(date).toISOString().slice(0,10)!==date||date<new Date(Date.now()-86400000).toISOString().slice(0,10)||date>new Date(Date.now()+3*365*86400000).toISOString().slice(0,10)||!/^[\da-f-]{36}$/i.test(b.requestId||''))return json({error:'Check your craft, artisan, date and contact details.'},400);

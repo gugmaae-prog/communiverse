@@ -13,6 +13,7 @@ const people=await publicMembers(adapter);assert.equal(people.length,1);assert.e
 r=await signup(req('members/',body),env);assert.equal(r.status,200);assert.equal((await r.json()).profileUrl,created.profileUrl);assert.equal(mail.length,1);
 r=await signup(req('members/',{...body,firstName:'Someone else',requestId:crypto.randomUUID()}),env);assert.equal(r.status,200);assert.equal((await r.json()).profileUrl,undefined);assert.equal(mail.length,1);assert.equal((await publicMembers(adapter))[0].name,'Ada');
 const token=mail[0].text.match(/confirm\/#([a-f0-9]{64})/)[1];r=await confirm(req('members/confirm/',{token}),env);assert.equal(r.status,200);r=await confirm(req('members/confirm/',{token}),env);assert.equal(r.status,400);
+assert.equal((await signup(req('members/',{...body,extra:'x'.repeat(7000)},'unit-big'),env)).status,413);
 assert.throws(()=>validateSignup({...body,instagram:'https://instagram.com/ada'}));assert.throws(()=>validateSignup({...body,phone:'123'}));assert.throws(()=>validateSignup({...body,consent:false}));
 assert.equal((await signup(req('members/',body,'unit-2','https://untrusted.test'),env)).status,403);
 for(let i=0;i<7;i++)r=await signup(req('members/',body,'rate-limit'),env);assert.equal(r.status,429);assert.equal(mail.length,1);

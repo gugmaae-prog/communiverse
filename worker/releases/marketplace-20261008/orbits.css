@@ -56,3 +56,5 @@ html .cv-plug .glass-panel .glass-panel-body .glass-card.is-expanded .cv-photo-c
 
 html .cv-plug .glass-panel .glass-panel-body .glass-card[data-card=work].is-expanded details[open]{display:block!important;max-height:none!important;overflow:visible!important}
 html .cv-plug .glass-panel .glass-panel-body .glass-card[data-card=work].is-expanded .cv-work-thumb{height:140px!important;max-height:140px!important;object-fit:cover!important}
+
+html .cv-plug .glass-card p{overflow-wrap:anywhere}
