@@ -228,3 +228,5 @@ html[data-cv-social] .cv-plug .cv-plug-browse{display:flex;align-items:center;ju
 html[data-cv-social] .cv-plug .glass-extra>summary::after{content:none!important}
 html{scroll-padding-top:120px}#cv-social-header~* input,#cv-social-header~* select,#cv-social-header~* button{scroll-margin-top:120px}
 @media(max-width:600px){.cv-artist-pin.is-expanded{padding:0;background:transparent;outline:0}.cv-inline-story>p{font-size:13px;line-height:1.7}.cv-inline-story .cv-work-actions{flex-wrap:wrap}}
+
+html[data-cv-social]{overflow-x:clip;max-width:100%}
