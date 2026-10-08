@@ -716,7 +716,7 @@
           const candidate=Math.hypot(x-preferredX,y-preferredY)+4*(Math.max(0,viewTop-y)+Math.max(0,y+ch-viewBottom));
           if(candidate<cost){cost=candidate;best={x,y,w:cw,h:ch};}
         }
-        best||={x:bound(preferredX,0,w-cw),y:cardsBottom+20,w:cw,h:ch};
+        best||={x:bound(preferredX,0,w-cw),y:Math.max(...layout.zones.map(z=>z.y+z.h))+12,w:cw,h:ch};
         for(const [key,value] of Object.entries(best))card.style.setProperty('--cv-orbit-'+key,value+'px');
         card.style.left=best.x+'px';card.style.top=best.y+'px';
         layout.orbitCards.push({el:card,...best});layout.zones.push(best);cardsBottom=Math.max(cardsBottom,best.y+ch);
@@ -767,6 +767,7 @@
       n.el.style.pointerEvents = shown ? "auto" : "none";
       n.el.tabIndex = shown ? 0 : -1;
       n.el.setAttribute("aria-hidden", String(!shown));
+      n.el.inert=!shown;
       n.el.setAttribute("aria-expanded", String(n === selected));
       n.el.classList.toggle("is-selected", n === selected);
       n.el.style.zIndex = n === selected ? "4" : "2";
