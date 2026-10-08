@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Current release: `20261008-marketplace-1c` — craft marketplace, 25 generated visuals, guide prices/currencies, workshop calendars, city discovery, one-step signup with immediate circles and private contacts, and welcome-email confirmation. [Release evidence](deployments/20261008-marketplace-1c.json) · [Source and research](worker/releases/marketplace-20261008/README.md).
+Current release: `20261008-social-5b` — Google sign-in with card onboarding, optimized Cloudflare images, internal galleries and profiles, calendar-based Events, and refined responsive Plug motion. [Release evidence](deployments/20261008-social-5b.json) · [Source and research](worker/releases/social-20261008/README.md).
 
 Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
 
