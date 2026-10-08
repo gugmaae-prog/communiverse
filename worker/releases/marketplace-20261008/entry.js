@@ -11,11 +11,12 @@ import {signup,confirm,publicMembers,sessionRequest} from './market-members.js';
 const snapshot=JSON.parse(RATE_SNAPSHOT);
 const readMethods=new Set(['GET','HEAD']);
 function asset(body,type,request){return new Response(request.method==='HEAD'?null:body,{headers:{'Content-Type':type,'Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'}})}
-async function priceResponse(currency,ctx){
+async function priceResponse(currency,people,ctx){
  if(!CURRENCIES.includes(currency))return Response.json({error:'Unsupported currency'},{status:400});
  const key=new Request('https://espacios.me/communiverse/_rates-cache/v1');let rates=snapshot.rates,updated=snapshot.updated;
  try{let r=await caches.default.match(key);if(!r){const upstream=await fetch('https://open.er-api.com/v6/latest/USD',{signal:AbortSignal.timeout(3000)});if(upstream.ok){const d=await upstream.json();if(d.result==='success'&&CURRENCIES.every(c=>Number.isFinite(d.rates[c])&&d.rates[c]>0)){r=Response.json({rates:Object.fromEntries(CURRENCIES.map(c=>[c,d.rates[c]])),updated:d.time_last_update_utc},{headers:{'Cache-Control':'public,max-age=86400'}});ctx.waitUntil(caches.default.put(key,r.clone()));}}}if(r){const d=await r.json();rates=d.rates;updated=d.updated;}}catch{}
- return Response.json({currency,factor:rates[currency],updated:new Date(updated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})},{headers:{'Cache-Control':'public,max-age=3600'}});
+ const values=[...new Set([...ITEMS.map(i=>i.price),...SESSION_PRICES,...SESSION_PRICES.map(p=>p*people)])];
+ return Response.json({currency,quotes:Object.fromEntries(values.map(v=>[v,v*rates[currency]])),updated:new Date(updated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})},{headers:{'Cache-Control':'public,max-age=3600'}});
 }
 const nav='<a href="/communiverse/">Discover</a><a href="/communiverse/plug/?filter=artists">Artists</a><a href="/communiverse/workshops/">Workshops</a><a href="/communiverse/plug/">Plug</a>';
 export default {async fetch(request,env,ctx){
@@ -27,7 +28,7 @@ export default {async fetch(request,env,ctx){
    if(path==='/communiverse/api/members'&&readMethods.has(request.method))return Response.json(request.method==='HEAD'?null:await publicMembers(env.COMMUNIVERSE_DB),{headers:{'Cache-Control':'no-store'}});
    if(path==='/communiverse/api/members/confirm'&&request.method==='POST')return await confirm(request,env);
    if(path==='/communiverse/api/session-requests'&&request.method==='POST')return await sessionRequest(request,env,ARTISTS);
-   if(path==='/communiverse/api/prices'&&readMethods.has(request.method))return await priceResponse(u.searchParams.get('currency')||'USD',ctx);
+   if(path==='/communiverse/api/prices'&&readMethods.has(request.method))return await priceResponse(u.searchParams.get('currency')||'USD',Math.max(1,Math.min(40,Math.floor(Number(u.searchParams.get('people')))||4)),ctx);
    return new Response('Method not allowed',{status:405});
   }catch(e){console.error('Communiverse request unavailable',e.code||'service_unavailable');return Response.json({error:'Unable to save right now. Please try again shortly.'},{status:503,headers:{'Cache-Control':'no-store'}})}
  }
