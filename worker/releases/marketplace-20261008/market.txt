@@ -1,6 +1,7 @@
 (()=>{
 const data=JSON.parse(document.getElementById('cv-market-data')?.textContent||'{}');
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const motion=matchMedia('(prefers-reduced-motion:reduce)'),videos=$$('video.cv-market-film');if(videos.length){const io=new IntersectionObserver(entries=>entries.forEach(({target:v,isIntersecting})=>{if(isIntersecting&&!motion.matches&&!document.hidden)v.play().catch(()=>{});else v.pause()}),{threshold:.4});videos.forEach(v=>io.observe(v));document.addEventListener('visibilitychange',()=>{if(document.hidden)videos.forEach(v=>v.pause())});motion.addEventListener('change',()=>{if(motion.matches)videos.forEach(v=>v.pause())});addEventListener('pagehide',()=>io.disconnect(),{once:true});}
 const storage={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
 let currency=storage.get('cv-currency')||'USD',category='All',priceRequest=0;
 const format=(value,code=currency)=>new Intl.NumberFormat(undefined,{style:'currency',currency:code,currencyDisplay:'code',maximumFractionDigits:0}).format(value);

@@ -35,7 +35,7 @@ city('jingdezhen','Jingdezhen','China',29.27,117.18,[venue('China Ceramics Museu
 city('bogota','Bogotá','Colombia',4.71,-74.07,[venue('Artesanías de Colombia','Crafts','Colombian craft','https://artesaniasdecolombia.com.co/PortalAC/tiendaSubMenu/tiendas_1515','Explore the Las Aguas craft store in Bogotá and other official artisan collections.')]),
 city('jeddah','Jeddah','Saudi Arabia',21.54,39.17,[venue('Hayy Jameel','Workshops','Ceramics & wood','https://hayyjameel.org/','Hayy Makers, exhibitions and a creative learning programme.')]),
 city('lima','Lima','Peru',-12.05,-77.05,[venue('Museo Larco','Museum','Ceramics & metal','https://www.museolarco.org/','Explore ancient Peruvian craft and museum learning experiences.')]),
-city('delhi','New Delhi','India',28.61,77.21,[venue('National Crafts Museum & Hastkala Academy','Museum','Indian craft','https://nationalcraftsmuseum.nic.in/','Traditional craft collections and a living craft setting.')]),
+city('delhi','New Delhi','India',28.61,77.21,[venue('National Crafts Museum & Hastkala Academy','Museum','Indian craft','https://www.incredibleindia.gov.in/en/delhi/delhi/national-crafts-museum-and-hastkala-academy','Traditional craft collections and a living craft setting.')]),
 city('tashkent','Tashkent','Uzbekistan',41.30,69.24,[venue('Museum of Applied Arts','Museum','Ceramics & textiles','https://uzbekistan.travel/en/o/state-museum-of-applied-art-of-uzbekistan/','Uzbek decorative and applied arts. Check the official visitor information.')])
 ];
 export const CURRENCIES=['USD','EUR','GBP','AED','SAR','PHP','MYR','CNY','INR','PKR','COP','PEN','SGD','UZS'];

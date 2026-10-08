@@ -404,6 +404,7 @@
       work.style.setProperty('--cv-expanded-top',Math.max(0,Math.min((focusAnchor?.y||0)-160,innerHeight-stage.getBoundingClientRect().top-560))+'px');
     });
     work.append(expand);
+    work.addEventListener('click',e=>{if(!work.classList.contains('is-expanded')&&!e.target.closest('button,a,summary'))expand.click();});
     extra.addEventListener('toggle',()=>{work.classList.toggle('is-expanded',extra.open);expand.setAttribute('aria-expanded',String(extra.open));expand.textContent=extra.open?'Close story ×':'Read their story ↗';});
     main.dataset.card = "identity";
     work.dataset.card = "work";
