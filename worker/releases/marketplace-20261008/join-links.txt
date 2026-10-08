@@ -1,0 +1,9 @@
+(()=>{
+ if(window.__cvJoinLinks)return;window.__cvJoinLinks=true;
+ const target='/communiverse/join/';
+ function generic(a){try{const u=new URL(a.getAttribute('href'),location.href);return u.origin===location.origin&&u.pathname.replace(/\/$/,'')==='/communiverse/contact'&&!u.search&&/\bjoin\s+(?:the\s+)?waitlist\b|^\s*waitlist\s*$/i.test(a.textContent.trim())}catch{return false}}
+ function sync(){for(const a of document.querySelectorAll('a[href]'))if(generic(a)){a.href=target;const walk=document.createTreeWalker(a,NodeFilter.SHOW_TEXT);let n;while(n=walk.nextNode())if(/^(?:join\s+(?:the\s+)?waitlist|waitlist)$/i.test(n.textContent.trim()))n.textContent=n.textContent===n.textContent.toUpperCase()?'JOIN COMMUNIVERSE':'Join Communiverse';a.dataset.cvJoin='true';}}
+ const observer=new MutationObserver(sync);const observe=()=>observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['href']});
+ document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;if(a.dataset.cvJoin==='true'||generic(a)){e.preventDefault();e.stopImmediatePropagation();location.assign(target)}},true);
+ sync();observe();addEventListener('pagehide',()=>observer.disconnect());addEventListener('pageshow',e=>{if(e.persisted){sync();observe()}});
+})();

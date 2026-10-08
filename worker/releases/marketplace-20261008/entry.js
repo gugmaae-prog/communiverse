@@ -1,6 +1,7 @@
 import previous from './plug-orbits-entry.js';
 import STYLE from './market.css';
 import SCRIPT from './market.txt';
+import JOIN_LINKS from './market-join-links.txt';
 import FOCUS from './market-focus.txt';
 import ORBITS from './market-orbits.css';
 import IMAGES from './market-images.js';
@@ -9,7 +10,8 @@ import {ARTISTS,ITEMS,CATEGORIES,CURRENCIES,CITIES,SESSION_PRICES,RELEASE,PREFIX
 import {home,join,confirmation,workshops,artistExtras,h,serialize,disclosure} from './market-views.js';
 import {signup,confirm,publicMembers,sessionRequest} from './market-members.js';
 const snapshot=JSON.parse(RATE_SNAPSHOT);
-const PATCH_RELEASE='20261008-marketplace-1a';
+const PATCH_RELEASE='20261008-marketplace-1b';
+const JOIN_ASSET='/communiverse/_public/20261008-marketplace-1b-join.js';
 const readMethods=new Set(['GET','HEAD']);
 function asset(body,type,request){return new Response(request.method==='HEAD'?null:body,{headers:{'Content-Type':type,'Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'}})}
 async function priceResponse(currency,people,ctx){
@@ -33,6 +35,7 @@ export default {async fetch(request,env,ctx){
    return new Response('Method not allowed',{status:405});
   }catch(e){console.error('Communiverse request unavailable',e.code||'service_unavailable');return Response.json({error:'Unable to save right now. Please try again shortly.'},{status:503,headers:{'Cache-Control':'no-store'}})}
  }
+ if(path===JOIN_ASSET)return readMethods.has(request.method)?asset(JOIN_LINKS,'application/javascript; charset=utf-8',request):new Response('Method not allowed',{status:405});
  const staticAsset=path===PREFIX+'.css'?[STYLE,'text/css; charset=utf-8']:path===PREFIX+'.js'?[SCRIPT,'application/javascript; charset=utf-8']:path===PREFIX+'-focus.js'?[FOCUS,'application/javascript; charset=utf-8']:null;
  if(staticAsset)return readMethods.has(request.method)?asset(...staticAsset,request):new Response('Method not allowed',{status:405});
  const image=IMAGES[path];if(image)return readMethods.has(request.method)?asset(image,'image/jpeg',request):new Response('Method not allowed',{status:405});
@@ -52,10 +55,11 @@ export default {async fetch(request,env,ctx){
   const item=ITEMS.find(i=>i.id===u.searchParams.get('item')&&i.artist===u.searchParams.get('artist'));
   if(item){const re=/(<script\b[^>]*id="cv-enquiry-data"[^>]*>)([\s\S]*?)(<\/script>)/;html=html.replace(re,(_,a,b,c)=>{const context=JSON.parse(b);context.itemTitle=item.title+'\nGuide price: USD '+item.price+'\nMaterial: '+item.material+'\nSize: '+item.size;return a+serialize(context)+c});}
  }
- if(isPlug){const re=/(<script\b[^>]*id="cv-focus-data"[^>]*>)([\s\S]*?)(<\/script>)/,m=html.match(re);if(!m)throw Error('People data unavailable');const members=await publicMembers(env.COMMUNIVERSE_DB);html=html.replace(re,(_,a,b,c)=>a+serialize([...JSON.parse(b),...members])+c);const portraits=members.map(p=>`<a class="node" data-slug="${h(p.slug)}" data-name="${h(p.name)}" href="${h(p.profileUrl)}"><img src="${h(p.image)}" alt="" width="240" height="240" decoding="async"><span class="cap"><b>${h(p.name)}</b><small>${h(p.role)}</small></span></a>`).join('');const rewrite=new HTMLRewriter().on('#constellation',{element(el){el.append(portraits,{html:true})}}).on('head',{element(el){el.append('<style data-cv-market="'+PATCH_RELEASE+'">'+STYLE+'</style><style>'+ORBITS+'</style>',{html:true})}}).on('script[src],link[as=script]',{element(el){const key=el.tagName==='script'?'src':'href';if(el.getAttribute(key)==='/communiverse/_public/20261008-plug-orbits-1.js')el.setAttribute(key,PREFIX+'-focus.js')}}).on('main',{element(el){el.append('<div class="cv-market">'+disclosure+'</div>',{html:true})}});return rewrite.transform(new Response(html,{headers}));}
+ html=html.replace(/(<a\b[^>]*href=")(\/communiverse\/contact\/?(?:#contact)?)("[^>]*>)([\s\S]*?)(<\/a>)/gi,(_,a,url,b,inner,c)=>/\bjoin\s+(?:the\s+)?waitlist\b|^\s*waitlist\s*$/i.test(inner.replace(/<[^>]*>/g,'').trim())?a+'/communiverse/join/'+b+inner+c:a+url+b+inner+c);
+ if(isPlug){const re=/(<script\b[^>]*id="cv-focus-data"[^>]*>)([\s\S]*?)(<\/script>)/,m=html.match(re);if(!m)throw Error('People data unavailable');const members=await publicMembers(env.COMMUNIVERSE_DB);html=html.replace(re,(_,a,b,c)=>a+serialize([...JSON.parse(b),...members])+c);const portraits=members.map(p=>`<a class="node" data-slug="${h(p.slug)}" data-name="${h(p.name)}" href="${h(p.profileUrl)}"><img src="${h(p.image)}" alt="" width="240" height="240" decoding="async"><span class="cap"><b>${h(p.name)}</b><small>${h(p.role)}</small></span></a>`).join('');const rewrite=new HTMLRewriter().on('#constellation',{element(el){el.append(portraits,{html:true})}}).on('head',{element(el){el.append('<style data-cv-market="'+PATCH_RELEASE+'">'+STYLE+'</style><style>'+ORBITS+'</style><script defer src="'+JOIN_ASSET+'"></script>',{html:true})}}).on('script[src],link[as=script]',{element(el){const key=el.tagName==='script'?'src':'href';if(el.getAttribute(key)==='/communiverse/_public/20261008-plug-orbits-1.js')el.setAttribute(key,PREFIX+'-focus.js')}}).on('main',{element(el){el.append('<div class="cv-market">'+disclosure+'</div>',{html:true})}});return rewrite.transform(new Response(html,{headers}));}
  const content=isHome?home():isJoin?join(path.endsWith('/artist')?'artist':'member'):isConfirm?confirmation():isWorkshops?workshops():null;
  const pageData={items:ITEMS,artists:ARTISTS,categories:CATEGORIES,currencies:CURRENCIES,cities:CITIES,sessionPrices:SESSION_PRICES};
- let rewrite=new HTMLRewriter().on('html',{element(el){if(content||artist)el.setAttribute('data-cv-market-theme','auto')}}).on('.top nav.nav',{element(el){const active=isHome?'/communiverse/':artist?'/communiverse/plug/?filter=artists':isWorkshops?'/communiverse/workshops/':null;el.setInnerContent(active?nav.replace('href="'+active+'"','aria-current="page" href="'+active+'"'):nav,{html:true})}}).on('head',{element(el){el.append(`<style data-cv-market="${PATCH_RELEASE}">${STYLE}</style>${(content||artist)?`<script defer src="${PREFIX}.js"></script>`:''}`,{html:true})}});
+ let rewrite=new HTMLRewriter().on('html',{element(el){if(content||artist)el.setAttribute('data-cv-market-theme','auto')}}).on('.top nav.nav',{element(el){const active=isHome?'/communiverse/':artist?'/communiverse/plug/?filter=artists':isWorkshops?'/communiverse/workshops/':null;el.setInnerContent(active?nav.replace('href="'+active+'"','aria-current="page" href="'+active+'"'):nav,{html:true})}}).on('head',{element(el){el.append(`<style data-cv-market="${PATCH_RELEASE}">${STYLE}</style><script defer src="${JOIN_ASSET}"></script>${(content||artist)?`<script defer src="${PREFIX}.js"></script>`:''}`,{html:true})}});
  if(content)rewrite=rewrite.on('main',{element(el){el.setInnerContent(content,{html:true})}}).on('title',{element(el){el.setInnerContent(isJoin?'Join Communiverse':isConfirm?'Welcome to Communiverse':isWorkshops?'Workshops | Communiverse':'Communiverse Marketplace')}}).on('script[src]',{element(el){if(el.getAttribute('src')==='/communiverse/_public/20261008-marketplace-6.js')el.remove()}});
  if(artist)rewrite=rewrite.on('#gallery-sessions,#gallery-store,.cv-artist-note',{element(el){el.remove()}}).on('.cv-gallery-page',{element(el){el.append(artistExtras(artist),{html:true})}}).on('.cv-gallery-nav a',{element(el){if(el.getAttribute('href')==='#gallery-sessions')el.setAttribute('href','#plan-session');if(el.getAttribute('href')==='#gallery-store')el.setAttribute('href','#cv-store')}});
  if(content||artist)rewrite=rewrite.on('body',{element(el){el.append(`<script type="application/json" id="cv-market-data">${serialize(pageData)}</script>`,{html:true})}});
