@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Current release: `20261008-social-9` — discover and build niche art circles, follow interests, invite people and share work or conversations. Place is optional. [Release evidence](deployments/20261008-social-9.json) · [Source and research](worker/releases/social-20261008/README.md).
+Current release: `20261008-social-10b` — private team workspace, connected artist discovery, location-first group sessions and all sourced artists in Plug. [Release evidence](deployments/20261009-social-10.json) · [Implementation notes](worker/releases/social-20261008/README.md).
 
 Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
 
