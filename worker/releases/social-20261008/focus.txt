@@ -39,7 +39,7 @@
       }
       wrap.append(note);subject.closest('div').before(wrap);
       form.addEventListener('submit',e=>{for(const field of [date,size].filter(Boolean))if(!field.checkValidity()){e.preventDefault();e.stopImmediatePropagation();field.reportValidity();break;}},true);
-      const button=form.querySelector('button[type=submit]');if(button)button.textContent=p.intent==='order'?'Send store enquiry ↗':'Send session request ↗';
+      const button=form.querySelector('button[type=submit]');if(button)button.textContent=p.intent==='order'?'Send store enquiry':'Send session request';
       document.title=label+' | Communiverse';
       const heading=document.getElementById('contact-heading');if(heading)heading.textContent=p.intent==='order'?'Find a piece to keep.':'Let’s make something together.';
       const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),updates=new Map([
@@ -395,17 +395,17 @@
     const contact=link('', '/communiverse/contact/#contact','glass-link glass-social');
     contact.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="cv-mail-blue" x2="0" y2="1"><stop stop-color="#3da7ff"/><stop offset="1" stop-color="#0874ee"/></linearGradient></defs><path fill="url(#cv-mail-blue)" d="M3 8h26v18H3z"/><path fill="#fff" d="m3 8 13 10L29 8z"/><path fill="#b9dcff" d="m3 26 10-10 3 2 3-2 10 10z"/></svg>';contact.dataset.service='contact';contact.setAttribute('aria-label','Contact Communiverse');contact.title='Contact';links.append(contact);
     connect.append(links);
-    const expand=make('button','cv-card-expand','Read their story ↗');
+    const expand=make('button','cv-card-expand','Read their story');
     expand.type='button';expand.setAttribute('aria-expanded','false');
     expand.addEventListener('click',()=>{
       if(!work.classList.contains('is-expanded'))work.dataset.closedHeight=String(work.getBoundingClientRect().height);
       const opened=work.classList.toggle('is-expanded');extra.open=opened;
-      expand.setAttribute('aria-expanded',String(opened));expand.textContent=opened?'Close story ×':'Read their story ↗';
+      expand.setAttribute('aria-expanded',String(opened));expand.textContent=opened?'Close story ×':'Read their story';
       work.style.setProperty('--cv-expanded-top',Math.max(0,Math.min((focusAnchor?.y||0)-160,innerHeight-stage.getBoundingClientRect().top-560))+'px');
     });
     work.append(expand);
     work.addEventListener('click',e=>{if(!work.classList.contains('is-expanded')&&!e.target.closest('button,a,summary'))expand.click();});
-    extra.addEventListener('toggle',()=>{work.classList.toggle('is-expanded',extra.open);expand.setAttribute('aria-expanded',String(extra.open));expand.textContent=extra.open?'Close story ×':'Read their story ↗';});
+    extra.addEventListener('toggle',()=>{work.classList.toggle('is-expanded',extra.open);expand.setAttribute('aria-expanded',String(extra.open));expand.textContent=extra.open?'Close story ×':'Read their story';});
     main.dataset.card = "identity";
     work.dataset.card = "work";
     connect.dataset.card = "connect";
@@ -540,20 +540,13 @@
           return (seed >>> 0) / 4294967296;
         };
         for (let k = 0; k < 1800; k++) {
-          const angle = rand() * Math.PI * 2,
-            anchor = points.length
-              ? points[Math.floor(rand() * points.length)]
-              : null,
-            distance = anchor
-              ? (anchor.d + diameter) / 2 + fitGap + rand() * 10
-              : 0,
-            radial = Math.sqrt(rand()) * (k < 900 ? 0.45 : 1);
-          const x = anchor
-            ? anchor.x + Math.cos(angle) * distance
-            : w / 2 + Math.cos(angle) * radial * rx;
-          const y = anchor
-            ? anchor.y + Math.sin(angle) * distance
-            : h / 2 + Math.sin(angle) * radial * ry;
+          // A balanced oval with soft variation, rather than a growing clump.
+          const slot=(points.length+(n.seed%items.length))%items.length,
+            phase=((constellationSeed%360)/180)*Math.PI,
+            angle=k<80?phase+(slot+k*.13)*Math.PI*(3-Math.sqrt(5)):rand()*Math.PI*2,
+            radial=k<80?Math.sqrt((slot+.5)/items.length)*.88:Math.sqrt(rand()),
+            x=w/2+Math.cos(angle)*radial*rx,
+            y=h/2+Math.sin(angle)*radial*ry;
           if (
             x < r + 12 ||
             x > w - r - 12 ||
@@ -675,8 +668,8 @@
     nodes.forEach(
       (n) =>
         (n.restD = mobile
-          ? 44 + (((n.seed ^ constellationSeed) >>> 8) % 7) * 5
-          : 56 + (((n.seed ^ constellationSeed) >>> 8) % 8) * 8),
+          ? 44 + (((n.seed ^ constellationSeed) >>> 8) % 6) * 4
+          : 56 + (((n.seed ^ constellationSeed) >>> 8) % 7) * 6),
     );
     if(w < 100) return; // A temporarily hidden stage has no usable layout width.
     // One viewport for the curated circle set; shorter screens reduce the
