@@ -13,3 +13,5 @@
 .cv-process-steps{padding-left:24px;line-height:1.7}.cv-process-steps li{padding:12px 0;border-bottom:1px solid var(--cv-line)}
 
 html[data-cv-market-theme] .top nav.nav a[aria-current=page]{color:#076aff;background:#eef3fb;border-radius:24px}@media(prefers-color-scheme:dark){html[data-cv-market-theme] .top nav.nav a[aria-current=page]{color:#5b9fff;background:#283950}}
+
+.cv-market section[id]{scroll-margin-top:130px}@media(max-width:359px){.cv-product-line [data-price]{font-size:14px}}
