@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Current release: `20261008-social-6` — emoji-free interfaces, bare autoplay clips, Pinterest-style artist discovery, larger selected circles and glass navigation. [Release evidence](deployments/20261008-social-6.json) · [Source and research](worker/releases/social-20261008/README.md).
+Current release: `20261008-social-7` — circular portrait sizing corrected across Discover and artisan galleries, with the existing feed, autoplay and glass navigation retained. [Release evidence](deployments/20261008-social-7.json) · [Source and research](worker/releases/social-20261008/README.md).
 
 Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
 
