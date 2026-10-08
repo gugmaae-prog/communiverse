@@ -1,0 +1,30 @@
+-- Private collaboration. Identity IDs are staff IDs or member-<UUID>; no contacts
+-- are copied into public profiles and no staff role is granted by joining a task.
+CREATE TABLE IF NOT EXISTS cv_connect_threads(id TEXT PRIMARY KEY,title TEXT NOT NULL,created_by TEXT NOT NULL,request_key TEXT NOT NULL UNIQUE,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS cv_connect_participants(thread_id TEXT NOT NULL REFERENCES cv_connect_threads(id),identity_id TEXT NOT NULL,last_read_at TEXT,last_read_sequence INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(thread_id,identity_id));
+CREATE INDEX IF NOT EXISTS cv_connect_participants_identity ON cv_connect_participants(identity_id,thread_id);
+CREATE TABLE IF NOT EXISTS cv_connect_messages(id TEXT PRIMARY KEY,thread_id TEXT NOT NULL REFERENCES cv_connect_threads(id),sender_id TEXT NOT NULL,body TEXT NOT NULL,reply_to TEXT REFERENCES cv_connect_messages(id),request_key TEXT NOT NULL UNIQUE,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX IF NOT EXISTS cv_connect_messages_thread ON cv_connect_messages(thread_id,created_at,id);
+CREATE TABLE IF NOT EXISTS cv_connect_meetings(id TEXT PRIMARY KEY,title TEXT NOT NULL,created_by TEXT NOT NULL,start_at TEXT NOT NULL,end_at TEXT NOT NULL,timezone TEXT NOT NULL,location TEXT NOT NULL DEFAULT '',note TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT 'scheduled',request_key TEXT NOT NULL UNIQUE,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX IF NOT EXISTS cv_connect_meetings_dates ON cv_connect_meetings(status,start_at,end_at);
+CREATE TABLE IF NOT EXISTS cv_connect_meeting_people(meeting_id TEXT NOT NULL REFERENCES cv_connect_meetings(id),identity_id TEXT NOT NULL,response TEXT NOT NULL DEFAULT 'invited',responded_at TEXT,PRIMARY KEY(meeting_id,identity_id));
+CREATE INDEX IF NOT EXISTS cv_connect_meeting_people_identity ON cv_connect_meeting_people(identity_id,meeting_id);
+-- The trigger serializes the conflict check with the meeting write, preventing
+-- two concurrent submissions from double-booking a participant.
+CREATE TRIGGER IF NOT EXISTS cv_connect_meeting_conflict BEFORE INSERT ON cv_connect_meeting_people
+WHEN NEW.response<>'declined' AND EXISTS(SELECT 1 FROM cv_connect_meeting_people old JOIN cv_connect_meetings m ON m.id=old.meeting_id JOIN cv_connect_meetings next ON next.id=NEW.meeting_id WHERE old.identity_id=NEW.identity_id AND old.response<>'declined' AND m.status='scheduled' AND next.status='scheduled' AND m.start_at<next.end_at AND m.end_at>next.start_at)
+BEGIN SELECT RAISE(ABORT,'CV_MEETING_CONFLICT'); END;
+CREATE TRIGGER IF NOT EXISTS cv_connect_meeting_accept_conflict BEFORE UPDATE OF response ON cv_connect_meeting_people
+WHEN NEW.response<>'declined' AND OLD.response='declined' AND EXISTS(SELECT 1 FROM cv_connect_meeting_people old JOIN cv_connect_meetings m ON m.id=old.meeting_id JOIN cv_connect_meetings next ON next.id=NEW.meeting_id WHERE old.identity_id=NEW.identity_id AND old.meeting_id<>NEW.meeting_id AND old.response<>'declined' AND m.status='scheduled' AND next.status='scheduled' AND m.start_at<next.end_at AND m.end_at>next.start_at)
+BEGIN SELECT RAISE(ABORT,'CV_MEETING_CONFLICT'); END;
+CREATE TABLE IF NOT EXISTS cv_connect_outbox(id TEXT PRIMARY KEY,meeting_id TEXT NOT NULL REFERENCES cv_connect_meetings(id),identity_id TEXT NOT NULL,kind TEXT NOT NULL DEFAULT 'invite',state TEXT NOT NULL DEFAULT 'pending',attempts INTEGER NOT NULL DEFAULT 0,last_error TEXT NOT NULL DEFAULT '',provider_id TEXT NOT NULL DEFAULT '',next_attempt_at INTEGER NOT NULL DEFAULT 0,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,UNIQUE(meeting_id,identity_id,kind));
+CREATE INDEX IF NOT EXISTS cv_connect_outbox_queue ON cv_connect_outbox(state,next_attempt_at);
+CREATE TABLE IF NOT EXISTS cv_connect_files(id TEXT PRIMARY KEY,target TEXT NOT NULL,uploader_id TEXT NOT NULL,name TEXT NOT NULL,key TEXT NOT NULL UNIQUE,content_type TEXT NOT NULL,bytes INTEGER NOT NULL,checksum TEXT NOT NULL,tags TEXT NOT NULL DEFAULT '[]',visibility TEXT NOT NULL DEFAULT 'workspace',status TEXT NOT NULL DEFAULT 'active',created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX IF NOT EXISTS cv_connect_files_target ON cv_connect_files(target,status,created_at);
+CREATE TABLE IF NOT EXISTS cv_connect_comment_mentions(comment_id TEXT NOT NULL REFERENCES cv_workspace_comments(id),identity_id TEXT NOT NULL,PRIMARY KEY(comment_id,identity_id));
+CREATE TABLE IF NOT EXISTS cv_connect_task_join(id TEXT PRIMARY KEY,task_id TEXT NOT NULL REFERENCES cv_tasks(id),identity_id TEXT NOT NULL REFERENCES cv_staff(id),note TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT 'pending',decision_by TEXT,decision_note TEXT NOT NULL DEFAULT '',request_key TEXT NOT NULL UNIQUE,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE UNIQUE INDEX IF NOT EXISTS cv_connect_task_join_pending ON cv_connect_task_join(task_id,identity_id) WHERE status='pending';
+CREATE TABLE IF NOT EXISTS cv_connect_task_members(task_id TEXT NOT NULL REFERENCES cv_tasks(id),identity_id TEXT NOT NULL REFERENCES cv_staff(id),approved_by TEXT NOT NULL REFERENCES cv_staff(id),created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(task_id,identity_id));
+CREATE TABLE IF NOT EXISTS cv_connect_resources(request_id TEXT PRIMARY KEY REFERENCES cv_team_requests(id),kind TEXT NOT NULL,platform TEXT NOT NULL DEFAULT '',category TEXT NOT NULL DEFAULT '',url TEXT NOT NULL DEFAULT '',renewal_date TEXT NOT NULL DEFAULT '',asset_status TEXT NOT NULL DEFAULT 'requested',assigned_to TEXT NOT NULL DEFAULT '',serial TEXT NOT NULL DEFAULT '',updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS cv_connect_notifications(id TEXT PRIMARY KEY,identity_id TEXT NOT NULL,target TEXT NOT NULL,message TEXT NOT NULL,read_at TEXT,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE INDEX IF NOT EXISTS cv_connect_notifications_identity ON cv_connect_notifications(identity_id,read_at,created_at);
