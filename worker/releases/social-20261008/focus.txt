@@ -370,7 +370,7 @@
     const media=make('div','glass-card cv-video-orbit'),films=make('div','cv-films');
     for(const f of p.films||[]){
       const video=make('video','cv-craft-video');
-      video.src=f.src;video.muted=true;video.loop=true;video.playsInline=true;video.controls=true;video.preload='metadata';
+      video.src=f.src;video.muted=true;video.loop=true;video.playsInline=true;video.controls=false;video.autoplay=true;video.setAttribute('muted','');video.setAttribute('autoplay','');video.setAttribute('disablepictureinpicture','');video.setAttribute('controlslist','nofullscreen noremoteplayback');video.preload='metadata';
       video.setAttribute('aria-label',f.title);films.append(video);
       extra.append(make('p','cv-film-label',f.title+' · '+f.note));
     }
@@ -595,7 +595,7 @@
   }
   function nearbyPositions(items, w, zones) {
     const placed = new Map(), positions = [], gap = layout.compact ? 5 : 10;
-    const diameter = n => layout.compact ? 44 : Math.max(44,n.restD*.88);
+    const diameter = n => layout.compact ? 44 : Math.max(44,Math.min(54,n.restD*.62));
     const free = (n,x,y) => {
       const r=diameter(n)/2;
       return x>=r+4&&x<=w-r-4&&y>=r+4&&y<=layout.h-r-4&&
@@ -668,15 +668,15 @@
     nodes.forEach(
       (n) =>
         (n.restD = mobile
-          ? 44 + (((n.seed ^ constellationSeed) >>> 8) % 6) * 4
-          : 56 + (((n.seed ^ constellationSeed) >>> 8) % 7) * 6),
+          ? 44 + (((n.seed ^ constellationSeed) >>> 8) % 5) * 4
+          : 48 + (((n.seed ^ constellationSeed) >>> 8) % 6) * 6),
     );
     if(w < 100) return; // A temporarily hidden stage has no usable layout width.
     // One viewport for the curated circle set; shorter screens reduce the
     // portrait variation before resorting to a rectangular packing boundary.
     const stageTop = stage.getBoundingClientRect().top;
     const availableH = Math.max(220, innerHeight - stageTop - (compact ? 54 : 44));
-    const rest = starPositions(visible, w, availableH, null, mobile ? 12 : 18);
+    const rest = starPositions(visible, w, availableH, null, mobile ? 14 : 24);
     visible.forEach((n,i)=>{n.restD=rest.points[i].d;});
     const restH = rest.h;
     layout = { w, h: restH, mobile, compact, d };
@@ -693,7 +693,7 @@
       const main=cards.find(c=>c.dataset.card==='identity'),work=cards.find(c=>c.dataset.card==='work'),media=cards.find(c=>c.dataset.card==='video'),connect=cards.find(c=>c.dataset.card==='connect');
       layout.heroX=focusAnchor?.x??selected.rest.x;
       layout.heroY=focusAnchor?.y??selected.rest.y;
-      layout.heroD=Math.max(selected.rest.d,compact?82:118);
+      layout.heroD=Math.max(selected.rest.d,Math.min(compact?116:mobile?144:176,2*Math.min(layout.heroX-4,w-layout.heroX-4,layout.heroY-4,restH-layout.heroY-4))); 
       const r=layout.heroD/2;
       if(previousWidth&&Math.abs(previousWidth-w)>1){layout.heroX=bound(layout.heroX,r+8,w-r-8);layout.heroY=bound(layout.heroY,r+8,restH-r-8);focusAnchor={x:layout.heroX,y:layout.heroY};}
       layout.zones=[{x:layout.heroX-r-8,y:layout.heroY-r-8,w:layout.heroD+16,h:layout.heroD+16}];layout.orbitCards=[];
