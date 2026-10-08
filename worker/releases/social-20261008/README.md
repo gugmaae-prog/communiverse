@@ -1,6 +1,68 @@
-# Communiverse art feed, Events and interest communities
+# Communiverse connected workspace and art feed
 
-Scoped wrapper over the marketplace runtime. The current social-9 release retains the original 57 modules and eighteen previously published social scripts byte-for-byte, with twelve current social modules (87 total). Assets, media, D1, R2, EMAIL, LEGACY and runtime settings are retained. The legacy Next export is not deployed.
+## Current release: Social 11a
+
+`20261009-social-11a` is the server-rendered staff header refinement over Social 11. The complete stacked Worker has **111 modules**: the original 57 modules, 28 retained historical immutable script modules, and 26 current modules. All five currently published Social 11 JavaScript URLs remain byte-for-byte unchanged: main, focus, booking, workspace and identity. `RELEASE` changes to 11a while the public script prefix stays `/communiverse/_public/20261009-social-11`. This preserves immutable caching rather than replacing a published script at the same URL. Assets, original media, D1, R2, EMAIL, LEGACY, compatibility settings and observability remain part of the captured runtime.
+
+The code commit for this refinement is `1ea4c71d2207b1ab6f1f1addecbdace6d6b9543f`. Deployment/version IDs and final traffic verification belong in the deployment record; this README is not deployment proof.
+
+The shared public header now recognizes an existing staff workspace session when no public member session is present. Staff see their shared photo and a workspace account chip instead of Join; staff-only visits to the public Join/Profile routes return to their existing workspace. A public member session keeps its own public profile destination. The plain Communiverse wordmark, navigation and guest Join/Sign in actions remain consistent across pages.
+
+### One identity and one workspace
+
+Thirteen existing team accounts are connected to their original Plug identities and photos. Updating a profile photo uses the same identity throughout public circles, headers and the private workspace. Profile contacts remain private. Staff account permissions come from the server-managed roster; member-supplied profile fields cannot grant staff, ambassador or finance access. Verified artisan members get their own studio through the existing member account, and an approved account link can connect a member to an existing catalogue artist without creating a duplicate public person.
+
+The workspace keeps Overview, Work, Requests, Artists, Connect and Team together. Artists receive Overview, Studio and Connect. Projects, collaborator scopes, task owners, boards, dates, priorities, progress, comments and attachments remain available; participation requests and scoped mentions add people to the discussion without silently widening project access. Messages refresh without replacing an unsent composer or mixing a late response from another conversation. SQL creation timestamps are interpreted as UTC; meetings and availability display their recorded time zones.
+
+### Artist business and programme visibility
+
+Artists can edit their craft story, country/city, workshop hosting setup, confirmed available dates, capacity and local-currency price. Products record stock, price, currency, tags and listing state. Product sales, workshops and other income are **manually recorded transactions**, with pending, paid, cancelled and refunded states. Stock changes follow the recorded sale state. Income charts aggregate paid records less refunds, keep currencies separate and do not create synthetic sales or automatic conversion totals. Client geographic summaries use consenting transaction locations only; age, gender and other demographics are not inferred.
+
+Assigned ambassadors can see their artists' permitted business statistics to support sales and marketing. The private programme earnings ledger remains separate from the artisan response and interface. Operations can propose an amount; CEO approval precedes recording payment. No revenue-share percentage or unapproved ambassador fee is invented. Confirmed availability appears in the existing public group planning and Events flows, while a group request remains non-binding until its details are agreed.
+
+Craft photos, process videos, documents and references share a private R2 library. Upload metadata records scope, uploader, content type, size, tags, timestamps and checksum. Documents/photos are bounded to 20 MB and workspace clips to 32 MB; previously supplied public clips retain their original bytes. Every private download authorizes the current participant or studio scope. Explicit sharing can publish a photo or craft video to an artist's gallery/feed, and hiding it removes public access; documents never become public gallery works through this action. Profile photos use their separate bounded, validated upload flow.
+
+### Conversations, meetings and requests
+
+Connect holds participant-scoped conversations, replies and attachments. Task/request files use the same tagged R2 handling; existing private attachment downloads remain supported. Meetings record participants, start/end, time zone, location, agenda and acceptance/decline responses, with an authenticated calendar file. Email invitations use verified contact addresses and an idempotent outbox. Missing confirmations remain waiting for contact; queued, provider-accepted and failed attempts are recorded independently of the meeting. Provider acceptance does not establish arrival in a recipient's inbox.
+
+Equipment and subscription requests belong in Requests alongside existing kit, training and access work. Platform, category, amount/currency and renewal information are retained. Ambassador requests pass through Keiffer before CEO approval; Haseeb approves assets/subscriptions and Elferah records execution, assignment and asset state. Requests for more information and resubmission preserve the approval path. No subscription purchase or payment occurs merely because a request is logged.
+
+### Server-side AI
+
+Groq powers bounded query expansion and editable drafts for tasks, requests, artist stories, craft tags, product descriptions and meeting agendas. Search results are selected from authorized records; ordinary search remains available when the model is unavailable. The workspace shows a draft for review and applies it to a field only on user action. AI does not save records, send messages/invitations, change access, approve requests or invent transactions.
+
+The runtime key is a **Cloudflare Worker secret**. The additional Supabase copy is encrypted in **Vault**, not an Edge Function environment variable and not a browser credential. No secret value belongs in this directory, rendered markup, client scripts or Git. Public search excludes private contacts, project details and artist finance records; private searches retain the caller's existing scope.
+
+### Assembly and validation
+
+From the repository, assemble with:
+
+```sh
+node scripts/prepare-social11a.mjs ../social11a-current ../social11a-candidate
+```
+
+The script pins the verified 111-module Social 11 capture to version `cff0f8c0-61e7-4438-ae1f-811597abbf6d`, checks captured module hashes, preserves original/immutable modules, and overlays the current release source. Review a different baseline explicitly rather than deploying a guessed or partial Worker. Use the existing guarded upload, zero-traffic verification and promotion workflow; do not deploy the legacy Next/Wrangler export.
+
+The verification set includes 171 identity/AI assertions, 184 public AI assertions, 72 booking assertions, 23 collaboration test groups, 58 workspace UI VM assertions and 21 pure header assertions. Integration fixtures use actual assembled handlers with isolated SQLite, R2 and email/model adapters. Native checks cover current role views, photos, files, messages, meetings, approval flows and responsive layouts. Production verification reads public pages/media and closes its account test sessions; it does not insert production test sales, tasks, messages, meetings or profiles.
+
+Run the shipping-handler checks against the assembled candidate with Node 24+ and `scripts/social-text-loader.mjs`, and the pure header check with its candidate view module:
+
+```sh
+node --experimental-loader ./scripts/social-text-loader.mjs scripts/test-identity-ai11.mjs ../social11a-candidate
+node --experimental-loader ./scripts/social-text-loader.mjs scripts/test-ai-public11.mjs ../social11a-candidate
+node --experimental-loader ./scripts/social-text-loader.mjs scripts/test-booking11.mjs ../social11a-candidate
+node --experimental-loader ./scripts/social-text-loader.mjs scripts/test-collaboration11.mjs ../social11a-candidate
+node scripts/test-header11a.mjs ../social11a-candidate/social-views.js
+```
+
+The staged and final live audit checks **188 HTML pages and 33 video URLs**, retained modules/scripts, route ownership and media bytes. Final-release completion requires the live audit after promotion, not just a healthy candidate or an upload. These checks do not claim automatic payment checkout or confirmed meeting-email inbox delivery.
+
+## Historical release notes
+
+The sections below describe earlier release states and their verification evidence. Their catalogue counts, module counts, interaction descriptions and limits are historical, and may be superseded by the current release above.
+
+Historical Social 9 baseline: a scoped wrapper retained the original 57 modules, eighteen previously published social scripts and twelve current social modules (87 total). This is an earlier release count; the current runtime and assembly process are described above. The legacy Next export was not deployed.
 
 - `/communiverse/` is the art feed; the upper-left logo opens it. Discover remains `/communiverse/discover/` with marketplace, currencies and group calendars. Workshops navigation becomes Events, and the old Workshops route redirects to Events.
 - `collected.json` stores 80 gallery/programme artists, 127 published work images and 92 organizer events with source URLs and checked dates. Eleven year-round cultural venues cover the ten region filters. These are bounded collections from official sources, not every event on the web. Gallery listings are public directory entries, not accounts or endorsements. Original generated studio material retains a quiet provenance disclosure.
@@ -8,17 +70,17 @@ Scoped wrapper over the marketplace runtime. The current social-9 release retain
 - The D1 catalogue contains 352 records including preserved studio content: 143 works, 13 videos, 90 artists, three ambassadors, 92 events and 11 venues. Work metadata has multiple relevant tags, source credits and region associations. Gallery regions identify their publishing space, not an inferred artist nationality.
 - Supplied Balo/Ammar/Luna videos are retained byte-for-byte in private R2 bucket `communiverse-media`, served only through scoped Worker URLs with byte-range support. Profile poster frames are extracted from the clips. Mappings are Balo → `cv-abdallah-mahmoudd`, Ammar → `cv-turbooz`, Luna → `cv-luna`; preserve the existing three ambassador records and ten Cool Kids.
 - New signups get private cookie sessions and immediate public circles. Welcome confirmation and 15-minute single-use sign-in links establish email ownership. Sessions are hashed, HttpOnly, Secure, SameSite=Lax and expire after 30 days. Existing members return through Sign in. Signed-in headers show the member's profile instead of Join.
-- Hearts save works privately and inform tag/follow/region recommendations. Artist heart counts include confirmed active member accounts only and are never seeded. Stable 30-minute feed snapshots avoid repeated/missing cards across pagination; the finite catalogue loads automatically until exhausted. Shortest-column appends preserve existing card positions. Related work uses shared tags and artist associations. No third-party behavioural tracking or paid AI service is used.
+- Hearts save works privately and inform tag/follow/region recommendations. Artist heart counts include confirmed active member accounts only and are never seeded. Stable 30-minute feed snapshots avoid repeated/missing cards across pagination; the finite catalogue loads automatically until exhausted. Shortest-column appends preserve existing card positions. Related work uses shared tags and artist associations. This earlier release used no third-party behavioural tracking or paid AI service.
 - Regional posts support conversations, works, events and workshops. Confirmed members can publish an owned photo, public link and tags, comment on work, remove their own entries and report content. Three distinct reports put an entry into review. Reports stay private. Photo uploads are bounded to 8 MB JPEG/PNG/WebP; unpublished photos require the owning session, and removed posts no longer expose their photos publicly. No SVG/HTML upload or server fetching of user links is allowed.
 - The additive migration creates only `cv_*` social tables; existing private contact/application tables remain. No test profiles, comments, hearts or follows are created in production. Native integration tests use in-memory SQLite and controlled mail/storage bindings. Provider email delivery remains a separate acceptance boundary.
 
-## Reproduce and verify
+### Reproduce and verify
 
 From the repository, `node scripts/prepare-social.mjs <verified-57-module-capture> <candidate>` assembles the runtime and verifies retained checksums. Run Node 24+ integration checks with `node --experimental-loader ./scripts/social-text-loader.mjs scripts/test-social.mjs <candidate>`. Use the existing guarded upload, zero-traffic verification and promotion workflow; retain ASSETS, D1, LEGACY, EMAIL, observability and compatibility settings. Review migration and catalogue changes separately from deployment. Do not run the legacy deployment configuration.
 
 Raw research captures and transient login tokens are not committed. Source metadata, release hashes, aggregate verification and the media checksums are the durable evidence. Updating event collections is an explicit collection/import operation; no unattended scraping or recurring automation was created.
 
-## Shared header, connections and participation
+### Shared header, connections and participation
 
 Social release 2 is assembled over the verified 65-module release `2ef63fa8-c946-4d48-b884-ad4346706ea3`. It retains the original 57 modules byte-for-byte, replaces its own eight modules and preserves both published social-1b scripts under two additional Text modules (67 total). `scripts/prepare-social2.mjs` pins that capture. Bindings, assets and runtime settings stay identical.
 
@@ -34,17 +96,17 @@ Confirmed artisan members can publish a workshop, art event, exhibition or festi
 
 Events request geolocation only after Find near me is tapped. Coordinates stay in browser memory; the nearest city in the bounded guide becomes a city/region filter. Distances describe guide cities, not exact venue proximity. Permission failure leaves manual filters available. Community regions and relevant-person cards wrap rather than scrolling horizontally. Narrow 320 and 390 px layouts are verified.
 
-## Floating header and viewport fitting
+### Floating header and viewport fitting
 
 Social release 3 is assembled over the verified 67-module version `946e20e1-66df-46fc-b40a-8e7a511e6bbe`, using `scripts/prepare-social3.mjs`. The shared wordmark, navigation and account links have transparent backgrounds and no surrounding frame. Active navigation uses an underline. Plug filters participate in layout below the header, preventing the old fixed-position overlap. Horizontal scrolling is clipped during layout transitions. No database migration or catalogue import is part of this release.
 
 Native browser checks cover 320×568, 390×844 and 1224×707: all 23 resting circles are visible, filters remain uncovered and there is no horizontal overflow. Keyboard selection, rapid profile changes, reduced motion, tap-out story collapse, retained videos and in-place centre continuity pass. Exact uploaded module checks, full feed pagination, private session boundaries, old immutable scripts, canonical Worker routes and the unaffected Espacios homepage pass independently. Live evidence and screenshots are in `deployments/20261008-social-3*`.
 
-## Standalone feed hearts
+### Standalone feed hearts
 
 Social release 4 preserves the 69-module baseline `95c6c7e6-3210-4327-abcc-ab8c6d4e012e` and the immutable social-3 scripts (71 modules total). `scripts/prepare-social4.mjs` pins the captured runtime. Feed hearts use a 16 px SVG, transparent background, no border or oval, and a 44 px touch target. Icon and count shadows preserve contrast over artwork. The visible Films tab is removed; For you, Following and Saved remain, and videos stay in the mixed feed. Member heart state, real counts and guest sign-in behavior are unchanged. No database, media or motion changes are part of this release. Desktop and 390 px native checks plus live route, pagination and immutable-script checks are recorded in `deployments/20261008-social-4*`.
 
-## Google onboarding, Cloudflare images and calendar groups
+### Google onboarding, Cloudflare images and calendar groups
 
 Social release 5 adds Google sign-in using the connected Supabase provider. The existing approved first-party host `mail.espacios.me` relays only the scoped `/communiverse/auth/callback*` path to the canonical Espacios callback. All other Mail routes, its Site URL and Supabase settings are retained. Authorization uses PKCE and an independent hashed private browser secret. A verified Google identity returns existing members directly to their private profile; new members choose an Artist, Collector, City representative or Cool Kids card and complete only their remaining details. Public profile consent precedes immediate circle creation. Contact details stay private. Synthetic local integration tests verify one-use flows and welcome email calls; no human Google consent or production test profile is claimed. Migration 5 adds only private Google flow, pending setup and identity tables.
 
@@ -52,25 +114,25 @@ Social release 5 adds Google sign-in using the connected Supabase provider. The 
 
 Events default to Upcoming, with Today, This week, Next week, This month, Past and year-round Places. Calendar boundaries use the selected region or device time zone; weeks begin Monday. Today labels the current date while ongoing programmes retain their full source period on the internal detail page. The Jameel programme published as March 30–November 1 is an ongoing exhibition, not a one-day event. Internal gallery pages expose works, artists and scoped event programmes. External source and social links open an internal credit or connection page instead of navigating outside Communiverse. Member profiles show saved and followed counts with a clean editor. Plug packs its preserved 23 curated circles into a balanced oval; finite in-place animation, smaller nearby cards, reduced motion and 44 px touch targets remain. Decorative link arrows are removed. Native browser and HTTP proof is in `deployments/20261008-social-5*`.
 
-## Mobile proximity refinement
+### Mobile proximity refinement
 
 Social 5b adds card-edge candidates to the in-place placement search. Lower circles keep their clicked centre while detail cards can settle immediately above existing identity cards, avoiding a distant fallback at the top of the scene. The immutable social-5 scripts remain byte-identical. No catalogue, authentication, media, storage or provider configuration changes are included in this refinement.
 
-## Emoji-free presentation and artist discovery
+### Emoji-free presentation and artist discovery
 
 Social 6 removes pictographic emoji, arrow and play glyphs from rendered text and accessible labels across legacy and current pages. The same sanitizer runs in the Worker and client; currency symbols, copyright, ordinary trademark marks and localized names remain. A MutationObserver covers later-loaded cards and member content while leaving raw stored data and editable form values intact. Member-avatar SVG text uses the same rule. Native and custom video controls are removed. Clips play muted, inline and on loop while visible; offscreen, closed and hidden clips pause, and reduced-motion preferences are respected. Keyboard Space can pause or resume a standalone clip without a visible player button. Observer cleanup preserves card identity and stops detached videos.
 
 Artists uses a responsive masonry wall with source-backed work covers, regional diversity, text introductions where no work image is available, search with accent folding, Following, incremental scroll loading, and a modal preview that preserves the wall position. Profile and gallery navigation stays inside Communiverse. Selected Plug portraits grow while peer images shrink within retained 44 px touch targets; clicked centres remain anchored and current member circles stay present. Main and secondary tabs float inside translucent oval surfaces with bounded backdrop blur, readable active states and an opaque fallback. Auth, storage, calendars, source data, routes and media bytes remain. Live page/video audits, API checks and native browser captures are in deployments/20261008-social-6*. No production test profiles or reactions were created.
 
-## Circular portraits
+### Circular portraits
 
 Social 7 preserves authored width and height attributes when serving an optimized Cloudflare image. Previously, 28, 56, 64 and 112 px portrait dimensions were replaced with 720 or 850 px source dimensions, producing stretched avatar crops. Explicit square boxes and cover crops now constrain maker thumbnails, booking pickers, gallery portraits and account avatars. Legacy gallery pages retain a block section layout instead of inheriting the newer directory profile grid; the portrait and title fit the page at desktop and mobile widths. All other source modules, data, authentication, media, immutable scripts and route mappings are retained. Source syntax, staged and live page/API/media checks, plus measured desktop/mobile portrait ratios and screenshots are recorded in deployments/20261008-social-7*. No production test profile or reaction was created.
 
-## Story controls
+### Story controls
 
 Social 8 replaces visible Follow labels on artist pins, related artist cards, work details and profile pages with compact SVG plus controls. These controls open a shared internal story dialog with biography, craft tags, work and gallery/profile links. Reading a story requires no sign-in and creates no follow. A separate plus inside the story keeps or removes the artist from the signed-in member circle; its accessible label and pressed state distinguish that action. The story dialog is available across current and legacy pages, returns focus and retains the underlying wall or work preview when closed. Visible icons remain 18 px within 44 px touch targets, with keyboard focus and hover feedback. All old scripts, the circular portrait repair, media, stored follows, private sessions and route mappings are retained. Native desktop/mobile checks cover story opening, nested work details, closing, focus return and the guest following boundary. No production profile, reaction or follow was created during verification.
 
-## Interest communities
+### Interest communities
 
 Social 9 replaces the place-only community picker with interest discovery, craft search and an optional place filter. Twelve public art circles cover specific practices such as glaze experiments, natural dyes, visible repairs and tiny sculpture; ten regional circles preserve local discussions. These are real empty public spaces: no synthetic memberships, posts or activity counts are inserted. `migration-9.sql` adds circle, membership and post-link tables and links existing regional posts without modifying them. Migration evidence records identical hashes/counts for existing members, posts, hearts, artist follows and hosted events.
 
@@ -80,7 +142,7 @@ Invitation links open the circle and let each person choose to follow. Copying a
 
 Native browser checks cover discovery/filtering, mobile circle details, creator editing, posting, comments, reversible following, invitation copying and guest drafts. Cards reflow into three desktop columns, two at 665 px and one at 390/320 px, without sideways overflow. Existing videos, portrait dimensions, glass tabs, private sessions, original modules and immutable scripts are preserved. The live audit checks 93 HTML pages and 34 bare autoplay videos.
 
-## Connected discovery, group sessions and team workspace
+### Connected discovery, group sessions and team workspace
 
 The home feed excludes ambassador clips; their profiles retain the original videos. Artist pins append automatically during scrolling, expand inline and show related artists ranked from followed makers and saved-work tags. Twenty-one additional artists and seventeen works come from CARBON 12, Lawrie Shabibi and Casas Riegner primary sources. Gallery connections are distinct from confirmed residency; these directory records are not member accounts. All 111 catalogue artists also have Plug circles. Search and bounded constellation pages keep larger directories usable. The selected circle grows while peers make room. Work details use a larger artist circle, and member initials have a private-contact-free SVG fallback. Profile navigation uses 44 pixel glass buttons. Existing marketing pages retain their animations; the shared header, image mapping and display cleanup are reapplied after legacy React hydration.
 
