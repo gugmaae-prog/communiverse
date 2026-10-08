@@ -14,6 +14,7 @@ const activity=(db,p,target,action,description='')=>db.prepare('INSERT INTO cv_w
 async function person(db,id,historical=false){
  const staff=await db.prepare("SELECT id,name,role,title,profile_slug FROM cv_staff WHERE id=? AND status='active'").bind(id).first();
  if(staff)return staff;
+ if(historical&&await db.prepare('SELECT id FROM cv_staff WHERE id=?').bind(id).first())return {id,name:'Former member',role:'member',profile_slug:''};
  if(!/^member-[a-f0-9-]{36}$/.test(id))fail('Choose an active workspace member.');
  const member=await db.prepare("SELECT m.id,m.first_name name,m.craft title FROM cv_members m LEFT JOIN cv_member_preferences p ON p.member_id=m.id WHERE m.id=? AND m.status='active' AND m.email_verified_at IS NOT NULL AND (m.kind='artist' OR p.intent='artist' OR EXISTS(SELECT 1 FROM cv_artist_accounts a WHERE a.member_id=m.id))").bind(id.slice(7)).first();
  if(!member){if(historical)return{id,name:'Former member',role:'artist',profile_slug:''};fail('Choose an active workspace member.');}
@@ -70,6 +71,9 @@ export async function flushMeetingEmails(env,meetingId){
  const db=env.COMMUNIVERSE_DB,m=await db.prepare('SELECT * FROM cv_connect_meetings WHERE id=?').bind(meetingId).first();if(!m)return;
  const jobs=await rows(db,"SELECT * FROM cv_connect_outbox WHERE meeting_id=? AND state IN ('pending','waiting-contact','failed') AND attempts<5 AND next_attempt_at<=?",meetingId,Date.now());
  for(const job of jobs){
+  // Do not let a cancellation overtake this recipient's invitation at the
+  // provider boundary. The invitation flush drains it after completing below.
+  if(job.kind==='cancel'&&await db.prepare("SELECT id FROM cv_connect_outbox WHERE meeting_id=? AND identity_id=? AND kind='invite' AND state='sending'").bind(meetingId,job.identity_id).first())continue;
   if(job.kind==='invite'&&m.status==='cancelled'){await db.prepare("UPDATE cv_connect_outbox SET state='cancelled',updated_at=CURRENT_TIMESTAMP WHERE id=? AND state IN ('pending','waiting-contact','failed')").bind(job.id).run();continue}
   const email=await contact(db,job.identity_id);
   if(!email){await db.prepare("UPDATE cv_connect_outbox SET state='waiting-contact',last_error='Add an email in your workspace profile.',updated_at=CURRENT_TIMESTAMP WHERE id=? AND state IN ('pending','waiting-contact','failed')").bind(job.id).run();continue}
@@ -86,6 +90,8 @@ export async function flushMeetingEmails(env,meetingId){
    await db.prepare("UPDATE cv_connect_outbox SET state=?,last_error=?,next_attempt_at=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND state='sending'").bind(retryable.has(code)?'failed':'delivery-unknown',retryable.has(code)?code:'Delivery could not be confirmed; review before resending.',Date.now()+Math.min(3600000,60000*2**job.attempts),job.id).run();
   }
  }
+ const latest=await db.prepare('SELECT status FROM cv_connect_meetings WHERE id=?').bind(meetingId).first();
+ if(m.status!=='cancelled'&&latest?.status==='cancelled')await flushMeetingEmails(env,meetingId);
 }
 async function enqueueEmails(db,m,ids,kind='invite'){return ids.map(id=>db.prepare('INSERT OR IGNORE INTO cv_connect_outbox(id,meeting_id,identity_id,kind) VALUES(?,?,?,?)').bind(crypto.randomUUID(),m,id,kind));}
 function schedule(ctx,promise){if(ctx?.waitUntil)ctx.waitUntil(promise);return promise;}
