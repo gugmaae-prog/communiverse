@@ -13,3 +13,9 @@ CREATE TABLE IF NOT EXISTS cv_comments(id TEXT PRIMARY KEY,member_id TEXT NOT NU
 CREATE INDEX IF NOT EXISTS cv_comments_target ON cv_comments(target,status,created_at);
 CREATE TABLE IF NOT EXISTS cv_reports(member_id TEXT NOT NULL,target TEXT NOT NULL,reason TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(member_id,target));
 CREATE TABLE IF NOT EXISTS cv_feed_snapshots(id TEXT PRIMARY KEY,member_id TEXT NOT NULL,ids TEXT NOT NULL,expires_at INTEGER NOT NULL);
+
+CREATE INDEX IF NOT EXISTS cv_hearts_item ON cv_hearts(item_id,member_id);
+CREATE INDEX IF NOT EXISTS cv_posts_author ON cv_posts(member_id,status);
+CREATE INDEX IF NOT EXISTS cv_feed_snapshots_expiry ON cv_feed_snapshots(expires_at);
+CREATE INDEX IF NOT EXISTS cv_login_links_member ON cv_login_links(member_id);
+CREATE INDEX IF NOT EXISTS cv_join_limits_expiry ON cv_join_limits(expires_at);
