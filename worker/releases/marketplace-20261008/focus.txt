@@ -380,7 +380,7 @@
     if(galleryAction){
       const action=link(p.galleryLabel||p.name.split(' ')[0]+'’s Gallery',p.profileUrl,'glass-link cv-gallery-link');
       action.append(make('span','','↗'));galleryAction.append(action);
-      extra.append(make('p','cv-attribution','An imagined artist story. Films and images are craft references, not attributed to this profile.'));
+
     }
     const connect=make('div','glass-card cv-social-orbit'),links=make('div','glass-social-grid');
     const services=[['instagram','Instagram','instagram.com'],['behance','Behance','behance.net'],['linkedin','LinkedIn','linkedin.com'],['dribbble','Dribbble','dribbble.com'],['youtube','YouTube','youtube.com'],['tiktok','TikTok','tiktok.com'],['facebook','Facebook','facebook.com'],['x','X','x.com']];
@@ -398,9 +398,10 @@
     const expand=make('button','cv-card-expand','Read their story ↗');
     expand.type='button';expand.setAttribute('aria-expanded','false');
     expand.addEventListener('click',()=>{
+      if(!work.classList.contains('is-expanded'))work.dataset.closedHeight=String(work.getBoundingClientRect().height);
       const opened=work.classList.toggle('is-expanded');extra.open=opened;
       expand.setAttribute('aria-expanded',String(opened));expand.textContent=opened?'Close story ×':'Read their story ↗';
-      work.style.setProperty('--cv-expanded-top',Math.max(0,(focusAnchor?.y||0)-160)+'px');
+      work.style.setProperty('--cv-expanded-top',Math.max(0,Math.min((focusAnchor?.y||0)-160,innerHeight-stage.getBoundingClientRect().top-560))+'px');
     });
     work.append(expand);
     extra.addEventListener('toggle',()=>{work.classList.toggle('is-expanded',extra.open);expand.setAttribute('aria-expanded',String(extra.open));expand.textContent=extra.open?'Close story ×':'Read their story ↗';});
@@ -703,7 +704,7 @@
       const specs=[[main,compact?160:232,-1,-1],[media,compact?90:150,1,-1],[work,compact?180:270,-1,1],[panel.querySelector('.cv-gallery-orbit'),compact?140:200,1,1],[connect,44,0,1]].filter(([el])=>el);
       function place(card,cw,side,vertical){
         card.style.setProperty('--cv-orbit-w',cw+'px');card.style.width=cw+'px';
-        const ch=card.getBoundingClientRect().height,preferredX=side<0?layout.heroX-r-cw-12:side>0?layout.heroX+r+12:layout.heroX-cw/2,preferredY=vertical<0?layout.heroY-ch-16:layout.heroY+r+20;
+        const ch=card.classList.contains('is-expanded')?(Number(card.dataset.closedHeight)||104):card.getBoundingClientRect().height,preferredX=side<0?layout.heroX-r-cw-12:side>0?layout.heroX+r+12:layout.heroX-cw/2,preferredY=vertical<0?layout.heroY-ch-16:layout.heroY+r+20;
         let best=null,cost=Infinity;
         const xs=[0,w-cw,bound(preferredX,0,w-cw)];for(let x=0;x<=w-cw;x+=12)xs.push(x);
         const ys=[0,Math.max(0,restH-ch),bound(preferredY,0,Math.max(0,restH-ch))];for(let y=Math.max(0,layout.heroY-360);y<=Math.min(restH-ch,layout.heroY+360);y+=12)ys.push(y);
