@@ -33,9 +33,9 @@ for (const p of ['', 'about/', 'how-it-works/', 'makers/', 'for-founders/', 'for
 await check('Communiverse contains artists, Cool Kids and three ambassadors', async () => {
   const r = await request('/communiverse/plug/'), html = await r.text();
   const data = JSON.parse(html.match(/<script\b[^>]*\bid="cv-focus-data"[^>]*>([\s\S]*?)<\/script>/)[1]);
-  assert.equal(data.length, 23); assert.equal(data.filter(p => p.category === 'artists').length, 10); assert.equal(data.filter(p => p.category === 'cool-kids').length, 10); assert.equal(data.filter(p => p.category === 'ambassadors').length, 3);
-  assert.equal((html.match(/\bdata-slug="/g) || []).length, 23); assert.ok(!html.includes('data-filter="artisans"'));
-  return { people: 23, artists: 10, coolKids: 10, ambassadors: 3 };
+  assert.ok(data.length >= 23); assert.ok(data.filter(p => p.category === 'artists').length >= 10); assert.equal(data.filter(p => p.category === 'cool-kids').length, 10); assert.equal(data.filter(p => p.category === 'ambassadors').length, 3);
+  assert.equal((html.match(/\bdata-slug="/g) || []).length, data.length); assert.ok(!html.includes('data-filter="artisans"'));
+  return { people: data.length, artists: data.filter(p => p.category === 'artists').length, coolKids: 10, ambassadors: 3 };
 });
 for (const p of ['internal/', 'ral/', 'api/admin/']) await check('private route ' + p, async () => { const r = await request('/communiverse/' + p); await r.arrayBuffer(); assert.equal(r.status, 404); return { status: r.status }; });
 for (const suffix of ['.js', '.css']) await check('prior immutable squeeze-4' + suffix, async () => { const r = await request('/communiverse/_public/20260929-cylinder-squeeze-4' + suffix); await r.arrayBuffer(); assert.equal(r.status, 200); return { status: r.status }; });

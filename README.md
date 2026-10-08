@@ -2,11 +2,13 @@
 
 Public site: https://espacios.me/communiverse/
 
-Latest mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
+Current release: `20261008-marketplace-1c` — craft marketplace, 25 generated visuals, guide prices/currencies, workshop calendars, city discovery, one-step signup with immediate circles and private contacts, and welcome-email confirmation. [Release evidence](deployments/20261008-marketplace-1c.json) · [Source and research](worker/releases/marketplace-20261008/README.md).
 
-Latest navigation update: `20261008-simple-nav-1` replaces the remaining legacy header with Discover, Artists, Workshops and Plug. All four tabs stay visible on mobile. [Release evidence](deployments/20261008-simple-nav-1.json).
+Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
 
-Latest Plug update: `20261008-plug-gallery-1a` adds standalone named gallery links, workshop/group-session requests, store enquiries and restored mobile orb animation with smaller separate cards. All 23 people, three ambassadors and ten Cool Kids remain. Artist galleries follow the shared theme with inline CSS under their unchanged security policy. [Release evidence](deployments/20261008-plug-gallery-1a.json).
+Previous navigation update: `20261008-simple-nav-1` replaces the remaining legacy header with Discover, Artists, Workshops and Plug. All four tabs stay visible on mobile. [Release evidence](deployments/20261008-simple-nav-1.json).
+
+Previous gallery update: `20261008-plug-gallery-1a` adds standalone named gallery links, workshop/group-session requests, store enquiries and restored mobile orb animation with smaller separate cards. All 23 people, three ambassadors and ten Cool Kids remain. Artist galleries follow the shared theme with inline CSS under their unchanged security policy. [Release evidence](deployments/20261008-plug-gallery-1a.json).
 
 ## Production release — 7 October 2026
 
@@ -30,7 +32,7 @@ After the repository secret is configured, run **Sync exact Communiverse product
 
 ## Scope still in planning
 
-The broader marketplace, paid bookings, kit entitlements, applications and film-chapter product plan is not activated by this typography/header release. Sample content must remain labelled; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
+Marketplace browsing, member signup and date/order enquiries are live. Paid bookings, inventory/checkout and kit entitlements remain in planning. Generated concepts are disclosed at collection level; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
 
 ## Development and retained history
 

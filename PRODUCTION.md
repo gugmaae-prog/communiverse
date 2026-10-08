@@ -1,6 +1,20 @@
 # Communiverse production reconciliation
 
-## Latest compact mobile orbit cards
+## Latest marketplace, signup and in-place cards
+
+Release `20261008-marketplace-1c`; presentation assets `20261008-marketplace-1`; Worker `communiverse-marketplace`; version `d6e5b7f4-5e0d-4545-9d54-72cee4b68563`; deployment `54b657f2-3b52-4b00-acf5-c433d909756a`; 100% traffic. Source commit `0402587606f43f448c9e003195e253271ebdb308`. Rollback version `6f84fe2e-2079-466e-9750-c43053945de5`.
+
+Discover is a 16-object marketplace with eight craft categories, maker stories, 25 generated product/process images, craft films and 14 display currencies. Galleries add product enquiries and priced workshop/group date requests. Near You uses an official city guide across the nine requested countries plus Uzbekistan and can show registered artisan circles. Generated concepts and guide pricing are disclosed once at collection level. Orders and sessions require confirmation; payments and live host availability are not implemented.
+
+One Join form collects private email/phone and optional social handles. Public first name, craft, city and supplied handles appear in Plug immediately after signup. Welcome email uses a restricted EMAIL binding on `welcome@communiverse.espacios.me`; confirmation tokens are hashed, single-use and expire after seven days. The additive member/limiter tables leave the three curated ambassadors, reviewer access, activity and existing applications intact. Legacy Join/Waitlist buttons enter this same signup after hydration. The calendar saves requests into the existing private submissions table. No test profiles were published. Separate provider email tests were accepted for Outlook and Gmail; Outlook delivery was confirmed, Gmail delivery remains unconfirmed.
+
+Plug captures the selected circle's current position, keeps 640ms motion and places compact independent cards around it. Story cards have no internal vertical scrolling. Gallery/calendar styles are embedded under the unchanged inline-only style CSP; the policy was not weakened.
+
+All twenty pre-marketplace modules remain byte-identical. The final image-sizing patch retains 55 current modules, changes only the scoped entrypoint and adds an inline stylesheet, for 57 modules total. Published immutable CSS bytes remain unchanged; inline image styles override the retained HTML height attributes so product cards display square photographs. LEGACY, D1, the restricted EMAIL sender, assets, runtime and observability are retained. Canonical and www Communiverse routes still map explicitly to this Worker; the separate Espacios homepage returns HTTP 200.
+
+Source and pricing/venue provenance: `worker/releases/marketplace-20261008/`. Assembly: `scripts/prepare-marketplace.mjs`; integration checks (Node 24+): `scripts/test-marketplace.mjs`. Full module, migration, staged/live, privacy and browser evidence: `deployments/20261008-marketplace-1c.json`; retained route/media/source checks: `deployments/20261008-marketplace-retained-checks.json`. Signup/session state transitions were tested using real in-memory SQLite with a controlled mail binding; production reads, validation/Origin rejection, D1 upsert RETURNING and sender delivery were verified independently. The public signup happy path was not submitted with a test member.
+
+## Previous compact mobile orbit cards
 
 Release `20261008-plug-orbits-1`; Worker `communiverse-marketplace`; version `9563f02e-0cb5-471c-abc9-de2772678887`; deployment `0dfc87d7-6943-4bae-b53c-3806ae7f6cfd`; 100% traffic. Rollback version: `62b35c00-4a47-4a11-a02e-aedd41d2dad5`.
 
