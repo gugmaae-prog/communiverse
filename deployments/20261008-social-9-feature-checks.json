@@ -1,0 +1,31 @@
+{
+  "pass": true,
+  "version": "78c08b30-deb4-4506-b308-51e8a8f35417",
+  "mode": "live",
+  "checkedAt": "2026-10-08T18:47:51.801Z",
+  "calendarCounts": {
+    "upcoming": 35,
+    "today": 25,
+    "week": 30,
+    "next-week": 20,
+    "month": 39,
+    "past": 32,
+    "places": 11
+  },
+  "galleries": 24,
+  "galleryFilterVerified": true,
+  "artCircles": 22,
+  "interestDiscovery": true,
+  "invitationLanding": true,
+  "guestFollowBoundary": true,
+  "internalPages": true,
+  "initialImagesOnCloudflare": true,
+  "optimizedImagesChecked": 3,
+  "imageHashSamples": 3,
+  "googlePKCEAndPrivateCookie": true,
+  "googleProviderRedirect": true,
+  "firstPartyRelay": true,
+  "guestOnboardingBlocked": true,
+  "publicProfilesCreated": 0,
+  "mailHomeRetained": true
+}
