@@ -8,14 +8,14 @@ export async function google(request,env){const u=new URL(request.url),path=u.pa
 try{
 if(path==='/communiverse/auth/google'&&request.method==='GET'){
  if(!env.SUPABASE_URL||!env.SUPABASE_PUBLIC_KEY)return redirect('/communiverse/sign-in/?error=google-unavailable');await limited(request,db,'google-start',30);
- const state=random(),verifier=random();await db.batch([db.prepare('INSERT INTO cv_google_flows(hash,verifier,expires_at) VALUES(?,?,?)').bind(await hash(state),verifier,Date.now()+600000),db.prepare('DELETE FROM cv_google_flows WHERE expires_at<?').bind(Date.now())]);
+ const state=random(),browser=random(),verifier=random();await db.batch([db.prepare('INSERT INTO cv_google_flows(hash,verifier,expires_at,browser_hash) VALUES(?,?,?,?)').bind(await hash(state),verifier,Date.now()+600000,await hash(browser)),db.prepare('DELETE FROM cv_google_flows WHERE expires_at<?').bind(Date.now())]);
  const url=new URL(env.SUPABASE_URL+'/auth/v1/authorize'),bytes=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier))),challenge=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
  url.search=new URLSearchParams({provider:'google',redirect_to:'https://mail.espacios.me/communiverse/auth/callback/?state='+state,code_challenge:challenge,code_challenge_method:'s256',scopes:'openid email profile'});
- return redirect(url.href,[cookie('__Host-cv-oauth',state)]);
+ return redirect(url.href,[cookie('__Host-cv-oauth',browser)]);
 }
 if(path==='/communiverse/auth/callback'&&request.method==='GET'){
- const state=readCookie(request,'__Host-cv-oauth'),provided=u.searchParams.get('state');if(!state||provided!==state)return redirect('/communiverse/sign-in/?error=google-state',[cookie('__Host-cv-oauth','',0)]);
- const flow=await db.prepare('DELETE FROM cv_google_flows WHERE hash=? AND expires_at>? RETURNING verifier').bind(await hash(state),Date.now()).first(),code=u.searchParams.get('code');if(!flow||!code||code.length>4096||u.searchParams.has('error'))return redirect('/communiverse/sign-in/?error=google-expired',[cookie('__Host-cv-oauth','',0)]);
+ const state=readCookie(request,'__Host-cv-oauth'),provided=u.searchParams.get('state');if(!state||!/^[a-f0-9]{64}$/.test(provided||''))return redirect('/communiverse/sign-in/?error=google-state',[cookie('__Host-cv-oauth','',0)]);
+ const flow=await db.prepare('DELETE FROM cv_google_flows WHERE hash=? AND expires_at>? AND browser_hash=? RETURNING verifier').bind(await hash(provided),Date.now(),await hash(state)).first(),code=u.searchParams.get('code');if(!flow||!code||code.length>4096||u.searchParams.has('error'))return redirect('/communiverse/sign-in/?error=google-expired',[cookie('__Host-cv-oauth','',0)]);
  const exchange=await fetch(env.SUPABASE_URL+'/auth/v1/token?grant_type=pkce',{method:'POST',headers:{apikey:env.SUPABASE_PUBLIC_KEY,'Content-Type':'application/json'},body:JSON.stringify({auth_code:code,code_verifier:flow.verifier}),signal:AbortSignal.timeout(15000)});if(!exchange.ok)throw Error('exchange');const result=await exchange.json();
  const verify=await fetch(env.SUPABASE_URL+'/auth/v1/user',{headers:{apikey:env.SUPABASE_PUBLIC_KEY,Authorization:'Bearer '+result.access_token},signal:AbortSignal.timeout(15000)});if(!verify.ok)throw Error('identity');const user=await verify.json();
  if(!user.id||!user.email_confirmed_at||!user.identities?.some(i=>i.provider==='google')||!/^\S+@\S+\.\S+$/.test(user.email||''))throw Error('unverified');const email=user.email.toLowerCase(),identity='google:'+user.id;
