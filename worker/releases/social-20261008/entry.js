@@ -1,5 +1,6 @@
 import previous from './market-entry.js';
 import OLD_SCRIPT from './social-1b.txt';import OLD_FOCUS from './social-1b-focus.txt';
+import SOCIAL3_SCRIPT from './social-3.txt';import SOCIAL3_FOCUS from './social-3-focus.txt';
 import SOCIAL2_SCRIPT from './social-2.txt';import SOCIAL2_FOCUS from './social-2-focus.txt';
 import STYLE from './social.css';import SCRIPT from './social.txt';import FOCUS from './social-focus.txt';
 import {CATALOG,CLIPS,PREFIX,RELEASE,REGIONS,EVENT_CITIES,AMBASSADOR_REGIONS,ambassadorFor} from './social-data.js';
@@ -15,6 +16,7 @@ export default{async fetch(request,env,ctx){const u=new URL(request.url),path=u.
  if(read.has(request.method)&&(path.startsWith('/communiverse/_public/media/ambassadors/20261008/')||path.startsWith('/communiverse/_public/community/')))return media(request,env,path);
  if(path==='/communiverse/_public/20261008-social-1b.js'||path==='/communiverse/_public/20261008-social-1b-focus.js')return new Response(request.method==='HEAD'?null:path.endsWith('-focus.js')?OLD_FOCUS:OLD_SCRIPT,{headers:{'Content-Type':'application/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(path==='/communiverse/_public/20261008-social-2.js'||path==='/communiverse/_public/20261008-social-2-focus.js')return new Response(request.method==='HEAD'?null:path.endsWith('-focus.js')?SOCIAL2_FOCUS:SOCIAL2_SCRIPT,{headers:{'Content-Type':'application/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ if(path==='/communiverse/_public/20261008-social-3.js'||path==='/communiverse/_public/20261008-social-3-focus.js')return new Response(request.method==='HEAD'?null:path.endsWith('-focus.js')?SOCIAL3_FOCUS:SOCIAL3_SCRIPT,{headers:{'Content-Type':'application/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(path===PREFIX+'.js'||path===PREFIX+'-focus.js'){if(!read.has(request.method))return new Response('Method not allowed',{status:405});return new Response(request.method==='HEAD'?null:path.endsWith('-focus.js')?FOCUS:SCRIPT,{headers:{'Content-Type':'application/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff'}})}
  if(!read.has(request.method)||!path.startsWith('/communiverse'))return previous.fetch(request,env,ctx);
  const pages={'/communiverse':'feed','/communiverse/events':'events','/communiverse/events/host':'host','/communiverse/join':'join','/communiverse/workshops':'events','/communiverse/artists':'artists','/communiverse/artist':'artist','/communiverse/sign-in':'signin','/communiverse/profile':'profile','/communiverse/communities':'communities'},page=pages[path],p=await session(request,env);
