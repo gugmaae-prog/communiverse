@@ -2,7 +2,7 @@
 
 Public site: https://espacios.me/communiverse/
 
-Current release: `20261008-social-7` — circular portrait sizing corrected across Discover and artisan galleries, with the existing feed, autoplay and glass navigation retained. [Release evidence](deployments/20261008-social-7.json) · [Source and research](worker/releases/social-20261008/README.md).
+Current release: `20261008-social-8` — compact plus controls open artist stories and work; following remains an explicit action inside the story. [Release evidence](deployments/20261008-social-8.json) · [Source and research](worker/releases/social-20261008/README.md).
 
 Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
 
