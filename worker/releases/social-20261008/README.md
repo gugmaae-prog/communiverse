@@ -1,6 +1,6 @@
 # Communiverse social feed, Events and regional communities
 
-Scoped release over the pinned 57-module marketplace runtime `d6e5b7f4-5e0d-4545-9d54-72cee4b68563`. All previous modules, media and immutable URLs are retained unchanged. This release adds eight modules and an R2 binding; it does not deploy the legacy Next export.
+Scoped wrapper over the marketplace runtime. The current social-3 release retains the original 57 modules and four previously published social scripts byte-for-byte, with eight current social modules (69 total). Assets, media, D1, R2, EMAIL, LEGACY and runtime settings are retained. The legacy Next export is not deployed.
 
 - `/communiverse/` is the art feed; the upper-left logo opens it. Discover remains `/communiverse/discover/` with marketplace, currencies and group calendars. Workshops navigation becomes Events, and the old Workshops route redirects to Events.
 - `collected.json` stores 80 gallery/programme artists, 127 published work images and 92 organizer events with source URLs and checked dates. Eleven year-round cultural venues cover the ten region filters. These are bounded collections from official sources, not every event on the web. Gallery listings are public directory entries, not accounts or endorsements. Original generated studio material retains a quiet provenance disclosure.
@@ -24,10 +24,18 @@ Social release 2 is assembled over the verified 65-module release `2ef63fa8-c946
 
 The nonbold, star-free Communiverse wordmark is upper left. Join and Sign in, or the member profile, are upper right; five compact navigation links wrap to a second row on smaller screens. Directory artists exclude ambassadors by default. Ambassador detail views identify their role and link a deterministic regional curation: Luna for Colombia and Peru, Balo for UAE and Saudi Arabia, Ammar for Pakistan, Philippines, Malaysia, China, India and Uzbekistan. Studio entries without a matching region use a stable balanced assignment. These are curated connections, not representation agreements or endorsements.
 
-Plug peers retain 88 percent of their resting diameter, with a 44 px floor; collision-free destinations reserve the largest peer radius. Selected circles keep their document centre. Small video, story and gallery cards retain their motion and remain beside the selected circle.
+Plug uses the original 23 curated circles: ten studio artists, three ambassadors and ten Cool Kids, plus genuine member signups. Collected gallery artists remain in the Artists directory and feed; the wrapper no longer injects them into Plug. The separate Espacios Plug route is unchanged.
+
+The constellation height follows the available viewport. Portrait variation and gaps decrease on short screens, with a 44 px floor. Open detail cards remain near the selected circle; compact peers use 44 px and bounded destinations. An extremely short open scene may use the least-overlap destination instead of adding a new bottom row. The selected circle keeps its document centre and the existing finite motion, keyboard and reduced-motion behavior remain. Story cards expand without inner scroll and collapse when tapped outside.
 
 Join starts with Artisan, Collector, Represent my city and Cool Kids role cards, followed by one set of basic questions. Fresh signup intent is saved server-side. City and team interests are applications; they do not confer curated ambassador or back-office membership. Guest hearts show an immediate sign-in invitation; guest comment forms are replaced by that invitation. Server authorization remains mandatory.
 
 Confirmed artisan members can publish a workshop, art event, exhibition or festival with local calendar dates, venue, description and optional booking link. Date validation, rate limits and request-id idempotency apply. Hosts can remove their own events; member reports use the existing private review flow. No paid checkout, ticket inventory or confirmed organizer affiliation is implied. `cv_hosted_events` is an additive table with a regional/date index.
 
 Events request geolocation only after Find near me is tapped. Coordinates stay in browser memory; the nearest city in the bounded guide becomes a city/region filter. Distances describe guide cities, not exact venue proximity. Permission failure leaves manual filters available. Community regions and relevant-person cards wrap rather than scrolling horizontally. Narrow 320 and 390 px layouts are verified.
+
+## Floating header and viewport fitting
+
+Social release 3 is assembled over the verified 67-module version `946e20e1-66df-46fc-b40a-8e7a511e6bbe`, using `scripts/prepare-social3.mjs`. The shared wordmark, navigation and account links have transparent backgrounds and no surrounding frame. Active navigation uses an underline. Plug filters participate in layout below the header, preventing the old fixed-position overlap. Horizontal scrolling is clipped during layout transitions. No database migration or catalogue import is part of this release.
+
+Native browser checks cover 320×568, 390×844 and 1224×707: all 23 resting circles are visible, filters remain uncovered and there is no horizontal overflow. Keyboard selection, rapid profile changes, reduced motion, tap-out story collapse, retained videos and in-place centre continuity pass. Exact uploaded module checks, full feed pagination, private session boundaries, old immutable scripts, canonical Worker routes and the unaffected Espacios homepage pass independently. Live evidence and screenshots are in `deployments/20261008-social-3*`.
