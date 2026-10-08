@@ -125,3 +125,6 @@ html[data-cv-social] .cv-filters button[aria-pressed=true]{background:rgba(39,98
 #cv-social-header nav a[aria-current],.cv-feed-tabs button[aria-pressed=true],.cv-gallery-nav button[aria-pressed=true],html[data-cv-social] .cv-plug .filters button[aria-pressed=true],html[data-cv-social] .cv-filters button[aria-pressed=true]{color:#133f8b!important}
 
 #cv-social-header nav a{flex:0 0 auto}
+
+.cv-artist-text-card{display:grid;gap:20px;padding:24px 20px;background:rgba(226,233,244,.6);color:var(--cv-social-ink);line-height:1.55;min-height:140px;align-content:center}.cv-artist-text-card>.cv-kicker{font-size:10px;letter-spacing:.05em}.cv-artist-text-card>span:last-child{font-size:17px;text-wrap:balance}
+@media(max-width:600px){.cv-artist-text-card{padding:18px 14px;gap:14px;min-height:120px}.cv-artist-text-card>span:last-child{font-size:14px}}
