@@ -1,0 +1,169 @@
+{
+  "release": "20261008-plug-orbits-1",
+  "worker": "communiverse-marketplace",
+  "sourceCommit": "b967c7ba520dd4e004693c4270f3418617d7e546",
+  "deployment": {
+    "version": "9563f02e-0cb5-471c-abc9-de2772678887",
+    "deployment": {
+      "id": "0dfc87d7-6943-4bae-b53c-3806ae7f6cfd"
+    },
+    "rollbackVersion": "62b35c00-4a47-4a11-a02e-aedd41d2dad5"
+  },
+  "sourceProof": {
+    "pass": true,
+    "version": "9563f02e-0cb5-471c-abc9-de2772678887",
+    "release": "20261008-plug-orbits-1",
+    "verifiedAt": "2026-10-08T06:58:26.101Z",
+    "modulesVerified": 20,
+    "originalModulesRetained": 17,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "liveChecks": {
+    "pass": true,
+    "version": "9563f02e-0cb5-471c-abc9-de2772678887",
+    "release": "20261008-plug-orbits-1",
+    "mode": "live",
+    "people": 23,
+    "artists": 10,
+    "coolKids": 10,
+    "ambassadors": 3,
+    "assetBytesVerified": true,
+    "priorImmutableAssetsVerified": true,
+    "galleriesAndNavigationRetained": true,
+    "glassRangeVerified": true,
+    "checkedAt": "2026-10-08T07:05:22.678Z"
+  },
+  "browserChecks": {
+    "pass": true,
+    "mobile": {
+      "cards": [
+        {
+          "kind": "identity",
+          "r": {
+            "bottom": 290,
+            "height": 128,
+            "left": 32,
+            "right": 204.7734375,
+            "top": 162,
+            "width": 172.7734375,
+            "x": 32,
+            "y": 162
+          }
+        },
+        {
+          "kind": "video",
+          "r": {
+            "bottom": 381.859375,
+            "height": 173.859375,
+            "left": 260.1953125,
+            "right": 357.9921875,
+            "top": 208,
+            "width": 97.796875,
+            "x": 260.1953125,
+            "y": 208
+          }
+        },
+        {
+          "kind": "work",
+          "r": {
+            "bottom": 630,
+            "height": 160,
+            "left": 32,
+            "right": 224.3359375,
+            "top": 470,
+            "width": 192.3359375,
+            "x": 32,
+            "y": 470
+          }
+        },
+        {
+          "kind": "connect",
+          "r": {
+            "bottom": 448,
+            "height": 44,
+            "left": 125.359375,
+            "right": 173.359375,
+            "top": 404,
+            "width": 48,
+            "x": 125.359375,
+            "y": 404
+          }
+        },
+        {
+          "kind": "gallery",
+          "r": {
+            "bottom": 463.1875,
+            "height": 59.1875,
+            "left": 211.296875,
+            "right": 357.9921875,
+            "top": 404,
+            "width": 146.6953125,
+            "x": 211.296875,
+            "y": 404
+          }
+        }
+      ],
+      "ctaOutside": true,
+      "mode": "orbits",
+      "position": "absolute",
+      "release": "20261008-plug-orbits-1",
+      "sceneHeight": 480,
+      "scrollWidth": 390,
+      "video": {
+        "height": 173.859375,
+        "paused": false,
+        "ready": 4,
+        "transform": "translate3d(0px, 0px, 0px)",
+        "width": 97.796875
+      },
+      "width": 390
+    },
+    "motion": {
+      "rest": {
+        "height": 480
+      },
+      "during": {
+        "animating": "true",
+        "panelPosition": "absolute",
+        "sceneHeight": 480,
+        "videoTransform": "translate3d(0px, -2.742px, 0px)"
+      },
+      "afterTransform": "translate3d(0px, 0px, 0px)",
+      "sceneHeightUnchanged": true
+    },
+    "previewChecks": {
+      "rapidSwitching": true,
+      "reducedMotionSnapsAndPauses": true,
+      "smallMobile": {
+        "width": 320,
+        "height": 568,
+        "scrollWidth": 320,
+        "stageTop": 148,
+        "scrollMargin": "148px"
+      },
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "videoWidth": 176,
+        "videoHeight": 312.8828125
+      },
+      "darkMode": true,
+      "realMemberSocialLinks": true,
+      "closeAndFilters": true
+    },
+    "screenshot": "outputs/communiverse-mobile-orbit-cards-live.jpg",
+    "checkedAt": "2026-10-08T07:06:59.483Z"
+  },
+  "routePatterns": [
+    "espacios.me/communiverse*",
+    "www.espacios.me/communiverse*"
+  ],
+  "previousModulesRetained": 17,
+  "newModules": 3,
+  "databaseWrites": false,
+  "formSubmissions": 0,
+  "securityPoliciesUnchanged": true
+}

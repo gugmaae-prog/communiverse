@@ -1,6 +1,16 @@
 # Communiverse production reconciliation
 
-## Latest simplified shared navigation
+## Latest compact mobile orbit cards
+
+Release `20261008-plug-orbits-1`; Worker `communiverse-marketplace`; version `9563f02e-0cb5-471c-abc9-de2772678887`; deployment `0dfc87d7-6943-4bae-b53c-3806ae7f6cfd`; 100% traffic. Rollback version: `62b35c00-4a47-4a11-a02e-aedd41d2dad5`.
+
+Mobile Plug replaces the fixed bottom tray with separate small profile, video, craft-detail, social and gallery surfaces in the constellation. Surfaces follow the selected orb during the existing 640ms motion, and quick switches retain the most recent card pose. The gallery action remains outside the cards. On 390x844 the live video is approximately 98x174 and plays; profile/detail cards are 128px/160px tall. Short screens use 112px/144px cards. Native scrolling and independent card scroll areas retain access to full details. A 148px mobile scroll margin keeps the scene clear of the fixed header and filters.
+
+Source: `worker/releases/plug-orbits-20261008/`; assembly: `scripts/prepare-plug-orbits.mjs`; verification: `scripts/verify-plug-orbits.mjs <verified candidate> live`. All seventeen current runtime modules remain identical, with three scoped presentation modules added. Desktop card geometry, four-tab navigation, artist galleries, request forms, all 23 people and original media remain. No schema, records, form submissions, bindings or security policy changes.
+
+Evidence: `deployments/20261008-plug-orbits-1.json` and `deployments/20261008-plug-orbits-retained-checks.json`. Live asset checksums, gallery/nav preservation and glass byte-range checks passed, as did 20 retained route/media/source checks. Browser checks covered mobile 390x844, short mobile 320x568, desktop 1440x900, rapid selection, close/filter handling, reduced motion, dark mode and real member social links. Mobile panel position is absolute, video transform moves then settles, scene height remains 480px before/after selection, and page scrollWidth is 390px.
+
+## Previous simplified shared navigation
 
 Release `20261008-simple-nav-1`; Worker `communiverse-marketplace`; version `62b35c00-4a47-4a11-a02e-aedd41d2dad5`; deployment `cbf4c477-ab75-48fd-8363-6b0db47071d0`; 100% traffic. Rollback version: `83f1bdb4-e7e4-44ef-8679-967a5cb4b382`.
 
