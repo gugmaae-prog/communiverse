@@ -414,7 +414,7 @@
     body.append(main,...(films.childElementCount?[media]:[]),work,connect);
     if(galleryAction)panel.append(galleryAction);
     if(!reduced.matches)body.querySelector('video')?.play().catch(()=>{});
-    const filmObserver=new IntersectionObserver(entries=>entries.forEach(({target:v,isIntersecting})=>{if(isIntersecting&&!reduced.matches&&!document.hidden)v.play().catch(()=>{});else v.pause();}),{root:films,threshold:.6});
+    const filmObserver=new IntersectionObserver(entries=>entries.forEach(({target:v,isIntersecting})=>{if(isIntersecting&&selected===n&&!panel.inert&&!reduced.matches&&!document.hidden)v.play().catch(()=>{});else v.pause();}),{root:films,threshold:.6});
     films.querySelectorAll('video').forEach(v=>filmObserver.observe(v));
     panel._filmObserver?.disconnect();panel._filmObserver=filmObserver;
     observedCards.forEach((card) => ro.unobserve(card));
@@ -464,6 +464,7 @@
   }
   function close(focus, writeHistory = true) {
     const old = selected;
+    panel._filmObserver?.disconnect();
     panel.querySelectorAll("video").forEach(v=>v.pause());
     panel.querySelectorAll("video").forEach(v=>v.pause());
     rebase();

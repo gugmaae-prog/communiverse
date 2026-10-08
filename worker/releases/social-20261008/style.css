@@ -62,7 +62,7 @@ html[data-cv-social] .cv-plug{min-height:0!important}
 @media(max-width:600px){.cv-social{padding:20px 20px 48px}.cv-social h1,.cv-account-page h1{font-size:34px;margin-bottom:20px}.cv-social h2{font-size:25px}.cv-social-intro{padding:12px 0 24px}.cv-feed-controls{gap:16px;margin-bottom:20px}.cv-feed-tabs{gap:8px;margin-bottom:20px}.cv-feed-tabs button{font-size:13px;padding:10px 13px}.cv-feed-tabs>a{width:auto;margin:0;font-size:13px}.cv-social .cv-button,.cv-social .cv-quiet-button{font-size:14px}.cv-role-grid button{padding:17px 15px}.cv-profile-editor{padding:20px 16px}.cv-member-summary{gap:14px}.cv-member-summary strong{font-size:18px}.cv-profile-links{gap:12px 20px;font-size:14px}.cv-gallery-profile,.cv-event-hero{grid-template-columns:1fr;gap:24px;margin:16px 0 32px}.cv-gallery-profile img,.cv-event-hero img{max-height:360px}.cv-event-grid,.cv-directory{gap:20px}.cv-event-card,.cv-directory-card{padding:18px}.cv-event-card h3{font-size:20px}.cv-source-note{margin-top:28px}.cv-social .cv-form-row{gap:16px}}
 
 /* Navigation floats in a bounded glass surface; readable text remains solid. */
-:root{--cv-glass-fill:rgba(255,255,255,.58);--cv-glass-line:rgba(255,255,255,.84);--cv-glass-shadow:0 5px 18px rgba(35,50,78,.045),inset 0 1px 0 rgba(255,255,255,.92)}
+:root{--cv-glass-fill:rgba(255,255,255,.72);--cv-glass-line:rgba(255,255,255,.84);--cv-glass-shadow:0 5px 18px rgba(35,50,78,.045),inset 0 1px 0 rgba(255,255,255,.92)}
 #cv-social-header nav,.cv-feed-tabs,.cv-gallery-nav,.cv-region-tabs,html[data-cv-social] .cv-plug .filters,html[data-cv-social] .cv-plug.is-focused .filters{
  box-sizing:border-box;background:var(--cv-glass-fill)!important;border:1px solid var(--cv-glass-line)!important;box-shadow:var(--cv-glass-shadow)!important;backdrop-filter:blur(16px) saturate(135%);-webkit-backdrop-filter:blur(16px) saturate(135%);border-radius:999px;padding:4px!important;gap:2px!important;width:max-content;max-width:100%;
 }
@@ -121,3 +121,5 @@ html[data-cv-social] .cv-filters{box-sizing:border-box;display:flex;flex-wrap:wr
 html[data-cv-social] .cv-filters button{min-height:44px;padding:10px 14px;border:0;border-radius:999px;background:transparent;box-shadow:none;font-size:13px;line-height:1.4;color:var(--cv-social-ink)}
 html[data-cv-social] .cv-filters button[aria-pressed=true]{background:rgba(39,98,235,.13);color:var(--cv-social-blue)}
 @media(max-width:600px){.cv-gallery-nav>a{font-size:12px;padding:0 10px}html[data-cv-social] .cv-filters button{font-size:12px;padding:10px 12px}}
+
+#cv-social-header nav a[aria-current],.cv-feed-tabs button[aria-pressed=true],.cv-gallery-nav button[aria-pressed=true],html[data-cv-social] .cv-plug .filters button[aria-pressed=true],html[data-cv-social] .cv-filters button[aria-pressed=true]{color:#133f8b!important}
