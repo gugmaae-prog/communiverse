@@ -123,3 +123,5 @@ html[data-cv-social] .cv-filters button[aria-pressed=true]{background:rgba(39,98
 @media(max-width:600px){.cv-gallery-nav>a{font-size:12px;padding:0 10px}html[data-cv-social] .cv-filters button{font-size:12px;padding:10px 12px}}
 
 #cv-social-header nav a[aria-current],.cv-feed-tabs button[aria-pressed=true],.cv-gallery-nav button[aria-pressed=true],html[data-cv-social] .cv-plug .filters button[aria-pressed=true],html[data-cv-social] .cv-filters button[aria-pressed=true]{color:#133f8b!important}
+
+#cv-social-header nav a{flex:0 0 auto}
