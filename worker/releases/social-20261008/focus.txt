@@ -704,7 +704,7 @@
         const ch=card.classList.contains('is-expanded')?(Number(card.dataset.closedHeight)||104):card.getBoundingClientRect().height,preferredX=side<0?layout.heroX-r-cw-(mobile?6:12):side>0?layout.heroX+r+(mobile?6:12):layout.heroX-cw/2,preferredY=vertical<0?layout.heroY-ch-(mobile?8:16):layout.heroY+r+(mobile?8:20);
         let best=null,cost=Infinity;
         const xs=[0,w-cw,bound(preferredX,0,w-cw)];for(let x=0;x<=w-cw;x+=12)xs.push(x);
-        const ys=[0,Math.max(0,restH-ch),bound(preferredY,0,Math.max(0,restH-ch))];for(let y=Math.max(0,layout.heroY-360);y<=Math.min(restH-ch,layout.heroY+360);y+=12)ys.push(y);
+        const ys=[0,Math.max(0,restH-ch),bound(preferredY,0,Math.max(0,restH-ch))];const clearance=mobile?4:8;for(const z of layout.zones){ys.push(bound(z.y-ch-clearance,0,Math.max(0,restH-ch)),bound(z.y+z.h+clearance,0,Math.max(0,restH-ch)));xs.push(bound(z.x-cw-clearance,0,w-cw),bound(z.x+z.w+clearance,0,w-cw));}for(let y=Math.max(0,layout.heroY-360);y<=Math.min(restH-ch,layout.heroY+360);y+=12)ys.push(y);
         for(const x of xs)for(const y of ys){
           if(layout.zones.some(z=>x+cw+(mobile?4:8)>z.x&&x-(mobile?4:8)<z.x+z.w&&y+ch+(mobile?4:8)>z.y&&y-(mobile?4:8)<z.y+z.h))continue;
           const candidate=Math.hypot(x-preferredX,y-preferredY)+4*(Math.max(0,viewTop-y)+Math.max(0,y+ch-viewBottom));
