@@ -10,7 +10,7 @@ if(path==='/communiverse/auth/google'&&request.method==='GET'){
  if(!env.SUPABASE_URL||!env.SUPABASE_PUBLIC_KEY)return redirect('/communiverse/sign-in/?error=google-unavailable');await limited(request,db,'google-start',30);
  const state=random(),verifier=random();await db.batch([db.prepare('INSERT INTO cv_google_flows(hash,verifier,expires_at) VALUES(?,?,?)').bind(await hash(state),verifier,Date.now()+600000),db.prepare('DELETE FROM cv_google_flows WHERE expires_at<?').bind(Date.now())]);
  const url=new URL(env.SUPABASE_URL+'/auth/v1/authorize'),bytes=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier))),challenge=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
- url.search=new URLSearchParams({provider:'google',redirect_to:'https://espacios.me/communiverse/auth/callback/?state='+state,code_challenge:challenge,code_challenge_method:'s256',scopes:'openid email profile'});
+ url.search=new URLSearchParams({provider:'google',redirect_to:'https://mail.espacios.me/communiverse/auth/callback/?state='+state,code_challenge:challenge,code_challenge_method:'s256',scopes:'openid email profile'});
  return redirect(url.href,[cookie('__Host-cv-oauth',state)]);
 }
 if(path==='/communiverse/auth/callback'&&request.method==='GET'){

@@ -29,4 +29,4 @@ export function dateWindow(key,at=new Date(),zone='UTC'){
  const add=n=>new Date(+d+n*86400000).toISOString().slice(0,10),endMonth=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0,12)).toISOString().slice(0,10);
  return {today,from:key==='next-week'?add(7-day):today,to:key==='week'?add(6-day):key==='next-week'?add(13-day):key==='month'?endMonth:today};
 }
-export function inWindow(i,key,b){const end=i.end||i.expiresOn||i.start;if(key==='places')return i.kind==='venue';if(i.kind==='venue')return false;if(key==='past')return !!end&&end<b.today;if(key==='upcoming')return !i.start||i.start>b.today;return !!i.start&&i.start<=b.to&&(end||i.start)>=b.from}
+export function inWindow(i,key,b){const end=i.end||i.expiresOn||i.start;if(key==='places')return i.kind==='venue';if(i.kind==='venue')return false;if(key==='past')return !!end&&end<b.today;if(key==='upcoming')return (!end||end>=b.today)&&(!i.start||i.start>b.today);return !!i.start&&i.start<=b.to&&(end||i.start)>=b.from}
