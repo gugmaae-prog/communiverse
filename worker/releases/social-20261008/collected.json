@@ -1715,7 +1715,7 @@
     "region": "saudi",
     "city": "Jeddah",
     "checkedAt": "2026-10-08",
-    "type": "Art event",
+    "type": "Workshop",
     "start": "2026-10-04",
     "end": "2026-10-08",
     "dateLabel": "October 4, 2026 - October 8, 2026",
@@ -1725,7 +1725,8 @@
       "art event",
       "saudi",
       "culture",
-      "hayy jameel"
+      "hayy jameel",
+      "workshop"
     ],
     "description": "Published programme at Hayy Jameel. See the organizer for tickets and current details."
   },

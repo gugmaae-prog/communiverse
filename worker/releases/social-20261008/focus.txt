@@ -648,6 +648,7 @@
   }
   function measure() {
     rememberCardPose();
+    const previousWidth=layout?.w;
     const w = stage.getBoundingClientRect().width,
       mobile = innerWidth < 1050,
       compact = innerWidth < 760;
@@ -700,6 +701,7 @@
       layout.heroY=focusAnchor?.y??selected.rest.y;
       layout.heroD=Math.max(selected.rest.d,compact?82:118);
       const r=layout.heroD/2;
+      if(previousWidth&&Math.abs(previousWidth-w)>1){layout.heroX=bound(layout.heroX,r+8,w-r-8);layout.heroY=bound(layout.heroY,r+8,restH-r-8);focusAnchor={x:layout.heroX,y:layout.heroY};}
       layout.zones=[{x:layout.heroX-r-8,y:layout.heroY-r-8,w:layout.heroD+16,h:layout.heroD+16}];layout.orbitCards=[];
       const stageTop=stage.getBoundingClientRect().top,viewTop=Math.max(0,128-stageTop),viewBottom=Math.min(restH,innerHeight-stageTop-16);
       const specs=[[main,compact?160:232,-1,-1],[media,compact?90:150,1,-1],[work,compact?180:270,-1,1],[panel.querySelector('.cv-gallery-orbit'),compact?140:200,1,1],[connect,44,0,1]].filter(([el])=>el);
