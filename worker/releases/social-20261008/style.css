@@ -135,3 +135,9 @@ html[data-cv-social] .cv-maker-inline img{width:28px;height:28px;aspect-ratio:1;
 html[data-cv-social] .cv-pick img{width:56px;height:56px;aspect-ratio:1;flex:none;object-fit:cover;border-radius:50%;display:block}
 html[data-cv-social] .cv-avatar{width:40px;height:40px;aspect-ratio:1;flex:none;object-fit:cover;border-radius:50%}
 @media(max-width:759px){html[data-cv-social] .cv-maker-inline img{width:24px;height:24px;flex-basis:24px}}
+
+/* Legacy gallery sections share a profile class with the newer directory view. */
+html[data-cv-social] .cv-artist-profile.cv-gallery-page{display:block}
+html[data-cv-social] .cv-gallery-hero .cv-artist-portrait{width:112px;height:112px;aspect-ratio:1;flex:0 0 112px;object-fit:cover;border-radius:50%;display:block}
+html[data-cv-social] .cv-gallery-hero>div{min-width:0}
+@media(max-width:640px){html[data-cv-social] .cv-gallery-hero .cv-artist-portrait{width:76px;height:76px;flex-basis:76px}}
