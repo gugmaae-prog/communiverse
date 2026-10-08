@@ -379,7 +379,7 @@
     const galleryAction=['artists','ambassadors'].includes(p.category)?make('div','cv-gallery-orbit'):null;
     if(galleryAction){
       const action=link(p.galleryLabel||p.name.split(' ')[0]+'’s Gallery',p.profileUrl,'glass-link cv-gallery-link');
-      action.append(make('span','','↗'));galleryAction.append(action);
+      galleryAction.append(action);
 
     }
     const connect=make('div','glass-card cv-social-orbit'),links=make('div','glass-social-grid');
