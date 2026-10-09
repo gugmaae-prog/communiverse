@@ -1,0 +1,274 @@
+/* Communiverse search coherence · search-v4 staging
+   Additive design layer: uses Communiverse tokens and leaves original
+   search fields, query/filter state, API calls and event handlers unchanged.
+*/
+html[data-cv-social] {
+  --cv4-search-line: var(--cv-social-line, #dce2ec);
+  --cv4-search-bg: color-mix(in srgb,var(--cv-social-card,#fff) 89%,transparent);
+  --cv4-search-ink: var(--cv-social-ink,#1c2636);
+  --cv4-search-muted: var(--cv-social-muted,#5e6c80);
+  --cv4-search-accent: #2869df;
+}
+/* Shared public search toolbar. Never apply these selectors to booking or auth forms. */
+html[data-cv-social] .cv-feed-controls.cv4-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(170px,210px);
+  gap: 12px 15px !important;
+  align-items: end !important;
+  margin-bottom: 15px !important;
+}
+html[data-cv-social] #cv-events-filters.cv4-toolbar {
+  grid-template-columns: minmax(0,1fr) minmax(155px,210px) minmax(155px,210px);
+}
+html[data-cv-social] #cv-events-filters.cv4-toolbar > label.cv4-search-field {
+  grid-column: 1;
+  grid-row: 1;
+}
+html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):first-child {
+  grid-column: 2;
+}
+html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):nth-child(2) {
+  grid-column: 3;
+}
+html[data-cv-social] #cv-circle-filters.cv4-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(150px,210px) minmax(150px,210px);
+  gap: 12px 15px !important;
+  align-items: end !important;
+  margin-bottom: 17px !important;
+}
+html[data-cv-social] .cv-market .cv-search-line.cv4-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(165px,210px);
+  gap: 12px 15px !important;
+  align-items: end !important;
+}
+html[data-cv-social] .cv-plug .cv-plug-browse.cv4-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 12px 16px !important;
+  align-items: end !important;
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+html[data-cv-social] .cv4-toolbar > label {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+  font-weight: 520;
+  line-height: 1.45;
+  color: var(--cv4-search-muted);
+}
+html[data-cv-social] .cv4-toolbar > label.cv4-search-field {
+  flex: 1 1 auto !important;
+}
+html[data-cv-social] .cv4-toolbar > label:not(.cv4-search-field) select {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  height: 52px !important;
+  min-height: 52px !important;
+  margin: 0 !important;
+  padding: 12px 40px 12px 15px !important;
+  border: 1px solid var(--cv4-search-line);
+  border-radius: 19px !important;
+  background: var(--cv4-search-bg);
+  color: var(--cv4-search-ink);
+  font-size: 14px !important;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+}
+html[data-cv-social] .cv4-search-field {
+  position: relative;
+  isolation: isolate;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner {
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 52px;
+  height: 52px;
+  width: 100%;
+  min-width: 0;
+  gap: 10px;
+  padding: 0 9px 0 15px;
+  margin: 0;
+  border: 1px solid var(--cv4-search-line);
+  border-radius: 19px;
+  background: var(--cv4-search-bg);
+  color: var(--cv4-search-ink);
+  box-shadow: 0 5px 16px rgba(29,46,76,.025);
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner:focus-within {
+  border-color: var(--cv4-search-accent);
+  box-shadow: 0 0 0 3px rgba(40,105,223,.10);
+}
+html[data-cv-social] .cv4-search-field .cv4-search-symbol {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  color: var(--cv4-search-muted);
+  pointer-events: none;
+  opacity: .88;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > input[type=search] {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 49px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  font-size: 14px !important;
+  line-height: 1.45;
+  color: var(--cv4-search-ink) !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > input[type=search]::placeholder {
+  color: var(--cv4-search-muted);
+  opacity: .90;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 35px !important;
+  min-height: 35px !important;
+  min-width: 74px;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  border: 1px solid color-mix(in srgb,var(--cv4-search-accent) 14%,var(--cv4-search-line));
+  border-radius: 999px;
+  background: color-mix(in srgb,var(--cv4-search-accent) 4%,var(--cv4-search-bg));
+  color: #2058b9;
+  white-space: nowrap;
+  font-size: 11px !important;
+  font-weight: 650;
+  line-height: 1.3 !important;
+  cursor: pointer;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button[hidden] {
+  display: none !important;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button:focus-visible {
+  outline: 2px solid var(--cv4-search-accent);
+  outline-offset: 2px;
+}
+html[data-cv-social] .cv4-search-field > .cv-ai-search-results {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 0;
+  right: 0;
+  z-index: 140;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  max-height: min(370px,50vh);
+  margin: 0 !important;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--cv4-search-line);
+  border-radius: 18px;
+  background: color-mix(in srgb,var(--cv-social-card,#fff) 96%,transparent);
+  box-shadow: 0 18px 48px rgba(23,39,65,.14);
+  backdrop-filter: blur(20px);
+}
+html[data-cv-social] .cv4-search-field > .cv-ai-search-results[hidden] {
+  display: none !important;
+}
+html[data-cv-social] .cv4-search-field > .cv-ai-search-results a {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-radius: 12px;
+  padding: 11px 12px;
+  font-size: 13px;
+  color: var(--cv4-search-ink);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html[data-cv-social] .cv4-search-field > .cv-ai-search-results a:hover,
+html[data-cv-social] .cv4-search-field > .cv-ai-search-results a:focus-visible {
+  background: color-mix(in srgb,var(--cv4-search-accent) 6%,var(--cv-social-card,#fff));
+}
+html[data-cv-social] .cv4-toolbar > label:not(.cv4-search-field) select:focus-visible {
+  outline: 2px solid var(--cv4-search-accent);
+  outline-offset: 3px;
+}
+/* Maintain original feed section and chips; prevent the toolbar becoming a card. */
+html[data-cv-social] .cv-feed-page .cv-feed-controls.cv4-toolbar {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
+@media(max-width:790px) {
+  html[data-cv-social] .cv-feed-controls.cv4-toolbar,
+  html[data-cv-social] #cv-events-filters.cv4-toolbar,
+  html[data-cv-social] #cv-circle-filters.cv4-toolbar,
+  html[data-cv-social] .cv-market .cv-search-line.cv4-toolbar {
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+    gap: 10px 12px !important;
+  }
+  html[data-cv-social] .cv4-toolbar > label.cv4-search-field,
+  html[data-cv-social] #cv-events-filters.cv4-toolbar > label.cv4-search-field,
+  html[data-cv-social] #cv-circle-filters.cv4-toolbar > label.cv4-search-field {
+    grid-column: 1/-1 !important;
+    grid-row: auto !important;
+  }
+  html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):first-child,
+  html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):nth-child(2) {
+    grid-column: auto;
+  }
+  html[data-cv-social] .cv-plug .cv-plug-browse.cv4-toolbar {
+    grid-template-columns: minmax(0,1fr);
+    gap: 10px !important;
+  }
+}
+@media(max-width:480px) {
+  html[data-cv-social] .cv-feed-controls.cv4-toolbar,
+  html[data-cv-social] #cv-events-filters.cv4-toolbar,
+  html[data-cv-social] #cv-circle-filters.cv4-toolbar,
+  html[data-cv-social] .cv-market .cv-search-line.cv4-toolbar {
+    gap: 9px 10px !important;
+  }
+  html[data-cv-social] .cv4-search-field .cv4-search-inner {
+    height: 50px;
+    min-height: 50px;
+    padding-left: 12px;
+  }
+  html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button {
+    min-width: 51px;
+    padding: 0 9px !important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html[data-cv-social] .cv4-search-field .cv4-search-inner {transition:none}
+}
