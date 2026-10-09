@@ -1,0 +1,141 @@
+/* Communiverse · Group session artist picker · 2026-10-10
+   Fixes the legacy .cv-pick { width:65px } rule without affecting
+   other gallery pickers, profile imagery, or booking form behaviour. */
+html[data-cv-social] #cv-group-form #cv-group-artists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick {
+  box-sizing: border-box;
+  display: flex !important;
+  align-items: center;
+  justify-self: stretch;
+  align-self: stretch;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  min-height: 98px;
+  margin: 0;
+  padding: 16px 18px !important;
+  gap: 14px;
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid var(--cv-social-line,#dce2ec);
+  background: var(--cv-social-card,#fff);
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > img {
+  box-sizing: border-box;
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  min-height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  flex: 0 0 60px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: var(--cv-social-bg,#f3f5f8);
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > span {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto !important;
+  color: var(--cv-social-ink,#1e2939);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+  text-align: left;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > span > small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--cv-social-muted,#5d6a80);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > input[type=radio] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  min-width: 1px !important;
+  min-height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:hover {
+  border-color: color-mix(in srgb, var(--cv-social-blue,#1267ff) 34%, var(--cv-social-line,#dce2ec));
+  background: color-mix(in srgb, var(--cv-social-blue,#1267ff) 2%, var(--cv-social-card,#fff));
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(input:checked) {
+  border-color: var(--cv-social-blue,#1267ff);
+  background: color-mix(in srgb, var(--cv-social-blue,#1267ff) 6%, var(--cv-social-card,#fff));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cv-social-blue,#1267ff) 25%, transparent);
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(input:focus-visible) {
+  outline: 2px solid var(--cv-social-blue,#1267ff);
+  outline-offset: 3px;
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-match {
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+  width: 100% !important;
+  min-width: 0;
+  justify-self: stretch;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--cv-social-card,#fff) 78%, transparent);
+}
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-match:has(input:checked) {
+  border-color: var(--cv-social-blue,#1267ff);
+  background: color-mix(in srgb, var(--cv-social-blue,#1267ff) 6%, var(--cv-social-card,#fff));
+}
+@media(max-width:760px) {
+  html[data-cv-social] #cv-group-form #cv-group-artists {
+    grid-template-columns: minmax(0,1fr);
+    gap: 10px;
+  }
+  html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick {
+    min-height: 86px;
+    padding: 13px 15px !important;
+    border-radius: 18px;
+    gap: 12px;
+  }
+  html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > img {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    max-width: 52px !important;
+    max-height: 52px !important;
+    flex-basis: 52px !important;
+  }
+  html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > span { font-size: 14px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick { transition: none; }
+}
