@@ -97,6 +97,8 @@ html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(
   background-color: #edf4ff !important;
   box-shadow: 0 0 0 1px rgba(35,107,236,.10);
 }
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > input[type=radio]:checked + img { outline: 3px solid #236bec !important; outline-offset: 2px; }
+html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick > input[type=radio]:checked ~ span { color: #174d9e !important; }
 html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(input:focus-visible) {
   outline: 2px solid var(--cv-social-blue,#1267ff);
   outline-offset: 3px;
