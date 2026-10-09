@@ -1,5 +1,15 @@
 # Communiverse
 
+## Production update — 9 October 2026
+
+**Live:** https://espacios.me/communiverse/ — the active presentation and source-grounded knowledge gateway is **communiverse-experience-20261009**. It delegates to the unchanged **communiverse-marketplace** Worker, preserving all existing accounts, D1/R2 data, media and application APIs. Cloudflare route exceptions keep most API and media requests on the original Worker.
+
+The gateway's exact editable source is in [worker/experience/](worker/experience/); tested knowledge projections are in [worker/knowledge/](worker/knowledge/), and deployment/rollback details are in [deployments/20261009-experience-overlay.md](deployments/20261009-experience-overlay.md). Public pages and assets have been checked after deployment. Authenticated cross-role interaction and file-upload QA remain pending.
+
+**Important:** The 9 October gateway is an additive layer; this repository still does **not** contain all underlying marketplace Worker modules. Do not blindly run the legacy root Wrangler deployment.
+
+---
+
 Public site: https://espacios.me/communiverse/
 
 ## Production release — 7 October 2026
