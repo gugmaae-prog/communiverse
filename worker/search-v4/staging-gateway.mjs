@@ -6,12 +6,14 @@ import JS from './search-js.txt';
 import FIXTURE from './fixture.txt';
 import QA from './qa.txt';
 import PLUG_QA from './plug-qa.txt';
+import PLUG_FIX from './plug-fix.txt';
 
 const ROOT='/communiverse/';
 const SEARCH_JS=ROOT+'__cvsearch_v4.js';
 const SEARCH_CSS=ROOT+'__cvsearch_v4.css';
 const QA_JS=ROOT+'__cvsearch_v4_qa.js';
 const PLUG_QA_JS=ROOT+'__cvsearch_v4_plug_qa.js';
+const PLUG_FIX_JS=ROOT+'__cvsearch_v4_plug_fix.js';
 const QA_FIXTURE=ROOT+'__cvsearch_v4_fixture';
 const PUBLIC=new Set([ROOT,ROOT+'artists/',ROOT+'events/',ROOT+'communities/',ROOT+'plug/',ROOT+'discover/']);
 
@@ -32,10 +34,11 @@ async function upstream(request,env){
 }
 class Head{element(e){e.append('<link rel="stylesheet" href="'+SEARCH_CSS+'" data-cv-search-stage="v4">',{html:true})}}
 class Body{
- constructor(qa){this.qa=qa}
+ constructor(qa,plug){this.qa=qa;this.plug=plug}
  element(e){
   let scripts='<script defer src="'+SEARCH_JS+'"></script>';
   if(this.qa==='layout')scripts+='<script defer src="'+QA_JS+'"></script>';
+  if(this.plug)scripts+='<script defer src="'+PLUG_FIX_JS+'"></script>';
   if(this.qa==='plug')scripts+='<script defer src="'+PLUG_QA_JS+'"></script>';
   e.append(scripts,{html:true});
  }
@@ -47,6 +50,7 @@ export default{
   if(path===SEARCH_CSS&&['GET','HEAD'].includes(request.method))return response(CSS,'text/css; charset=utf-8',request);
   if(path===QA_JS&&['GET','HEAD'].includes(request.method))return response(QA,'text/javascript; charset=utf-8',request);
   if(path===PLUG_QA_JS&&['GET','HEAD'].includes(request.method))return response(PLUG_QA,'text/javascript; charset=utf-8',request);
+  if(path===PLUG_FIX_JS&&['GET','HEAD'].includes(request.method))return response(PLUG_FIX,'text/javascript; charset=utf-8',request);
   if(path===QA_FIXTURE&&request.method==='GET')return new Response(FIXTURE,{headers:{'content-type':'text/html; charset=utf-8','cache-control':'no-store','content-security-policy':"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'"}});
   if(request.method!=='GET'&&request.method!=='HEAD')return Response.json({error:'Read-only staging'} ,{status:405});
   const original=await upstream(request,env);
@@ -56,6 +60,6 @@ export default{
   const csp=headers.get('content-security-policy');
   if(csp&&/\bstyle-src\b/.test(csp))headers.set('content-security-policy',csp.replace(/style-src ([^;]+)/,(whole,options)=>options.includes("'self'")?whole: "style-src 'self' "+options));
   headers.set('x-communiverse-stage','search-v4');
-  return new HTMLRewriter().on('head',new Head()).on('body',new Body(u.searchParams.get('cv4qa'))).transform(new Response(original.body,{status:original.status,statusText:original.statusText,headers}));
+  return new HTMLRewriter().on('head',new Head()).on('body',new Body(u.searchParams.get('cv4qa'),path===ROOT+'plug/')).transform(new Response(original.body,{status:original.status,statusText:original.statusText,headers}));
  }
 };
