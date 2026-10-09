@@ -38,10 +38,11 @@
       add('Desktop search and filter share a row',Math.abs(fr.top-rect.top)<6,'search='+rect.top+',filter='+fr.top);
      }
     }
+    const input=search;
     const ai=wrap?.querySelector('button.cv4-ai-button');
     if(ai&&!ai.hidden){
      const ib=ai.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),as=getComputedStyle(ai);
-     add('AI action stays completely inside its search field',ib.left>=wr.left+2&&ib.right<=wr.right-2&&ib.top>=wr.top+2&&ib.bottom<=wr.bottom-2,'AI: '+ib.width.toFixed(1)+' x '+ib.height.toFixed(1)+' field: '+wr.width.toFixed(1));
+     add('AI action stays completely inside its search field',ib.left>=wr.left+2&&ib.right<=wr.right-2&&ib.top>=wr.top+2&&ib.bottom<=wr.bottom-2,'AI '+ib.x.toFixed(1)+','+ib.y.toFixed(1)+'..'+ib.right.toFixed(1)+','+ib.bottom.toFixed(1)+' field '+wr.x.toFixed(1)+','+wr.y.toFixed(1)+'..'+wr.right.toFixed(1)+','+wr.bottom.toFixed(1)+' label '+label.getBoundingClientRect().width.toFixed(1));
      add('AI action is a compact 44px control',ib.width>=40&&ib.width<=48&&ib.height>=30&&ib.height<=38,ib.width+'x'+ib.height);
      add('AI action does not add another outlined pill',as.borderTopWidth==='0px'&&as.boxShadow==='none'&&as.backgroundColor==='rgba(0, 0, 0, 0)','border='+as.borderTopWidth+', shadow='+as.boxShadow+', bg='+as.backgroundColor);
      add('AI action has small restrained type',parseFloat(as.fontSize)<=12,'font='+as.fontSize);
