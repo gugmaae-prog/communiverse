@@ -1,5 +1,17 @@
 # Communiverse
 
+## Current production status — 9 October 2026 (latest)
+
+**LIVE:** [espacios.me/communiverse/](https://espacios.me/communiverse/) and [workspace](https://espacios.me/communiverse/workspace/) now use **`communiverse-experience-v2-20261009`** through ten **exact** Cloudflare routes (homepage, workspace, two versioned UI assets and the authorization-checked artist-assignment endpoint for apex and www).
+
+- The underlying `communiverse-marketplace` Worker and its sessions, OAuth callback, ordinary APIs, R2 media and D1 data remain unchanged.
+- The earlier broad gateway `communiverse-experience-20261009` was rolled back; it must **not** be reenabled. The notes headed "Release correction" and "Production update" below are historical.
+- Corrected implementation source is in [worker/experience-v2/](worker/experience-v2/); exact release versions, route IDs, rollback and checks are recorded in [deployments/20261009-experience-v2-production.md](deployments/20261009-experience-v2-production.md).
+- Source work was merged in [PR #12](https://github.com/gugmaae-prog/communiverse/pull/12). GitHub CI and signed-out real-page checks passed; simulated workspace interaction tests passed.
+- **Outstanding:** the original user's signed-in `null` screen, account-specific tasks, OAuth and real file uploads were not validated with an authenticated session. Do not claim these are fully certified. Roll back the exact ten v2 routes if signed-in failures recur.
+
+---
+
 ## Release correction — 9 October 2026 (later update)
 
 The 9 October presentation gateway noted below was **rolled back** following reports of a signed-in `null` screen and broken UI interactions. Cloudflare production routes now serve the original `communiverse-marketplace` Worker directly. The gateway `communiverse-experience-20261009` is **not** attached to the live zone. Previous release notes further down describe the earlier deployment historically, not the present live configuration.
