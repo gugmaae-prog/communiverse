@@ -45,9 +45,25 @@
   const button=[...label.children].find(x=>x.matches?.('button.cv-ai-search-button'));
   if(button){
    button.classList.add('cv4-ai-button');
-   button.textContent='AI Search';
-   button.setAttribute('aria-label','Search Communiverse by meaning');
-   button.title='Find related work and people using AI';
+   // A nested bordered pill competes with the field's own rounded outline.
+   // Keep the original live button and event listeners, but make it a quiet action.
+   button.replaceChildren();
+   const mark=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   mark.setAttribute('viewBox','0 0 24 24');
+   mark.setAttribute('fill','none');
+   mark.setAttribute('stroke','currentColor');
+   mark.setAttribute('stroke-width','1.65');
+   mark.setAttribute('stroke-linecap','round');
+   mark.setAttribute('stroke-linejoin','round');
+   mark.setAttribute('aria-hidden','true');
+   mark.classList.add('cv4-ai-sparkle');
+   const star=document.createElementNS('http://www.w3.org/2000/svg','path');
+   star.setAttribute('d','M12 2.7 13.9 9l6.3 2-6.3 1.9-1.9 6.4-2-6.4L3.7 11l6.3-2z');
+   mark.append(star);
+   const label=document.createElement('span');label.textContent='AI';
+   button.append(mark,label);
+   button.setAttribute('aria-label','Search with AI');
+   button.title='Search with AI';
    line.append(button);
    status.aiButtonsMoved++;
   }
