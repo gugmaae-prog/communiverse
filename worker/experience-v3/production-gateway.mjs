@@ -20,6 +20,7 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url),path=u
  const upstream=await backend(request,env);
  if(!htmlPaths.has(path)||request.method!=='GET'||!upstream.ok||!String(upstream.headers.get('content-type')||'').includes('text/html'))return upstream;
  const headers=new Headers(upstream.headers);for(const key of ['content-length','content-encoding','etag','last-modified'])headers.delete(key);
+ const csp=headers.get('content-security-policy');if(csp&&/\bstyle-src\b/.test(csp))headers.set('content-security-policy',csp.replace(/style-src ([^;]+)/,(full,values)=>values.includes("'self'")?full: "style-src 'self' "+values));
  headers.set('x-communiverse-release',RELEASE);
  return new HTMLRewriter().on('head',new Head()).on('body',new Body()).transform(new Response(upstream.body,{status:upstream.status,statusText:upstream.statusText,headers}));
  }};
