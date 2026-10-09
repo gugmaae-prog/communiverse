@@ -346,3 +346,17 @@ html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
     overflow: visible !important;
   }
 }
+
+
+/* Plug orbit focus-clearance: colliding portrait circles fade temporarily when
+   a story is open. No constellation nodes are removed, repositioned or renamed. */
+html[data-cv-social] .cv-plug #constellation a.node.cv4-story-clearance {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 160ms ease !important;
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-cv-social] .cv-plug #constellation a.node.cv4-story-clearance {
+    transition: none !important;
+  }
+}
