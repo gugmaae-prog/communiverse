@@ -1,5 +1,18 @@
 # Communiverse
 
+## Latest scoped release — Communiverse UX V3 (9 October 2026)
+
+**LIVE:** [Communiverse](https://espacios.me/communiverse/) and [Workspace](https://espacios.me/communiverse/workspace/) use `communiverse-workspace-ux-v3-20261009` for the four exact homepage/workspace routes. The original `communiverse-marketplace` backend and the existing V2 JS/CSS, D1, R2, identity, OAuth callback and business-knowledge endpoints remain unchanged. The V3 Worker loads the two existing V2 presentation assets before the new V3 CSS/JS.
+
+- Artwork: structurally reflows source/credits/tags below the proportional hero; expanded card uses full gallery width with native recommendation navigation.
+- Workspace: source-grounded Focus panel, native task buttons, avatar-circle owner/collaborator selection, request type tiles and read-only reviewer timeline. Underlying forms and policy-enforced write endpoints are preserved; no autonomous AI actions.
+- Exact routes, CI evidence and rollback: [deployments/20261009-communiverse-ux-v3.md](deployments/20261009-communiverse-ux-v3.md).
+- Implementation: [worker/experience-v3](worker/experience-v3) and [PR #14](https://github.com/gugmaae-prog/communiverse/pull/14).
+- **QA boundary:** public artwork E2E and simulated workspace tests passed; a real authenticated production session, approval mutation, R2 upload, OAuth renewal and the previously reported signed-in `null` issue remain unverified. The deeper Connect/AI workflow roadmap is not complete.
+- The historical **V2 release and rollback notes below** are retained for context and must not be treated as the current page routing state.
+
+---
+
 ## Current production status — 9 October 2026 (latest)
 
 **LIVE:** [espacios.me/communiverse/](https://espacios.me/communiverse/) and [workspace](https://espacios.me/communiverse/workspace/) now use **`communiverse-experience-v2-20261009`** through ten **exact** Cloudflare routes (homepage, workspace, two versioned UI assets and the authorization-checked artist-assignment endpoint for apex and www).
