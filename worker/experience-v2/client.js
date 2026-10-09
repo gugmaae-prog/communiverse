@@ -116,6 +116,26 @@ document.addEventListener('click',e=>{
  const close=e.target.closest('[data-cvfix-close]');if(close){e.preventDefault();e.stopImmediatePropagation();lastTaskRequest++;taskAbort?.abort();const box=$('#cv-ws-search-results');if(box){box.hidden=true;box.replaceChildren()}$('#cv-ws-search')?.focus();return}
  const mode=e.target.closest('[data-cvfix-mode]');if(mode&&taskView){e.preventDefault();e.stopImmediatePropagation();taskView.mode=mode.dataset.cvfixMode;renderTasks()}
 },true);
+/* Native artwork events already work; release the stale expanded tile AFTER
+ * the original handler moves the detail host. Never preventDefault or re-dispatch.
+ */
+document.addEventListener('click',e=>{
+ const recommendation=e.target.closest('#cv-work-detail .cv-related [data-open]');
+ if(!recommendation)return;
+ const nextId=safe(recommendation.dataset.open);
+ if(!valid(nextId))return;
+ queueMicrotask(()=>{
+   const host=$('#cv-work-detail'),dialog=$('#cv-work-dialog');
+   const movedToDialog=!!(dialog?.open&&host?.closest('#cv-work-dialog')===dialog&&host.dataset.inline==='false');
+   const anotherTile=$$('#cv-feed>.cv-pin.is-work-expanded').some(c=>c.dataset.id===nextId);
+   if(!movedToDialog&&!anotherTile)return;
+   for(const prior of $$('#cv-feed>.cv-pin.is-work-expanded')){
+     if(prior.dataset.id===nextId)continue;
+     prior.classList.remove('is-work-expanded');
+   }
+ });
+},false);
+
 let assignments=null,assignmentPromise=null;
 async function fetchAssignments(){
  if(assignments)return assignments;
