@@ -37,6 +37,7 @@ try{
  const viewport=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-viewport;pass('No horizontal overflow',overflow<=2,'overflow '+overflow+' px');
 }catch(err){pass('Unexpected QA error',false,err?.message||String(err))}
  const output=document.createElement('pre');output.id='cv-qa-result';output.dataset.ok=String(tests.every(x=>x.pass));output.dataset.count=String(tests.length);output.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(output);window.__cvQAComplete=true;
+ if(new URL(location.href).searchParams.has('preview')){const field=poll('#cv-ws-search'),btn=poll('[data-ws-ai-search]');if(field&&btn){field.value='show all tasks';btn.click();await wait(()=>document.querySelectorAll('.cvfix-task').length===2,3500);}}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>run(),{once:true});else run();
 })();
