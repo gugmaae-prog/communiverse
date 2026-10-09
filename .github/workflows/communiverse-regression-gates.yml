@@ -30,6 +30,7 @@ jobs:
           node --check worker/experience-v2/qa-runner.js
           node --check worker/experience-v2/qa-public-runner.js
           node --check worker/experience-v2/staging-gateway.mjs
+          node --check worker/experience-v2/production-gateway.mjs
           node --check worker/experience-v2/knowledge-worker.mjs
       - name: Verify knowledge projection invariants
         run: node --test worker/knowledge/knowledge-model.test.mjs
