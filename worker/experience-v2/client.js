@@ -136,7 +136,7 @@ document.addEventListener('click',e=>{
      prior.classList.remove('is-work-expanded');
    }
  });
-},false);
+},true);
 
 let assignments=null,assignmentPromise=null;
 async function fetchAssignments(){
