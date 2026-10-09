@@ -1,0 +1,39 @@
+name: Communiverse booking artist cards QA
+on:
+  push:
+    branches:
+      - fix/booking-artist-cards-20261010
+    paths:
+      - 'worker/booking-card-fix/**'
+      - '.github/workflows/booking-artist-cards-qa.yml'
+  pull_request:
+    paths:
+      - 'worker/booking-card-fix/**'
+      - '.github/workflows/booking-artist-cards-qa.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate gateway syntax
+        run: node --check worker/booking-card-fix/index.mjs
+      - name: Validate scoped presentation invariant
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          const css=fs.readFileSync("worker/booking-card-fix/artist-cards.css","utf8");
+          const code=fs.readFileSync("worker/booking-card-fix/index.mjs","utf8");
+          assert.match(css, /#cv-group-form #cv-group-artists > label\\.cv-group-pick/);
+          assert.match(css, /width: 100% !important/);
+          assert.match(css, /input\\[type=radio\\]:checked \\+ img/);
+          assert.match(code, /ALLOWED=new Set/);
+          assert.match(code, /env\\.MARKETPLACE\\.fetch/);
+          assert.ok(!code.includes("COMMUNIVERSE_DB"));
+          '
