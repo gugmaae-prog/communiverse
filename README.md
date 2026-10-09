@@ -1,5 +1,15 @@
 # Communiverse
 
+## Homepage compact artwork reader — 10 October 2026 (latest)
+
+On [Communiverse](https://espacios.me/communiverse/), selected artwork now occupies **3 of the 5 desktop feed columns** (2 at tablet widths, full available width on mobile). The related artworks directly beneath it use their own regular two-column grid with aligned 4:5 image frames, readable artist attribution and native recommendation clicks. All artwork images are fitted without cropping/stretching.
+
+**Source:** [worker/experience-v3/experience-v3.css](worker/experience-v3/experience-v3.css) · [PR #16](https://github.com/gugmaae-prog/communiverse/pull/16) · [deployment and rollback](deployments/20261010-homepage-compact-reader.md).
+
+This was a **CSS-only** update to the existing V3 Worker, with no Cloudflare route, API, media, account, D1, R2 or Supabase changes. Staging verified 174/174 real-gallery assertions across six widths and 44/44 existing workspace fixture checks. The previous V3 Worker version remains available for rollback. Authenticated workflows were not tested here.
+
+---
+
 ## Booking artist picker correction — 10 October 2026 (latest)
 
 **Live:** [Discover](https://espacios.me/communiverse/discover/) and the [artist booking view](https://espacios.me/communiverse/artist/) use a narrowly scoped CSS fix from `communiverse-booking-cards-20261010`.
