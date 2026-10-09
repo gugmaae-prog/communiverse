@@ -1,5 +1,13 @@
 # Communiverse
 
+## Release correction — 9 October 2026 (later update)
+
+The 9 October presentation gateway noted below was **rolled back** following reports of a signed-in `null` screen and broken UI interactions. Cloudflare production routes now serve the original `communiverse-marketplace` Worker directly. The gateway `communiverse-experience-20261009` is **not** attached to the live zone. Previous release notes further down describe the earlier deployment historically, not the present live configuration.
+
+A safer correction is under review in [draft PR #12](https://github.com/gugmaae-prog/communiverse/pull/12); real public and simulated workspace browser checks passed, but authenticated production QA is outstanding. Do **not** redeploy, merge or re-enable the retired gateway just because its original release record says LIVE. No application or database mutations are part of this documentation correction.
+
+---
+
 ## Production update — 9 October 2026
 
 **Live:** https://espacios.me/communiverse/ — the active presentation and source-grounded knowledge gateway is **communiverse-experience-20261009**. It delegates to the unchanged **communiverse-marketplace** Worker, preserving all existing accounts, D1/R2 data, media and application APIs. Cloudflare route exceptions keep most API and media requests on the original Worker.
