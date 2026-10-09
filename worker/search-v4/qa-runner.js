@@ -38,10 +38,35 @@
       add('Desktop search and filter share a row',Math.abs(fr.top-rect.top)<6,'search='+rect.top+',filter='+fr.top);
      }
     }
+    const ai=wrap?.querySelector('button.cv4-ai-button');
+    if(ai&&!ai.hidden){
+     const ib=ai.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),as=getComputedStyle(ai);
+     add('AI action stays completely inside its search field',ib.left>=wr.left+2&&ib.right<=wr.right-2&&ib.top>=wr.top+2&&ib.bottom<=wr.bottom-2,'AI: '+ib.width.toFixed(1)+' x '+ib.height.toFixed(1)+' field: '+wr.width.toFixed(1));
+     add('AI action is a compact 44px control',ib.width>=40&&ib.width<=48&&ib.height>=30&&ib.height<=38,ib.width+'x'+ib.height);
+     add('AI action does not add another outlined pill',as.borderTopWidth==='0px'&&as.boxShadow==='none'&&as.backgroundColor==='rgba(0, 0, 0, 0)','border='+as.borderTopWidth+', shadow='+as.boxShadow+', bg='+as.backgroundColor);
+     add('AI action has small restrained type',parseFloat(as.fontSize)<=12,'font='+as.fontSize);
+     add('AI action icon and text are not cut off',!!ai.querySelector('svg.cv4-ai-sparkle')&&ai.textContent.trim()==='AI'&&ai.scrollWidth<=ai.clientWidth+2);
+     add('AI and search input do not overlap',!!input&&input.getBoundingClientRect().right<=ib.left+2);
+    }
+    const panels=label?.querySelectorAll(':scope > .cv-ai-search-results')||[];
+    if(fixture&&panels.length&&wrap){
+      const pop=panels[0],wasHidden=pop.hidden;pop.hidden=false;
+      const frame=pop.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+      add('AI result list aligns below search field',frame.top>=wr.bottom+4&&frame.left>=wr.left-3&&frame.right<=wr.right+3,'left='+frame.left+', right='+frame.right);
+      pop.hidden=wasHidden;
+    }
+    const searchToolbar=label?.parentElement;
+    if(searchToolbar){
+      const direct=[...searchToolbar.children].filter(el=>el.tagName==='LABEL'&&getComputedStyle(el).display!=='none');
+      const intersects=(a,b)=>a.left<b.right-3&&b.left<a.right-3&&a.top<b.bottom-3&&b.top<a.bottom-3;
+      const overlap=direct.some((a,i)=>direct.slice(i+1).some(b=>intersects(a.getBoundingClientRect(),b.getBoundingClientRect())));
+      add('No search or filter controls overlap',!overlap);
+    }
+    add('No search layout causes horizontal page scrolling',document.documentElement.scrollWidth<=innerWidth+3,'extra px='+(document.documentElement.scrollWidth-innerWidth));
     if(fixture){
      const btn=await wait(()=>wrap?.querySelector('button.cv4-ai-button'),3000);
      add('Delayed original AI button moves into input row',!!btn);
-     add('AI button retains original accessible label',btn?.getAttribute('aria-label')==='Search Communiverse by meaning');
+     add('AI button retains accessible semantic label',btn?.getAttribute('aria-label')==='Search with AI');
      if(btn){btn.click();add('Original AI button event listener survives',window.__fixtureAIClicked===1)}
      search.value='a material';search.dispatchEvent(new Event('input',{bubbles:true}));
      add('Original keyword search event listener survives',window.__fixtureInputEvents===1);
