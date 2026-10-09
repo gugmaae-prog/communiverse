@@ -58,11 +58,32 @@
      add('AI and search input do not overlap',!!input&&input.getBoundingClientRect().right<=ib.left+2);
     }
     const panels=label?.querySelectorAll(':scope > .cv-ai-search-results')||[];
-    if(fixture&&panels.length&&wrap){
-      const pop=panels[0],wasHidden=pop.hidden;pop.hidden=false;
+    if(panels.length&&wrap){
+      const pop=panels[0],wasHidden=pop.hidden,original=[...pop.childNodes];
+      const mock=Array.from({length:4},(_,i)=>{
+        const a=document.createElement('a');a.href='#cv4-qa-no-navigation';
+        a.textContent='Related search result '+(i+1);
+        return a;
+      });
+      pop.replaceChildren(...mock);pop.hidden=false;
       const frame=pop.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
-      add('AI result list aligns below search field',frame.top>=wr.bottom+4&&frame.left>=wr.left-3&&frame.right<=wr.right+3,'left='+frame.left+', right='+frame.right);
-      pop.hidden=wasHidden;
+      add('AI result list aligns below search field',frame.top>=wr.bottom+4&&frame.left>=wr.left-3&&frame.right<=wr.right+3,'list '+frame.left.toFixed(1)+'..'+frame.right.toFixed(1)+' search '+wr.left.toFixed(1)+'..'+wr.right.toFixed(1));
+      add('AI result list stays inside viewport horizontally',frame.left>=-2&&frame.right<=document.documentElement.clientWidth+2,'left='+frame.left+',right='+frame.right);
+      const clipping=[];for(let n=pop.parentElement;n&&n!==document.documentElement;n=n.parentElement){
+        const c=getComputedStyle(n),r=n.getBoundingClientRect();
+        if(['hidden','clip','auto','scroll'].includes(c.overflowY)&&r.bottom<frame.bottom-6)clipping.push(n.className||n.nodeName);
+      }
+      add('AI results are not clipped by a containing panel',clipping.length===0,clipping.join(','));
+      const previouslyScrolled=window.scrollY;
+      if(!fixture)label.scrollIntoView({block:'start',behavior:'instant'});
+      const visible=pop.getBoundingClientRect();
+      if(visible.top>=0&&visible.top<innerHeight-20){
+        const px=Math.min(visible.right-12,visible.left+32),py=visible.top+Math.min(20,visible.height/2);
+        const target=document.elementFromPoint(px,py);
+        add('AI results display above surrounding content',pop===target||pop.contains(target),'hit='+(target?.className||target?.nodeName));
+      }
+      pop.replaceChildren(...original);pop.hidden=wasHidden;
+      if(!fixture)window.scrollTo({top:previouslyScrolled,behavior:'instant'});
     }
     const searchToolbar=label?.parentElement;
     if(searchToolbar){
