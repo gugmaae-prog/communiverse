@@ -1,5 +1,7 @@
 /* Isolated QA staging. Never deploy on production routes. */
 import CV3_JS from './v3-client.txt';
+import CV2_JS from './v2-client.txt';
+import CV2_CSS from './v2-style.txt';
 import CV3_CSS from './v3-style.txt';
 import FIXTURE from './fixture.txt';
 import QA from './qa.txt';
@@ -13,6 +15,8 @@ class Head{element(e){e.append('<link rel="stylesheet" href="'+V2_STYLE+'"><link
 class Body{constructor(qa){this.qa=qa}element(e){e.append('<script defer src="'+V2_SCRIPT+'"></script><script defer src="'+SCRIPT+'"></script>'+(this.qa?'<script defer src="/communiverse/__cvux_public_qa.js"></script>':''),{html:true})}}
 export default {async fetch(req,env){const u=new URL(req.url),p=u.pathname;
  if(p===ROOT+'__cvux_qa_fixture')return asset(req,FIXTURE,'text/html; charset=utf-8');
+ if(p===ROOT+'__cvfix_v2.js')return asset(req,CV2_JS,'text/javascript; charset=utf-8');
+ if(p===ROOT+'__cvfix_v2.css')return asset(req,CV2_CSS,'text/css; charset=utf-8');
  if(p===ROOT+'__cvux_v3.js')return asset(req,CV3_JS,'text/javascript; charset=utf-8');
  if(p===ROOT+'__cvux_v3.css')return asset(req,CV3_CSS,'text/css; charset=utf-8');
  if(p===ROOT+'__cvux_qa.js')return asset(req,QA,'text/javascript; charset=utf-8');
