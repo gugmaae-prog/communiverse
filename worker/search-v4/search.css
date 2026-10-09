@@ -235,6 +235,17 @@ html[data-cv-social] .cv4-search-field > .cv-ai-search-results {
   box-shadow: 0 18px 48px rgba(23,39,65,.14);
   backdrop-filter: blur(20px);
 }
+/* Suggestions must escape sibling filters/cards while open. Scope elevated
+   stacking to the active search only; all closed search fields stay neutral. */
+html[data-cv-social] .cv4-toolbar:has(> .cv4-search-field > .cv-ai-search-results:not([hidden])) {
+  position: relative !important;
+  z-index: 400 !important;
+  overflow: visible !important;
+}
+html[data-cv-social] .cv4-toolbar > .cv4-search-field:has(> .cv-ai-search-results:not([hidden])) {
+  position: relative !important;
+  z-index: 401 !important;
+}
 html[data-cv-social] .cv4-search-field > .cv-ai-search-results[hidden] {
   display: none !important;
 }
