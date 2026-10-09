@@ -39,6 +39,14 @@
      }
     }
     const input=search;
+    if(document.querySelector('#cv-events-filters')&&parent&&wrap){
+      const choices=[...parent.querySelectorAll(':scope > label select')];
+      if(innerWidth<791&&choices.length>=2){
+       const fs=choices.map(el=>el.getBoundingClientRect());
+       const sr=wrap.getBoundingClientRect();
+       add('Mobile Events search precedes its location/type filters',sr.bottom<=Math.min(...fs.map(x=>x.top))+4,'searchBottom='+sr.bottom.toFixed(1)+' filtersTop='+fs.map(x=>x.top.toFixed(1)).join(','));
+      }
+    }
     const ai=wrap?.querySelector('button.cv4-ai-button');
     if(ai&&!ai.hidden){
      const ib=ai.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),as=getComputedStyle(ai);
