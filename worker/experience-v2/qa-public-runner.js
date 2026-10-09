@@ -26,8 +26,9 @@ async function run(){
     const changed=await wait(()=>document.querySelector('#cv-work-detail .cv-work-layout h2')?.textContent!==previous?document.querySelector('#cv-work-detail .cv-work-layout h2'):null,9500);
     mark('Related-work click switches to another artwork',!!changed,'target='+target);
     mark('Related-work route ID matches clicked item',new URL(location.href).searchParams.get('work')===target);
+    await new Promise(resolve=>setTimeout(resolve,280));
     const oldExpanded=document.querySelectorAll('#cv-feed>.is-work-expanded').length;
-    mark('Transition clears outdated expanded card',oldExpanded===0,'remaining='+oldExpanded);
+    mark('Transition clears outdated expanded card',oldExpanded===0,'remaining='+oldExpanded+' trace='+JSON.stringify(window.__cvExperienceV2?.lastRecommendation||{}));
    }
   }else mark('Gallery click target available',false);
   mark('No horizontal overflow after detail',document.documentElement.scrollWidth<=document.documentElement.clientWidth+3,'overflow='+String(document.documentElement.scrollWidth-document.documentElement.clientWidth));
