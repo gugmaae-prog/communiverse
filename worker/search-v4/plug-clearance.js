@@ -1,6 +1,7 @@
 /* Staging-only Plug orbit clearance.
- * Keep profile controls within card bounds and fade ONLY portrait nodes that
- * geometrically intersect an opened story card. Never move/replace originals.
+ * Keep the story CTA unobstructed by temporarily fading ONLY the small set of
+ * portrait nodes that intersect the CTA itself. Never hide the entire story card
+ * area or move/replace the original people circles.
  * Closing or changing the selected person restores unaffected nodes.
  */
 (()=>{'use strict';
@@ -14,15 +15,16 @@
   if(!stage)return;
   const nodes=[...stage.querySelectorAll('a.node[data-slug]')];
   const work=panel?.querySelector('.glass-card[data-card="work"]');
+  const story=work?.querySelector('.cv-card-expand');
   const focused=plug?.classList.contains('is-focused')&&!panel?.inert&&panel?.getAttribute('aria-hidden')!=='true';
-  const real=focused&&work&&getComputedStyle(work).display!=='none'&&work.getBoundingClientRect().width>0;
-  const bounds=real?work.getBoundingClientRect():null;
+  const real=focused&&story&&getComputedStyle(story).display!=='none'&&story.getBoundingClientRect().width>0;
+  const bounds=real?story.getBoundingClientRect():null;
   let count=0;
   for(const node of nodes){
    const r=node.getBoundingClientRect(),computed=getComputedStyle(node);
    // The selected person's focal circle may remain visible unless it physically
    // intersects the card. Hidden/removed nodes are never modified unnecessarily.
-   const hasHit=!!bounds&&computed.display!=='none'&&r.width>12&&overlap(bounds,r,5);
+   const hasHit=!!bounds&&computed.display!=='none'&&r.width>12&&overlap(bounds,r,8);
    if(node.classList.contains('cv4-story-clearance')!==hasHit)node.classList.toggle('cv4-story-clearance',hasHit);
    if(hasHit)count++;
   }
