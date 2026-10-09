@@ -506,161 +506,29 @@
   // New document, new constellation. Avatar tiles and portrait sizes stay stable.
   const constellationSeed = crypto.getRandomValues(new Uint32Array(1))[0];
   const galaxyCache = new Map();
-  function starPositions(
-    items,
-    w,
-    initialH,
-    d,
-    gap,
-    zones = [],
-    ellipse = true,
-  ) {
-    const diameters = items.map((n) => d ?? n.restD);
-    const key = JSON.stringify([
-      items.map((n) => n.p.slug),
-      Math.round(w),
-      initialH,
-      diameters,
-      gap,
-      zones,
-      ellipse,
-    ]);
-    if (galaxyCache.has(key)) return galaxyCache.get(key);
-    let h = initialH;
-    for (let round = 0; round < 24; round++) {
-      const fitGap = Math.max(4, gap - round), fitScale = .94 ** round;
-      const points = [];
-      let failed = false;
-      for (const n of items) {
-        const diameter = Math.max(44, (d ?? n.restD) * fitScale),
-          r = diameter / 2,
-          rx = w / 2 - r - 12,
-          ry = h / 2 - r - 12;
-        let seed = (n.seed ^ constellationSeed ^ 0x9e3779b9) || 0x6d2b79f5,
-          point = null;
-        const rand = () => {
-          seed ^= seed << 13;
-          seed ^= seed >>> 17;
-          seed ^= seed << 5;
-          return (seed >>> 0) / 4294967296;
-        };
-        for (let k = 0; k < 1800; k++) {
-          // A balanced oval with soft variation, rather than a growing clump.
-          const slot=(points.length+(n.seed%items.length))%items.length,
-            phase=((constellationSeed%360)/180)*Math.PI,
-            angle=k<80?phase+(slot+k*.13)*Math.PI*(3-Math.sqrt(5)):rand()*Math.PI*2,
-            radial=k<80?Math.sqrt((slot+.5)/items.length)*.88:Math.sqrt(rand()),
-            x=w/2+Math.cos(angle)*radial*rx,
-            y=h/2+Math.sin(angle)*radial*ry;
-          if (
-            x < r + 12 ||
-            x > w - r - 12 ||
-            y < r + 12 ||
-            y > h - r - 12 ||
-            (ellipse && round < 4 &&
-              ((x - w / 2) / rx) ** 2 + ((y - h / 2) / ry) ** 2 > 1)
-          )
-            continue;
-          if (
-            zones.some(
-              (z) =>
-                x + r + gap > z.x &&
-                x - r - gap < z.x + z.w &&
-                y + r + gap > z.y &&
-                y - r - gap < z.y + z.h,
-            )
-          )
-            continue;
-          if (
-            points.some(
-              (p) => Math.hypot(p.x - x, p.y - y) < (p.d + diameter) / 2 + fitGap,
-            )
-          )
-            continue;
-          point = { x, y, d: diameter };
-          break;
-        }
-        if (!point) {
-          failed = true;
-          break;
-        }
-        points.push(point);
-      }
-      if (!failed) {
-        const minX=Math.min(...points.map(p=>p.x-p.d/2)),maxX=Math.max(...points.map(p=>p.x+p.d/2));
-        const minY=Math.min(...points.map(p=>p.y-p.d/2)),maxY=Math.max(...points.map(p=>p.y+p.d/2));
-        const dx=w/2-(minX+maxX)/2,dy=h/2-(minY+maxY)/2;
-        points.forEach(p=>{p.x+=dx;p.y+=dy;});
-        const result = { h, points };
-        galaxyCache.set(key, result);
-        return result;
-      }
-    }
-    throw Error("Cannot fit the public portraits in the constellation");
+  function starPositions(items,w,h,d,gap,zones=[]){
+    if(!items.length)return{h,points:[]};
+    const cols=Math.max(1,Math.ceil(Math.sqrt(items.length*w/h))),rows=Math.ceil(items.length/cols),cw=w/cols,ch=h/rows,cell=Math.min(cw,ch);
+    const points=items.map((n,i)=>{const col=i%cols,row=Math.floor(i/cols),variation=((n.seed^constellationSeed)>>>0)%100/100,diameter=Math.min(86,cell*(.53+variation*.32)),lastCount=Math.min(cols,items.length-row*cols),offset=(cols-lastCount)*cw/2;return{x:offset+(col+.5)*cw+(variation-.5)*cw*.08,y:(row+.5)*ch+(variation-.5)*ch*.08,d:diameter}});
+    return{h,points};
   }
-  function nearbyPositions(items, w, zones) {
-    const placed = new Map(), positions = [], gap = layout.compact ? 5 : 10;
-    const diameter = n => layout.compact ? 44 : Math.max(44,Math.min(54,n.restD*.62));
-    const free = (n,x,y) => {
-      const r=diameter(n)/2;
-      return x>=r+4&&x<=w-r-4&&y>=r+4&&y<=layout.h-r-4&&
-        !zones.some(z=>x+r+gap>z.x&&x-r-gap<z.x+z.w&&y+r+gap>z.y&&y-r-gap<z.y+z.h)&&
-        !positions.some(p=>Math.hypot(p.x-x,p.y-y)<(p.d+diameter(n))/2+gap);
-    };
-    const add=(n,p)=>{placed.set(n,p);positions.push(p)};
-    const displaced=[];
-    for(const n of items){
-      if(free(n,n.rest.x,n.rest.y))add(n,{...n.rest,d:diameter(n)});
-      else displaced.push(n);
+  function nearbyPositions(items,w,zones){
+    if(!items.length)return new Map();const h=layout.h;
+    // Use available space around the detail cards; adapt size rather than pagination.
+    for(let size=Math.min(44,Math.sqrt(w*h/Math.max(1,items.length))* .7);size>=4;size*=.86){
+      const gap=Math.max(2,size*.16),step=size+gap,spots=[];
+      for(let y=size/2+3;y<=h-size/2-3;y+=step)for(let x=size/2+3;x<=w-size/2-3;x+=step){if(!zones.some(z=>x+size/2+2>z.x&&x-size/2-2<z.x+z.w&&y+size/2+2>z.y&&y-size/2-2<z.y+z.h))spots.push({x,y,d:size});}
+      if(spots.length<items.length)continue;
+      const result=new Map();for(const n of items){let best=0,cost=Infinity;spots.forEach((p,i)=>{const distance=Math.hypot(p.x-n.rest.x,p.y-n.rest.y);if(distance<cost){best=i;cost=distance}});const p=spots.splice(best,1)[0];p.d*=.76+((n.seed>>>0)%100)/100*.24;result.set(n,p)}return result;
     }
-    for(const n of displaced){
-      let destination=null,cost=Infinity;
-      for(let y=diameter(n)/2+4;y<=layout.h-diameter(n)/2-4;y+=8)
-        for(let x=diameter(n)/2+4;x<=w-diameter(n)/2-4;x+=8){
-          if(!free(n,x,y))continue;
-          const travel=Math.hypot(x-n.rest.x,y-n.rest.y);
-          if(travel<cost){cost=travel;destination={x,y,d:diameter(n)}}
-        }
-      // Very short screens can have less free area than all open detail cards.
-      // Keep remaining circles inside the scene rather than growing a new row.
-      if(!destination){
-        let penalty=Infinity;
-        for(let y=26;y<=layout.h-26;y+=12)for(let x=26;x<=w-26;x+=12){
-          if(zones.some(z=>x+22>z.x&&x-22<z.x+z.w&&y+22>z.y&&y-22<z.y+z.h))continue;
-          const overlap=positions.reduce((sum,p)=>sum+Math.max(0,(p.d+44)/2+4-Math.hypot(p.x-x,p.y-y))**2,0);
-          const score=overlap*100+Math.hypot(x-n.rest.x,y-n.rest.y);
-          if(score<penalty){penalty=score;destination={x,y,d:44}}
-        }
-        destination||={x:bound(n.rest.x,26,w-26),y:bound(n.rest.y,26,layout.h-26),d:44};
-      }
-      add(n,destination);
-    }
-    // Shorten affected journeys by exchanging only their free destinations.
-    // Intersecting straight paths cannot be a minimum-distance pairing.
-    const cost = (n, p) => {
-      const from = focusOrigins?.get(n) || n.rest;
-      return Math.hypot(from.x - p.x, from.y - p.y);
-    };
-    for (let pass = 0; pass < displaced.length; pass++) {
-      let changed = false;
-      for (let i = 0; i < displaced.length; i++)
-        for (let j = i + 1; j < displaced.length; j++) {
-          const a = displaced[i], b = displaced[j];
-          const pa = placed.get(a), pb = placed.get(b);
-          if (cost(a, pb) + cost(b, pa) < cost(a, pa) + cost(b, pb) - 0.1) {
-            placed.set(a, pb); placed.set(b, pa); changed = true;
-          }
-        }
-      if (!changed) break;
-    }
-    return placed;
+    return new Map(items.map(n=>[n,{...n.rest,d:6}]));
   }
   function measure() {
     rememberCardPose();
     const previousWidth=layout?.w;
     const w = stage.getBoundingClientRect().width,
       mobile = innerWidth < 1050,
-      compact = innerWidth < 760;
+      compact = innerWidth < 760 || innerHeight < 500;
     allMatching = nodes
       .filter((n) => (filter === "communiverse" || n.p.category === filter)&&(!plugQuery||[n.p.name,n.p.location,...(n.p.focus||[])].join(" ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").includes(plugQuery)))
       .sort(
@@ -668,8 +536,7 @@
           (+b.el.dataset.score || 0) - (+a.el.dataset.score || 0) ||
           a.p.name.localeCompare(b.p.name),
       );
-    plugPageSize=mobile?28:42;plugPage=Math.min(Math.max(0,Math.floor(plugPage)),Math.max(0,Math.ceil(allMatching.length/plugPageSize)-1));
-    visible = allMatching.slice(plugPage*plugPageSize,(plugPage+1)*plugPageSize);pagePrev.disabled=plugPage===0;pageNext.disabled=(plugPage+1)*plugPageSize>=allMatching.length;pageNote.textContent=allMatching.length?(plugPage*plugPageSize+1)+'–'+Math.min(allMatching.length,(plugPage+1)*plugPageSize)+' of '+allMatching.length:'No matches';
+    plugPageSize=Math.max(1,allMatching.length);plugPage=0;visible=allMatching;pagePrev.hidden=true;pageNext.hidden=true;pageNote.textContent=allMatching.length+' people';
     const d = mobile ? 44 : 56;
     nodes.forEach(
       (n) =>
@@ -681,7 +548,7 @@
     // One viewport for the curated circle set; shorter screens reduce the
     // portrait variation before resorting to a rectangular packing boundary.
     const stageTop = stage.getBoundingClientRect().top;
-    const availableH = Math.max(220, innerHeight - stageTop - (compact ? 54 : 44));
+    const availableH = Math.max(120, innerHeight - stageTop - 12);
     const rest = starPositions(visible, w, availableH, null, mobile ? 14 : 24);
     visible.forEach((n,i)=>{n.restD=rest.points[i].d;});
     const restH = rest.h;
@@ -697,14 +564,14 @@
     layout.peers = new Map();
     if(selected){
       const main=cards.find(c=>c.dataset.card==='identity'),work=cards.find(c=>c.dataset.card==='work'),media=cards.find(c=>c.dataset.card==='video'),connect=cards.find(c=>c.dataset.card==='connect');
-      layout.heroX=focusAnchor?.x??selected.rest.x;
-      layout.heroY=focusAnchor?.y??selected.rest.y;
-      layout.heroD=Math.max(selected.rest.d,Math.min(compact?116:mobile?144:176,2*Math.min(layout.heroX-4,w-layout.heroX-4,layout.heroY-4,restH-layout.heroY-4))); 
+      layout.heroD=Math.min(compact?92:144,restH*.34,w*.28);
+      layout.heroX=bound(focusAnchor?.x??selected.rest.x,layout.heroD/2+6,w-layout.heroD/2-6);
+      layout.heroY=bound(focusAnchor?.y??selected.rest.y,layout.heroD/2+6,restH-layout.heroD/2-6);
       const r=layout.heroD/2;
       if(previousWidth&&Math.abs(previousWidth-w)>1){layout.heroX=bound(layout.heroX,r+8,w-r-8);layout.heroY=bound(layout.heroY,r+8,restH-r-8);focusAnchor={x:layout.heroX,y:layout.heroY};}
       layout.zones=[{x:layout.heroX-r-8,y:layout.heroY-r-8,w:layout.heroD+16,h:layout.heroD+16}];layout.orbitCards=[];
       const stageTop=stage.getBoundingClientRect().top,viewTop=0,viewBottom=Math.min(restH,innerHeight-stageTop-16);
-      const specs=[[main,compact?160:232,-1,-1],[media,compact?90:150,1,-1],[work,compact?180:270,-1,1],[panel.querySelector('.cv-gallery-orbit'),compact?140:200,1,1],[connect,44,0,1]].filter(([el])=>el);
+      const specs=[[main,compact?130:208,-1,-1],[media,compact?68:120,1,-1],[work,compact?138:235,-1,1],[panel.querySelector('.cv-gallery-orbit'),compact?118:180,1,1],[connect,44,0,1]].filter(([el])=>el);
       function place(card,cw,side,vertical){
         card.style.setProperty('--cv-orbit-w',cw+'px');card.style.width=cw+'px';
         const ch=card.classList.contains('is-expanded')?(Number(card.dataset.closedHeight)||104):card.getBoundingClientRect().height,preferredX=side<0?layout.heroX-r-cw-(mobile?6:12):side>0?layout.heroX+r+(mobile?6:12):layout.heroX-cw/2,preferredY=vertical<0?layout.heroY-ch-(mobile?8:16):layout.heroY+r+(mobile?8:20);
@@ -716,7 +583,7 @@
           const candidate=Math.hypot(x-preferredX,y-preferredY)+4*(Math.max(0,viewTop-y)+Math.max(0,y+ch-viewBottom));
           if(candidate<cost){cost=candidate;best={x,y,w:cw,h:ch};}
         }
-        best||={x:bound(preferredX,0,w-cw),y:Math.max(...layout.zones.map(z=>z.y+z.h))+12,w:cw,h:ch};
+        best||={x:bound(preferredX,0,w-cw),y:bound(preferredY,0,Math.max(0,restH-ch)),w:cw,h:Math.min(ch,restH)};
         for(const [key,value] of Object.entries(best))card.style.setProperty('--cv-orbit-'+key,value+'px');
         card.style.left=best.x+'px';card.style.top=best.y+'px';
         layout.orbitCards.push({el:card,...best});layout.zones.push(best);cardsBottom=Math.max(cardsBottom,best.y+ch);
@@ -724,9 +591,9 @@
       specs.forEach(args=>place(...args));
       // Only circles touching a card move aside; the selected circle stays at its clicked centre.
       layout.peers=nearbyPositions(visible.filter(n=>n!==selected),w,layout.zones);
-      panel.style.height=Math.max(restH,cardsBottom)+'px';
+      panel.style.height=restH+'px';
     }
-    layout.sceneH=selected?Math.max(restH,cardsBottom+24,...[...layout.peers.values()].map(p=>p.y+p.d/2+24)):restH;
+    layout.sceneH=restH;
     stage.style.setProperty('--scene-height',Math.ceil(layout.sceneH)+'px');
     root.dataset.focusLayout = mobile ? "mobile" : "desktop";
     root.dataset.cardLayout = compact ? "orbits" : "desktop";
