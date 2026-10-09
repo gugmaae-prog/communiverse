@@ -1,6 +1,16 @@
 # Communiverse production reconciliation
 
-## Latest marketplace, signup and in-place cards
+## Current connected workspace release
+
+Release `20261009-social-12`; version `4a659bea-6915-4093-a7e7-8ab9c85ccfb4`; deployment `88adaa38-8222-4b86-aa66-247da6af593b`; Worker `communiverse-marketplace`; 100% traffic. Source commit `aa12f2789ea082887792ef9480767d1c5f76758e`. Rollback Worker version: `37e7cd9a-11b4-4c1d-84e7-e43afa632c30`. The additive Social 12 tables can remain in place during a Worker rollback.
+
+Shared username/password identity gives every member an appropriately scoped workspace. Team-aware AI produces reviewed requests/tasks/conversations; server routing preserves Keiffer, Haseeb and Elferah dependencies. Mentions and replies create private workspace notifications and verified-contact email delivery records. Keiffer/Haseeb management supports account edits and previewed, confirmed cascading deletion. All Plug circles fit the current viewport, with enlarged selection and compact separate cards; feed details span two columns.
+
+All 119 uploaded modules and 33 retained immutable script URLs were verified. The final live crawl returned 188 successful routes; 186 HTML documents passed presentation checks and 33 video elements retained autoplay/loop/muted/inline configuration. Shared identity, actual Groq Q&A, role boundaries and all three Worker routes were checked independently after promotion. Integration suites passed 513 assertions plus 23 collaboration groups. Native checks covered desktop, portrait, landscape and 320px phone views. No real test requests, messages, meetings, deletion or email deliveries were submitted to the team.
+
+Evidence: [release record](deployments/20261009-social-12.json), [live feature checks](deployments/20261009-social-12-features.json), [page audit](deployments/20261009-social-12-page-audit.json), [runtime notes](worker/releases/social-20261008/README.md). Previous notes below describe historical releases.
+
+## Previous marketplace, signup and in-place cards
 
 Release `20261008-marketplace-1c`; presentation assets `20261008-marketplace-1`; Worker `communiverse-marketplace`; version `d6e5b7f4-5e0d-4545-9d54-72cee4b68563`; deployment `54b657f2-3b52-4b00-acf5-c433d909756a`; 100% traffic. Source commit `0402587606f43f448c9e003195e253271ebdb308`. Rollback version `6f84fe2e-2079-466e-9750-c43053945de5`.
 

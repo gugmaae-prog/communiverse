@@ -1,0 +1,67 @@
+{
+  "pass": true,
+  "version": "4a659bea-6915-4093-a7e7-8ab9c85ccfb4",
+  "checkedAt": "2026-10-09T01:08:39.224Z",
+  "environment": "Isolated localhost assembled candidate; public assets only fetched from production; SQLite/R2/email/model mutations are fixtures.",
+  "circles": [
+    {
+      "circles": 127,
+      "height": 844,
+      "outside": 0,
+      "scrollWidth": 390,
+      "selectedWidth": 91.99998474121094,
+      "width": 390
+    },
+    {
+      "circles": 127,
+      "height": 390,
+      "outside": 0,
+      "scrollWidth": 844,
+      "selectedWidth": 71.39999389648438,
+      "width": 844
+    },
+    {
+      "circles": 127,
+      "height": 747,
+      "outside": 0,
+      "scrollWidth": 1280,
+      "selectedWidth": 144.00001525878906,
+      "width": 1280
+    },
+    {
+      "circles": 127,
+      "detailCardOverlaps": 0,
+      "height": 568,
+      "outside": 0,
+      "scrollWidth": 320,
+      "selectedWidth": 81.760009765625,
+      "width": 320
+    }
+  ],
+  "workspaceMobile": {
+    "width": 390,
+    "scrollWidth": 390,
+    "promptWidth": 334,
+    "buttonsWithinViewport": true
+  },
+  "artistInline": {
+    "width": 390,
+    "expandedWidth": 334,
+    "scrollWidth": 390
+  },
+  "feedInline": {
+    "width": 1280,
+    "expandedWidth": 455.203125,
+    "peerWidth": 217.59375,
+    "gridColumn": "span 2",
+    "scrollWidth": 1280
+  },
+  "glassActions": {
+    "minimumHeight": 44,
+    "borderRadius": 999
+  },
+  "sharedSignInObserved": true,
+  "editableAiReviewAndSubmitObserved": true,
+  "adminDirectoryObserved": true,
+  "productionMutationTests": false
+}

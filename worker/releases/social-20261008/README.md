@@ -1,6 +1,34 @@
 # Communiverse connected workspace and art feed
 
-## Current release: Social 11a
+## Current release: Social 12
+
+`20261009-social-12` unifies public and workspace accounts, adds reviewed team-aware AI actions and administration, and fits the complete Plug directory into the viewport. The assembled Worker has **119 modules**, preserves all 57 original modules and 33 historical immutable scripts, and uses a new Social 12 script prefix. Assets, D1, R2, EMAIL, LEGACY, secret bindings, runtime and observability are retained. Deployment IDs, uploaded hashes and verification belong in `deployments/20261009-social-12.json`.
+
+### Shared account and access
+
+Username/password sign-in now serves the public site and workspace with one 90-day HttpOnly, Secure, SameSite session. Existing staff identities reuse their original Plug circles and photos; internal bridge records do not create duplicate public profiles. Existing Google/email callback support is retained. Every active member gets their own workspace automatically, including collectors; this does not grant internal team, artist finance or administration access. Password changes revoke old sessions while keeping the current user signed in. Sign-out clears canonical and legacy cookies. Apex redirects prevent www/non-www cookie mismatches.
+
+### From a prompt to approved work
+
+“What do you have in mind?” accepts questions and requests. The assistant receives the active team roster, responsibilities and only the caller's permitted projects, tasks and requests. It can answer, draft a request, prepare a project task or propose a conversation. Drafts are owned by the caller, editable and explicitly submitted; repeated submissions reuse their result. Existing server permissions and approval routes are authoritative. Ambassadors route through Keiffer, then Haseeb, with Elferah handling execution after approval. Unknown costs, dates and approvals stay blank.
+
+Task descriptions and replies support @ mentions with access checks. New replies, mentions and workflow changes create in-app notifications and a deduplicated email outbox. Emails use verified contact addresses and contain a private-workspace link rather than message text. Missing confirmed contacts wait for completion; provider acceptance is not an inbox-delivery claim. All mutation/email/delete tests use isolated fixtures, not real team work records.
+
+### Management and deletion
+
+Keiffer and Haseeb can create and edit accounts, update roles and profiles, and manage artists and communities. Deletion requires a server-generated impact preview and the exact record name. The deletion graph removes linked identities, private accounts/sessions and dependent database content; tombstones keep static catalogue entries from returning through legacy routes. Owned R2 media and history are queued for deletion, with failed cleanup retained for retry. Shared immutable source assets are preserved. No existing production users, artists or communities were deleted while developing this release.
+
+### Layout
+
+All Plug circles stay in one viewport. Smaller peers surround the enlarged selected circle and compact animated detail/video cards; mobile landscape has a compact single-row header. Art-feed cards span two columns when opened and surrounding cards reflow. Artist discovery keeps its inline story expansion and paginated infinite feed. Liquid-glass action buttons replace bare navigation actions, and the mobile workspace prompt has its own full-width row.
+
+### Assembly and verification
+
+Apply the additive `migration-12.sql` after the prior migrations. Assemble with `node scripts/prepare-social12.mjs ../social12-current ../social12-candidate`; the capture is pinned to Social 11a version `37e7cd9a-11b4-4c1d-84e7-e43afa632c30`. Run the Social 12 shipping-handler suite with Node 24+ and `scripts/social-text-loader.mjs`, plus the retained identity/AI, public AI, booking and collaboration suites. Use guarded zero-traffic staging, uploaded-module verification, production-route checks and independent live verification before recording completion. Never deploy the legacy Next.js export over this stacked Worker.
+
+The Social 11 notes below describe retained features and their original verification. Where they differ, Social 12's shared-account and automatic workspace behavior supersedes them.
+
+## Retained release: Social 11a
 
 `20261009-social-11a` is the server-rendered staff header refinement over Social 11. The complete stacked Worker has **111 modules**: the original 57 modules, 28 retained historical immutable script modules, and 26 current modules. All five currently published Social 11 JavaScript URLs remain byte-for-byte unchanged: main, focus, booking, workspace and identity. `RELEASE` changes to 11a while the public script prefix stays `/communiverse/_public/20261009-social-11`. This preserves immutable caching rather than replacing a published script at the same URL. Assets, original media, D1, R2, EMAIL, LEGACY, compatibility settings and observability remain part of the captured runtime.
 
