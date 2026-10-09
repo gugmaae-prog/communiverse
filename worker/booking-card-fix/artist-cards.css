@@ -93,9 +93,9 @@ html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:hove
   background: color-mix(in srgb, var(--cv-social-blue,#1267ff) 2%, var(--cv-social-card,#fff));
 }
 html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(input:checked) {
-  border-color: var(--cv-social-blue,#1267ff);
-  background: color-mix(in srgb, var(--cv-social-blue,#1267ff) 6%, var(--cv-social-card,#fff));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cv-social-blue,#1267ff) 25%, transparent);
+  border: 2px solid #236bec !important;
+  background-color: #edf4ff !important;
+  box-shadow: 0 0 0 1px rgba(35,107,236,.10);
 }
 html[data-cv-social] #cv-group-form #cv-group-artists > label.cv-group-pick:has(input:focus-visible) {
   outline: 2px solid var(--cv-social-blue,#1267ff);
