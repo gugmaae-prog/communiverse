@@ -279,9 +279,19 @@ html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
     grid-column: 1/-1 !important;
     grid-row: auto !important;
   }
-  html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):first-child,
+  /* Events DOM puts its filters first. Override their grid placement on
+     small screens so primary search is visually first at every breakpoint. */
+  html[data-cv-social] #cv-events-filters.cv4-toolbar > label.cv4-search-field {
+    grid-row: 1 !important;
+    grid-column: 1/-1 !important;
+  }
+  html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):first-child {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
   html[data-cv-social] #cv-events-filters.cv4-toolbar > label:not(.cv4-search-field):nth-child(2) {
-    grid-column: auto;
+    grid-column: 2 !important;
+    grid-row: 2 !important;
   }
   html[data-cv-social] .cv-plug .cv-plug-browse.cv4-toolbar {
     grid-template-columns: minmax(0,1fr);
