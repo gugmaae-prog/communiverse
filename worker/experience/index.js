@@ -2,12 +2,14 @@
  * Never mutate the existing communiverse-marketplace Worker or its bindings.
  * Routes are more specific than the existing communiverse* routes.
  */
-import {taskCollection,artistAssignmentCollection,relatedWorks,envelope} from "../knowledge/knowledge-model.mjs";
+import {taskCollection,artistAssignmentCollection,relatedWorks,envelope} from "./knowledge-model.mjs";
+import EXPERIENCE_JS from "./experience-client.txt";
+import EXPERIENCE_CSS from "./experience-style.txt";
 const PREFIX="/communiverse/";
 const JS=PREFIX+"_public/cv-experience-20261009.js";
 const CSS=PREFIX+"_public/cv-experience-20261009.css";
 const D1_SQL="SELECT a.artist_id,a.ambassador_id,s.name,s.profile_slug,p.photo_url,p.photo_version FROM cv_artist_assignments a JOIN cv_staff s ON s.id=a.ambassador_id AND s.status='active' LEFT JOIN cv_identity_profiles p ON p.identity_id=s.id";
-const asURL=(req,path)=>{const u=new URL(req.url);u.protocol="https:";u.host="espacios.me";if(path)u.pathname=path;return new Request(u,req)};
+const asURL=(req,path)=>{const u=new URL(req.url);u.protocol="https:";u.host="espacios.me";if(path){const target=new URL(path,"https://espacios.me");u.pathname=target.pathname;u.search=target.search;}return new Request(u,req)};
 const plain=(body,type)=>new Response(body,{headers:{"content-type":type,"cache-control":"public, max-age=31536000, immutable","x-content-type-options":"nosniff","access-control-allow-origin":"*"}});
 const json=(body,status=200)=>Response.json(body,{status,headers:{"cache-control":"no-store","x-content-type-options":"nosniff"}});
 const safeID=v=>typeof v==="string"&&/^[a-zA-Z0-9_-]{1,120}$/.test(v);
