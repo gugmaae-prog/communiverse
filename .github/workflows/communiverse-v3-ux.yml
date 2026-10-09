@@ -1,0 +1,32 @@
+name: Communiverse V3 UX checks
+on:
+  push:
+    branches:
+      - feature/communiverse-workspace-ux-v3-20261009
+    paths:
+      - 'worker/experience-v3/**'
+      - '.github/workflows/communiverse-v3-ux.yml'
+  pull_request:
+    paths:
+      - 'worker/experience-v3/**'
+      - '.github/workflows/communiverse-v3-ux.yml'
+permissions:
+  contents: read
+jobs:
+  syntax-and-knowledge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate the V3 source modules
+        run: |
+          node --check worker/experience-v3/experience-v3.js
+          node --check worker/experience-v3/production-gateway.mjs
+          node --check worker/experience-v3/staging-gateway.mjs
+          node --check worker/experience-v3/qa-runner.js
+          node --check worker/experience-v3/qa-public.js
+      - name: Verify existing knowledge projection invariants
+        run: node --test worker/knowledge/knowledge-model.test.mjs
