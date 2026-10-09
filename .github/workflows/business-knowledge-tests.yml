@@ -1,0 +1,28 @@
+name: Communiverse business knowledge checks
+on:
+  push:
+    paths:
+      - 'worker/business-knowledge/**'
+      - '.github/workflows/business-knowledge-tests.yml'
+  pull_request:
+    paths:
+      - 'worker/business-knowledge/**'
+      - '.github/workflows/business-knowledge-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Assemble checksummed gateway
+        run: node worker/business-knowledge/assemble.mjs
+      - name: Verify syntax and permission-scoped SQLite tests
+        run: |
+          node --check worker/business-knowledge/dist/worker.mjs
+          node --test worker/business-knowledge/worker.test.mjs
