@@ -1,0 +1,16 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {taskCollection,artistAssignmentCollection,relatedWorks,envelope} from "./knowledge-model.mjs";
+const overview={person:{id:"keiffer",name:"Keiffer",profile_slug:"cv-keiffer"},team:[{id:"haseeb",name:"Haseeb",profile_slug:"cv-haseeb"}],projects:[{id:"p1",title:"Programme",owner_id:"haseeb"},{id:"p2",title:"Marketplace",owner_id:"haseeb"}],tasks:[{id:"t1",title:"Train Luna",owner_id:"keiffer",project_id:"p1",created_by:"haseeb",status:"blocked"},{id:"t2",title:"Build product",owner_id:"haseeb",project_id:"p2",status:"todo"}]};
+test("owner-only tasks",()=>assert.deepEqual(taskCollection(overview,{ownerOnly:true}).cards.map(x=>x.id),["t1"]));
+test("task owner and creator remain distinct",()=>assert.deepEqual(taskCollection(overview).cards[0].people.map(x=>x.relationship),["Owner","Created by"]));
+test("authorized project filter",()=>assert.equal(taskCollection({...overview,projects:[overview.projects[0]]}).count,1));
+test("unauthenticated owner request sees nothing",()=>assert.equal(taskCollection({...overview,person:null},{ownerOnly:true}).count,0));
+test("unknown due dates stay null",()=>assert.equal(taskCollection(overview).cards[0].dueDate,null));
+test("task links preserve id",()=>assert.equal(taskCollection(overview).cards[0].link,"/communiverse/workspace/?task=t1"));
+test("assignment does not imply onboarder",()=>{const x=artistAssignmentCollection([{id:"art1",title:"Amina"}],[{artist_id:"art1",ambassador_id:"luna"}],[{id:"luna",name:"Luna"}]);assert.equal(x.cards[0].assignedAmbassador.name,"Luna");assert.equal(x.cards[0].onboardedBy,null)});
+test("recorded onboarding is distinct",()=>{const x=artistAssignmentCollection([{id:"art1",title:"Amina",onboardedBy:"luna"}],[{artist_id:"art1",ambassador_id:"ammar"}],[{id:"luna",name:"Luna"},{id:"ammar",name:"Ammar"}]);assert.equal(x.cards[0].onboardedBy.name,"Luna");assert.equal(x.cards[0].assignedAmbassador.name,"Ammar")});
+test("recommendations exclude seed and hidden",()=>{const r=relatedWorks({id:"a",tags:["ceramics"]},[{id:"a",title:"Same"},{id:"b",title:"B",tags:["ceramics"]},{id:"c",title:"Hidden",status:"hidden"}]);assert.deepEqual(r.items.map(x=>x.id),["b"])});
+test("recommendations preserve exact route",()=>assert.equal(relatedWorks({id:"a"},[{id:"b",title:"B"}]).items[0].link,"/communiverse/?work=b"));
+test("typed envelope never executes a write",()=>assert.equal(envelope("task_collection",{},null).provenanceRequired,true));
+test("reject unknown action envelopes",()=>assert.throws(()=>envelope("payment",{},null)));
