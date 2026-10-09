@@ -129,7 +129,7 @@ document.addEventListener('click',e=>{
    const host=$('#cv-work-detail'),dialog=$('#cv-work-dialog');
    const movedToDialog=!!(dialog?.open&&host?.closest('#cv-work-dialog')===dialog&&host.dataset.inline==='false');
    const anotherTile=$$('#cv-feed>.cv-pin.is-work-expanded').some(c=>c.dataset.id===nextId);
-   window.__cvExperienceV2.lastRecommendation={nextId,movedToDialog,anotherTile,open:!!dialog?.open,hostInline:host?.dataset.inline,oldExpanded:$('#cv-feed>.cv-pin.is-work-expanded').map(x=>x.dataset.id)};
+   window.__cvExperienceV2.lastRecommendation={nextId,movedToDialog,anotherTile,open:!!dialog?.open,hostInline:host?.dataset.inline,oldExpanded:$$('#cv-feed>.cv-pin.is-work-expanded').map(x=>x.dataset.id)};
    if(!movedToDialog&&!anotherTile)return;
    for(const prior of $$('#cv-feed>.cv-pin.is-work-expanded')){
      if(prior.dataset.id===nextId)continue;
