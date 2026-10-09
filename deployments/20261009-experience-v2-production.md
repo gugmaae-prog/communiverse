@@ -44,6 +44,12 @@ Original broad `espacios.me/communiverse*`, `www.espacios.me/communiverse*`, and
 - GitHub CI `37910752871` passed syntax and source-grounded knowledge projection tests.
 - Post-production checks: homepage and workspace on apex and www render the experience assets; Plug and Discover remain original; anonymous workspace and artist-assignment endpoints deny access, and no literal public `null` page was seen.
 
+## Query-string deep links — known scope limitation
+
+Cloudflare exact routes without a trailing wildcard do **not** match URL query strings. For safety, this release intentionally avoided the broad /communiverse/* route that was associated with the earlier regression. Therefore direct navigation to /communiverse/?work=... or /communiverse/workspace/?task=... can use the unchanged original Worker and will still function with its original UI; they do not receive the v2 style injection on an initial direct page load. Following work links from a v2-enhanced plain homepage/workspace retains the new styles during the in-page navigation.
+
+Do not add broad routes to fix that discrepancy until authenticated E2E and safe exception routing are proven. A future original-runtime code change may be a better long-term solution.
+
 ## Outstanding validation
 **No authenticated live-session E2E test was performed.** The user's previously reported signed-in `null` issue cannot be certified fixed solely from signed-out page checks or mocked task data. Real account, session renewal, editor, R2 upload, OAuth, account permissions and live task opening should be tested by an authorized signed-in person. Keep monitoring and roll back promptly if regressions appear.
 
