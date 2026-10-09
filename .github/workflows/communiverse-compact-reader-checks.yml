@@ -1,0 +1,42 @@
+name: Communiverse Compact Reader Checks
+on:
+  push:
+    branches:
+      - fix/home-pinterest-reader-span-20261010
+    paths:
+      - 'worker/experience-v3/experience-v3.css'
+      - 'worker/experience-v3/qa-compact-reader.js'
+      - '.github/workflows/communiverse-compact-reader-checks.yml'
+  pull_request:
+    paths:
+      - 'worker/experience-v3/experience-v3.css'
+      - 'worker/experience-v3/qa-compact-reader.js'
+      - '.github/workflows/communiverse-compact-reader-checks.yml'
+permissions:
+  contents: read
+jobs:
+  invariants:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate browser QA JavaScript
+        run: node --check worker/experience-v3/qa-compact-reader.js
+      - name: Enforce scoped 3-column reader and normal related grid
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          const css=fs.readFileSync("worker/experience-v3/experience-v3.css","utf8");
+          const patch=css.slice(css.indexOf("HOME READER / PINTEREST-LIKE COMPACT DISCOVERY"));
+          assert.ok(patch.includes("grid-column: span 3 !important"));
+          assert.ok(patch.includes("grid-column: span 2 !important"));
+          assert.ok(patch.includes("#cv-work-detail .cv-related.cv-masonry"));
+          assert.ok(patch.includes("grid-auto-rows: auto !important"));
+          assert.ok(patch.includes("grid-row-end: auto !important"));
+          assert.ok(patch.includes("object-fit: contain !important"));
+          assert.ok(!patch.includes("#cv-ws-content"));
+          '
