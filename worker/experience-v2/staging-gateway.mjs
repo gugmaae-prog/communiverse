@@ -3,6 +3,7 @@ import CLIENT from './client.txt';
 import CSS from './style.txt';
 import FIXTURE from './fixture.txt';
 import QA from './qa.txt';
+import QA_PUBLIC from './qa-public.txt';
 const base='/communiverse/';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'cache-control':'no-store','x-cv-stage':'1'}});
 const asset=(data,type)=>new Response(data,{headers:{'content-type':type,'cache-control':'no-store','x-content-type-options':'nosniff','x-cv-stage':'1'}});
@@ -14,7 +15,7 @@ const demo={
  {id:'task-2',title:'Approve briefing',owner_id:'haseeb',created_by:'keiffer',project_id:'project-1',status:'done',due_date:'2026-10-12',priority:'normal'}]
 };
 class Head{element(node){node.append('<link rel="stylesheet" href="/communiverse/__cvfix_v2.css" data-stage-cvfix-v2="true">',{html:true})}}
-class Body{element(node){node.append('<script defer src="/communiverse/__cvfix_v2.js" data-stage-cvfix-v2="true"></script>',{html:true})}}
+class Body{constructor(publicQA){this.publicQA=publicQA}element(node){node.append('<script defer src="/communiverse/__cvfix_v2.js" data-stage-cvfix-v2="true"></script>',{html:true});if(this.publicQA)node.append('<script defer src="/communiverse/__cvfix_qa_public.js"></script>',{html:true})}}
 export default{
  async fetch(request,env){
    const u=new URL(request.url),p=u.pathname;
@@ -22,6 +23,7 @@ export default{
    if(p===base+'__cvfix_v2.js')return asset(CLIENT,'text/javascript; charset=utf-8');
    if(p===base+'__cvfix_v2.css')return asset(CSS,'text/css; charset=utf-8');
    if(p===base+'__cvfix_qa_runner.js')return asset(QA,'text/javascript; charset=utf-8');
+   if(p===base+'__cvfix_qa_public.js')return asset(QA_PUBLIC,'text/javascript; charset=utf-8');
    if(p===base+'api/workspace/overview')return json(demo);
    if(p===base+'api/knowledge/artist-assignments')return json({assignments:[{artistId:'artist-1',relationship:'assigned ambassador',person:{id:'luna',name:'Luna',profile_slug:'cv-luna',photo_url:'/communiverse/_public/avatar/cv-luna'},verifiedOnboarder:false}]});
    if(p===base+'__cv-qa-health')return json({ok:true,staging:true});
@@ -31,6 +33,6 @@ export default{
    if(request.method!=='GET'||!origin.ok||!String(origin.headers.get('content-type')).includes('text/html'))return origin;
    const h=new Headers(origin.headers);for(const name of ['content-length','content-encoding','etag'])h.delete(name);
    const response=new Response(origin.body,{status:origin.status,headers:h});
-   return new HTMLRewriter().on('head',new Head()).on('body',new Body()).transform(response);
+   return new HTMLRewriter().on('head',new Head()).on('body',new Body(p===base)).transform(response);
  }
 };
