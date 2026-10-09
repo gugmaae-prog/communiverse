@@ -331,3 +331,18 @@ html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
 @media(prefers-reduced-motion:reduce) {
   html[data-cv-social] .cv4-search-field .cv4-search-inner {transition:none}
 }
+
+
+/* Plug story-card overflow correction — QA 2026-10-10.
+   Existing orbit layout measures the card's bounding rect to route other circles
+   around it. An old global max-height:180px truncates its measured height even
+   when the action button visibly continues below. Allow natural height, so the
+   original orbit placement and ResizeObserver can reserve the entire story CTA.
+   No absolute positioning, clipping or pointer-event overrides. */
+@media (min-width:760px) {
+  html[data-cv-social] .cv-plug.is-focused #cv-person-work .glass-panel-body .glass-card[data-card="work"]:not(.is-expanded) {
+    max-height: none !important;
+    height: max-content !important;
+    overflow: visible !important;
+  }
+}
