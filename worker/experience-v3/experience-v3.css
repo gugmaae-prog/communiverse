@@ -98,3 +98,164 @@ html[data-cv-social] .cv-ws-tabs button{white-space:nowrap;min-height:43px}
 @media(max-width:950px){html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out>.cv-pin.is-work-expanded{grid-column:1/-1!important}html[data-cv-social] #cv-work-detail[data-inline=true] .cv-work-layout{grid-template-columns:1fr 1fr!important;gap:22px}html[data-cv-social] .cv3-work-extra-inner{grid-template-columns:1fr 1fr;gap:18px}}
 @media(max-width:700px){html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out>.cv-pin.is-work-expanded{grid-column:1/-1!important;padding:14px!important;border-radius:20px;scroll-margin-top:120px}html[data-cv-social] #cv-work-detail[data-inline=true] .cv-work-layout{grid-template-columns:minmax(0,1fr)!important;gap:14px}html[data-cv-social] #cv-work-detail[data-inline=true] .cv-work-layout>div:first-child>img,html[data-cv-social] #cv-work-detail[data-inline=true] .cv-work-layout>div:first-child>video{max-height:65dvh!important;border-radius:17px}html[data-cv-social] #cv-work-detail .cv-work-maker img{width:50px!important;height:50px!important;min-height:50px}html[data-cv-social] .cv3-work-extra-inner{grid-template-columns:minmax(0,1fr)}.cv3-focus-grid{grid-template-columns:1fr}.cv3-kind-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cv3-approval-timeline{gap:7px}}
 @media(prefers-reduced-motion:reduce){.cv3-person-choice,.cv3-kind-tile,.cv3-focus-item{animation:none!important;transition:none!important}html{scroll-behavior:auto!important}}
+
+
+/*
+ * HOME READER / PINTEREST-LIKE COMPACT DISCOVERY 2026-10-10
+ * Only applies to the existing inline work view on #cv-feed.
+ * Do not affect workspace, artist/gallery routes, popup fallbacks, or other
+ * cv-masonry instances.
+ */
+@media (min-width: 1200px) {
+  html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out > .cv-pin.is-work-expanded {
+    grid-column: span 3 !important; /* three of the desktop feed's five columns */
+  }
+}
+@media (min-width: 701px) and (max-width: 1199px) {
+  html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out > .cv-pin.is-work-expanded {
+    grid-column: span 2 !important;
+  }
+  /* A two-column card is narrower than the full feed: keep the media legible. */
+  html[data-cv-social] #cv-work-detail[data-inline="true"] .cv-work-layout,
+  html[data-cv-social] #cv-work-detail[data-inline="true"] .cv3-work-extra-inner {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+@media (max-width: 700px) {
+  html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out > .cv-pin.is-work-expanded {
+    grid-column: 1 / -1 !important; /* only the phone's two narrow columns */
+  }
+}
+/* Reader size must follow its grid track, not spill onto adjacent cards. */
+html[data-cv-social] #cv-feed.cv-masonry.cv-laid-out > .cv-pin.is-work-expanded {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: visible;
+}
+html[data-cv-social] #cv-work-detail[data-inline="true"] {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere;
+}
+/*
+ * Related works are a normal two-column card grid, NOT a nested 8px-row masonry.
+ * Without resetting grid-row-end, the parent masonry observer makes these
+ * recommendations hundreds of rows tall and leaves gaps/overlaps.
+ */
+html[data-cv-social] #cv-work-detail .cv-related.cv-masonry,
+html[data-cv-social] #cv-work-detail .cv-related.cv-masonry.cv-laid-out {
+  display: grid !important;
+  columns: unset !important;
+  grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  grid-auto-rows: auto !important;
+  grid-auto-flow: row !important;
+  align-items: start !important;
+  align-content: start !important;
+  gap: 16px 14px !important;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  margin: 16px 0 24px;
+}
+html[data-cv-social] #cv-work-detail .cv-related.cv-masonry > .cv-pin {
+  display: flex !important;
+  flex-direction: column;
+  align-self: start;
+  grid-row: auto !important;
+  grid-row-start: auto !important;
+  grid-row-end: auto !important; /* overrides native inline masonry spans */
+  grid-column: auto !important;
+  height: auto !important;
+  width: 100%;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-media {
+  display: flex !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4 / 5;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0;
+  border-radius: 16px !important;
+  background: #f3f5f8 !important;
+  box-shadow: none !important;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-media > img,
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-media > video {
+  display: block;
+  box-sizing: border-box;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  object-fit: contain !important; /* full artwork visible; no crop or stretch */
+  object-position: center !important;
+  border-radius: 0 !important;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-caption {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  padding: 9px 2px 0 !important;
+  margin: 0;
+  line-height: 1.45;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-caption > button {
+  display: -webkit-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  cursor: pointer;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-pin-caption > a {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+html[data-cv-social] #cv-work-detail .cv-related .cv-heart {
+  z-index: 2;
+}
+@media (max-width: 360px) {
+  html[data-cv-social] #cv-work-detail .cv-related.cv-masonry,
+  html[data-cv-social] #cv-work-detail .cv-related.cv-masonry.cv-laid-out {
+    grid-template-columns: minmax(0,1fr) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-cv-social] #cv-work-detail .cv-related .cv-pin {
+    transition: none !important;
+    animation: none !important;
+  }
+}
