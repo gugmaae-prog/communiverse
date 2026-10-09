@@ -28,5 +28,6 @@ export default {async fetch(req,env){const u=new URL(req.url),p=u.pathname;
  const upstreamURL=new URL(req.url);upstreamURL.protocol='https:';upstreamURL.host='espacios.me';const upstream=await env.MARKETPLACE.fetch(new Request(upstreamURL,req));
  if(!upstream.ok||req.method!=='GET'||!String(upstream.headers.get('content-type')||'').includes('text/html'))return upstream;
  const headers=new Headers(upstream.headers);for(const k of ['content-length','content-encoding','etag','last-modified'])headers.delete(k);
+ const csp=headers.get('content-security-policy');if(csp&&/\bstyle-src\b/.test(csp))headers.set('content-security-policy',csp.replace(/style-src ([^;]+)/,(full,values)=>values.includes("'self'")?full: "style-src 'self' "+values));
  return new HTMLRewriter().on('head',new Head()).on('body',new Body(p===ROOT)).transform(new Response(upstream.body,{status:upstream.status,headers}));
  }};
