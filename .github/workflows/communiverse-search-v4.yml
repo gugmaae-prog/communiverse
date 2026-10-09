@@ -25,6 +25,8 @@ jobs:
           node --check worker/search-v4/search.js
           node --check worker/search-v4/staging-gateway.mjs
           node --check worker/search-v4/qa-runner.js
+          node --check worker/search-v4/qa-plug.js
+          node --check worker/search-v4/plug-clearance.js
       - name: Assert same input and AI button are retained
         run: |
           node --input-type=module -e '
@@ -33,6 +35,7 @@ jobs:
           const js=fs.readFileSync("worker/search-v4/search.js","utf8");
           const css=fs.readFileSync("worker/search-v4/search.css","utf8");
           const gateway=fs.readFileSync("worker/search-v4/staging-gateway.mjs","utf8");
+          const clearance=fs.readFileSync("worker/search-v4/plug-clearance.js","utf8");
           assert.ok(js.includes("line.append(button)"));
           assert.ok(js.includes("line.append(icon(),input)"));
           assert.ok(js.includes("aiButtonsMoved"));
@@ -40,4 +43,9 @@ jobs:
           assert.ok(css.includes(".cv4-ai-button[hidden]"));
           assert.ok(gateway.includes("Read-only staging"));
           assert.ok(!gateway.includes("COMMUNIVERSE_DB"));
+          assert.ok(css.includes("Plug story-card overflow correction"));
+          assert.ok(css.includes("cv4-story-clearance"));
+          assert.ok(clearance.includes("querySelectorAll"));
+          assert.ok(gateway.includes("new Body(u.searchParams.get"));
+          assert.ok(gateway.includes("PLUG_FIX_JS"));
           '
