@@ -21,6 +21,25 @@ Mobile/public tests: Homepage 320/390 14/14 each; Artists 390 14/14; Events 390 
 GitHub Actions search-v4 source syntax and no-mutation invariant checks: passed.
 An extra browser measurement injection timed out and is NOT counted as passed.
 
+## Final pre-deployment visual regression audit — 10 October 2026
+Source screenshot: the old prominent AI Search pill sits against the search field border and looks clipped.
+Root causes found and corrected in staging:
+1. Nested pill border within a second rounded search border: replaced the existing AI button's visual content with a compact 44×34 borderless control (13px sparkles SVG + AI). The ORIGINAL clickable button and its listener are reused. Aria label and tooltip remain Search with AI.
+2. Legacy AI button align-self:start positioned the button near the top field border on Discover and Plug; overridden with align-self:center and consistent dimensions.
+3. Events filters appeared above primary keyword search around 768–790px; explicit responsive grid rows put keyword search first, location/type directly below.
+4. AI suggestions appeared behind adjacent content on desktop/tablet for Communities and Discover; the toolbar/search field elevate their stacking only while a suggestion panel is open, preserving normal page layering.
+5. Input overflow, label alignment, keyboard semantics and suggestion panel clipping were covered by additional browser tests.
+
+Final staging results:
+- Real public pages (Homepage, Artists, Events, Communities, Discover, Plug) at 320, 390, 768, 1024, and 1440px: **583 / 583 browser assertions passed**, zero failures across 30 cases.
+- Representative delayed-AI fixture at 320, 390, 768, 1280 and 1440px: **102 / 102 assertions passed**, preserving original input/change events, AI button action and selected native Region control.
+- GitHub Actions source syntax and presentation invariant checks passed on latest branch.
+
+Boundaries:
+- This remains a **draft staging change**, not production. No DNS/Worker production routes, accounts, D1, Supabase, uploads, or original search API have been touched.
+- The staging gateway deliberately rejects POST requests; real successful AI model output and user-specific workspace search still require authenticated live end-to-end verification.
+- A human final visual review of the staging preview is recommended before promoting; the earlier optional screenshot extraction was not independently certified.
+
 ## Safety / release gates
 No production routes, APIs, Supabase records, D1/R2, credentials, auth, booking submissions or AI services changed.
 Staging gateway blocks POST intentionally. Its search design can be reviewed but live AI requests and form submissions must not be attempted there.
