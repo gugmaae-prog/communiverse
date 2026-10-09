@@ -1,0 +1,26 @@
+name: Communiverse Knowledge Model Tests
+on:
+  pull_request:
+    paths:
+      - worker/knowledge/**
+      - .github/workflows/knowledge-model-tests.yml
+  push:
+    branches: [feature/communiverse-ai-ux-20261009]
+    paths:
+      - worker/knowledge/**
+      - .github/workflows/knowledge-model-tests.yml
+permissions:
+  contents: read
+jobs:
+  knowledge-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check syntax
+        run: node --check worker/knowledge/knowledge-model.mjs
+      - name: Unit tests
+        run: node --test worker/knowledge/knowledge-model.test.mjs

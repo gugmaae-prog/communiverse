@@ -1,0 +1,28 @@
+name: Communiverse Experience UI Syntax
+on:
+  push:
+    branches: [feature/communiverse-ai-ux-20261009]
+    paths:
+      - worker/experience/**
+      - .github/workflows/experience-checks.yml
+  pull_request:
+    paths:
+      - worker/experience/**
+      - .github/workflows/experience-checks.yml
+permissions:
+  contents: read
+jobs:
+  verify-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check gateway and browser syntax
+        run: |
+          node --check worker/experience/index.js
+          node --check worker/experience/experience.js
+      - name: Check knowledge projections
+        run: node --test worker/knowledge/knowledge-model.test.mjs
