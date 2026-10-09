@@ -1,0 +1,18 @@
+{
+  "main_module": "worker.mjs",
+  "compatibility_date": "2026-10-09",
+  "bindings": [
+    {"name":"APP","type":"service","service":"communiverse-marketplace","environment":"production"},
+    {"name":"DB","type":"d1","database_id":"6126080a-3d53-4043-baa5-3d2ebb4781bb"},
+    {"name":"LIMITER","type":"ratelimit","namespace_id":"2026100902","simple":{"limit":60,"period":60}}
+  ],
+  "observability": {
+    "enabled": true,
+    "redact_query_string": true,
+    "logs": {"enabled":true,"invocation_logs":true,"persist":true,"head_sampling_rate":1}
+  },
+  "annotations": {
+    "workers/tag":"20261009-knowledge-1",
+    "workers/message":"Permission-scoped business knowledge; preserve application, experience UI, media and authentication."
+  }
+}
