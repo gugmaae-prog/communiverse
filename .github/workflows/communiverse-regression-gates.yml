@@ -1,0 +1,36 @@
+name: Communiverse Regression Gates
+
+on:
+  push:
+    branches:
+      - fix/communiverse-regression-qa-20261009
+    paths:
+      - 'worker/experience-v2/**'
+      - '.github/workflows/communiverse-regression-gates.yml'
+  pull_request:
+    paths:
+      - 'worker/experience-v2/**'
+      - '.github/workflows/communiverse-regression-gates.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  unit-and-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax-check all staging modules
+        run: |
+          node --check worker/experience-v2/client.js
+          node --check worker/experience-v2/qa-runner.js
+          node --check worker/experience-v2/qa-public-runner.js
+          node --check worker/experience-v2/staging-gateway.mjs
+          node --check worker/experience-v2/production-gateway.mjs
+          node --check worker/experience-v2/knowledge-worker.mjs
+      - name: Verify knowledge projection invariants
+        run: node --test worker/knowledge/knowledge-model.test.mjs
