@@ -147,25 +147,57 @@ html[data-cv-social] .cv4-search-field .cv4-search-inner > input[type=search]::p
   color: var(--cv4-search-muted);
   opacity: .90;
 }
+/* Compact AI action: no nested pill, no doubled borders at the field edge. */
 html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button {
+  box-sizing: border-box !important;
   display: inline-flex !important;
-  flex: 0 0 auto;
-  justify-content: center;
-  align-items: center;
-  height: 35px !important;
-  min-height: 35px !important;
-  min-width: 74px;
+  flex: 0 0 44px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
   margin: 0 !important;
-  padding: 0 12px !important;
-  border: 1px solid color-mix(in srgb,var(--cv4-search-accent) 14%,var(--cv4-search-line));
-  border-radius: 999px;
-  background: color-mix(in srgb,var(--cv4-search-accent) 4%,var(--cv4-search-bg));
-  color: #2058b9;
-  white-space: nowrap;
-  font-size: 11px !important;
-  font-weight: 650;
-  line-height: 1.3 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  color: #255dba !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
   cursor: pointer;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  letter-spacing: .01em;
+  font-weight: 650 !important;
+  white-space: nowrap;
+  text-align: center;
+  text-transform: none;
+  vertical-align: middle;
+  overflow: hidden;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button:hover {
+  background: color-mix(in srgb,var(--cv4-search-accent) 7%,transparent) !important;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button svg.cv4-ai-sparkle {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+}
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button span {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  font: inherit;
 }
 html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button[hidden] {
   display: none !important;
@@ -265,8 +297,10 @@ html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
     padding-left: 12px;
   }
   html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button {
-    min-width: 51px;
-    padding: 0 9px !important;
+    flex-basis: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 0 !important;
   }
 }
 @media(prefers-reduced-motion:reduce) {
