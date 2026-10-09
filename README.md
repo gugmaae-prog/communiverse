@@ -1,5 +1,18 @@
 # Communiverse
 
+## Booking artist picker correction — 10 October 2026 (latest)
+
+**Live:** [Discover](https://espacios.me/communiverse/discover/) and the [artist booking view](https://espacios.me/communiverse/artist/) use a narrowly scoped CSS fix from `communiverse-booking-cards-20261010`.
+
+The legacy gallery rule `.cv-pick { width:65px }` was shrinking the group-session artist cards into tall narrow columns. The correction is limited to `#cv-group-form #cv-group-artists`: full-width responsive cards, proportional portraits, readable copy, preserved radio inputs and a visible selected state.
+
+- Four specific Cloudflare routes; no broad `/communiverse/*` proxy. The original marketplace, V3 home/workspace UI, session requests, Supabase, D1, R2 and AI remain unchanged.
+- Validation: 42/42 staged browser checks against real public artist data, live public route smoke tests and CI passing.
+- [Code PR #15](https://github.com/gugmaae-prog/communiverse/pull/15); [deployment/rollback record](deployments/20261010-booking-artist-cards.md).
+- No live booking submission or authenticated booking completion test was performed.
+
+---
+
 ## Latest scoped release — Communiverse UX V3 (9 October 2026)
 
 **LIVE:** [Communiverse](https://espacios.me/communiverse/) and [Workspace](https://espacios.me/communiverse/workspace/) use `communiverse-workspace-ux-v3-20261009` for the four exact homepage/workspace routes. The original `communiverse-marketplace` backend and the existing V2 JS/CSS, D1, R2, identity, OAuth callback and business-knowledge endpoints remain unchanged. The V3 Worker loads the two existing V2 presentation assets before the new V3 CSS/JS.
