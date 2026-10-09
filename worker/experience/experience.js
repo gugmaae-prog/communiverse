@@ -1,0 +1,43 @@
+/* Communiverse experience enhancement; loaded only from the 2026-10-09 overlay. */
+(()=>{"use strict";
+if(window.__communiverseExperience20261009)return;window.__communiverseExperience20261009=true;
+const ROOT="/communiverse/",q=s=>document.querySelector(s),qa=s=>Array.from(document.querySelectorAll(s));
+const text=(v,n=300)=>String(v??"").trim().slice(0,n);
+const validId=v=>typeof v==="string"&&/^[a-zA-Z0-9_-]{1,120}$/.test(v);
+const elt=(tag,cls,label)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(label!==undefined)e.textContent=text(label,2000);return e};
+function profile(){for(const chip of qa("a.cv-profile-chip,button.cv-profile-chip")){if(chip.classList.contains("cv-avatar-only"))continue;const name=text(chip.textContent,90)||"my profile";if(!chip.querySelector("img,.cv-avatar"))continue;chip.setAttribute("aria-label","Open profile for "+name);chip.title="My profile: "+name;chip.classList.add("cv-avatar-only")}}
+function files(){for(const f of qa('.cv-workspace input[type="file"],#cv-ws-dialog input[type="file"]')){if(f.dataset.cvRefined)return;f.dataset.cvRefined="yes";const info=elt("span","cv-file-selection","No file selected");info.setAttribute("role","status");info.setAttribute("aria-live","polite");f.insertAdjacentElement("afterend",info);f.addEventListener("change",()=>{const chosen=Array.from(f.files||[]);if(!chosen.length){info.textContent="No file selected";f.setCustomValidity("");return}const format=v=>(v/1048576).toFixed(1)+" MB";info.textContent=chosen.map(x=>text(x.name,120)+" · "+format(x.size)).join(" · ");const invalid=chosen.find(x=>x.size>(x.type.startsWith("video/")?32:20)*1048576);info.dataset.error=invalid?"true":"false";f.setCustomValidity(invalid?"File exceeds the permitted size.": "");if(invalid)info.textContent+=" — Please choose a smaller file."});f.addEventListener("invalid",()=>{info.dataset.error="true"})}}
+function relatedClick(e){const a=e.target.closest("#cv-work-detail .cv-related [data-open],#cv-work-dialog .cv-related [data-open]");if(!a)return;const id=text(a.dataset.open,120);if(!validId(id))return;e.preventDefault();e.stopImmediatePropagation();const inline=q('#cv-work-detail[data-inline="true"]');if(inline)inline.querySelector("[data-close-work]")?.click();const u=new URL(location.href);u.searchParams.set("work",id);history.pushState({work:id},"",u);window.dispatchEvent(new PopStateEvent("popstate",{state:{work:id}}))}
+document.addEventListener("click",relatedClick,true);
+function avatar(person,relationship){const a=elt(validId(person.profile_slug)?"a":"span","cv-person-avatar");const name=text(person.name||person.id,90);a.dataset.personName=name;a.dataset.relationship=relationship;a.setAttribute("aria-label",name+" · "+relationship);a.title=name+" · "+relationship;if(a.tagName==="A")a.href=ROOT+"plug/?person="+encodeURIComponent(person.profile_slug);else a.tabIndex=0;const fallback=elt("span","cv-person-initial",name.charAt(0).toUpperCase());a.append(fallback);const src=person.photo_url||(validId(person.profile_slug)?ROOT+"_public/avatar/"+encodeURIComponent(person.profile_slug):"");if(src&&src.startsWith(ROOT)){const img=elt("img");img.src=src;img.alt="";img.loading="lazy";img.addEventListener("error",()=>img.remove(),{once:true});a.append(img)}return a}
+const states={todo:"To do",blocked:"Blocked",review:"In review",done:"Done",in_progress:"In progress"};
+const dueFormat=d=>/^\d{4}-\d{2}-\d{2}$/.test(d||"")?new Date(d+"T12:00:00Z").toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):"No due date";
+async function authorized(path){const res=await fetch(ROOT+"api/"+path,{credentials:"same-origin",cache:"no-store",headers:{Accept:"application/json"}});if(!res.ok)throw Error("Not available for your workspace");return res.json()}
+const isTasks=p=>/\b(tasks?|to[- ]?dos?|assignments?|workload|my next moves?|what (?:do|should) i do|who (?:owns?|is working on))\b/i.test(p)&&!/\b(create|make|add|new task|draft|request|remind)\b/i.test(p);
+let taskVersion=0;
+async function taskCards(box,prompt){const stamp=++taskVersion;
+try{const d=await authorized("workspace/overview");if(stamp!==taskVersion||!box.isConnected)return;
+const my=/\b(my|mine|assigned to me|what (?:do|should) i)\b/i.test(prompt)&&!/\b(all|every|team|everyone)\b/i.test(prompt);
+const projects=new Map((d.projects||[]).filter(p=>validId(p.id)).map(p=>[p.id,p]));
+const people=new Map([...(d.team||[]),d.person].filter(p=>p&&validId(p.id)).map(p=>[p.id,p]));
+const order={blocked:0,review:1,todo:2,in_progress:3,done:4};
+const rows=(d.tasks||[]).filter(t=>validId(t.id)&&projects.has(t.project_id)&&t.status!=="archived"&&(!my||t.owner_id===d.person?.id)).sort((a,b)=>(order[a.status]??5)-(order[b.status]??5)||String(a.due_date||"9999").localeCompare(String(b.due_date||"9999")));
+const wrap=elt("section","cv-task-results");wrap.setAttribute("aria-label",my?"My tasks":"Accessible tasks");
+const head=elt("div","cv-task-results-head");head.append(elt("h3","",my?"My tasks":"Tasks you can access"),elt("p","",rows.length+" tasks · Current workspace"));wrap.append(head);
+const grid=elt("div","cv-task-grid");
+for(const t of rows.slice(0,80)){const p=projects.get(t.project_id),card=elt("article","cv-task-card");const top=elt("div","cv-task-card-top");top.append(elt("span","cv-task-project",p.title));const state=elt("span","cv-task-status",states[t.status]||"Status unverified");state.dataset.state=t.status;top.append(state);card.append(top,elt("h4","cv-task-title",t.title));if(t.description)card.append(elt("p","cv-task-description",text(t.description,240)));const foot=elt("div","cv-task-foot"),avatars=elt("div","cv-task-people");avatars.setAttribute("aria-label","Task people");
+for(const id of [...new Set([t.owner_id,t.created_by,p.owner_id].filter(Boolean))].slice(0,5)){const role=id===t.owner_id?"Owner":id===t.created_by?"Created by":"Project lead";avatars.append(avatar(people.get(id)||{id,name:id},role))}
+foot.append(avatars,elt("span","cv-task-due",dueFormat(t.due_date)));card.append(foot);const end=elt("div","cv-task-foot");end.append(elt("span","cv-task-due",t.approval_required?"Approval required":""));const link=elt("a","cv-task-link","Open task");link.href=ROOT+"workspace/?task="+encodeURIComponent(t.id);end.append(link);card.append(end);grid.append(card)}
+if(!rows.length)wrap.append(elt("p","cv-task-restricted","No tasks in your authorized workspace."));else wrap.append(grid);if(rows.length>80)wrap.append(elt("p","cv-task-restricted","Showing the first 80. Open Work for more."));
+const answer=box.querySelector(".cv-assistant-answer");if(answer){answer.hidden=true;answer.setAttribute("aria-hidden","true")}box.querySelector(".cv-task-results")?.remove();box.append(wrap)
+}catch{ /* In case of an authorization or network failure the existing assistant remains visible. */ }}
+let lastAI=null;
+function ai(){const root=q("#cv-ws-search-results"),box=root?.querySelector(".cv-ws-assistant"),answer=box?.querySelector(".cv-assistant-answer"),prompt=text(q("#cv-ws-search")?.value,250);if(!box||!answer||!isTasks(prompt)||box.querySelector(".cv-task-results"))return;if(lastAI===box)return;lastAI=box;taskCards(box,prompt)}
+let cache=null,cacheUntil=0,pipelineBusy=false;
+async function pipeline(){const rows=qa(".cv-ws-pipeline-name button[data-ws-artist]");if(!rows.length||pipelineBusy)return;if(rows.every(b=>b.closest(".cv-ws-pipeline-name")?.querySelector(".cv-pipeline-assignment")))return;
+pipelineBusy=true;try{if(!cache||Date.now()>cacheUntil){const d=await authorized("workspace/pipeline");cache=new Map((d.artists||[]).filter(x=>x.assignedAmbassador).map(x=>[x.id,x.assignedAmbassador]));cacheUntil=Date.now()+30000}
+for(const button of rows){const parent=button.closest(".cv-ws-pipeline-name"),id=button.dataset.wsArtist,person=cache.get(id);if(!parent||parent.querySelector(".cv-pipeline-assignment"))continue;const tag=elt("span","cv-pipeline-assignment");if(person&&person.name){tag.append(avatar(person,"Assigned ambassador"),elt("span","cv-pipeline-label","Assigned ambassador"))}else tag.append(elt("span","cv-pipeline-label","No assigned ambassador"));parent.append(tag)}}catch{/* Keep original pipeline visible. */}finally{pipelineBusy=false}}
+let scheduled=false;const watch=new MutationObserver(()=>{if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;profile();files();ai();pipeline()})});
+function boot(){profile();files();ai();pipeline();watch.observe(document.documentElement,{subtree:true,childList:true})}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
