@@ -1,0 +1,43 @@
+name: Communiverse Search v4 Staging Checks
+on:
+  push:
+    branches: [feature/communiverse-search-unified-20261010]
+    paths:
+      - 'worker/search-v4/**'
+      - '.github/workflows/communiverse-search-v4.yml'
+  pull_request:
+    paths:
+      - 'worker/search-v4/**'
+      - '.github/workflows/communiverse-search-v4.yml'
+permissions:
+  contents: read
+jobs:
+  search-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check staging and browser code syntax
+        run: |
+          node --check worker/search-v4/search.js
+          node --check worker/search-v4/staging-gateway.mjs
+          node --check worker/search-v4/qa-runner.js
+      - name: Assert same input and AI button are retained
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          const js=fs.readFileSync("worker/search-v4/search.js","utf8");
+          const css=fs.readFileSync("worker/search-v4/search.css","utf8");
+          const gateway=fs.readFileSync("worker/search-v4/staging-gateway.mjs","utf8");
+          assert.ok(js.includes("line.append(button)"));
+          assert.ok(js.includes("line.append(icon(),input)"));
+          assert.ok(js.includes("aiButtonsMoved"));
+          assert.ok(css.includes(".cv4-search-inner"));
+          assert.ok(css.includes(".cv4-ai-button[hidden]"));
+          assert.ok(gateway.includes("Read-only staging"));
+          assert.ok(!gateway.includes("COMMUNIVERSE_DB"));
+          '
