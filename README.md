@@ -1,5 +1,18 @@
 # Communiverse
 
+## Latest release — Unified Search V4 & Plug story cards (10 October 2026)
+
+**LIVE:** [Communiverse](https://espacios.me/communiverse/) now uses `communiverse-search-v4-20261010` for the six public page families: Homepage, Artists, Events, Communities, Discover and Plug. The same release is active on both `espacios.me` and `www.espacios.me`. Earlier V3/booking release notes below remain historical references.
+
+- Communiverse-aligned 52px search fields, compact borderless AI action, aligned Region/Where/What controls, responsive ordering and consistently layered AI suggestions. Existing input values, filters and click handlers are preserved.
+- Plug's `Read their story` action remains inside its white profile card. Only portrait circles crossing that button temporarily clear during animations; they return when the story closes.
+- The release was made with **14 new narrowly scoped routes** (8 page-family routes + 6 versioned assets) and **4 existing routes updated in place**, not a global `/communiverse/*` proxy. All 18 route IDs and rollback order are in [deployments/20261010-communiverse-search-v4.md](deployments/20261010-communiverse-search-v4.md).
+- Underlying Workers for Marketplace, V3/Workspace, booking, identity, authorized AI knowledge, Supabase and D1/R2 remain unchanged. The production search gateway has no QA scripts or staging-only POST block.
+- Staging: 583/583 real-public-page responsive checks, 102/102 component checks, 48/48 Plug story states; GitHub CI passed. After deployment, 12/12 mobile/desktop public-page checks passed; www, private APIs and existing V3/booking paths were also checked. Real signed-in AI POST and account-specific workflows still require authenticated end-to-end QA.
+- Source: [worker/search-v4](worker/search-v4) · [merged PR #17](https://github.com/gugmaae-prog/communiverse/pull/17).
+
+---
+
 ## Homepage compact artwork reader — 10 October 2026 (latest)
 
 On [Communiverse](https://espacios.me/communiverse/), selected artwork now occupies **3 of the 5 desktop feed columns** (2 at tablet widths, full available width on mobile). The related artworks directly beneath it use their own regular two-column grid with aligned 4:5 image frames, readable artist attribution and native recommendation clicks. All artwork images are fitted without cropping/stretching.
