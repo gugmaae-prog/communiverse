@@ -347,6 +347,12 @@ html[data-cv-social] .cv-feed-page .cv-feed-actions { margin-top: 3px; }
   }
 }
 
+/* Keep View profile and Read their story from sitting on each other. */
+html[data-cv-social] .cv-plug #cv-person-work .cv-card-expand,
+html[data-cv-social] .cv-plug #cv-person-work .glass-panel-body .glass-card > :is(a.cv-primary, .cv-card-expand, .glass-extra) + :is(a.cv-primary, .cv-card-expand, .glass-extra) {
+  margin-top: 14px !important;
+}
+
 
 /* Plug orbit focus-clearance: colliding portrait circles fade temporarily when
    a story is open. No constellation nodes are removed, repositioned or renamed. */
