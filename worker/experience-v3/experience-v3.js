@@ -115,10 +115,74 @@ function upgradeFocus(){const content=$('#cv-ws-content'),app=$('#cv-ws-app');if
  panel.append(grid);content.insertAdjacentElement('afterbegin',panel);
  }).catch(()=>{});
 }
+const planWords=new Set(['plan','this','that','with','from','your','have','need','trip','days','what','mind','want','please','make','into','about']);
+function planKind(prompt){const q=prompt.toLowerCase();if(/\b(camera|kit|gear|equipment|lens)\b/.test(q))return 'kit';if(/\b(trip|travel|flight|itinerary|ambassador)\b/.test(q))return 'travel';if(/\bvisit\b/.test(q))return 'travel';if(/\b(budget|cost|calculate|how much|estimate)\b/.test(q))return 'budget';return 'plan'}
+function readDays(prompt){const m=prompt.match(/\b(\d{1,3})\s*days?\b/i);return m?Number(m[1]):null}
+function readBudget(prompt){const m=prompt.match(/(?:usd|\$)\s*(\d{1,7}(?:[.,]\d{1,2})?)|\b(\d{1,7}(?:[.,]\d{1,2})?)\s*(?:usd|dollars)\b/i);if(!m)return null;const n=Number(String(m[1]||m[2]).replace(/,/g,''));return Number.isFinite(n)?n:null}
+function money(n){const v=Number(n);return Number.isFinite(v)?v.toLocaleString(undefined,{maximumFractionDigits:2}):'0'}
+function namedPeople(prompt,overview){const team=overview?.team||[],found=[];for(const p of team){const first=safe(p?.name).split(/\s+/)[0];if(first.length<3)continue;if(new RegExp('\\b'+first.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i').test(prompt))found.push(p)}if(found.length)return found;const m=prompt.match(/\bfor\s+([A-Za-z][A-Za-z.'-]{2,})/);return m?[{id:'',name:m[1]}]:[]}
+function routePeople(assistant,overview){const team=overview?.team||[];return [...assistant.querySelectorAll('.cv-assistant-route span')].map(s=>s.textContent.replace(/^\s*\d+\.\s*/,'').trim()).filter(Boolean).map(name=>{const person=team.find(p=>safe(p.name).toLowerCase()===name.toLowerCase());return person||{id:'',name}})}
+function relatedWork(prompt,overview){const words=prompt.toLowerCase().split(/[^a-z0-9]+/).filter(w=>w.length>3&&!planWords.has(w));return (overview?.tasks||[]).filter(t=>{const blob=[t.title,t.description,t.owner_id,t.created_by].map(v=>safe(v).toLowerCase()).join(' ');return words.some(w=>blob.includes(w))}).slice(0,3)}
+function planTitle(prompt,people,kind){const who=people[0]?.name;if(kind==='travel')return who?'Trip plan for '+who:'Trip plan';if(kind==='kit')return who?'Kit plan for '+who:'Kit plan';if(kind==='budget')return 'Cost plan';return who?'Plan with '+who:'A plan from your question'}
+function planSteps(kind,prompt,people,related){const who=people.map(p=>p.name).filter(Boolean).join(', ')||'the people you add';if(kind==='travel')return [['Purpose',prompt],['Who travels',who+' is on this draft. Add anyone else who should go.'],['Dates','Set the number of days. The total follows that figure.'],['Money','The budget you named is split across the days and people. Change any figure.'],['Review','The approval circles are the expected reviewers. The draft below is what can be recorded.'],['After approval','Book travel only after the request is approved, then share the outcome with the people on this plan.']];if(kind==='kit')return [['What is needed',prompt],['Who it is for',who],['Already in the workspace',related.length?related.map(t=>t.title).join(', '):'No open task in your workspace mentions this yet.'],['Cost','Put the estimate in the calculator. It copies into the draft amount.'],['Review','Expected reviewers are the circles below. Nothing is requested until the draft is submitted.'],['Hand-off','After approval, name who collects the kit and when it comes back.']];return [['What you asked',prompt],['People',who],['Figures','Use days, people, and a daily allowance. The total stays here until you change it.'],['Recommendations',related.length?'Related workspace records are listed with the plan.':'Recommendations use the records already in your workspace.'],['Next action','Read the answer above. Use the draft only if you want the work recorded.']]}
+function upgradeMind(){const assistant=$('#cv-ws-search-results .cv-ws-assistant');if(!assistant||assistant.dataset.cv3Plan==='yes'||assistant.dataset.cv3Plan==='pending')return;if(!assistant.querySelector('.cv-assistant-answer'))return;const prompt=safe($('#cv-ws-search')?.value);if(!prompt)return;assistant.dataset.cv3Plan='pending';
+ const paint=data=>{if(!assistant.isConnected||assistant.dataset.cv3Plan==='yes')return;drawMind(assistant,prompt,data)};
+ paint(teamData||null);
+ authorizedOverview().then(data=>{if(!assistant.isConnected||assistant.querySelector('.cv3-plan')?.dataset.cv3Touched==='yes')return;if(assistant.dataset.cv3PlanSource==='live')return;assistant.dataset.cv3Plan='pending';assistant.querySelector('.cv3-plan')?.remove();drawMind(assistant,prompt,data)}).catch(()=>{});
+}
+function drawMind(assistant,prompt,overview){const kind=planKind(prompt),travelers=namedPeople(prompt,overview),assumedDays=readDays(prompt)==null,days=readDays(prompt)||(kind==='travel'?3:1),budget=readBudget(prompt),related=relatedWork(prompt,overview);
+ const reviewers=routePeople(assistant,overview);const chain=reviewers.length?reviewers:kindReviewers(overview,kind==='kit'?'kit':'travel',budget??'').map(id=>personInfo(id,overview));
+ const subject=travelers.length?travelers:(overview?.person?[overview.person]:[]);
+ const board=node('section','cv3-plan');board.setAttribute('aria-label','Working plan');board.dataset.cv3Touched='no';
+ const head=node('div','cv3-plan-head');head.append(node('p','cv3-kicker',kind==='travel'?'TRIP PLAN':kind==='kit'?'KIT PLAN':kind==='budget'?'COST PLAN':'WORKING PLAN'));head.append(node('h3','',planTitle(prompt,subject,kind)));head.append(node('p','cv3-note','Edit the steps and figures. Nothing is booked or sent from this board.'));board.append(head);
+ const peopleBlock=node('div','cv3-plan-people');
+ const travelerLabel=node('p','cv3-label',kind==='travel'?'Who is going':'People in this plan');
+ const travelerChain=node('div','cv3-plan-chain cv3-plan-travelers');travelerChain.setAttribute('aria-label','People on this plan');
+ function link(){return node('span','cv3-plan-link','')}
+ function personNode(person,relationship){const item=node('div','cv3-plan-person');item.dataset.cv3PersonId=person.id||person.name;item.append(circle(person,{relationship}),node('span','cv3-person-name',person.name||'Person'),node('small','cv3-person-role',relationship));return item}
+ subject.forEach((p,i)=>{if(i)travelerChain.append(link());travelerChain.append(personNode(p,roles[p.role]||(p.role?'Team':'Named in your question')))});
+ const add=node('button','cv3-plan-add cv3-plan-add-person','Add someone');add.type='button';
+ const picker=node('div','cv3-plan-picker');picker.hidden=true;picker.setAttribute('aria-label','People you can add');
+ const team=overview?.team||[];
+ for(const p of team){if(!p?.id||travelerChain.querySelector('[data-cv3-person-id="'+CSS.escape(p.id)+'"]'))continue;const b=node('button','cv3-plan-choice');b.type='button';b.dataset.cv3PersonId=p.id;b.append(circle(p,{relationship:roles[p.role]||'Team',small:true}),node('span','cv3-person-name',p.name));b.addEventListener('click',()=>{if(travelerChain.children.length)travelerChain.append(link());travelerChain.append(personNode(p,roles[p.role]||'Added to this plan'));b.remove();picker.hidden=true;if(peopleInput.dataset.cv3Edited!=='yes')peopleInput.value=String(travelerChain.querySelectorAll('.cv3-plan-person').length);board.dataset.cv3Touched='yes';recalc()});picker.append(b)}
+ add.addEventListener('click',()=>{board.dataset.cv3Touched='yes';if(!team.length){picker.hidden=false;picker.textContent='Your team list is not available yet.';return}picker.hidden=!picker.hidden});
+ peopleBlock.append(travelerLabel,travelerChain,add,picker);
+ const reviewLabel=node('p','cv3-label','Expected approval path');
+ const reviewChain=node('div','cv3-plan-chain cv3-plan-reviewers');reviewChain.setAttribute('aria-label','Expected reviewers');
+ chain.forEach((p,i)=>{if(i)reviewChain.append(link());reviewChain.append(personNode(p,i===0?'First reviewer':'Next reviewer'))});
+ const reviewNote=node('p','cv3-note','This path follows the current request policy. Submitting the draft is what asks for review.');
+ peopleBlock.append(reviewLabel,reviewChain,reviewNote);board.append(peopleBlock);
+ const steps=node('ol','cv3-plan-steps');
+ function appendStep(title,detail){const li=node('li','cv3-plan-step');const btn=node('button','cv3-plan-step-btn');btn.type='button';btn.setAttribute('aria-pressed','false');const copy=node('div','cv3-plan-copy');copy.append(node('strong','',title),node('p','',detail));btn.append(node('span','cv3-plan-num',String(steps.children.length+1)),copy);btn.addEventListener('click',()=>{btn.setAttribute('aria-pressed',String(btn.getAttribute('aria-pressed')!=='true'));board.dataset.cv3Touched='yes';syncProgress()});li.append(btn);steps.append(li)}
+ for(const [title,detail] of planSteps(kind,prompt,subject,related))appendStep(title,detail);
+ const addStep=node('button','cv3-quiet-button cv3-plan-add-step','Add a step');addStep.type='button';addStep.addEventListener('click',()=>{appendStep('New step','Write what should happen here.');board.dataset.cv3Touched='yes';syncProgress()});
+ const progress=node('p','cv3-plan-progress','');board.append(steps,addStep,progress);
+ const calc=node('div','cv3-plan-calc');calc.setAttribute('aria-label','Working estimate');
+ function field(cls,label,value,step){const wrap=node('label','cv3-plan-field',label);const input=node('input');input.className=cls;input.type='number';input.min='0';input.step=step;input.value=value;if(cls.includes('days')||cls.includes('people'))input.min='1';wrap.append(input);return {wrap,input}}
+ const dayField=field('cv3-plan-days','Days',String(days),'1'),peopleField=field('cv3-plan-people-count','People',String(Math.max(1,subject.length)),'1'),dailyField=field('cv3-plan-daily','Daily allowance',budget&&days?String(Math.round((budget/days/Math.max(1,subject.length))*100)/100):'0','0.01'),budgetField=field('cv3-plan-budget','Budget',budget==null?'':String(budget),'0.01');
+ const peopleInput=peopleField.input;const total=node('p','cv3-plan-total','');const balance=node('p','cv3-plan-balance','');const hint=node('p','cv3-note',assumedDays&&kind==='travel'?'Three days is only a starting point until you set the dates.':'The total is days × people × daily allowance.');
+ calc.append(dayField.wrap,peopleField.wrap,dailyField.wrap,budgetField.wrap,total,balance,hint);board.append(calc);
+ const recs=node('div','cv3-plan-recs');recs.append(node('p','cv3-label','Recommendations'));
+ const answer=assistant.querySelector('.cv-assistant-answer')?.textContent?.trim();if(answer)recs.append(node('article','cv3-plan-rec',answer));
+ const next=[...assistant.children].find(el=>el.classList?.contains('cv-ws-meta'))?.textContent?.trim();if(next)recs.append(node('article','cv3-plan-rec',next));
+ for(const p of subject)if(p.role)recs.append(node('article','cv3-plan-rec',(p.name||'This person')+' is recorded as '+(roles[p.role]||p.role)+'.'));
+ if(!related.length)recs.append(node('article','cv3-plan-rec','No matching open task was found in your workspace.'));
+ for(const t of related){const card=node('article','cv3-plan-rec');card.append(node('strong','',t.title||'Task'));const open=node('button','cv3-action','Open task');open.type='button';open.dataset.wsTask=t.id;card.append(open);recs.append(card)}
+ board.append(recs);
+ const amount=assistant.querySelector('input[name=amount]');let amountEdited=false;amount?.addEventListener('input',e=>{if(e.isTrusted)amountEdited=true});
+ function num(input,fallback){const n=Number(input.value);return Number.isFinite(n)&&n>=0?n:fallback}
+ function recalc(){const d=Math.max(1,num(dayField.input,1)),p=Math.max(1,num(peopleInput,1)),daily=num(dailyField.input,0),cap=budgetField.input.value===''?null:num(budgetField.input,0),estimate=d*p*daily;total.dataset.cv3Estimate=String(Math.round(estimate*100)/100);total.textContent='Working estimate '+money(estimate);if(cap==null)balance.textContent='Add a budget to see what remains.';else balance.textContent=(estimate>cap?'Over the named budget by ':'Remaining in the named budget: ')+money(Math.abs(cap-estimate));if(amount&&!amountEdited)amount.value=estimate?String(Math.round(estimate*100)/100):'';syncProgress()}
+ function syncProgress(){const all=steps.querySelectorAll('.cv3-plan-step-btn'),on=[...all].filter(b=>b.getAttribute('aria-pressed')==='true').length;progress.textContent=on+' of '+all.length+' steps reviewed'}
+ for(const input of [dayField.input,peopleInput,dailyField.input,budgetField.input])input.addEventListener('input',()=>{if(input===peopleInput)peopleInput.dataset.cv3Edited='yes';board.dataset.cv3Touched='yes';recalc()});
+ peopleInput.dataset.cv3Edited='no';recalc();
+ const route=assistant.querySelector('.cv-assistant-route');if(route)route.hidden=true;
+ const form=assistant.querySelector('form');if(form)form.before(board);else assistant.append(board);
+ assistant.dataset.cv3Plan='yes';assistant.dataset.cv3PlanSource=overview?.team?.length?'live':'local';
+}
 function upgradeWorkspaceLabels(){const nav=$('.cv-ws-tabs');if(nav&&!nav.dataset.cv3Nav){nav.dataset.cv3Nav='yes';for(const [id,text] of [['overview','Focus'],['projects','Work'],['team','People']]){const item=nav.querySelector('[data-ws-tab='+id+']');if(item)item.textContent=text}}
 }
 function updateFileUI(){for(const input of $$('.cv-workspace input[type=file]')){if(input.dataset.cv3File)return;input.dataset.cv3File='yes';const form=input.closest('form');if(!form)return;form.classList.add('cv3-upload-form');const caption=form.querySelector('.cvfix-file-caption');if(caption)caption.textContent='Choose a reference · 20 MB images/documents or 32 MB video';}}
-function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeRequestForm();upgradeTaskForm();upgradeFocus();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
+function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeRequestForm();upgradeTaskForm();upgradeFocus();upgradeMind();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
 let scheduled=0;const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=requestAnimationFrame(()=>{scheduled=0;run()})});
 function boot(){run();observer.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

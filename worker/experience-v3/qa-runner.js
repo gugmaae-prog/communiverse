@@ -27,6 +27,21 @@ async function run(){try{
  add('Original request submit button preserved',!!document.querySelector('#cv-ws-request-form button[type=submit]'));
  add('Task actions are review before save',document.querySelector('.cv3-task-actions')?.textContent.includes('Ready to save')===false);
  const member=document.querySelector('.cv3-avatar-group');add('Multi-person selector preserves checkbox controls',!!member&&member.querySelectorAll('input[name=members]').length===4);
+ const ask=document.querySelector('#cv-ws-search'),results=document.querySelector('#cv-ws-search-results');
+ if(ask&&results){ask.value='Plan an ambassador trip for Luna for 4 days with a $2000 budget';results.hidden=false;results.innerHTML='<section class="cv-ws-assistant"><h2>Your next move</h2><p class="cv-assistant-answer">Luna can travel once the request is reviewed.</p><p class="cv-ws-meta">Next: confirm dates.</p><form data-assistant-submit="draft-1"><label>Title<input name="title" value="Ambassador trip for Luna"></label><label>Estimated amount<input name="amount" type="number"></label><div class="cv-assistant-route" aria-label="Approval path"><span>1. Haseeb</span><span>2. Elferah</span></div><button class="cv-button" type="submit">Create request</button></form></section>';}
+ const plan=await wait(()=>document.querySelector('.cv3-plan-travelers'),5000);
+ add('A trip question becomes a working plan',!!plan&&plan.textContent.includes('Luna'));
+ add('Approval path stays a circle chain',!!document.querySelector('.cv3-plan-reviewers')?.textContent.includes('Haseeb')&&document.querySelector('.cv3-plan-reviewers')?.textContent.includes('Elferah'));
+ add('Days and budget are filled from the question',document.querySelector('.cv3-plan-days')?.value==='4'&&document.querySelector('.cv3-plan-budget')?.value==='2000');
+ add('The estimate is calculated',document.querySelector('.cv3-plan-total')?.dataset.cv3Estimate==='2000');
+ const daily=document.querySelector('.cv3-plan-daily');if(daily){daily.value='100';daily.dispatchEvent(new Event('input',{bubbles:true}));}
+ add('Changing the allowance updates the estimate',document.querySelector('.cv3-plan-total')?.dataset.cv3Estimate==='400');
+ const stepCount=document.querySelectorAll('.cv3-plan-step').length;document.querySelector('.cv3-plan-add-step')?.click();
+ add('A step can be added',document.querySelectorAll('.cv3-plan-step').length===stepCount+1);
+ document.querySelector('.cv3-plan-add-person')?.click();document.querySelector('.cv3-plan-picker [data-cv3-person-id="keiffer"]')?.click();
+ add('Another person can be added as a circle',!!document.querySelector('.cv3-plan-travelers [data-cv3-person-id="keiffer"]'));
+ add('The assistant answer stays on the page',document.querySelector('.cv-assistant-answer')?.textContent.includes('Luna can travel'));
+ add('The draft form is still there to review',!!document.querySelector('[data-assistant-submit] button[type=submit]'));
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
 }catch(e){add('Unhandled runtime exception',false,String(e?.message||e))}
  const pre=document.createElement('pre');pre.id='cv3-qa-result';pre.dataset.success=String(tests.every(t=>t.pass));pre.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(pre);
