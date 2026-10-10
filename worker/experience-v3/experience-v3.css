@@ -106,6 +106,38 @@ html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check input{width:18p
 .cv3-timeline-person{display:grid;gap:6px;justify-items:center;min-width:65px;font-size:11px;color:#3e4f65}
 .cv3-timeline-person .cv3-person-circle{width:42px;height:42px;min-width:42px}
 .cv3-timeline-line{display:block;width:32px;height:1px;background:var(--cv3-line);align-self:center;margin-bottom:20px}
+/* Working plan under the workspace question field. */
+.cv3-plan{display:grid;gap:16px;margin:8px 0 18px;padding:18px;border:1px solid var(--cv3-line);border-radius:22px;background:#f8fafc;min-width:0}
+.cv3-plan-head{display:grid;gap:6px}
+.cv3-plan h3{margin:0;font-size:22px;letter-spacing:-.03em;line-height:1.2}
+.cv3-plan-people{display:grid;gap:8px}
+.cv3-plan-chain{display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;min-width:0}
+.cv3-plan-person{display:grid;justify-items:center;gap:5px;width:84px;text-align:center}
+.cv3-plan-person .cv3-person-circle{width:52px;height:52px;min-width:52px}
+.cv3-plan-link{width:28px;height:2px;margin:25px 2px 0;background:#d5deea;flex:none}
+.cv3-plan-add,.cv3-plan-choice,.cv3-plan-step-btn{font:inherit;cursor:pointer}
+.cv3-plan-add{justify-self:start;border:1px dashed #c5d2e6;background:#fff;color:#245cc8;border-radius:999px;min-height:40px;padding:8px 14px}
+.cv3-plan-picker{display:flex;flex-wrap:wrap;gap:8px}
+.cv3-plan-picker[hidden]{display:none}
+.cv3-plan-choice{display:flex;align-items:center;gap:8px;border:1px solid var(--cv3-line);background:#fff;border-radius:999px;padding:4px 10px 4px 4px;color:inherit}
+.cv3-plan-steps{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cv3-plan-step-btn{width:100%;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;align-items:start;text-align:left;border:1px solid var(--cv3-line);background:#fff;border-radius:16px;padding:12px;color:inherit}
+.cv3-plan-step-btn[aria-pressed=true]{border-color:#a9bfef;background:#f3f7ff}
+.cv3-plan-num{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#e9eef7;color:#30455d;font-size:13px;font-weight:700}
+.cv3-plan-step-btn[aria-pressed=true] .cv3-plan-num{background:#1c61e7;color:#fff}
+.cv3-plan-copy{display:grid;gap:3px;min-width:0}
+.cv3-plan-copy strong{font-size:14px}
+.cv3-plan-copy p,.cv3-plan-rec,.cv3-plan-total,.cv3-plan-balance,.cv3-plan-progress{margin:0;font-size:13px;line-height:1.45;color:#3e4f65}
+.cv3-plan-calc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:end}
+.cv3-plan-field{display:grid;gap:6px;font-size:12px;font-weight:650;color:#3b495c;min-width:0}
+.cv3-plan-field input{width:100%;box-sizing:border-box;height:48px;min-height:48px;padding:0 12px;border:1px solid #e0e5ee;border-radius:14px;background:#fff;color:#1c2636;font:inherit;font-size:15px}
+.cv3-plan-field input:focus-visible,.cv3-plan-step-btn:focus-visible,.cv3-plan-add:focus-visible,.cv3-plan-choice:focus-visible{outline:2px solid var(--cv3-blue);outline-offset:2px}
+.cv3-plan-total,.cv3-plan-balance{grid-column:1 / -1}
+.cv3-plan-total{font-size:16px;font-weight:700;color:#1c2636}
+.cv3-plan-recs{display:grid;gap:8px}
+.cv3-plan-rec{padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--cv3-line)}
+.cv3-plan-rec .cv3-action{margin-top:8px}
+@media(max-width:720px){.cv3-plan{padding:14px}.cv3-plan-calc{grid-template-columns:1fr 1fr}.cv3-plan h3{font-size:20px}}
 .cv3-task-actions{border:1px solid var(--cv3-line);background:#f9fbfd;border-radius:18px;padding:15px;display:grid;gap:11px;margin:14px 0 20px}
 .cv3-inline-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 /* Existing multi-person checkboxes become circle tiles, not new identities. */
