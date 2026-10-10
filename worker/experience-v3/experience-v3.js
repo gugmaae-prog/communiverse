@@ -89,6 +89,18 @@ function upgradeRequestForm(){const form=$('#cv-ws-dialog #cv-ws-request-form');
  select.addEventListener('change',refresh);amount?.addEventListener('input',refresh);
  authorizedOverview().then(data=>{overview=data;if(form.isConnected)refresh()}).catch(()=>{route.textContent='The approval path will be confirmed when you submit.'});refresh();
 }
+function settleTaskFields(){const form=$('#cv-ws-dialog #cv-ws-task-form');if(!form||form.dataset.cv3Fields)return;
+ const status=form.querySelector('select[name=status]')?.closest('label');
+ const priority=form.querySelector('select[name=priority]')?.closest('label');
+ const due=form.querySelector('input[name=due_date]')?.closest('label');
+ if(!status||!priority||!due)return;
+ const band=node('div','cv3-task-fields');
+ const ownerRow=form.querySelector('select[name=owner_id]')?.closest('.cv-form-row');
+ (ownerRow||status).insertAdjacentElement('afterend',band);
+ band.append(status,priority,due);
+ for(const row of [...form.querySelectorAll('.cv-form-row')]){if(!row.querySelector('input,select,textarea,.cv3-person-picker'))row.remove()}
+ form.dataset.cv3Fields='yes';
+}
 function upgradeTaskForm(){const form=$('#cv-ws-dialog #cv-ws-task-form');if(!form||form.dataset.cv3Action)return;form.dataset.cv3Action='yes';const state=form.querySelector('select[name=status]');if(!state)return;const title=form.querySelector('input[name=title]')?.value||'Task';const prior=node('section','cv3-task-actions');prior.append(node('p','cv3-label','Next useful step'));
  const row=node('div','cv3-inline-actions');const current=state.value;
  function suggested(label,value){const button=node('button','cv3-quiet-button',label);button.type='button';button.addEventListener('click',()=>{if(value&&![...state.options].some(o=>o.value===value&&!o.disabled))return;if(value){state.value=value;state.dispatchEvent(new Event('change',{bubbles:true}));note.textContent='Ready to save. Review the details below, then select Save task.'}else note.textContent='You can create a support request without changing this task.'});return button}
@@ -115,10 +127,33 @@ function upgradeFocus(){const content=$('#cv-ws-content'),app=$('#cv-ws-app');if
  panel.append(grid);content.insertAdjacentElement('afterbegin',panel);
  }).catch(()=>{});
 }
+function mentionRoot(select){const anchor=select.closest('label')||select;const root=anchor.nextElementSibling;return root?.classList.contains('cv3-mention-picker')?root:null}
+function personForMention(opt,overview){const info=personInfo(opt.value,overview);const label=opt.textContent.trim();const name=info.name&&info.name!==info.id?info.name:label;return {...info,id:opt.value,name:name||label||opt.value}}
+function syncMentionPicker(picker,select){for(const button of picker.querySelectorAll('[data-cv3-person-id]')){const opt=[...select.options].find(o=>o.value===button.dataset.cv3PersonId);const on=!!opt?.selected;button.setAttribute('aria-pressed',String(on));button.classList.toggle('is-selected',on)}
+ const n=[...select.selectedOptions].length;const count=picker.querySelector('.cv3-mention-count');if(count)count.textContent=n===0?'None selected':n===1?'1 person selected':n+' people selected'}
+function createMentionPicker(select,overview){if(select.dataset.cv3Mentions==='yes')return;
+ const items=[...select.options].filter(opt=>opt.value&&!opt.disabled).map(opt=>({id:opt.value,label:opt.textContent.trim(),person:personForMention(opt,overview)}));
+ if(!items.length){delete select.dataset.cv3Mentions;return}
+ const root=node('div','cv3-mention-picker');root.setAttribute('role','group');root.setAttribute('aria-label','Notify people');
+ let search=null;if(items.length>8){search=node('input','cv3-picker-search');search.type='search';search.placeholder='Find a person';search.setAttribute('aria-label','Filter people to notify');root.append(search)}
+ const row=node('div','cv3-mention-row');
+ for(const item of items){const b=node('button','cv3-mention-choice');b.type='button';b.dataset.cv3PersonId=item.id;b.setAttribute('aria-pressed','false');b.title=item.person.name||item.label;b.append(circle(item.person,{relationship:''}));b.append(node('span','cv3-person-name',item.person.name||item.label));
+  b.addEventListener('click',()=>{const opt=[...select.options].find(o=>o.value===item.id);if(!opt)return;opt.selected=!opt.selected;select.dispatchEvent(new Event('change',{bubbles:true}));syncMentionPicker(root,select)});row.append(b)}
+ root.append(row);const count=node('p','cv3-mention-count','');count.setAttribute('aria-live','polite');root.append(count);
+ if(search)search.addEventListener('input',()=>{const q=search.value.trim().toLocaleLowerCase();for(const btn of row.children)btn.hidden=!!q&&!btn.textContent.toLocaleLowerCase().includes(q)});
+ select.dataset.cv3Mentions='yes';select.classList.add('cv3-native-hidden');select.setAttribute('aria-hidden','true');select.tabIndex=-1;
+ (select.closest('label')||select).insertAdjacentElement('afterend',root);select.addEventListener('change',()=>syncMentionPicker(root,select));syncMentionPicker(root,select);
+}
+function refreshMentionFaces(select,overview){const picker=mentionRoot(select);if(!picker)return;for(const button of picker.querySelectorAll('[data-cv3-person-id]')){const opt=[...select.options].find(o=>o.value===button.dataset.cv3PersonId);if(!opt)continue;const person=personForMention(opt,overview);const face=button.querySelector('.cv3-person-circle');const name=button.querySelector('.cv3-person-name');if(name)name.textContent=person.name;button.title=person.name;if(face)face.replaceWith(circle(person,{relationship:''}))}}
+function upgradeMentionSelects(){for(const select of $$('#cv-ws-dialog #cv-ws-comment-form select[name=mentions][multiple]')){if(select.dataset.cv3Mentions==='yes'||select.dataset.cv3Mentions==='pending')continue;select.dataset.cv3Mentions='pending';
+ const paint=data=>{if(select.isConnected&&select.dataset.cv3Mentions!=='yes')createMentionPicker(select,data)};
+ paint(teamData||{team:[]});
+ authorizedOverview().then(data=>{if(!select.isConnected)return;if(select.dataset.cv3Mentions==='yes')refreshMentionFaces(select,data);else paint(data)}).catch(()=>{if(select.isConnected&&select.dataset.cv3Mentions!=='yes')paint({team:[]})});
+}}
 function upgradeWorkspaceLabels(){const nav=$('.cv-ws-tabs');if(nav&&!nav.dataset.cv3Nav){nav.dataset.cv3Nav='yes';for(const [id,text] of [['overview','Focus'],['projects','Work'],['team','People']]){const item=nav.querySelector('[data-ws-tab='+id+']');if(item)item.textContent=text}}
 }
 function updateFileUI(){for(const input of $$('.cv-workspace input[type=file]')){if(input.dataset.cv3File)return;input.dataset.cv3File='yes';const form=input.closest('form');if(!form)return;form.classList.add('cv3-upload-form');const caption=form.querySelector('.cvfix-file-caption');if(caption)caption.textContent='Choose a reference · 20 MB images/documents or 32 MB video';}}
-function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeRequestForm();upgradeTaskForm();upgradeFocus();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
+function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeMentionSelects();upgradeRequestForm();settleTaskFields();upgradeTaskForm();upgradeFocus();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
 let scheduled=0;const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=requestAnimationFrame(()=>{scheduled=0;run()})});
 function boot(){run();observer.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
