@@ -21,6 +21,22 @@ Mobile/public tests: Homepage 320/390 14/14 each; Artists 390 14/14; Events 390 
 GitHub Actions search-v4 source syntax and no-mutation invariant checks: passed.
 An extra browser measurement injection timed out and is NOT counted as passed.
 
+## Plug story-card overlap correction — staged after visual feedback
+
+**User-observed problem:** 'Read their story' extended below its white card into the circular portrait constellation on the Plug preview. Raw JSON test results were also visible at the end of preview pages.
+
+**Verified root cause:** The existing marketplace stylesheet imposes `max-height:180px` on Plug `.glass-card`. Its story content needs ~193px of scroll height, so the 36px button extended ~14px below the rendered white card. The orbit layout measures the truncated card bounding box, making the overflow collide with nearby circles.
+
+**Scoped correction:** On desktop, only the collapsed Plug work card now uses its natural height (about 209px in the tested case), so the button sits ~15px inside its card. The existing orbit placement and ResizeObserver remain authoritative. On mobile, the native story card and portrait constellation are preserved. A Plug-only focus-clearance helper temporarily fades **only** portrait circles crossing the story CTA during animated transitions; it does not hide all portrait circles or replace/move existing nodes. On closing/switching profiles, circles reappear.
+
+**Preview cleanup:** Normal staging pages no longer automatically inject the raw QA reporter. Explicit `?cv4qa=layout` and `?cv4qa=plug` modes keep testing available without exposing diagnostics to reviewers.
+
+**Actual-browser Plug checks:** 8 states (initial collapsed, expanded, collapsed again, five distinct artist profiles) at each of 320, 390, 768, 1024, 1280 and 1440px = **48/48 passing states**. The story button remains inside its card, with no visible portrait/button or gallery-link/button intersection in tested states. At 390px the expanded view kept at least 117 of 127 portrait circles visible, and all 127 returned on close. Expanded CTA remains reachable by scrolling at 320px. The Plug layout/animation fix does not modify search/booking/backend data or its original click handlers.
+
+**Cross-site search regression:** Homepage, Artists, Events, Communities, Discover and Plug at 320, 390, 768, 1024, 1440px = **583/583 passing checks**. GitHub Actions including syntax checks of both new Plug scripts passed.
+
+**Remaining gate:** This is still a *read-only Cloudflare staging release*. Production routes and data were not changed. Signed-in workspace and real AI POST requests are untested in staging by design and must be checked before production promotion.
+
 ## Final pre-deployment visual regression audit — 10 October 2026
 Source screenshot: the old prominent AI Search pill sits against the search field border and looks clipped.
 Root causes found and corrected in staging:
