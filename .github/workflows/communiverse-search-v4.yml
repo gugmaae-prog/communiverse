@@ -24,6 +24,7 @@ jobs:
         run: |
           node --check worker/search-v4/search.js
           node --check worker/search-v4/staging-gateway.mjs
+          node --check worker/search-v4/production-gateway.mjs
           node --check worker/search-v4/qa-runner.js
           node --check worker/search-v4/qa-plug.js
           node --check worker/search-v4/plug-clearance.js
@@ -35,6 +36,7 @@ jobs:
           const js=fs.readFileSync("worker/search-v4/search.js","utf8");
           const css=fs.readFileSync("worker/search-v4/search.css","utf8");
           const gateway=fs.readFileSync("worker/search-v4/staging-gateway.mjs","utf8");
+          const prod=fs.readFileSync("worker/search-v4/production-gateway.mjs","utf8");
           const clearance=fs.readFileSync("worker/search-v4/plug-clearance.js","utf8");
           assert.ok(js.includes("line.append(button)"));
           assert.ok(js.includes("line.append(icon(),input)"));
@@ -48,4 +50,10 @@ jobs:
           assert.ok(clearance.includes("querySelectorAll"));
           assert.ok(gateway.includes("new Body(u.searchParams.get"));
           assert.ok(gateway.includes("PLUG_FIX_JS"));
+          assert.ok(prod.includes("PLUG_CLEARANCE"));
+          assert.ok(prod.includes("runtime.fetch(new Request(url,request))"));
+          assert.ok(!prod.includes("Read-only staging"));
+          assert.ok(!prod.includes("qa.txt"));
+          assert.ok(!prod.includes("COMMUNIVERSE_DB"));
+          assert.ok(prod.includes("PUBLIC_PAGES.has(path)"));
           '
