@@ -61,6 +61,19 @@ async function run(){try{
  add('Another person can be added as a circle',!!document.querySelector('.cv3-plan-travelers [data-cv3-person-id="keiffer"]'));
  add('The assistant answer stays on the page',document.querySelector('.cv-assistant-answer')?.textContent.includes('Luna can travel'));
  add('The draft form is still there to review',!!document.querySelector('[data-assistant-submit] button[type=submit]'));
+ const lunaCircle=document.querySelector('.cv3-plan-travelers [data-cv3-person-id="luna"]');
+ add('People start included',lunaCircle?.getAttribute('aria-pressed')==='true');
+ lunaCircle?.click();
+ add('Tapping a person leaves them out',lunaCircle?.getAttribute('aria-pressed')==='false');
+ lunaCircle?.click();
+ const stepTitle=document.querySelector('.cv3-plan-step-title');
+ if(stepTitle){stepTitle.value='Pack for the visit';stepTitle.dispatchEvent(new Event('input',{bubbles:true}))}
+ add('A step can be rewritten',document.querySelector('.cv3-plan-step-title')?.value==='Pack for the visit');
+ document.querySelector('.cv3-plan-step-btn')?.click();
+ add('The step circle marks it ready',document.querySelector('.cv3-plan-step')?.classList.contains('is-done')&&document.querySelector('.cv3-plan-progress')?.textContent.startsWith('1 of'));
+ const beforeSteps=document.querySelectorAll('.cv3-plan-step').length;
+ [...document.querySelectorAll('.cv3-plan-rec .cv3-action')].find(b=>b.textContent==='Add as a step')?.click();
+ add('A recommendation can become a step',document.querySelectorAll('.cv3-plan-step').length===beforeSteps+1);
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
 }catch(e){add('Unhandled runtime exception',false,String(e?.message||e))}
  const pre=document.createElement('pre');pre.id='cv3-qa-result';pre.dataset.success=String(tests.every(t=>t.pass));pre.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(pre);
