@@ -37,9 +37,11 @@
  };
  function settle(){
   requestScan();
-  setTimeout(requestScan,140);
-  setTimeout(requestScan,460);
-  setTimeout(requestScan,900);
+  // Orbit circles animate into new positions. Check throughout that short
+  // transition so a passing portrait never crosses the story CTA visibly.
+  for(const delay of [80,180,290,410,520,680,860,1080]){
+   setTimeout(requestScan,delay);
+  }
  }
  function init(){
   if(!document.querySelector('.cv-plug'))return;
