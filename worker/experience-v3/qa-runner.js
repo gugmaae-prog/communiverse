@@ -87,6 +87,10 @@ async function run(){try{
  add('Camera order uses a quantity',camera?.value==='15'&&camera.closest('.cv3-plan-field')?.hidden!==true);
  add('Daily allowance is not used for cameras',document.querySelector('.cv3-plan-daily')?.closest('.cv3-plan-field')?.hidden===true);
  add('The plan names ambassadors instead of the',!!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Luna')&&!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Named in your question'));
+ add('Email status shows nothing has been sent',(document.querySelector('.cv3-plan-mail-summary')?.textContent||'').includes('0 sent'));
+ add('The workspace assistant is Cosmos',document.querySelector('.cv3-plan .cv3-kicker')?.textContent==='COSMOS'&&document.querySelector('.cv3-plan')?.getAttribute('aria-label')==='Cosmos');
+ add('Progress shows the current stage',!!document.querySelector('.cv3-plan-stage.is-now')&&!!document.querySelector('.cv3-plan-meter'));
+ add('Open items stay visible until the price is set',(document.querySelector('.cv3-plan-ready')?.textContent||'').includes('Unit cost'));
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
 }catch(e){add('Unhandled runtime exception',false,String(e?.message||e))}
  const pre=document.createElement('pre');pre.id='cv3-qa-result';pre.dataset.success=String(tests.every(t=>t.pass));pre.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(pre);

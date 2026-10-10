@@ -109,6 +109,24 @@ html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check input{width:18p
 /* Working plan under the workspace question field. */
 .cv3-plan{display:grid;gap:16px;margin:8px 0 18px;padding:18px;border:1px solid var(--cv3-line);border-radius:22px;background:#f8fafc;min-width:0}
 .cv3-plan-head{display:grid;gap:6px}
+.cv3-plan-stages{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.cv3-plan-stage{border:1px solid #d7e2f6;background:#fff;color:#657287;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:650}
+.cv3-plan-stage.is-done{background:#eef4ff;color:#245cc8;border-color:#c5d6f6}
+.cv3-plan-stage.is-now{background:#1c61e7;color:#fff;border-color:#1c61e7}
+.cv3-plan-meter{height:6px;border-radius:999px;background:#e6edf7;overflow:hidden}
+.cv3-plan-meter-bar{display:block;height:100%;width:0;border-radius:inherit;background:#1c61e7}
+.cv3-plan-mail{display:grid;gap:8px}
+.cv3-plan-mail-list{display:grid;gap:6px}
+.cv3-plan-mail-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--cv3-line);border-radius:14px;padding:10px 12px}
+.cv3-plan-mail-copy{display:grid;gap:1px;min-width:0;flex:1}
+.cv3-plan-mail-copy small{color:#7b8798;font-size:11px}
+.cv3-plan-mail-dot{width:8px;height:8px;border-radius:50%;background:#1c61e7;flex:none}
+.cv3-plan-mail-row.is-off .cv3-plan-mail-dot{background:#d5deea}
+.cv3-plan-mail-row.is-off{opacity:.55}
+.cv3-plan-mail-pill{flex:none;white-space:nowrap;border-radius:999px;background:#f3f6fb;color:#3e4f65;font-size:11px;font-weight:650;padding:5px 8px}
+.cv3-plan-ready{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0}
+.cv3-plan-ready-item{border-radius:999px;padding:6px 10px;font-size:12px;background:#fff;border:1px solid #eadfca;color:#7a6240}
+.cv3-plan-ready-item.is-done{border-color:#cfe3d6;background:#f3faf6;color:#236349}
 .cv3-plan h3{margin:0;font-size:22px;letter-spacing:-.03em;line-height:1.2}
 .cv3-plan-people{display:grid;gap:8px}
 .cv3-plan-chain{display:flex;align-items:flex-start;gap:0;flex-wrap:wrap;min-width:0}
