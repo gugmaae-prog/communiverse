@@ -35,13 +35,17 @@
   if(scheduled)return;scheduled=true;
   requestAnimationFrame(()=>{scheduled=false;refresh()});
  };
+ let motionFrame=0,motionUntil=0,lastCheck=0;
+ function checkMotion(time){
+  if(time-lastCheck>=28){lastCheck=time;refresh()}
+  if(time<motionUntil)motionFrame=requestAnimationFrame(checkMotion);
+  else motionFrame=0;
+ }
  function settle(){
-  requestScan();
-  // Orbit circles animate into new positions. Check throughout that short
-  // transition so a passing portrait never crosses the story CTA visibly.
-  for(const delay of [80,180,290,410,520,680,860,1080]){
-   setTimeout(requestScan,delay);
-  }
+  // Only during a user-initiated Plug transition, check clearance at roughly
+  // 30fps. CSS portrait transforms continue between discrete JS updates.
+  motionUntil=Math.max(motionUntil,performance.now()+1150);
+  if(!motionFrame)motionFrame=requestAnimationFrame(checkMotion);
  }
  function init(){
   if(!document.querySelector('.cv-plug'))return;
