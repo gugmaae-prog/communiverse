@@ -357,40 +357,15 @@ html[data-cv-social] #cv-work-detail .cv-related .cv-heart {
 }
 
 /*
- * Liquid glass. Paint and motion only: sizes, grids, and form values stay put.
- * Surfaces blur what sits behind them; presses ease out instead of snapping.
+ * Liquid glass paint only. No transitions, transforms, or keyframes.
+ * Plug motion, pin zoom, and existing reveals stay on their own timing.
  */
-html[data-cv-social]{
-  --cv-liquid-ease:cubic-bezier(.22,1,.36,1);
-  --cv-liquid:.42s;
-  --cv-liquid-press:.22s;
-}
 html[data-cv-social] #cv-social-header{
   background:color-mix(in srgb,var(--cv-social-bg,#f5f5f7) 74%,transparent)!important;
   backdrop-filter:blur(22px) saturate(1.5);
   -webkit-backdrop-filter:blur(22px) saturate(1.5);
   border-bottom-color:color-mix(in srgb,var(--cv-social-line,#e0e5ee) 55%,transparent)!important;
   box-shadow:inset 0 -1px 0 rgba(255,255,255,.45);
-}
-html[data-cv-social] #cv-social-header nav a,
-html[data-cv-social] .cv-ws-tabs button,
-html[data-cv-social] .cv-feed-tabs button,
-html[data-cv-social] .cv-quiet-button,
-html[data-cv-social] .cv-button,
-html[data-cv-social] .cv3-action,
-html[data-cv-social] .cv3-mention-choice,
-html[data-cv-social] .cv3-person-choice,
-html[data-cv-social] .cv3-kind-tile,
-html[data-cv-social] .cv3-plan-person,
-html[data-cv-social] .cv3-plan-add,
-html[data-cv-social] .cv3-plan-choice,
-html[data-cv-social] .cv3-plan-stage,
-html[data-cv-social] .cv3-plan-mail-row,
-html[data-cv-social] .cv3-focus-item{
-  transition:background-color var(--cv-liquid) var(--cv-liquid-ease),border-color var(--cv-liquid) var(--cv-liquid-ease),box-shadow var(--cv-liquid) var(--cv-liquid-ease),color var(--cv-liquid) var(--cv-liquid-ease),opacity var(--cv-liquid) var(--cv-liquid-ease),transform var(--cv-liquid-press) var(--cv-liquid-ease);
-}
-html[data-cv-social] :is(.cv-quiet-button,.cv-button,.cv3-action,.cv3-mention-choice,.cv3-person-choice,.cv3-kind-tile,.cv3-plan-person,.cv-ws-tabs button):active{
-  transform:scale(.975);
 }
 html[data-cv-social] .cv-ws-tabs{
   background:color-mix(in srgb,var(--cv-social-card,#fff) 62%,transparent);
@@ -415,9 +390,7 @@ html[data-cv-social] .cv-modal-close{
   background:color-mix(in srgb,var(--cv-social-card,#fff) 70%,transparent);
   backdrop-filter:blur(12px) saturate(1.3);
   -webkit-backdrop-filter:blur(12px) saturate(1.3);
-  transition:background-color var(--cv-liquid) var(--cv-liquid-ease),transform var(--cv-liquid-press) var(--cv-liquid-ease);
 }
-html[data-cv-social] .cv-modal-close:active{transform:scale(.96)}
 html[data-cv-social] .cv3-focus-board,
 html[data-cv-social] .cv3-plan,
 html[data-cv-social] .cv3-task-actions{
@@ -441,30 +414,9 @@ html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>:is(select,input),
 html[data-cv-social] .cv3-plan-field input,
 html[data-cv-social] .cv3-picker-search{
   background:color-mix(in srgb,#fff 76%,transparent);
-  transition:background-color var(--cv-liquid) var(--cv-liquid-ease),border-color var(--cv-liquid) var(--cv-liquid-ease),box-shadow var(--cv-liquid) var(--cv-liquid-ease);
-}
-html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>:is(select,input):focus-visible,
-html[data-cv-social] .cv3-plan-field input:focus-visible{
-  box-shadow:0 0 0 4px rgba(28,97,231,.12);
-}
-html[data-cv-social] .cv3-plan-meter-bar{transition:width .55s var(--cv-liquid-ease)}
-html[data-cv-social] .cv-pin-media img,
-html[data-cv-social] .cv-pin-media video{transition:transform .72s var(--cv-liquid-ease)!important}
-@media(prefers-reduced-motion:no-preference){
-  html[data-cv-social]{scroll-behavior:smooth}
-  @keyframes cv-liquid-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  html[data-cv-social] dialog[open],
-  html[data-cv-social] .cv3-plan,
-  html[data-cv-social] #cv-work-detail[data-inline=true]{animation:cv-liquid-in .48s var(--cv-liquid-ease)}
 }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   html[data-cv-social] :is(#cv-social-header,dialog,.cv3-plan,.cv3-focus-board,#cv-feed .cv-pin.is-work-expanded){
     background:var(--cv-social-card,#fff)!important;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  html[data-cv-social] :is(#cv-social-header,dialog,.cv-modal-close,.cv-ws-tabs,.cv-ws-tabs button,.cv3-plan,.cv3-plan-meter-bar,.cv3-focus-item,.cv3-mention-choice,.cv3-plan-person,.cv-pin-media img,.cv-pin-media video,#cv-work-detail){
-    transition:none!important;
-    animation:none!important;
   }
 }
