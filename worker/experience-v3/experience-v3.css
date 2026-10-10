@@ -109,6 +109,11 @@ html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check input{width:18p
 /* Working plan under the workspace question field. */
 .cv3-plan{display:grid;gap:16px;margin:8px 0 18px;padding:18px;border:1px solid var(--cv3-line);border-radius:22px;background:#f8fafc;min-width:0}
 .cv3-plan-head{display:grid;gap:6px}
+.cv3-cosmos-knows{display:grid;gap:8px}
+.cv3-cosmos-knows:empty{display:none}
+.cv3-cosmos-fact{display:grid;gap:2px;background:#fff;border:1px solid var(--cv3-line);border-radius:16px;padding:10px 12px}
+.cv3-cosmos-fact strong{font-size:12px;font-weight:700;color:#1c2636}
+.cv3-cosmos-fact span{font-size:13px;line-height:1.4;color:#3e4f65}
 .cv3-plan-stages{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .cv3-plan-stage{border:1px solid #d7e2f6;background:#fff;color:#657287;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:650}
 .cv3-plan-stage.is-done{background:#eef4ff;color:#245cc8;border-color:#c5d6f6}

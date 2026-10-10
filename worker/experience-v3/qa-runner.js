@@ -89,6 +89,7 @@ async function run(){try{
  add('The plan names ambassadors instead of the',!!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Luna')&&!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Named in your question'));
  add('Email status shows nothing has been sent',(document.querySelector('.cv3-plan-mail-summary')?.textContent||'').includes('0 sent'));
  add('The workspace assistant is Cosmos',document.querySelector('.cv3-plan .cv3-kicker')?.textContent==='COSMOS'&&document.querySelector('.cv3-plan')?.getAttribute('aria-label')==='Cosmos');
+ add('Cosmos knows the recorded ambassadors',(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('Luna')&&(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('discovers makers'));
  add('Progress shows the current stage',!!document.querySelector('.cv3-plan-stage.is-now')&&!!document.querySelector('.cv3-plan-meter'));
  add('Open items stay visible until the price is set',(document.querySelector('.cv3-plan-ready')?.textContent||'').includes('Unit cost'));
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
