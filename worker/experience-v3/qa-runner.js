@@ -34,6 +34,12 @@ async function run(){try{
  add('Clearing one person leaves the others selected',!cleared.includes('haseeb')&&cleared.includes('luna')&&cleared.length===1,cleared.join(','));
  add('Mention values stay on the original select',new FormData(document.querySelector('#cv-ws-comment-form')).getAll('mentions').join(',')==='luna');
  add('Native owner selector remains serialized',!!document.querySelector('#cv-ws-task-form select[name=owner_id]')?.getAttribute('name'));
+ const fields=await wait(()=>document.querySelector('#cv-ws-task-form .cv3-task-fields'),4000);
+ const controls=fields?[...fields.querySelectorAll('select,input')]:[];
+ const heights=controls.map(el=>Math.round(el.getBoundingClientRect().height));
+ add('State, priority and due date share one row',controls.length===3&&!!fields.querySelector('select[name=status]')&&!!fields.querySelector('select[name=priority]')&&!!fields.querySelector('input[name=due_date]'));
+ add('Task fields stay one control tall',heights.length===3&&heights.every(h=>h>=44&&h<=56),heights.join(','));
+ add('Sign-off stays a checkbox on the task form',document.querySelector('#cv-ws-task-form .cv-ws-check input[name=approval_required]')?.type==='checkbox');
  const kind=await wait(()=>document.querySelector('.cv3-kind-grid'),7000);add('Request kind visual tiles',!!kind&&kind.querySelectorAll('[role=radio]').length===11);
  kind?.querySelector('[data-cv3-kind=subscription]')?.click();add('Request tile updates original select',document.querySelector('#cv-ws-request-form select[name=kind]')?.value==='subscription');
  const route=await wait(()=>document.querySelector('.cv3-timeline-person'),7000);add('Server-policy preview shows real reviewer identities',!!route&&document.querySelectorAll('.cv3-timeline-person').length===2);

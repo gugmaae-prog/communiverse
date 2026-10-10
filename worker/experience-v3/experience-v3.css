@@ -78,6 +78,20 @@ html[data-cv-social] #cv-work-detail .cv-related [data-open]:focus-visible{outli
 .cv3-mention-choice:focus-visible{outline:2px solid var(--cv3-blue);outline-offset:3px}
 .cv3-mention-count{margin:0;font-size:11px;color:var(--cv3-muted)}
 html[data-cv-social] #cv-ws-dialog select[multiple].cv3-native-hidden,.cv-workspace select[multiple].cv3-native-hidden{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;max-height:1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important}
+/* The owner circles used to stretch State to the same height. Keep every task control one row tall. */
+html[data-cv-social] #cv-ws-dialog .cv-form-row{align-items:start}
+html[data-cv-social] #cv-ws-dialog .cv-form-row>label{align-self:start;height:auto;align-content:start}
+html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-form-row:has(select[name=owner_id]){grid-template-columns:minmax(0,1fr)}
+html[data-cv-social] #cv-ws-dialog .cv-form-row>label>:is(select,input):not([type=checkbox]):not([type=file]):not([type=hidden]){align-self:start;box-sizing:border-box;height:48px;min-height:48px;max-height:48px}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start;min-width:0}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label{display:block;min-width:0;margin:0;font-size:12px;font-weight:600;letter-spacing:.01em;line-height:1.3;color:#3b495c}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>span{color:#7b8798;font-weight:500}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>:is(select,input){display:block;width:100%;box-sizing:border-box;height:48px;min-height:48px;max-height:48px;margin:7px 0 0;padding:0 14px;border:1px solid #e0e5ee;border-radius:14px;background:#f6f8fb;color:#1c2636;font:inherit;font-size:15px;line-height:1.2;box-shadow:none;color-scheme:light}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>:is(select,input):hover{border-color:#d3dbe8;background:#fff}
+html[data-cv-social] #cv-ws-dialog .cv3-task-fields>label>:is(select,input):focus-visible{outline:2px solid var(--cv3-blue);outline-offset:2px;border-color:#b7caf2;background:#fff}
+html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check{display:flex!important;align-items:center;gap:10px;width:fit-content;min-height:28px;margin:2px 0 0;padding:0;font-size:14px;font-weight:500;color:#243044}
+html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check input{width:18px;height:18px;min-height:18px;max-height:18px;margin:0;accent-color:var(--cv3-blue);flex:none}
+@media(max-width:720px){html[data-cv-social] #cv-ws-dialog .cv3-task-fields{grid-template-columns:minmax(0,1fr)}}
 .cv3-person-role{font-size:10px;color:var(--cv3-muted);line-height:1.2;overflow-wrap:anywhere}
 .cv3-kind-selector{display:grid;gap:12px;margin:13px 0}
 .cv3-kind-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}

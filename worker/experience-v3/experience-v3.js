@@ -89,6 +89,18 @@ function upgradeRequestForm(){const form=$('#cv-ws-dialog #cv-ws-request-form');
  select.addEventListener('change',refresh);amount?.addEventListener('input',refresh);
  authorizedOverview().then(data=>{overview=data;if(form.isConnected)refresh()}).catch(()=>{route.textContent='The approval path will be confirmed when you submit.'});refresh();
 }
+function settleTaskFields(){const form=$('#cv-ws-dialog #cv-ws-task-form');if(!form||form.dataset.cv3Fields)return;
+ const status=form.querySelector('select[name=status]')?.closest('label');
+ const priority=form.querySelector('select[name=priority]')?.closest('label');
+ const due=form.querySelector('input[name=due_date]')?.closest('label');
+ if(!status||!priority||!due)return;
+ const band=node('div','cv3-task-fields');
+ const ownerRow=form.querySelector('select[name=owner_id]')?.closest('.cv-form-row');
+ (ownerRow||status).insertAdjacentElement('afterend',band);
+ band.append(status,priority,due);
+ for(const row of [...form.querySelectorAll('.cv-form-row')]){if(!row.querySelector('input,select,textarea,.cv3-person-picker'))row.remove()}
+ form.dataset.cv3Fields='yes';
+}
 function upgradeTaskForm(){const form=$('#cv-ws-dialog #cv-ws-task-form');if(!form||form.dataset.cv3Action)return;form.dataset.cv3Action='yes';const state=form.querySelector('select[name=status]');if(!state)return;const title=form.querySelector('input[name=title]')?.value||'Task';const prior=node('section','cv3-task-actions');prior.append(node('p','cv3-label','Next useful step'));
  const row=node('div','cv3-inline-actions');const current=state.value;
  function suggested(label,value){const button=node('button','cv3-quiet-button',label);button.type='button';button.addEventListener('click',()=>{if(value&&![...state.options].some(o=>o.value===value&&!o.disabled))return;if(value){state.value=value;state.dispatchEvent(new Event('change',{bubbles:true}));note.textContent='Ready to save. Review the details below, then select Save task.'}else note.textContent='You can create a support request without changing this task.'});return button}
@@ -141,7 +153,7 @@ function upgradeMentionSelects(){for(const select of $$('#cv-ws-dialog #cv-ws-co
 function upgradeWorkspaceLabels(){const nav=$('.cv-ws-tabs');if(nav&&!nav.dataset.cv3Nav){nav.dataset.cv3Nav='yes';for(const [id,text] of [['overview','Focus'],['projects','Work'],['team','People']]){const item=nav.querySelector('[data-ws-tab='+id+']');if(item)item.textContent=text}}
 }
 function updateFileUI(){for(const input of $$('.cv-workspace input[type=file]')){if(input.dataset.cv3File)return;input.dataset.cv3File='yes';const form=input.closest('form');if(!form)return;form.classList.add('cv3-upload-form');const caption=form.querySelector('.cvfix-file-caption');if(caption)caption.textContent='Choose a reference · 20 MB images/documents or 32 MB video';}}
-function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeMentionSelects();upgradeRequestForm();upgradeTaskForm();upgradeFocus();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
+function run(){try{ensureArtwork();upgradeWorkspaceLabels();upgradePersonForms();upgradeMentionSelects();upgradeRequestForm();settleTaskFields();upgradeTaskForm();upgradeFocus();updateFileUI()}catch(e){console.warn('Communiverse presentation enhancement',e?.message||e)}}
 let scheduled=0;const observer=new MutationObserver(()=>{if(scheduled)return;scheduled=requestAnimationFrame(()=>{scheduled=0;run()})});
 function boot(){run();observer.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
