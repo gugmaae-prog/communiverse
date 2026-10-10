@@ -1,3 +1,5 @@
+**Historical staging note:** The V4 public search and Plug corrections were subsequently promoted to production on 10 October 2026. This document records pre-release staging constraints; production does **not** use its read-only proxy. For exact live Worker version, routes, preserved backends and rollback, see [deployments/20261010-communiverse-search-v4.md](../deployments/20261010-communiverse-search-v4.md).
+
 # Communiverse search v4 — reusable public search (staging only)
 Date: 10 October 2026.
 Status: STAGED ONLY; NOT LIVE. Do not merge or deploy without final review.
