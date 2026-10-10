@@ -1,0 +1,62 @@
+{
+  "release": "20261007-plug-haseeb-only-1",
+  "worker": "communiverse",
+  "worker_version_id": "2c0bae4b-c997-42c2-a31d-4d018d5c7f70",
+  "deployment_id": "14715178-4e79-496e-879c-9b0089bed078",
+  "traffic_percentage": 100,
+  "rollback_version_id": "4a09f1da-b076-43e5-9663-c93dc1a188bd",
+  "source_commit": "e4d757be1a8ed78777a92425c518b33357f54f6b",
+  "changed_module": "members-20261007-entry.js",
+  "unchanged_modules": 124,
+  "total_modules": 125,
+  "database_changes": false,
+  "scope": "Only the displayed Communiverse Plug directory. Retain Haseeb, remove the other 70 entries.",
+  "upload_verification": {
+    "pass": true,
+    "version": "2c0bae4b-c997-42c2-a31d-4d018d5c7f70",
+    "release": "20261007-plug-haseeb-only-1",
+    "verifiedAt": "2026-10-07T17:49:50.296Z",
+    "modulesVerified": 125,
+    "originalModulesRetained": 124,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "live_verification": {
+    "pass": true,
+    "people": 1,
+    "name": "Haseeb Wasim",
+    "portraitNodes": 1,
+    "removedEntries": 70,
+    "routes": [
+      {
+        "path": "/communiverse/",
+        "status": 200
+      },
+      {
+        "path": "/communiverse/contact/",
+        "status": 200
+      },
+      {
+        "path": "/plug/u/haseeb-wasim-5626fe",
+        "status": 200
+      },
+      {
+        "path": "/communiverse/media/gallery-20261007/fine-lettering.mp4",
+        "status": 200
+      }
+    ],
+    "desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "profileOpens": true
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "profileOpens": true
+    },
+    "artisansGroup": "empty"
+  }
+}

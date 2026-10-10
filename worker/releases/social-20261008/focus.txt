@@ -1,0 +1,978 @@
+/* Communiverse Plug: stable portrait slots and interruptible focus transitions. */
+(() => {
+  "use strict";
+  const RELEASE = "20261008-social-10b";
+  const SOCIAL_ICONS = {"instagram":"<svg viewBox=\"0 0 256 256\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z\"/></svg>","behance":"<svg viewBox=\"0 0 256 256\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M160,80a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H168A8,8,0,0,1,160,80Zm-24,78a42,42,0,0,1-42,42H32a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H90a38,38,0,0,1,25.65,66A42,42,0,0,1,136,158ZM40,116H90a22,22,0,0,0,0-44H40Zm80,42a26,26,0,0,0-26-26H40v52H94A26,26,0,0,0,120,158Zm128-6a8,8,0,0,1-8,8H169a32,32,0,0,0,56.59,11.2,8,8,0,0,1,12.8,9.61A48,48,0,1,1,248,152Zm-17-8a32,32,0,0,0-62,0Z\"/></svg>","linkedin":"<svg viewBox=\"0 0 256 256\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z\"/></svg>","dribbble":"<svg viewBox=\"0 0 256 256\" aria-hidden=\"true\" fill=\"currentColor\"><path d=\"M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm87.65,96.18Q211.83,120,208,120a168.58,168.58,0,0,0-43.94,5.84A166.52,166.52,0,0,0,150.61,96a168.32,168.32,0,0,0,38.2-31.55A87.78,87.78,0,0,1,215.65,120.18ZM176.28,54.46A151.75,151.75,0,0,1,142,82.52a169.22,169.22,0,0,0-38.63-39,88,88,0,0,1,73,10.94ZM85.65,50.88a153.13,153.13,0,0,1,42,39.18A151.82,151.82,0,0,1,64,104a154.19,154.19,0,0,1-20.28-1.35A88.39,88.39,0,0,1,85.65,50.88ZM40,128a87.73,87.73,0,0,1,.53-9.64A168.85,168.85,0,0,0,64,120a167.84,167.84,0,0,0,72.52-16.4,150.82,150.82,0,0,1,12.31,27.13,167.11,167.11,0,0,0-24.59,11.6,169.22,169.22,0,0,0-55.07,51.06A87.8,87.8,0,0,1,40,128Zm42,75a152.91,152.91,0,0,1,50.24-46.79,148.81,148.81,0,0,1,20.95-10,152.48,152.48,0,0,1,3.73,33.47,152.93,152.93,0,0,1-3.49,32.56A87.92,87.92,0,0,1,82,203Zm89.06,1.73a170,170,0,0,0,1.86-25,168.69,168.69,0,0,0-4.45-38.47A152.31,152.31,0,0,1,208,136q3.8,0,7.61.19A88.13,88.13,0,0,1,171.06,204.72Z\"/></svg>"};
+  Object.assign(SOCIAL_ICONS,{
+    youtube:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M22 7a3 3 0 0 0-2-2c-3-.7-13-.7-16 0a3 3 0 0 0-2 2 30 30 0 0 0 0 10 3 3 0 0 0 2 2c3 .7 13 .7 16 0a3 3 0 0 0 2-2 30 30 0 0 0 0-10ZM10 16V8l7 4Z"/></svg>',
+    x:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-6.9L4.9 22H2l7.6-8.7L1 2h7l4.8 6.3L18.9 2ZM18 20h1.7L7 4H5.2L18 20Z"/></svg>',
+    facebook:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M14 22v-9h3l.5-4H14V7c0-1.2.3-2 2-2h2V1.4A24 24 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v9Z"/></svg>',
+    tiktok:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16 1c.3 2.6 1.8 4.6 5 5v4a11 11 0 0 1-5-1.6V17a7 7 0 1 1-6-6.9V14a3 3 0 1 0 2 3V1Z"/></svg>'
+  });
+  // Branded transparent marks: the shape stays familiar without an app tile.
+  SOCIAL_ICONS.instagram='<svg viewBox="0 0 48 48" aria-hidden="true" fill="none"><defs><linearGradient id="cv-ig" x1="6" y1="44" x2="42" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#ffd776"/><stop offset=".35" stop-color="#f56040"/><stop offset=".65" stop-color="#dc2743"/><stop offset="1" stop-color="#833ab4"/></linearGradient></defs><rect x="6" y="6" width="36" height="36" rx="11" stroke="url(#cv-ig)" stroke-width="4"/><circle cx="24" cy="24" r="9" stroke="url(#cv-ig)" stroke-width="4"/><circle cx="35" cy="13" r="2.8" fill="#bc2a8d"/></svg>';
+  SOCIAL_ICONS.linkedin='<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="3" cy="3" r="2"/><path d="M1 7h4v16H1zm7 0h4v2c1-1.7 2.8-2.5 4.8-2.5 4.2 0 6.2 2.4 6.2 7V23h-4v-8.5c0-2.6-.8-4-3-4-2.4 0-4 1.7-4 4.5v8H8Z"/></svg>';
+  const enquiryData=document.getElementById('cv-enquiry-data');
+  if(enquiryData){
+    const p=JSON.parse(enquiryData.textContent),labels={workshop:'Workshop request','group-session':'Group session request',order:'Store enquiry'},label=labels[p.intent];
+    let attempts=0;
+    const init=()=>{
+      const form=document.getElementById('contact'),subject=form?.querySelector('[name=subject]'),message=form?.querySelector('[name=message]');
+      if(!form||!subject||!message||form.dataset.cvEnquiry||!label)return;
+      if(!Object.keys(subject).some(k=>k.startsWith('__reactProps'))){if(++attempts<100)setTimeout(init,150);return;}
+      form.dataset.cvEnquiry='ready';
+      const set=(el,value)=>{const proto=el.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(proto,'value').set.call(el,value);el.dispatchEvent(new Event('input',{bubbles:true}));};
+      if(!subject.value)set(subject,label+' · '+p.name);
+      if(!message.value)set(message,label+' for '+p.name+'\nCraft: '+p.role+(p.intent==='order'?'\nPiece: '+p.itemTitle:'')+'\n\nMy request: ');
+      const wrap=document.createElement('div');wrap.className='cv-enquiry-date';
+      const dateLabel=document.createElement('label');dateLabel.htmlFor='cv-preferred-date';dateLabel.textContent=p.intent==='order'?'Preferred delivery date (optional)':'Preferred date (optional)';
+      const date=document.createElement('input');date.type='date';date.id='cv-preferred-date';date.min=new Date().toLocaleDateString('en-CA');
+      const note=document.createElement('p');note.textContent=p.intent==='order'?'Communiverse will confirm availability, price and delivery before an order is agreed.':'Communiverse will confirm the host, date and availability before your session is booked.';
+      wrap.append(dateLabel,date);
+      const updateLine=(key,value)=>{let text=message.value.replace(new RegExp('\\n?'+key+': [^\\n]*','g'),'');if(value)text+='\n'+key+': '+value;set(message,text);};
+      for(const event of ['input','change'])date.addEventListener(event,()=>updateLine(p.intent==='order'?'Preferred delivery date':'Preferred date',date.value));
+      let size;
+      if(p.intent!=='order'){
+        const sizeLabel=document.createElement('label');sizeLabel.htmlFor='cv-group-size';sizeLabel.textContent='Estimated group size (optional)';
+        size=document.createElement('input');size.id='cv-group-size';size.type='number';size.inputMode='numeric';size.min='1';size.max='1000';size.step='1';size.placeholder='How many people?';wrap.append(sizeLabel,size);
+        for(const event of ['input','change'])size.addEventListener(event,()=>updateLine('Group size',size.value));
+      }
+      wrap.append(note);subject.closest('div').before(wrap);
+      form.addEventListener('submit',e=>{for(const field of [date,size].filter(Boolean))if(!field.checkValidity()){e.preventDefault();e.stopImmediatePropagation();field.reportValidity();break;}},true);
+      const button=form.querySelector('button[type=submit]');if(button)button.textContent=p.intent==='order'?'Send store enquiry':'Send session request';
+      document.title=label+' | Communiverse';
+      const heading=document.getElementById('contact-heading');if(heading)heading.textContent=p.intent==='order'?'Find a piece to keep.':'Let’s make something together.';
+      const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),updates=new Map([
+        ['Join the Communiverse waitlist. Tell us whether you are a maker, brand, or collector and we will be in touch.',p.intent==='order'?'Tell us about the piece you’re interested in. We’ll confirm the details with you.':'Share your preferred date, group size and what you’d like to learn.'],
+        ['(Join the waitlist)','('+label+')']
+      ]);let text;while(text=walker.nextNode())if(updates.has(text.textContent.trim()))text.textContent=updates.get(text.textContent.trim());
+      const context=form.closest('[aria-label]');if(context)context.setAttribute('aria-label',label);
+      const observer=new MutationObserver(()=>{if(document.title!==label+' | Communiverse')document.title=label+' | Communiverse';const heading=document.querySelector('[role=status] h2');if(heading?.textContent==='You’re on the list.'){heading.textContent='Your request is saved.';const copy=heading.nextElementSibling;if(copy)copy.textContent='Communiverse has received your request. We’ll confirm the details before anything is booked or ordered.';observer.disconnect();}});
+      observer.observe(form.parentElement,{childList:true,subtree:true});observer.observe(document.head,{childList:true,subtree:true,characterData:true});addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+    };
+    if(document.readyState==='complete')init();else addEventListener('load',init,{once:true});
+  }
+  const MOTION = {
+    duration: 640,
+    fadeDuration: 140,
+    panelDuration: 160,
+    panelEase: "ease-out",
+  };
+  if (window.__cvPlugFocusRelease) return;
+  const mediaReduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const craftVideos=[...document.querySelectorAll('video.cv-craft-video')];
+  if(craftVideos.length){
+    const observer=new IntersectionObserver(entries=>entries.forEach(({target:v,isIntersecting})=>{
+      v.muted=true;if(isIntersecting&&!mediaReduced.matches&&!document.hidden)v.play().catch(()=>{});else v.pause();
+    }),{threshold:.3});
+    craftVideos.forEach(v=>observer.observe(v));
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)craftVideos.forEach(v=>v.pause());});
+    mediaReduced.addEventListener('change',()=>{if(mediaReduced.matches)craftVideos.forEach(v=>v.pause());});
+    addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+  }
+  const root = document.querySelector(".cv-plug"),
+    stage = root?.querySelector(".stage");
+  if (!root || !stage) return;
+  document.documentElement.classList.add("cv-controls");
+  root.style.setProperty("--plug-detail-duration", MOTION.panelDuration + "ms");
+  root.style.setProperty("--plug-detail-ease", MOTION.panelEase);
+  window.__cvPlugFocusRelease = window.__cvPlugRelease = RELEASE;
+  const data = JSON.parse(
+    document.getElementById("cv-focus-data")?.textContent || "[]",
+  );
+  const bySlug = new Map(data.map((p) => [p.slug, p]));
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const buttons = [...root.querySelectorAll("[data-filter]")];
+  const normalizeFilter = (v) =>
+    ({
+      all: "communiverse",
+      team: "cool-kids",
+      artist: "artists",
+      founders: "artists",
+      design: "artisans",
+      dubai: "artisans",
+    })[v] ||
+    v ||
+    "communiverse";
+  let filter = normalizeFilter(
+    new URL(location.href).searchParams.get("filter"),
+  );
+  if (!buttons.some((b) => b.dataset.filter === filter))
+    filter = "communiverse";
+  let allMatching = [], plugPage=Math.max(0,Number(new URL(location.href).searchParams.get("page"))||0),plugQuery="",plugPageSize=28;
+  let cardOrigins=new Map(),orbitProgress=1;
+  let motionStart = 0,
+    motionPlan = null,
+    motionDirty = false;
+  let selected = null,
+    visible = [],
+    frame = 0,
+    layout = null,
+    panelAnimation = null,
+    resizeFrame = 0,
+    observedCards = [],
+    focusAnchor = null,
+    focusOrigins = null;
+  const lifetime = new AbortController(),
+    signal = lifetime.signal;
+  const dark = matchMedia("(prefers-color-scheme: dark)");
+  let themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (!themeMeta) {
+    themeMeta = document.createElement("meta");
+    themeMeta.name = "theme-color";
+    document.head.append(themeMeta);
+  }
+  const syncTheme = () => {
+    themeMeta.content = dark.matches ? "#161c28" : "#f3f6fb";
+  };
+  dark.addEventListener("change", syncTheme, { signal });
+  syncTheme();
+  const make = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  };
+  const field = root.querySelector(".field");
+  const browse=make('div','cv-plug-browse');browse.innerHTML='<label>Find your people<input type="search" maxlength="80" placeholder="Name, craft or city" aria-label="Search people"></label><div><button type="button" data-plug-prev>Previous</button><span role="status" data-plug-page></span><button type="button" data-plug-next>Next</button></div>';stage.before(browse);
+  const queryInput=browse.querySelector('input'),pagePrev=browse.querySelector('[data-plug-prev]'),pageNext=browse.querySelector('[data-plug-next]'),pageNote=browse.querySelector('[data-plug-page]');
+  const changePage=delta=>{if(selected)close(false);plugPage=Math.max(0,plugPage+delta);measure();targets();wake();const u=new URL(location.href);writePage(u);u.searchParams.delete('person');history.replaceState(null,'',u)};
+  pagePrev.addEventListener('click',()=>changePage(-1),{signal});pageNext.addEventListener('click',()=>changePage(1),{signal});queryInput.addEventListener('input',()=>{if(selected)close(false);plugQuery=queryInput.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');plugPage=0;measure();targets();wake()},{signal});
+  const identity = make("div", "glass-identity");
+  identity.setAttribute("aria-hidden", "true");
+  stage.append(identity);
+  const panel = make("aside", "glass-panel");
+  panel.id = "cv-person-work";
+  panel.setAttribute("role", "region");
+  panel.setAttribute("aria-labelledby", "cv-person-name");
+  panel.setAttribute("aria-hidden", "true");
+  panel.inert = true;
+  panel.innerHTML =
+    '<div class="glass-panel-top"><span>In their world</span><button class="glass-close" type="button" aria-label="Close profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="glass-panel-body"></div>';
+  panel.querySelector(".glass-close").addEventListener("click",()=>close(true),{signal});
+  stage.append(panel);
+  const announcer = make("p", "sr");
+  announcer.setAttribute("role", "status");
+  announcer.setAttribute("aria-live", "polite");
+  root.append(announcer);
+  const empty = make(
+    "p",
+    "glass-empty",
+    "No people in this group yet. Choose Communiverse to explore everyone.",
+  );
+  empty.hidden = true;
+  empty.setAttribute("role", "status");
+  stage.append(empty);
+  // Observed public letter-image placeholders; uploaded photographs are preserved.
+  const letterAvatars = new Set([
+    "diptiba-jadeja-255612",
+    "narges-ganjeh-20bd63",
+    "shantel-amber-clarito-e32564",
+    "the-plug-of-icc-30ffe5",
+    "amer-dahhan-40e1c2",
+    "aniruddha-kundu-cf1e97",
+    "ansor-1443c9",
+    "asad-ali-389db6",
+    "ash-er-3108a3",
+    "negineer-amke-7e8cb8",
+    "benjamin-boishing-fe5c87",
+    "dharnesh-waran-4ea1da",
+    "dora-asantewaa-ff5c1e",
+    "gugma-ae-4e8b34",
+    "hip-hop-news-dde7cf",
+    "jashan-deep-374283",
+    "moha-alan-0a027c",
+    "mohamad-osman-e7b768",
+    "oak-residency-09aff6",
+    "shreenath-atpadkar-96c099",
+    "vinaya-g-s-f1c4d4",
+    "joy-cantara-ec5aeb",
+    "narian-ardakani-3c1777",
+    "andrew-graham-5bb055",
+    "keshwala-ramde-1c5ba2",
+    "naina-singh-47e7ca",
+    "psr-homes-9e4436",
+    "shawn-lamouza-67bc0c",
+  ]);
+  const nodes = [...stage.querySelectorAll("a.node")].map((el, i) => {
+    const p = bySlug.get(el.dataset.slug) || {
+      slug: el.dataset.slug,
+      name: el.dataset.name || "Member",
+      role: el.querySelector(".cap small")?.textContent || "Member",
+      summary: "",
+      profileUrl: el.getAttribute("href"),
+      socials: [],
+    };
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-controls", panel.id);
+    el.setAttribute("aria-expanded", "false");
+    el.setAttribute("aria-label", "Explore " + p.name);
+    el.draggable = false;
+    el.querySelector(".cap")?.remove();
+    el.style.width = "240px";
+    el.style.height = "240px";
+    el.style.left = "0px";
+    el.style.top = "0px";
+    const n = {
+      el,
+      p,
+      i,
+      x: 0,
+      y: 0,
+      d: 1,
+      o: 0,
+      tx: 0,
+      ty: 0,
+      td: 1,
+      to: 0,
+      rest: null,
+    };
+    el.addEventListener(
+      "click",
+      (e) => {
+        if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
+          return;
+        e.preventDefault();
+        select(n);
+      },
+      { signal },
+    );
+    el.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === " ") {
+          e.preventDefault();
+          select(n);
+        }
+      },
+      { signal },
+    );
+    const hash = [...p.slug].reduce(
+      (a, c) => (a * 31 + c.charCodeAt(0)) >>> 0,
+      7,
+    );
+    n.seed = hash;
+    const avatar = () => {
+      let ph = el.querySelector(".ph");
+      if (!ph) {
+        ph = make("span", "ph");
+        el.append(ph);
+      }
+      ph.textContent = "";
+      ph.setAttribute("aria-hidden", "true");
+      const tile = hash % 16;
+      ph.dataset.avatar = String(tile);
+      ph.style.backgroundPosition =
+        ((tile % 4) * 100) / 3 + "% " + (Math.floor(tile / 4) * 100) / 3 + "%";
+      el.dataset.generatedAvatar = "true";
+    };
+    const img = el.querySelector("img");
+    if (!img) avatar();
+    else if (
+      letterAvatars.has(p.slug) &&
+      /^https:\/\/lh[0-9]\.googleusercontent\.com\/a\//.test(img.src)
+    ) {
+      img.hidden = true;
+      avatar();
+    } else {
+      // A saved/fallback directory can already have hidden a failed photograph.
+      if (img.hidden) avatar();
+      const fallback = () => {
+        img.hidden = true;
+        avatar();
+      };
+      img.addEventListener("error", fallback, { signal });
+      if (img.complete && !img.naturalWidth) fallback();
+    }
+    return n;
+  });
+  function safeUrl(s) {
+    try {
+      const u = new URL(s, location.origin);
+      if (
+        (u.protocol !== "https:" &&
+          !(
+            u.protocol === "http:" &&
+            u.origin === location.origin &&
+            ["localhost", "127.0.0.1", "[::1]"].includes(u.hostname)
+          )) ||
+        u.username ||
+        u.password
+      )
+        return null;
+      return u.href;
+    } catch {
+      return null;
+    }
+  }
+  function link(text, url, cls) {
+    const a = make("a", cls, text);
+    const href = safeUrl(url);
+    if (!href) return null;
+    a.href = href;
+    if (new URL(href).origin !== location.origin) {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
+    return a;
+  }
+  function card(kicker) {
+    const a = make("article", "glass-card");
+    a.append(make("p", "glass-eyebrow", kicker));
+    return a;
+  }
+  function rememberCardPose(){
+    if(!selected){cardOrigins.clear();return;}
+    if(layout?.compact&&layout.orbitCards?.some(c=>c.el.isConnected))cardOrigins=new Map(layout.orbitCards.map(c=>[c.el.dataset.card||"gallery",{x:c.renderedX??c.x,y:c.renderedY??c.y}]));
+  }
+  function renderPanel(n) {
+    rememberCardPose();
+    const body = panel.querySelector(".glass-panel-body"),
+      p = n.p;
+    panelAnimation?.cancel();
+    if (panel.contains(document.activeElement))
+      n.el.focus({ preventScroll: true });
+    body.querySelectorAll("video").forEach(v=>v.pause());
+    body.replaceChildren();
+    const main = card(
+      p.eyebrow || (p.category === "cool-kids" ? "Management" : p.group || "Member"),
+    );
+    const h = make("h2", "", p.name);
+    h.id = "cv-person-name";
+    main.append(h, make("p", "glass-role", p.role || "Communiverse member"));
+
+    if(p.location)main.append(make('p','glass-description',p.location));
+    const work = card(p.sample?'In the studio':'Their work');
+    work.append(
+      make(
+        "p",
+        "glass-description",
+        p.summary ||
+          "Explore their public profile to discover their work and interests.",
+      ),
+    );
+    const extra = make("details", "glass-extra");
+    extra.append(make("summary", "", "More about their work"));
+    if (p.more) extra.append(make("p", "glass-description glass-background", p.more));
+    if (p.sources?.length) {
+      const refs = make("div", "glass-sources");
+      refs.append(make("span", "", "Public sources"));
+      for (const source of p.sources) {
+        const a = link(source.label, source.url, "");
+        if (a) refs.append(a);
+      }
+      extra.append(refs);
+    }
+    if (p.more || p.sources?.length || p.workPhotos?.length) work.append(extra);
+    if (p.focus?.length) {
+      const tags = make("div", "glass-tags");
+      p.focus.slice(0, 4).forEach((t) => tags.append(make("span", "", t)));
+      work.append(tags);
+    }
+    const profile = link("View profile", p.profileUrl, "glass-link cv-primary");
+    if (profile && !p.sample) work.append(profile);
+    const media=make('div','glass-card cv-video-orbit'),films=make('div','cv-films');
+    for(const f of p.films||[]){
+      const video=make('video','cv-craft-video');
+      video.src=f.src;video.muted=true;video.loop=true;video.playsInline=true;video.controls=false;video.autoplay=true;video.setAttribute('muted','');video.setAttribute('autoplay','');video.setAttribute('disablepictureinpicture','');video.setAttribute('controlslist','nofullscreen noremoteplayback');video.preload='metadata';
+      video.setAttribute('aria-label',f.title);films.append(video);
+      extra.append(make('p','cv-film-label',f.title+' · '+f.note));
+    }
+    media.append(films);media.dataset.card='video';
+    if(p.workPhotos?.length){for(const photo of p.workPhotos){const img=make('img','cv-work-thumb');img.src=photo.src;img.alt=photo.title;img.loading='lazy';extra.append(img,make('p','cv-photo-caption',photo.title));}}
+    const galleryAction=['artists','ambassadors'].includes(p.category)?make('div','cv-gallery-orbit'):null;
+    if(galleryAction){
+      const action=link(p.galleryLabel||p.name.split(' ')[0]+'’s Gallery',p.profileUrl,'glass-link cv-gallery-link');
+      galleryAction.append(action);
+
+    }
+    const connect=make('div','glass-card cv-social-orbit'),links=make('div','glass-social-grid');
+    const services=[['instagram','Instagram','instagram.com'],['behance','Behance','behance.net'],['linkedin','LinkedIn','linkedin.com'],['dribbble','Dribbble','dribbble.com'],['youtube','YouTube','youtube.com'],['tiktok','TikTok','tiktok.com'],['facebook','Facebook','facebook.com'],['x','X','x.com']];
+    const supplied=[...(p.socials||[]),...(p.sources||[])],seen=new Set();
+    for(const [id,label,domain] of services){
+      const social=supplied.find(entry=>{try{const host=new URL(entry.url).hostname;return host===domain||host.endsWith('.'+domain)||(id==='youtube'&&host==='youtu.be')||(id==='x'&&host==='twitter.com');}catch{return false;}});
+      if(!social||seen.has(id))continue;seen.add(id);
+      const button=link('',social.url,'glass-link glass-social');if(!button)continue;
+      button.innerHTML=SOCIAL_ICONS[id]||'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3c-5 5-5 13 0 18"/></svg>';
+      button.dataset.service=id;button.setAttribute('aria-label','Open '+p.name+' on '+label);button.title=label;links.append(button);
+    }
+    const contact=link('', '/communiverse/contact/#contact','glass-link glass-social');
+    contact.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="cv-mail-blue" x2="0" y2="1"><stop stop-color="#3da7ff"/><stop offset="1" stop-color="#0874ee"/></linearGradient></defs><path fill="url(#cv-mail-blue)" d="M3 8h26v18H3z"/><path fill="#fff" d="m3 8 13 10L29 8z"/><path fill="#b9dcff" d="m3 26 10-10 3 2 3-2 10 10z"/></svg>';contact.dataset.service='contact';contact.setAttribute('aria-label','Contact Communiverse');contact.title='Contact';links.append(contact);
+    connect.append(links);
+    const expand=make('button','cv-card-expand','Read their story');
+    expand.type='button';expand.setAttribute('aria-expanded','false');
+    expand.addEventListener('click',()=>{
+      if(!work.classList.contains('is-expanded'))work.dataset.closedHeight=String(work.getBoundingClientRect().height);
+      const opened=work.classList.toggle('is-expanded');extra.open=opened;
+      expand.setAttribute('aria-expanded',String(opened));expand.textContent=opened?'Close story ×':'Read their story';
+      work.style.setProperty('--cv-expanded-top',Math.max(0,Math.min((focusAnchor?.y||0)-160,innerHeight-stage.getBoundingClientRect().top-560))+'px');
+    });
+    work.append(expand);
+    work.addEventListener('click',e=>{if(!work.classList.contains('is-expanded')&&!e.target.closest('button,a,summary'))expand.click();});
+    extra.addEventListener('toggle',()=>{work.classList.toggle('is-expanded',extra.open);expand.setAttribute('aria-expanded',String(extra.open));expand.textContent=extra.open?'Close story ×':'Read their story';});
+    main.dataset.card = "identity";
+    work.dataset.card = "work";
+    connect.dataset.card = "connect";
+    panel.querySelector(".glass-panel-top>span").textContent=p.name+" · "+p.role;
+    panel.querySelector(".cv-gallery-orbit")?.remove();
+    body.append(main,...(films.childElementCount?[media]:[]),work,connect);
+    if(galleryAction)panel.append(galleryAction);
+    if(!reduced.matches)body.querySelector('video')?.play().catch(()=>{});
+    const filmObserver=new IntersectionObserver(entries=>entries.forEach(({target:v,isIntersecting})=>{if(isIntersecting&&selected===n&&!panel.inert&&!reduced.matches&&!document.hidden)v.play().catch(()=>{});else v.pause();}),{root:films,threshold:.6});
+    films.querySelectorAll('video').forEach(v=>filmObserver.observe(v));
+    panel._filmObserver?.disconnect();panel._filmObserver=filmObserver;
+    observedCards.forEach((card) => ro.unobserve(card));
+    observedCards = [...body.children];
+    observedCards.forEach((card) => ro.observe(card));
+    identity.replaceChildren(
+      make("strong", "", p.name),
+      make("span", "", p.group || "Member"),
+    );
+    panel.scrollTop = 0;
+    announcer.textContent =
+      p.name + ". " + (p.role || "Member") + ". Details open.";
+  }
+  function select(n, writeHistory = true) {
+    if (!visible.includes(n)) return;
+    if (selected === n) {
+      close(true);
+      return;
+    }
+    rebase();
+    focusAnchor = { x: n.x, y: n.y };
+    focusOrigins = new Map(nodes.map((peer) => [peer, { x: peer.x, y: peer.y }]));
+    selected = n;
+    root.classList.add("is-focused");
+    root.classList.remove("is-details-ready");
+    root.dataset.focusedPerson = n.p.slug;
+    panel.inert = false;
+    panel.setAttribute("aria-hidden", "false");
+    identity.setAttribute("aria-hidden", "false");
+    renderPanel(n);
+    measure();
+    targets();
+    if(layout.compact){orbitProgress=0;root.classList.add("is-details-ready");resolveFrame();}
+    wake();
+
+    if (writeHistory) {
+      const u = new URL(location.href),
+        alreadyFocused = u.searchParams.has("person");
+      u.searchParams.set("person", n.p.slug);
+      writePage(u);
+      history[alreadyFocused ? "replaceState" : "pushState"](
+        { cvPerson: n.p.slug },
+        "",
+        u,
+      );
+    }
+  }
+  function close(focus, writeHistory = true) {
+    const old = selected;
+    panel._filmObserver?.disconnect();
+    panel.querySelectorAll("video").forEach(v=>v.pause());
+    panel.querySelectorAll("video").forEach(v=>v.pause());
+    rebase();
+    selected = null;
+    focusAnchor = focusOrigins = null;
+    root.classList.remove("is-focused", "is-details-ready");
+    delete root.dataset.focusedPerson;
+    panel.inert = true;
+    panel.setAttribute("aria-hidden", "true");
+    identity.setAttribute("aria-hidden", "true");
+    panelAnimation?.cancel();
+    measure();
+    targets();
+    wake();
+    announcer.textContent = "Back to the people.";
+    if (writeHistory) {
+      const u = new URL(location.href);
+      u.searchParams.delete("person");
+      writePage(u);
+      history.replaceState(null, "", u);
+    }
+    if (focus && old) {
+      old.el.focus({ preventScroll: true });
+      const targetY = stage.getBoundingClientRect().top + old.ty;
+      if (targetY < 0 || targetY > innerHeight)
+        scrollTo({
+          top: Math.max(0, scrollY + targetY - innerHeight / 2),
+          behavior: "instant",
+        });
+    }
+  }
+  const bound = (x, a, b) => Math.max(a, Math.min(b, x));
+  // Grow an irregular cluster from neighbouring portraits once per layout.
+  // Cache it for this document so exploration does not continuously reshuffle it.
+  // New document, new constellation. Avatar tiles and portrait sizes stay stable.
+  const constellationSeed = crypto.getRandomValues(new Uint32Array(1))[0];
+  const galaxyCache = new Map();
+  function starPositions(items,w,h,d,gap,zones=[]){
+    if(!items.length)return{h,points:[]};
+    const cols=Math.max(1,Math.ceil(Math.sqrt(items.length*w/h))),rows=Math.ceil(items.length/cols),cw=w/cols,ch=h/rows,cell=Math.min(cw,ch);
+    const points=items.map((n,i)=>{const col=i%cols,row=Math.floor(i/cols),variation=((n.seed^constellationSeed)>>>0)%100/100,diameter=Math.min(86,cell*(.53+variation*.32)),lastCount=Math.min(cols,items.length-row*cols),offset=(cols-lastCount)*cw/2;return{x:offset+(col+.5)*cw+(variation-.5)*cw*.08,y:(row+.5)*ch+(variation-.5)*ch*.08,d:diameter}});
+    return{h,points};
+  }
+  function nearbyPositions(items,w,zones){
+    if(!items.length)return new Map();const h=layout.h;
+    // Use available space around the detail cards; adapt size rather than pagination.
+    for(let size=Math.min(44,Math.sqrt(w*h/Math.max(1,items.length))* .7);size>=4;size*=.86){
+      const gap=Math.max(2,size*.16),step=size+gap,spots=[];
+      for(let y=size/2+3;y<=h-size/2-3;y+=step)for(let x=size/2+3;x<=w-size/2-3;x+=step){if(!zones.some(z=>x+size/2+2>z.x&&x-size/2-2<z.x+z.w&&y+size/2+2>z.y&&y-size/2-2<z.y+z.h))spots.push({x,y,d:size});}
+      if(spots.length<items.length)continue;
+      const result=new Map();for(const n of items){let best=0,cost=Infinity;spots.forEach((p,i)=>{const distance=Math.hypot(p.x-n.rest.x,p.y-n.rest.y);if(distance<cost){best=i;cost=distance}});const p=spots.splice(best,1)[0];p.d*=.76+((n.seed>>>0)%100)/100*.24;result.set(n,p)}return result;
+    }
+    return new Map(items.map(n=>[n,{...n.rest,d:6}]));
+  }
+  function measure() {
+    rememberCardPose();
+    const previousWidth=layout?.w;
+    const w = stage.getBoundingClientRect().width,
+      mobile = innerWidth < 1050,
+      compact = innerWidth < 760 || innerHeight < 500;
+    allMatching = nodes
+      .filter((n) => (filter === "communiverse" || n.p.category === filter)&&(!plugQuery||[n.p.name,n.p.location,...(n.p.focus||[])].join(" ").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").includes(plugQuery)))
+      .sort(
+        (a, b) =>
+          (+b.el.dataset.score || 0) - (+a.el.dataset.score || 0) ||
+          a.p.name.localeCompare(b.p.name),
+      );
+    plugPageSize=Math.max(1,allMatching.length);plugPage=0;visible=allMatching;pagePrev.hidden=true;pageNext.hidden=true;pageNote.textContent=allMatching.length+' people';
+    const d = mobile ? 44 : 56;
+    nodes.forEach(
+      (n) =>
+        (n.restD = mobile
+          ? 44 + (((n.seed ^ constellationSeed) >>> 8) % 5) * 4
+          : 48 + (((n.seed ^ constellationSeed) >>> 8) % 6) * 6),
+    );
+    if(w < 100) return; // A temporarily hidden stage has no usable layout width.
+    // One viewport for the curated circle set; shorter screens reduce the
+    // portrait variation before resorting to a rectangular packing boundary.
+    const stageTop = stage.getBoundingClientRect().top;
+    const availableH = Math.max(120, innerHeight - stageTop - 12);
+    const rest = starPositions(visible, w, availableH, null, mobile ? 14 : 24);
+    visible.forEach((n,i)=>{n.restD=rest.points[i].d;});
+    const restH = rest.h;
+    layout = { w, h: restH, mobile, compact, d };
+    nodes.forEach((n) => {
+      const i = visible.indexOf(n);
+      n.rest = i < 0 ? { x: w / 2, y: restH / 2, d: 1 } : rest.points[i];
+    });
+    empty.hidden = visible.length > 0;
+    layout.heroD = compact ? 112 : mobile ? 128 : 160;
+    const cards = [...panel.querySelectorAll(".glass-card")];
+    let cardsBottom = 0;
+    layout.peers = new Map();
+    if(selected){
+      const main=cards.find(c=>c.dataset.card==='identity'),work=cards.find(c=>c.dataset.card==='work'),media=cards.find(c=>c.dataset.card==='video'),connect=cards.find(c=>c.dataset.card==='connect');
+      layout.heroD=Math.min(compact?92:144,restH*.34,w*.28);
+      layout.heroX=bound(focusAnchor?.x??selected.rest.x,layout.heroD/2+6,w-layout.heroD/2-6);
+      layout.heroY=bound(focusAnchor?.y??selected.rest.y,layout.heroD/2+6,restH-layout.heroD/2-6);
+      const r=layout.heroD/2;
+      if(previousWidth&&Math.abs(previousWidth-w)>1){layout.heroX=bound(layout.heroX,r+8,w-r-8);layout.heroY=bound(layout.heroY,r+8,restH-r-8);focusAnchor={x:layout.heroX,y:layout.heroY};}
+      layout.zones=[{x:layout.heroX-r-8,y:layout.heroY-r-8,w:layout.heroD+16,h:layout.heroD+16}];layout.orbitCards=[];
+      const stageTop=stage.getBoundingClientRect().top,viewTop=0,viewBottom=Math.min(restH,innerHeight-stageTop-16);
+      const specs=[[main,compact?130:208,-1,-1],[media,compact?68:120,1,-1],[work,compact?138:235,-1,1],[panel.querySelector('.cv-gallery-orbit'),compact?118:180,1,1],[connect,44,0,1]].filter(([el])=>el);
+      function place(card,cw,side,vertical){
+        card.style.setProperty('--cv-orbit-w',cw+'px');card.style.width=cw+'px';
+        const ch=card.classList.contains('is-expanded')?(Number(card.dataset.closedHeight)||104):card.getBoundingClientRect().height,preferredX=side<0?layout.heroX-r-cw-(mobile?6:12):side>0?layout.heroX+r+(mobile?6:12):layout.heroX-cw/2,preferredY=vertical<0?layout.heroY-ch-(mobile?8:16):layout.heroY+r+(mobile?8:20);
+        let best=null,cost=Infinity;
+        const xs=[0,w-cw,bound(preferredX,0,w-cw)];for(let x=0;x<=w-cw;x+=12)xs.push(x);
+        const ys=[0,Math.max(0,restH-ch),bound(preferredY,0,Math.max(0,restH-ch))];const clearance=mobile?4:8;for(const z of layout.zones){ys.push(bound(z.y-ch-clearance,0,Math.max(0,restH-ch)),bound(z.y+z.h+clearance,0,Math.max(0,restH-ch)));xs.push(bound(z.x-cw-clearance,0,w-cw),bound(z.x+z.w+clearance,0,w-cw));}for(let y=Math.max(0,layout.heroY-360);y<=Math.min(restH-ch,layout.heroY+360);y+=12)ys.push(y);
+        for(const x of xs)for(const y of ys){
+          if(layout.zones.some(z=>x+cw+(mobile?4:8)>z.x&&x-(mobile?4:8)<z.x+z.w&&y+ch+(mobile?4:8)>z.y&&y-(mobile?4:8)<z.y+z.h))continue;
+          const candidate=Math.hypot(x-preferredX,y-preferredY)+4*(Math.max(0,viewTop-y)+Math.max(0,y+ch-viewBottom));
+          if(candidate<cost){cost=candidate;best={x,y,w:cw,h:ch};}
+        }
+        best||={x:bound(preferredX,0,w-cw),y:bound(preferredY,0,Math.max(0,restH-ch)),w:cw,h:Math.min(ch,restH)};
+        for(const [key,value] of Object.entries(best))card.style.setProperty('--cv-orbit-'+key,value+'px');
+        card.style.left=best.x+'px';card.style.top=best.y+'px';
+        layout.orbitCards.push({el:card,...best});layout.zones.push(best);cardsBottom=Math.max(cardsBottom,best.y+ch);
+      }
+      specs.forEach(args=>place(...args));
+      // Only circles touching a card move aside; the selected circle stays at its clicked centre.
+      layout.peers=nearbyPositions(visible.filter(n=>n!==selected),w,layout.zones);
+      panel.style.height=restH+'px';
+    }
+    layout.sceneH=restH;
+    stage.style.setProperty('--scene-height',Math.ceil(layout.sceneH)+'px');
+    root.dataset.focusLayout = mobile ? "mobile" : "desktop";
+    root.dataset.cardLayout = compact ? "orbits" : "desktop";
+  }
+  function targets() {
+    if (!layout) return;
+    const { w, h, compact, d } = layout;
+    let changed = false;
+    for (const n of nodes) {
+      const shown = visible.includes(n),
+        i = visible.indexOf(n);
+      let { x, y } = n.rest,
+        diameter = shown ? n.rest.d : 1,
+        opacity = shown ? 1 : 0;
+      if (selected && shown) {
+        if (n === selected) {
+          x = layout.heroX;
+          y = layout.heroY;
+          diameter = layout.heroD;
+        } else {
+          const point = layout.peers.get(n);
+          x = point.x;
+          y = point.y;
+          diameter = point.d;
+        }
+      }
+      if (!shown) {
+        x = n.rendered?.x ?? w / 2;
+        y = n.rendered?.y ?? h / 2;
+        diameter = n.rendered?.d ?? 1;
+      }
+      changed ||=
+        Math.abs(n.tx - x) > 0.05 ||
+        Math.abs(n.ty - y) > 0.05 ||
+        Math.abs(n.td - diameter) > 0.05 ||
+        n.to !== opacity;
+      Object.assign(n, { tx: x, ty: y, td: diameter, to: opacity });
+      n.el.style.pointerEvents = shown ? "auto" : "none";
+      n.el.tabIndex = shown ? 0 : -1;
+      n.el.setAttribute("aria-hidden", String(!shown));
+      n.el.inert=!shown;
+      n.el.setAttribute("aria-expanded", String(n === selected));
+      n.el.classList.toggle("is-selected", n === selected);
+      n.el.style.zIndex = n === selected ? "4" : "2";
+      n.el.dataset.slot = String(i);
+      n.el.dataset.destinationX = String(x);
+      n.el.dataset.destinationY = String(y);
+    }
+    if (changed) motionDirty = true;
+  }
+  // FLIP-style continuity: a new action starts from the last painted pose.
+  // Routes are calculated once and have a definite end; no collision repulsion.
+  function planMotion() {
+    motionDirty = false;
+    motionStart = 0;orbitProgress=0;
+    motionPlan = nodes.map((n) => {
+      const current = n.rendered || n,
+        entering = n.o < 0.002 && n.to > 0;
+      const plan = {
+        n,
+        sx: entering ? n.tx : current.x,
+        sy: entering ? n.ty : current.y,
+        sd: entering ? n.td : current.d,
+        so: n.o,
+        tx: n.tx,
+        ty: n.ty,
+        td: n.td,
+        to: n.to,
+        focus: n === selected,
+        returning: !!n.wasFocused && n !== selected,
+      };
+      n.wasFocused = n === selected;
+      return plan;
+    });
+  }
+  function paint(n, p = n) {
+    const d = Math.max(0.1, p.d);
+    n.el.style.transform =
+      "translate3d(" +
+      (p.x - d / 2).toFixed(4) +
+      "px," +
+      (p.y - d / 2).toFixed(4) +
+      "px,0) scale(" +
+      (d / 240).toFixed(7) +
+      ")";
+    n.el.style.opacity = bound(n.o, 0, 1).toFixed(5);
+    n.el.style.visibility = n.o < 0.002 ? "hidden" : "visible";
+    n.rendered = { x: p.x, y: p.y, d };
+    if (n === selected) {
+      for(const card of layout.orbitCards||[]){
+        const origin=cardOrigins.get(card.el.dataset.card||"gallery");
+        const dx=bound(origin?(origin.x-card.x)*(1-orbitProgress):(p.x-layout.heroX)*.45,-card.x,layout.w-card.x-card.w);
+        const dy=bound(origin?(origin.y-card.y)*(1-orbitProgress):(p.y-layout.heroY)*.35,-card.y,Math.max(layout.sceneH,480)-card.y-card.h);
+        card.renderedX=card.x+dx;card.renderedY=card.y+dy;
+        card.el.style.transform='translate3d('+dx.toFixed(3)+'px,'+dy.toFixed(3)+'px,0)';
+      }
+      identity.style.width = layout.heroD + "px";
+      identity.style.opacity = String(n.o);
+      const labelWidth = Math.min(240, layout.w * 0.4);
+      const labelX = bound(p.x, labelWidth / 2, layout.w - labelWidth / 2);
+      identity.style.transform =
+        "translate3d(" +
+        labelX +
+        "px," +
+        (p.y + d / 2 + 18) +
+        "px,0) translateX(-50%)";
+    }
+  }
+  function rebase() {
+    for (const n of nodes)
+      if (n.rendered) {
+        n.x = n.rendered.x;
+        n.y = n.rendered.y;
+        n.d = n.rendered.d;
+      }
+  }
+  function resolveFrame() {
+    const points = nodes
+      .filter((n) => n.o >= 0.002)
+      .map((n) => ({ source: n, x: n.x, y: n.y, d: n.d }));
+    let minimum = Infinity;
+    for (let i = 0; i < points.length; i++)
+      for (let j = i + 1; j < points.length; j++)
+        minimum = Math.min(
+          minimum,
+          Math.hypot(points[i].x - points[j].x, points[i].y - points[j].y) -
+            (points[i].d + points[j].d) / 2,
+        );
+    root.dataset.renderedPortraitGap = Number.isFinite(minimum)
+      ? minimum.toFixed(3)
+      : "none";
+    const positions = new Map(points.map((p) => [p.source, p]));
+    for (const n of nodes)
+      paint(
+        n,
+        positions.get(n) || { x: layout.w / 2, y: layout.h / 2, d: 0.1 },
+      );
+  }
+  function snap() {
+    motionPlan = null;
+    motionDirty = false;
+    motionStart = 0;orbitProgress=1;
+    for (const n of nodes)
+      Object.assign(n, { x: n.tx, y: n.ty, d: n.td, o: n.to });
+    resolveFrame();
+    if (selected) root.classList.add("is-details-ready");
+    root.dataset.animating = "false";
+    root.classList.remove("is-animating");
+  }
+  function tick(t) {
+    frame = 0;
+    if (document.hidden) return;
+    if (motionDirty || !motionPlan) planMotion();
+    if (!motionStart) motionStart = t;
+    const elapsed = t - motionStart,
+      u = Math.min(1, elapsed / MOTION.duration);
+    // Smooth start and finish. Peers make room early; the focus grows continuously.
+    const p = u * u * u * (u * (u * 6 - 15) + 10),
+      fade = Math.min(1, elapsed / MOTION.fadeDuration);
+    orbitProgress=p;
+    for (const a of motionPlan) {
+      a.n.x = a.sx + (a.tx - a.sx) * p;
+      a.n.y = a.sy + (a.ty - a.sy) * p;
+      const sizeU = a.focus ? u : Math.min(1, u / (a.returning ? 0.25 : 0.4));
+      const sizeP = sizeU * sizeU * sizeU * (sizeU * (sizeU * 6 - 15) + 10);
+      a.n.d = a.sd + (a.td - a.sd) * sizeP;
+      a.n.o = a.so + (a.to - a.so) * fade;
+    }
+    if (selected && u >= 0.6) root.classList.add("is-details-ready");
+    resolveFrame();
+    root.dataset.animating = String(u < 1);
+    root.classList.toggle("is-animating", u < 1);
+    if (u < 1) frame = requestAnimationFrame(tick);
+    else snap();
+  }
+  function wake() {
+    if (document.hidden) return;
+    if (reduced.matches) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      snap();
+      return;
+    }
+    if (motionDirty) planMotion();
+    if (!frame && motionPlan) frame = requestAnimationFrame(tick);
+  }
+  for (const b of buttons)
+    b.addEventListener(
+      "click",
+      () => {
+        if (selected) close(false);
+        filter = b.dataset.filter;plugPage=0;
+        for (const x of buttons)
+          x.setAttribute("aria-pressed", String(x === b));
+        const u = new URL(location.href);
+        if (filter === "communiverse") u.searchParams.delete("filter");
+        else u.searchParams.set("filter", filter);
+        u.searchParams.delete("person");
+        writePage(u);
+        history.replaceState(null, "", u);
+        measure();
+        targets();
+        wake();
+      },
+      { signal },
+    );
+  function writePage(u) {
+    if(plugPage)u.searchParams.set("page",String(plugPage));else u.searchParams.delete("page");
+  }
+  function restoreLocation() {
+    const u = new URL(location.href),
+      f = normalizeFilter(u.searchParams.get("filter"));
+    panel.querySelectorAll("video").forEach(v=>v.pause());
+    rebase();
+    selected = null;
+    focusAnchor = focusOrigins = null;
+    root.classList.remove("is-focused", "is-details-ready");
+    delete root.dataset.focusedPerson;
+    panel.inert = true;
+    panel.setAttribute("aria-hidden", "true");
+    identity.setAttribute("aria-hidden", "true");
+    panelAnimation?.cancel();
+    filter = buttons.some((b) => b.dataset.filter === f) ? f : "communiverse";
+    buttons.forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.filter === filter)),
+    );
+    measure();
+    const n = nodes.find((n) => n.p.slug === u.searchParams.get("person")),
+      i = allMatching.indexOf(n);
+    if (n && i >= 0) {
+      plugPage=Math.floor(i/plugPageSize);measure();
+      select(n, false);
+    } else {
+      targets();
+      wake();
+    }
+    if (document.activeElement?.matches('.node[aria-hidden="true"]'))
+      (visible[0]?.el || buttons[0]).focus({ preventScroll: true });
+  }
+  panel.addEventListener(
+    "focusin",
+    () => {
+      if (selected && !root.classList.contains("is-details-ready")) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        snap();
+      }
+    },
+    { signal },
+  );
+  window.addEventListener("popstate", restoreLocation, { signal });
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key === "Escape" && selected) {
+        e.preventDefault();
+        close(true);
+      }
+    },
+    { signal },
+  );
+  stage.addEventListener(
+    "click",
+    (e) => {
+      if (selected && e.target === stage) {
+        const expanded=panel.querySelector('.is-expanded');
+        if(expanded){expanded.classList.remove('is-expanded');const extra=expanded.querySelector('details');if(extra)extra.open=false;}
+        else close(false);
+      }
+    },
+    { signal },
+  );
+  document.addEventListener('pointerdown',e=>{
+    const expanded=panel.querySelector('.is-expanded');
+    if(expanded&&!expanded.contains(e.target)){expanded.classList.remove('is-expanded');const extra=expanded.querySelector('details');if(extra)extra.open=false;}
+  },{signal});
+  // One lifecycle owns all frame work. BFCache retains listeners; real teardown releases them.
+  const ro = new ResizeObserver(() => {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(() => {
+      measure();
+      targets();
+      wake();
+    });
+  });
+  ro.observe(stage);
+  ro.observe(panel);
+  function stopFrames() {
+    cancelAnimationFrame(frame);
+    cancelAnimationFrame(resizeFrame);
+    frame = resizeFrame = 0;
+    panelAnimation?.cancel();
+  }
+  reduced.addEventListener(
+    "change",
+    () => {
+      panelAnimation?.cancel();
+      if(reduced.matches)panel.querySelectorAll('video').forEach(v=>v.pause());
+      wake();
+    },
+    { signal },
+  );
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (document.hidden) {stopFrames();panel.querySelectorAll('video').forEach(v=>v.pause());}
+      else {
+        measure();
+        targets();
+        wake();
+      }
+    },
+    { signal },
+  );
+  window.addEventListener(
+    "resize",
+    () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => {
+        measure();
+        targets();
+        wake();
+      });
+    },
+    { signal },
+  );
+  window.addEventListener(
+    "pagehide",
+    (e) => {
+      stopFrames();
+      if (!e.persisted) {
+        ro.disconnect();
+        lifetime.abort();
+      }
+    },
+    { signal },
+  );
+  window.addEventListener(
+    "pageshow",
+    () => {
+      measure();
+      targets();
+      wake();
+    },
+    { signal },
+  );
+  for (const b of buttons)
+    b.setAttribute("aria-pressed", String(b.dataset.filter === filter));
+  const currentUrl = new URL(location.href);
+  measure();
+  targets();
+  snap();
+  root.dataset.glassReady = "true";
+  const initialPerson = new URL(location.href).searchParams.get("person");
+  if (initialPerson) {
+    const n = nodes.find((n) => n.p.slug === initialPerson);
+    if (n) {
+      const i = allMatching.indexOf(n);
+      if (i >= 0) {
+        plugPage=Math.floor(i/plugPageSize);measure();
+        select(n, false);
+        if (reduced.matches) snap();
+      }
+    }
+  }
+
+  window.__cvPlugFocusState = () => ({
+    release: RELEASE,
+    selected: selected?.p.slug || null,
+    filter,
+    pageIndex: plugPage,
+    totalPages: 1,
+    totalMatching: allMatching.length,
+    visible: visible.map((n) => n.p.slug),
+    animating: !!frame,
+    residual: Math.max(
+      0,
+      ...visible.map((n) => Math.hypot(n.x - n.tx, n.y - n.ty)),
+    ),
+    reducedMotion: reduced.matches,
+  });
+})();

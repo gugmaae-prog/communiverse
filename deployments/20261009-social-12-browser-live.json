@@ -1,0 +1,35 @@
+{
+  "pass": true,
+  "version": "4a659bea-6915-4093-a7e7-8ab9c85ccfb4",
+  "checkedAt": "2026-10-09T01:14:13.938Z",
+  "release": "20261009-social-12",
+  "desktop": {
+    "width": 1280,
+    "height": 747,
+    "circles": 127,
+    "outside": 0,
+    "scrollWidth": 1280,
+    "selectedWidth": 144
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "circles": 127,
+    "outside": 0,
+    "scrollWidth": 390,
+    "selectedWidth": 92
+  },
+  "workspace": {
+    "width": 390,
+    "scrollWidth": 390,
+    "promptWidth": 314,
+    "manageButton": true,
+    "sharedPhoto": true,
+    "existingKeifferSessionRecognized": true
+  },
+  "productionMutationTests": false,
+  "screenshots": [
+    "deployments/screenshots/social12-plug-desktop.jpg",
+    "deployments/screenshots/social12-plug-mobile.jpg"
+  ]
+}

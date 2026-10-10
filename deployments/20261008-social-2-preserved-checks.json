@@ -1,0 +1,68 @@
+{
+  "pass": true,
+  "checkedAt": "2026-10-08T12:36:23.840Z",
+  "release": "20261008-social-2",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/about/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/makers/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/for-founders/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/for-brands/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/for-startups/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/contact/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/ambassadors/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/events/host/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/plug/person/haseeb-wasim/",
+      "status": 200
+    }
+  ],
+  "oldImmutableScriptsVerified": 2,
+  "privateMemberProjection": true,
+  "currencyRetained": true,
+  "eventStateCounts": {
+    "upcoming": 35,
+    "now": 25,
+    "past": 32,
+    "places": 11
+  },
+  "artistsExcludeAmbassadors": true,
+  "routes": [
+    {
+      "pattern": "espacios.me/communiverse*",
+      "script": "communiverse-marketplace"
+    },
+    {
+      "pattern": "www.espacios.me/communiverse*",
+      "script": "communiverse-marketplace"
+    }
+  ],
+  "wwwStatus": 200
+}

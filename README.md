@@ -81,9 +81,17 @@ The gateway's exact editable source is in [worker/experience/](worker/experience
 
 Public site: https://espacios.me/communiverse/
 
+Current release: `20261009-social-12` — shared accounts, team-aware AI drafts and approvals, account administration, viewport-fit Plug circles and art cards that expand across columns. [Release evidence](deployments/20261009-social-12.json) · [Implementation notes](worker/releases/social-20261008/README.md).
+
+Previous mobile Plug update: `20261008-plug-orbits-1` uses smaller animated video and detail surfaces around the orb, replacing the fixed bottom tray. [Release evidence](deployments/20261008-plug-orbits-1.json).
+
+Previous navigation update: `20261008-simple-nav-1` replaces the remaining legacy header with Discover, Artists, Workshops and Plug. All four tabs stay visible on mobile. [Release evidence](deployments/20261008-simple-nav-1.json).
+
+Previous gallery update: `20261008-plug-gallery-1a` adds standalone named gallery links, workshop/group-session requests, store enquiries and restored mobile orb animation with smaller separate cards. All 23 people, three ambassadors and ten Cool Kids remain. Artist galleries follow the shared theme with inline CSS under their unchanged security policy. [Release evidence](deployments/20261008-plug-gallery-1a.json).
+
 ## Production release — 7 October 2026
 
-**Live:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
+**Shared design baseline:** `20261007-shared-plug-ui-1` on the existing `communiverse` Worker.
 
 - Worker version: `4a09f1da-b076-43e5-9663-c93dc1a188bd`
 - Deployment: `81b6d569-6434-4c57-8388-cc80d5829e5b`
@@ -103,10 +111,14 @@ After the repository secret is configured, run **Sync exact Communiverse product
 
 ## Scope still in planning
 
-The broader marketplace, paid bookings, kit entitlements, applications and film-chapter product plan is not activated by this typography/header release. Sample content must remain labelled; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
+Marketplace browsing, member signup and date/order enquiries are live. Paid bookings, inventory/checkout and kit entitlements remain in planning. Generated concepts are disclosed at collection level; internal RAL material remains outside public pages. Conflicting draft branches have not been blindly merged.
 
 ## Development and retained history
 
 The existing `app/`, `components/`, `data/`, `public/`, audit files and source branches are preserved. Development: `npm install`, then `npm run dev` at `/communiverse/`. The old readme is preserved verbatim at [`docs/legacy/README-before-production-reconciliation.md`](docs/legacy/README-before-production-reconciliation.md); its deployment directions are historical and superseded by this notice.
 
 See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
+
+Latest people presentation source: `worker/releases/plug-artists-20261008/` wraps the active marketplace Worker and preserves its compact header, public records, applications and database bindings.
+
+Latest Plug presentation refinement: `20261008-plug-refine-3`. See `PRODUCTION.md` and `worker/releases/plug-refine-20261008/README.md` for source, live verification and the retained-runtime assembly boundary.

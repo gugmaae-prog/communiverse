@@ -1,0 +1,105 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile,mkdir,cp} from 'node:fs/promises';
+import {DatabaseSync} from 'node:sqlite';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+
+// Uses the shipping source and actual authentication/scope helpers. All data,
+// R2 objects and email calls stay in this isolated in-memory fixture.
+let dir=process.argv[2]?resolve(process.argv[2]):'/tmp/communiverse-collaboration11-runtime';
+if(!process.argv[2]){
+ await mkdir(dir,{recursive:true});await cp(resolve('../social10-candidate'),dir,{recursive:true});
+ for(const [source,target] of [['workspace.js','social-workspace.js'],['identity.js','social-identity.js'],['artist-workspace.js','social-artist-workspace.js'],['workspace-collaboration.js','social-collaboration.js'],['publishing.js','social-publishing.js']])await cp(resolve('worker/releases/social-20261008/'+source),dir+'/'+target);
+}
+const {workspaceAPI,passwordHash,TEAM}=await import(pathToFileURL(dir+'/social-workspace.js'));
+const {collaborationAPI,flushMeetingEmails}=await import(pathToFileURL(dir+'/social-collaboration.js'));
+const {issue}=await import(pathToFileURL(dir+'/social-backend.js'));
+const {publishingAPI,studioMedia}=await import(pathToFileURL(dir+'/social-publishing.js'));
+const db=new DatabaseSync(':memory:');db.exec('PRAGMA foreign_keys=ON');
+for(const file of ['marketplace-20261008/migration.sql','social-20261008/migration.sql','social-20261008/migration-5.sql','social-20261008/migration-9.sql','social-20261008/migration-10.sql','social-20261008/migration-11-identity.sql','social-20261008/migration-11-artist.sql','social-20261008/migration-11-collaboration.sql','social-20261008/migration-11-publishing.sql','social-20261008/migration-11b-publishing-visibility.sql','social-20261008/migration-12.sql'])db.exec(await readFile('worker/releases/'+file,'utf8'));
+for(const p of TEAM){const salt=crypto.randomUUID();db.prepare('INSERT INTO cv_staff(id,username,name,role,title,salt,password_hash) VALUES(?,?,?,?,?,?,?)').run(p.id,p.name,p.name,p.role,p.title,salt,await passwordHash(p.name,salt));}
+const adapter={prepare(sql){let params=[];const q={bind(...p){params=p;return q},async first(){return db.prepare(sql).get(...params)||null},async all(){return {results:db.prepare(sql).all(...params)}},async run(){return {meta:{changes:db.prepare(sql).run(...params).changes}}}};return q},async batch(list){db.exec('BEGIN');try{const r=[];for(const q of list)r.push(await q.run());db.exec('COMMIT');return r}catch(e){db.exec('ROLLBACK');throw e}}};
+const objects=new Map(),sent=[],env={COMMUNIVERSE_DB:adapter,COMMUNIVERSE_MEDIA:{async put(key,bytes,options){objects.set(key,{bytes:new Uint8Array(bytes),options})},async delete(key){objects.delete(key)},async head(key){return objects.has(key)?{size:objects.get(key).bytes.length}:null},async get(key){return objects.has(key)?{body:objects.get(key).bytes,size:objects.get(key).bytes.length}:null}},EMAIL:{async send(payload){sent.push(payload);return {messageId:'local-'+sent.length}}}};
+const cookies={};
+const request=(path,b,id,method)=>new Request('https://espacios.me/communiverse/api/'+path,{method:method||(b===undefined?'GET':'POST'),headers:{Origin:'https://espacios.me','Content-Type':'application/json',Cookie:cookies[id]||'','CF-Connecting-IP':'collaboration-test-'+id},body:b===undefined?undefined:JSON.stringify(b)});
+const call=async(path,b,id='')=>{const r=await collaborationAPI(request('workspace/connect/'+path,b,id),env);return {status:r.status,data:await r.json()}};
+for(const p of TEAM){const r=await workspaceAPI(request('workspace/login',{username:p.name,password:p.name},p.id),env);assert.equal(r.status,200);cookies[p.id]=r.headers.get('Set-Cookie');}
+assert.equal((await call('threads')).status,401);
+assert.equal(await collaborationAPI(request('workspace/unknown',undefined,'luna'),env),null);
+const member=crypto.randomUUID();db.prepare('INSERT INTO cv_members(id,request_key,email,phone,first_name,city,craft,kind,email_verified_at,confirmation_hash,confirmation_expires_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(member,crypto.randomUUID(),'artist@example.test','+971501234567','Local Artisan','Dubai','Glass','artist',new Date().toISOString(),'local','2099-01-01');cookies.artist=await issue(member,env);
+const artisan='member-'+member,directory=await call('directory',undefined,'artist');assert.equal(directory.status,200);assert.ok(directory.data.people.some(p=>p.id===artisan));assert.ok(!JSON.stringify(directory.data).includes('artist@example.test'));
+const form={title:'Workshop coordination',participants:['ammar'],body:'Can we plan a visit?',requestId:crypto.randomUUID()};
+const first=await call('threads',form,'luna');assert.equal(first.status,201);const tid=first.data.id;
+assert.equal((await call('threads',form,'luna')).data.id,tid);assert.equal(db.prepare('SELECT count(*) n FROM cv_connect_threads').get().n,1);
+assert.equal((await call('threads?id='+tid,undefined,'haseeb')).status,404);assert.equal((await call('threads?id='+tid,undefined,'artist')).status,404);
+const initial=(await call('threads?id='+tid,undefined,'ammar')).data.messages[0],reply={thread_id:tid,reply_to:initial.id,body:'Yes, next week works.',requestId:crypto.randomUUID()};
+assert.equal((await call('messages',reply,'ammar')).status,201);assert.equal((await call('messages',reply,'ammar')).status,200);assert.equal((await call('messages',{...reply,requestId:crypto.randomUUID()},'haseeb')).status,404);
+const artistThread=(await call('threads',{...form,title:'Craft conversation',participants:['luna'],requestId:crypto.randomUUID()},'artist')).data.id;
+const alienReply=(await call('threads?id='+artistThread,undefined,'luna')).data.messages[0];assert.equal((await call('messages',{...reply,reply_to:alienReply.id,requestId:crypto.randomUUID()},'luna')).status,400);
+assert.ok((await call('threads',undefined,'ammar')).data.threads[0].unread>=1);await call('threads/read',{id:tid},'ammar');assert.equal((await call('threads',undefined,'ammar')).data.threads[0].unread,0);
+assert.equal((await call('messages',{thread_id:tid,body:'A fresh note after reading.',requestId:crypto.randomUUID()},'luna')).status,201);assert.equal((await call('threads',undefined,'ammar')).data.threads[0].unread,1);
+const upload=async(target,name,bytes,id)=>collaborationAPI(new Request('https://espacios.me/communiverse/api/workspace/connect/files?target='+encodeURIComponent(target)+'&name='+encodeURIComponent(name)+'&tags=process,glass',{method:'POST',headers:{Origin:'https://espacios.me',Cookie:cookies[id],'CF-Connecting-IP':'files-'+id},body:bytes}),env);
+const video=new Uint8Array([0,0,0,24,102,116,121,112,105,115,111,109,0,0,0,0]);
+let r=await upload(tid,'process.mp4',video,'luna');assert.equal(r.status,201);const attachment=await r.json();
+const object=[...objects.values()][0];assert.equal(object.options.customMetadata.visibility,'workspace');assert.equal(object.options.customMetadata.checksum,attachment.checksum);assert.deepEqual(JSON.parse(object.options.customMetadata.tags),['workspace','conversation','video','process','glass']);
+assert.equal((await call('files/file?id='+attachment.id,undefined,'haseeb')).status,404);
+r=await collaborationAPI(request('workspace/connect/files/file?id='+attachment.id,undefined,'ammar'),env);assert.equal(r.status,200);assert.match(r.headers.get('Content-Disposition'),/^attachment/);assert.equal(r.headers.get('Cache-Control'),'no-store');assert.deepEqual(new Uint8Array(await r.arrayBuffer()),video);
+assert.equal((await upload(tid,'bad.mp4','<script>alert(1)</script>','luna')).status,415);assert.equal((await upload(tid,'private.txt','notes','haseeb')).status,404);
+const largePhoto=new Uint8Array(21*1024*1024);largePhoto.set([137,80,78,71]);assert.equal((await upload(tid,'oversize.png',largePhoto,'luna')).status,413);
+let chunksLeft=257;const videoStream=new ReadableStream({pull(controller){if(chunksLeft--){controller.enqueue(new Uint8Array(128*1024))}else controller.close()}});
+assert.equal((await collaborationAPI(new Request('https://espacios.me/communiverse/api/workspace/connect/files?target='+tid+'&name=oversize.mp4',{method:'POST',duplex:'half',headers:{Origin:'https://espacios.me',Cookie:cookies.luna},body:videoStream}),env)).status,413);
+assert.equal((await call('files/remove',{id:attachment.id},'ammar')).status,403);assert.equal((await call('files/remove',{id:attachment.id},'luna')).status,200);assert.equal((await call('files/file?id='+attachment.id,undefined,'ammar')).status,404);
+assert.equal((await upload('artist:'+artisan,'craft.csv','Piece,Stock\nVase,2','artist')).status,201);assert.equal((await upload('artist:'+artisan,'craft.csv','Piece,Stock\nVase,2','luna')).status,404);
+r=await upload('artist:'+artisan,'gallery-process.mp4',video,'artist');assert.equal(r.status,201);const galleryFile=(await r.json()).id;
+r=await publishingAPI(request('studio/publish',{artist_id:artisan,file_id:galleryFile,title:'Glass process',description:'In the studio.',tags:['glass'],currency:'USD',price:null,requestId:crypto.randomUUID()},'artist'),env);assert.equal(r.status,201);const work=(await r.json()).id;
+assert.equal(db.prepare('SELECT count(*) n FROM cv_catalog WHERE id=?').get(work).n,1);
+const privateObject=db.prepare('SELECT key FROM cv_connect_files WHERE id=?').get(galleryFile).key;assert.ok(objects.has(privateObject));
+assert.equal((await call('files/remove',{id:galleryFile},'artist')).status,200);
+assert.equal(db.prepare('SELECT status FROM cv_studio_public_work WHERE id=?').get(work).status,'hidden');assert.equal(db.prepare('SELECT count(*) n FROM cv_catalog WHERE id=?').get(work).n,0);assert.ok(objects.has(privateObject));
+assert.equal((await studioMedia(new Request('https://espacios.me/communiverse/_public/studio-media/'+work),env)).status,404);
+db.prepare("INSERT INTO cv_identity_contacts(identity_id,email,email_verified) VALUES('luna','luna@example.test',0)").run();
+const start=new Date(Date.now()+7*86400000),end=new Date(+start+3600000),mf={title:'Film planning',participants:['ammar'],start_at:start.toISOString(),end_at:end.toISOString(),timezone:'Asia/Dubai',location:'Communiverse workspace',note:'Bring the artist story.',requestId:crypto.randomUUID()};
+const m=await call('meetings',mf,'luna');assert.equal(m.status,201);const mid=m.data.id;
+assert.equal(sent.length,0);assert.ok(m.data.meeting.delivery.every(d=>d.state==='waiting-contact'));assert.equal((await call('meetings?id='+mid,undefined,'haseeb')).status,404);
+const before=db.prepare('SELECT count(*) n FROM cv_connect_meetings').get().n;assert.equal((await call('meetings',{...mf,participants:['luna'],requestId:crypto.randomUUID()},'ammar')).status,409);assert.equal(db.prepare('SELECT count(*) n FROM cv_connect_meetings').get().n,before);
+db.prepare("UPDATE cv_identity_contacts SET email_verified=1 WHERE identity_id='luna'").run();await Promise.all([flushMeetingEmails(env,mid),flushMeetingEmails(env,mid)]);assert.equal(sent.length,1);assert.equal(sent[0].to,'luna@example.test');assert.ok(!sent[0].cc&&!sent[0].bcc);assert.equal(sent[0].attachments[0].type,'text/calendar');assert.match(new TextDecoder().decode(sent[0].attachments[0].content),/BEGIN:VEVENT/);
+await call('meetings/retry',{id:mid},'luna');assert.equal(sent.length,1);assert.equal((await call('meetings',mf,'luna')).data.id,mid);assert.equal(sent.length,1);
+db.prepare("INSERT INTO cv_identity_contacts(identity_id,email,email_verified) VALUES('ammar','ammar@example.test',1)").run();let failedOnce=false;const sender=env.EMAIL.send;env.EMAIL.send=async payload=>{if(!failedOnce){failedOnce=true;throw Object.assign(Error('local limit'),{code:'E_RATE_LIMIT_EXCEEDED'})}return sender(payload)};
+await flushMeetingEmails(env,mid);assert.equal(db.prepare("SELECT state FROM cv_connect_outbox WHERE meeting_id=? AND identity_id='ammar'").get(mid).state,'failed');assert.equal(sent.length,1);await flushMeetingEmails(env,mid);assert.equal(sent.length,1);
+db.prepare("UPDATE cv_connect_outbox SET next_attempt_at=0 WHERE meeting_id=? AND identity_id='ammar'").run(mid);await flushMeetingEmails(env,mid);assert.equal(sent.length,2);assert.equal(sent[1].to,'ammar@example.test');env.EMAIL.send=sender;
+assert.equal((await call('meetings/respond',{id:mid,response:'declined'},'ammar')).status,200);
+assert.equal((await call('meetings',{...mf,participants:['tariq'],requestId:crypto.randomUUID()},'ammar')).status,201);
+assert.equal((await call('meetings/respond',{id:mid,response:'accepted'},'ammar')).status,409);
+assert.equal((await call('meetings/cancel',{id:mid},'ammar')).status,403);assert.equal((await call('meetings/cancel',{id:mid},'luna')).status,200);const cancellationCount=sent.length;await call('meetings/cancel',{id:mid},'luna');assert.equal(sent.length,cancellationCount);
+r=await collaborationAPI(request('workspace/connect/meetings/calendar?id='+mid,undefined,'ammar'),env);assert.equal(r.status,200);assert.match(await r.text(),/STATUS:CANCELLED/);
+const pf={title:'Local craft team',description:'Local-only fixture.',due_date:'',members:['luna','ammar'],requestId:crypto.randomUUID()},pr=await workspaceAPI(request('workspace/projects',pf,'keiffer'),env);const projectId=(await pr.json()).id;
+const tf={project_id:projectId,title:'Review footage',description:'Local-only.',owner_id:'luna',requestId:crypto.randomUUID()},tr=await workspaceAPI(request('workspace/tasks',tf,'keiffer'),env),taskId=(await tr.json()).id;
+assert.equal((await call('task-join',{task_id:taskId,note:'I can help edit.',requestId:crypto.randomUUID()},'tariq')).status,404);
+const join=await call('task-join',{task_id:taskId,note:'I can help edit.',requestId:crypto.randomUUID()},'ammar');assert.equal(join.status,201);assert.equal(db.prepare('SELECT count(*) n FROM cv_connect_task_members').get().n,0);
+assert.equal((await call('task-join/action',{id:join.data.id,action:'approve'},'ammar')).status,403);assert.equal((await call('task-join/action',{id:join.data.id,action:'approve'},'luna')).status,200);assert.equal(db.prepare('SELECT count(*) n FROM cv_connect_task_members').get().n,1);
+assert.equal(db.prepare('SELECT count(*) n FROM cv_project_members WHERE project_id=?').get(projectId).n,2);
+const comment={target:taskId,body:'@Ammar please review.',mentions:['ammar'],requestId:crypto.randomUUID()};assert.equal((await call('comments',comment,'luna')).status,201);assert.equal((await call('comments',comment,'luna')).status,200);assert.equal((await call('comments',{...comment,mentions:['tariq'],requestId:crypto.randomUUID()},'luna')).status,404);assert.equal((await call('comments',{...comment,requestId:crypto.randomUUID()},'artist')).status,403);
+assert.ok((await call('notifications',undefined,'ammar')).data.notifications.some(n=>n.target===taskId));
+const rf={title:'Editing subscription',body:'For approved footage.',kind:'subscription',platform:'Local Edit',amount:null,currency:'AED',url:'https://example.test/edit',renewal_date:'2027-01-01',requestId:crypto.randomUUID()};
+const resource=await call('resources',rf,'louis');assert.equal(resource.status,201);const rid=resource.data.id;
+assert.equal((await call('resources',rf,'louis')).data.id,rid);assert.equal(db.prepare('SELECT stage FROM cv_team_requests WHERE id=?').get(rid).stage,'approval');assert.equal((await call('resources/update',{id:rid,asset_status:'active'},'elferah')).status,403);assert.equal((await call('resources',undefined,'luna')).data.resources.length,0);
+let decision=await workspaceAPI(request('workspace/requests/action',{id:rid,version:1,action:'approve'},'haseeb'),env);assert.equal(decision.status,200);
+assert.equal((await call('resources/update',{id:rid,asset_status:'active',assigned_to:'louis'},'elferah')).status,200);assert.equal((await call('resources/update',{id:rid,asset_status:'retired'},'haseeb')).status,403);assert.equal((await call('resources',undefined,'louis')).data.resources[0].asset_status,'active');
+assert.equal((await call('resources',{...rf,platform:'',requestId:crypto.randomUUID()},'louis')).status,400);
+// Historical threads and meetings survive deactivation without permitting a
+// disabled account to sign in or be added to a fresh conversation.
+db.prepare("UPDATE cv_staff SET status='inactive' WHERE id='ammar'").run();
+assert.equal((await call('threads',undefined,'luna')).status,200);assert.ok((await call('threads?id='+tid,undefined,'luna')).data.participants.some(p=>p.id==='ammar'&&p.name==='Former member'));
+assert.equal((await call('meetings?id='+mid,undefined,'luna')).status,200);assert.equal((await call('threads',undefined,'ammar')).status,401);
+assert.equal((await call('threads',{...form,requestId:crypto.randomUUID()},'luna')).status,400);db.prepare("UPDATE cv_staff SET status='active' WHERE id='ammar'").run();
+// Hold one invitation at the provider boundary while the organizer cancels.
+// The cancellation for that recipient must be accepted after the invitation.
+let releaseInvite,inviteStarted;const invitationGate=new Promise(resolve=>{releaseInvite=resolve}),invitationSignal=new Promise(resolve=>{inviteStarted=resolve});const acceptanceOrder=[];let holdFirst=true;
+env.EMAIL.send=async payload=>{if(holdFirst&&payload.subject==='Meeting invitation: Ordering fixture'&&payload.to==='luna@example.test'){holdFirst=false;inviteStarted();await invitationGate;}acceptanceOrder.push({to:payload.to,subject:payload.subject});return sender(payload)};
+const orderStart=new Date(Date.now()+21*86400000),orderForm={...mf,title:'Ordering fixture',start_at:orderStart.toISOString(),end_at:new Date(+orderStart+3600000).toISOString(),requestId:crypto.randomUUID()};
+const creating=call('meetings',orderForm,'luna');await invitationSignal;
+const orderingMeeting=db.prepare('SELECT id FROM cv_connect_meetings WHERE request_key=?').get(orderForm.requestId).id;
+assert.equal((await call('meetings/cancel',{id:orderingMeeting},'luna')).status,200);releaseInvite();assert.equal((await creating).status,201);
+assert.deepEqual(acceptanceOrder.filter(x=>x.to==='luna@example.test').map(x=>x.subject),['Meeting invitation: Ordering fixture','Meeting cancelled: Ordering fixture']);env.EMAIL.send=sender;
+const proof={pass:true,checkedAt:new Date().toISOString(),productionMessagesSent:0,localEmailCalls:sent.length,checks:['real staff and verified artisan sessions','participant-only messages and replies','CEO cannot read unrelated conversations','cross-thread reply rejection','message retries','private R2 media metadata and checksum','type and size validation','artist media ownership','file hiding atomically removes published feed projection and retains private object','private contacts absent from directory','unverified contact blocks invitations','meeting overlap trigger and atomic rollback','invitation outbox claim and safe retries','private recipient messages and calendar attachment','declining frees capacity and reaccept conflicts','organizer-only cancellation and calendar export','cancellation cannot overtake an in-flight invitation','inactive staff history stays readable without access escalation','task join requires project scope and approval','no project access escalation','mentions require target access','structured subscription stays in existing approval requests','CEO approval precedes Operations resource execution']};
+await writeFile(resolve(dir,'collaboration-tests.json'),JSON.stringify(proof,null,2));console.log(JSON.stringify(proof));

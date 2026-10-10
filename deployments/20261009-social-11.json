@@ -1,0 +1,10 @@
+{
+  "release": "20261009-social-11",
+  "version": "cff0f8c0-61e7-4438-ae1f-811597abbf6d",
+  "deploymentId": "dd979812-03aa-4417-af28-8e495f7aecc3",
+  "sourceCommit": "f77d7a27c1354f7a2a8c42fef5fbebb355399240",
+  "worker": "communiverse-marketplace",
+  "supersededBy": "20261009-social-11a",
+  "trafficAtPublish": 100,
+  "rollbackVersion": "9294ed0c-40bd-4336-8aa8-d31879606192"
+}

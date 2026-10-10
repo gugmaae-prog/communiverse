@@ -1,0 +1,140 @@
+{
+  "release": "20261008-plug-artists-1a",
+  "presentation_asset_release": "20261008-plug-artists-1",
+  "worker": "communiverse-marketplace",
+  "worker_version_id": "413ac851-8d29-4f00-8b14-0717de155364",
+  "deployment_id": "85fefe9a-a2c5-4d5b-8a3e-091eb99856ba",
+  "traffic_percentage": 100,
+  "rollback_version_id": "48e7b91e-e38f-4c55-ab50-e772c4bf642f",
+  "pre_feature_version_id": "6e06c1e6-902d-4f2e-8aea-990a307897b5",
+  "source_commit": "ce1569c097f074bcf548db630dfb9ce43ab1dccf",
+  "retained_original_marketplace_bundle": true,
+  "total_modules": 6,
+  "modules_added_for_feature": 5,
+  "final_copy_revision_changed_modules": [
+    "plug-artists-data.js"
+  ],
+  "database_changes": false,
+  "route_changes": false,
+  "upload_verification": {
+    "pass": true,
+    "version": "413ac851-8d29-4f00-8b14-0717de155364",
+    "release": "20261008-plug-artists-1a",
+    "verifiedAt": "2026-10-07T22:02:21.692Z",
+    "modulesVerified": 6,
+    "originalModulesRetained": 5,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "live_verification": {
+    "pass": true,
+    "mode": "live",
+    "version": "413ac851-8d29-4f00-8b14-0717de155364",
+    "release": "20261008-plug-artists-1",
+    "people": 23,
+    "coolKids": 10,
+    "ambassadors": 3,
+    "artists": 10,
+    "backOffice": 6,
+    "profiles": [
+      {
+        "name": "Amina Rahmani",
+        "path": "/communiverse/artists/amina-rahmani/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Luc\u00eda Quintero",
+        "path": "/communiverse/artists/lucia-quintero/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Matteo Bellini",
+        "path": "/communiverse/artists/matteo-bellini/",
+        "videos": 2,
+        "status": 200
+      },
+      {
+        "name": "Nia Okafor",
+        "path": "/communiverse/artists/nia-okafor/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Sora Nakamura",
+        "path": "/communiverse/artists/sora-nakamura/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Leila Al Mansouri",
+        "path": "/communiverse/artists/leila-al-mansouri/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Priya Mehta",
+        "path": "/communiverse/artists/priya-mehta/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Diego Salazar",
+        "path": "/communiverse/artists/diego-salazar/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Awa Diop",
+        "path": "/communiverse/artists/awa-diop/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Elias Korhonen",
+        "path": "/communiverse/artists/elias-korhonen/",
+        "videos": 1,
+        "status": 200
+      }
+    ],
+    "sourceBytesVerified": true,
+    "glassRangeVerified": true,
+    "glassOriginalBytes": 1838802,
+    "checkedAt": "2026-10-07T22:04:21.617Z"
+  },
+  "browser_verification": {
+    "desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "portraitsLoaded": 23,
+      "minimumRestGap": 18.23,
+      "minimumFocusedGap": 11.282,
+      "randomDiametersMin": 56,
+      "randomDiametersMax": 112,
+      "socialIconsStandalone": true,
+      "instagramAndLinkedInLinksVerified": true,
+      "filterClicksVerified": true,
+      "backOfficeProfileVerified": true,
+      "instructionRemoved": true,
+      "glassVideoReadyState": 4,
+      "glassVideoPlayingMuted": true
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "fullWidthCards": true,
+      "videoPlaybackVerified": true
+    },
+    "reducedMotion": {
+      "videoPaused": true,
+      "testedInPreview": true
+    },
+    "screenshots": [
+      "communiverse-artists-constellation-live.png",
+      "communiverse-elias-video-live.png"
+    ]
+  }
+}
