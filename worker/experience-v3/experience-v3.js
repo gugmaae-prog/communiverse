@@ -169,45 +169,62 @@ function drawMind(assistant,prompt,overview){const kind=planKind(prompt),travele
  const reviewers=routePeople(assistant,overview);const chain=reviewers.length?reviewers:kindReviewers(overview,kind==='kit'?'kit':'travel',budget??'').map(id=>personInfo(id,overview));
  const subject=travelers.length?travelers:(overview?.person?[overview.person]:[]);
  const board=node('section','cv3-plan');board.setAttribute('aria-label','Working plan');board.dataset.cv3Touched='no';
- const head=node('div','cv3-plan-head');head.append(node('p','cv3-kicker',kind==='travel'?'TRIP PLAN':kind==='kit'?'KIT PLAN':kind==='budget'?'COST PLAN':'WORKING PLAN'));head.append(node('h3','',planTitle(prompt,subject,kind)));head.append(node('p','cv3-note','Edit the steps and figures. Nothing is booked or sent from this board.'));board.append(head);
+ const head=node('div','cv3-plan-head');head.append(node('p','cv3-kicker',kind==='travel'?'TRIP PLAN':kind==='kit'?'KIT PLAN':kind==='budget'?'COST PLAN':'WORKING PLAN'));head.append(node('h3','',planTitle(prompt,subject,kind)));head.append(node('p','cv3-note','Tap a person, rewrite a step, or change a figure. The estimate follows. Nothing is sent until you submit the draft.'));board.append(head);
  const peopleBlock=node('div','cv3-plan-people');
- const travelerLabel=node('p','cv3-label',kind==='travel'?'Who is going':'People in this plan');
- const travelerChain=node('div','cv3-plan-chain cv3-plan-travelers');travelerChain.setAttribute('aria-label','People on this plan');
+ const travelerChain=node('div','cv3-plan-chain cv3-plan-travelers');travelerChain.setAttribute('role','group');travelerChain.setAttribute('aria-label','People on this plan');
+ const reviewChain=node('div','cv3-plan-chain cv3-plan-reviewers');reviewChain.setAttribute('role','group');reviewChain.setAttribute('aria-label','Expected reviewers');
  function link(){return node('span','cv3-plan-link','')}
- function personNode(person,relationship){const item=node('div','cv3-plan-person');item.dataset.cv3PersonId=person.id||person.name;item.append(circle(person,{relationship}),node('span','cv3-person-name',person.name||'Person'),node('small','cv3-person-role',relationship));return item}
- subject.forEach((p,i)=>{if(i)travelerChain.append(link());travelerChain.append(personNode(p,roles[p.role]||(p.role?'Team':'Named in your question')))});
- const add=node('button','cv3-plan-add cv3-plan-add-person','Add someone');add.type='button';
- const picker=node('div','cv3-plan-picker');picker.hidden=true;picker.setAttribute('aria-label','People you can add');
- const team=overview?.team||[];
- for(const p of team){if(!p?.id||travelerChain.querySelector('[data-cv3-person-id="'+CSS.escape(p.id)+'"]'))continue;const b=node('button','cv3-plan-choice');b.type='button';b.dataset.cv3PersonId=p.id;b.append(circle(p,{relationship:roles[p.role]||'Team',small:true}),node('span','cv3-person-name',p.name));b.addEventListener('click',()=>{if(travelerChain.children.length)travelerChain.append(link());travelerChain.append(personNode(p,roles[p.role]||'Added to this plan'));b.remove();picker.hidden=true;if(peopleInput.dataset.cv3Edited!=='yes')peopleInput.value=String(travelerChain.querySelectorAll('.cv3-plan-person').length);board.dataset.cv3Touched='yes';recalc()});picker.append(b)}
- add.addEventListener('click',()=>{board.dataset.cv3Touched='yes';if(!team.length){picker.hidden=false;picker.textContent='Your team list is not available yet.';return}picker.hidden=!picker.hidden});
- peopleBlock.append(travelerLabel,travelerChain,add,picker);
- const reviewLabel=node('p','cv3-label','Expected approval path');
- const reviewChain=node('div','cv3-plan-chain cv3-plan-reviewers');reviewChain.setAttribute('aria-label','Expected reviewers');
- chain.forEach((p,i)=>{if(i)reviewChain.append(link());reviewChain.append(personNode(p,i===0?'First reviewer':'Next reviewer'))});
- const reviewNote=node('p','cv3-note','This path follows the current request policy. Submitting the draft is what asks for review.');
- peopleBlock.append(reviewLabel,reviewChain,reviewNote);board.append(peopleBlock);
- const steps=node('ol','cv3-plan-steps');
- function appendStep(title,detail){const li=node('li','cv3-plan-step');const btn=node('button','cv3-plan-step-btn');btn.type='button';btn.setAttribute('aria-pressed','false');const copy=node('div','cv3-plan-copy');copy.append(node('strong','',title),node('p','',detail));btn.append(node('span','cv3-plan-num',String(steps.children.length+1)),copy);btn.addEventListener('click',()=>{btn.setAttribute('aria-pressed',String(btn.getAttribute('aria-pressed')!=='true'));board.dataset.cv3Touched='yes';syncProgress()});li.append(btn);steps.append(li)}
- for(const [title,detail] of planSteps(kind,prompt,subject,related))appendStep(title,detail);
- const addStep=node('button','cv3-quiet-button cv3-plan-add-step','Add a step');addStep.type='button';addStep.addEventListener('click',()=>{appendStep('New step','Write what should happen here.');board.dataset.cv3Touched='yes';syncProgress()});
- const progress=node('p','cv3-plan-progress','');board.append(steps,addStep,progress);
+ function paintLinks(row){const kids=[...row.children];for(let i=0;i<kids.length;i++){if(!kids[i].classList.contains('cv3-plan-link'))continue;const prev=kids[i-1],next=kids[i+1];const on=prev?.getAttribute('aria-pressed')!=='false'&&next?.getAttribute('aria-pressed')!=='false';kids[i].classList.toggle('is-dim',!on)}}
+ function personNode(person,relationship,onToggle){const item=node('button','cv3-plan-person');item.type='button';item.dataset.cv3PersonId=person.id||person.name;item.setAttribute('aria-pressed','true');item.append(circle(person,{relationship}),node('span','cv3-person-name',person.name||'Person'),node('small','cv3-person-role',relationship));
+  function paint(){const on=item.getAttribute('aria-pressed')==='true';item.setAttribute('aria-label',(person.name||'Person')+' · '+relationship+(on?' · included':' · left out'))}
+  item.addEventListener('click',()=>{item.setAttribute('aria-pressed',String(item.getAttribute('aria-pressed')!=='true'));board.dataset.cv3Touched='yes';paint();onToggle();});paint();return item}
+ function selectedCount(row){return row.querySelectorAll('.cv3-plan-person[aria-pressed="true"]').length}
+ const steps=node('ol','cv3-plan-steps');const progress=node('p','cv3-plan-progress','');
+ function renumber(){[...steps.querySelectorAll('.cv3-plan-num')].forEach((n,i)=>{n.textContent=String(i+1)})}
+ function appendStep(title,detail,focus){const li=node('li','cv3-plan-step');const btn=node('button','cv3-plan-step-btn');btn.type='button';btn.setAttribute('aria-pressed','false');btn.append(node('span','cv3-plan-num',String(steps.children.length+1)));btn.setAttribute('aria-label','Mark this step done');
+  const copy=node('div','cv3-plan-copy');const titleInput=node('input','cv3-plan-step-title');titleInput.value=title;titleInput.setAttribute('aria-label','Step title');const detailInput=node('textarea','cv3-plan-step-detail');detailInput.value=detail;detailInput.rows=2;detailInput.setAttribute('aria-label','Step detail');
+  const remove=node('button','cv3-plan-remove','Remove');remove.type='button';
+  btn.addEventListener('click',()=>{const on=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(on));li.classList.toggle('is-done',on);board.dataset.cv3Touched='yes';syncProgress()});
+  for(const field of [titleInput,detailInput])field.addEventListener('input',()=>{board.dataset.cv3Touched='yes'});
+  remove.addEventListener('click',()=>{li.remove();renumber();board.dataset.cv3Touched='yes';syncProgress()});
+  copy.append(titleInput,detailInput,remove);li.append(btn,copy);steps.append(li);if(focus)titleInput.focus();return li}
+ function syncProgress(){const all=steps.querySelectorAll('.cv3-plan-step-btn'),on=[...all].filter(b=>b.getAttribute('aria-pressed')==='true').length;progress.textContent=on+' of '+all.length+' steps ready'}
  const calc=node('div','cv3-plan-calc');calc.setAttribute('aria-label','Working estimate');
  function field(cls,label,value,step){const wrap=node('label','cv3-plan-field',label);const input=node('input');input.className=cls;input.type='number';input.min='0';input.step=step;input.value=value;if(cls.includes('days')||cls.includes('people'))input.min='1';wrap.append(input);return {wrap,input}}
  const dayField=field('cv3-plan-days','Days',String(days),'1'),peopleField=field('cv3-plan-people-count','People',String(Math.max(1,subject.length)),'1'),dailyField=field('cv3-plan-daily','Daily allowance',budget&&days?String(Math.round((budget/days/Math.max(1,subject.length))*100)/100):'0','0.01'),budgetField=field('cv3-plan-budget','Budget',budget==null?'':String(budget),'0.01');
- const peopleInput=peopleField.input;const total=node('p','cv3-plan-total','');const balance=node('p','cv3-plan-balance','');const hint=node('p','cv3-note',assumedDays&&kind==='travel'?'Three days is only a starting point until you set the dates.':'The total is days × people × daily allowance.');
- calc.append(dayField.wrap,peopleField.wrap,dailyField.wrap,budgetField.wrap,total,balance,hint);board.append(calc);
- const recs=node('div','cv3-plan-recs');recs.append(node('p','cv3-label','Recommendations'));
- const answer=assistant.querySelector('.cv-assistant-answer')?.textContent?.trim();if(answer)recs.append(node('article','cv3-plan-rec',answer));
- const next=[...assistant.children].find(el=>el.classList?.contains('cv-ws-meta'))?.textContent?.trim();if(next)recs.append(node('article','cv3-plan-rec',next));
- for(const p of subject)if(p.role)recs.append(node('article','cv3-plan-rec',(p.name||'This person')+' is recorded as '+(roles[p.role]||p.role)+'.'));
- if(!related.length)recs.append(node('article','cv3-plan-rec','No matching open task was found in your workspace.'));
- for(const t of related){const card=node('article','cv3-plan-rec');card.append(node('strong','',t.title||'Task'));const open=node('button','cv3-action','Open task');open.type='button';open.dataset.wsTask=t.id;card.append(open);recs.append(card)}
- board.append(recs);
+ const peopleInput=peopleField.input;const formula=node('p','cv3-plan-formula','');const total=node('p','cv3-plan-total','');const balance=node('p','cv3-plan-balance','');
  const amount=assistant.querySelector('input[name=amount]');let amountEdited=false;amount?.addEventListener('input',e=>{if(e.isTrusted)amountEdited=true});
  function num(input,fallback){const n=Number(input.value);return Number.isFinite(n)&&n>=0?n:fallback}
- function recalc(){const d=Math.max(1,num(dayField.input,1)),p=Math.max(1,num(peopleInput,1)),daily=num(dailyField.input,0),cap=budgetField.input.value===''?null:num(budgetField.input,0),estimate=d*p*daily;total.dataset.cv3Estimate=String(Math.round(estimate*100)/100);total.textContent='Working estimate '+money(estimate);if(cap==null)balance.textContent='Add a budget to see what remains.';else balance.textContent=(estimate>cap?'Over the named budget by ':'Remaining in the named budget: ')+money(Math.abs(cap-estimate));if(amount&&!amountEdited)amount.value=estimate?String(Math.round(estimate*100)/100):'';syncProgress()}
- function syncProgress(){const all=steps.querySelectorAll('.cv3-plan-step-btn'),on=[...all].filter(b=>b.getAttribute('aria-pressed')==='true').length;progress.textContent=on+' of '+all.length+' steps reviewed'}
+ function syncPeople(){if(peopleInput.dataset.cv3Edited==='yes')return;peopleInput.value=String(Math.max(1,selectedCount(travelerChain)))}
+ function recalc(){syncPeople();const d=Math.max(1,num(dayField.input,1)),p=Math.max(1,num(peopleInput,1)),daily=num(dailyField.input,0),cap=budgetField.input.value===''?null:num(budgetField.input,0),estimate=d*p*daily;total.dataset.cv3Estimate=String(Math.round(estimate*100)/100);formula.textContent=d+' × '+p+' × '+money(daily)+' = '+money(estimate);total.textContent='Working estimate '+money(estimate);if(cap==null)balance.textContent='Add a budget to see what remains.';else balance.textContent=(estimate>cap?'Over the named budget by ':'Remaining in the named budget: ')+money(Math.abs(cap-estimate));if(amount&&!amountEdited)amount.value=estimate?String(Math.round(estimate*100)/100):'';syncProgress();paintLinks(travelerChain);paintLinks(reviewChain)}
+ function onTraveler(){recalc()}
+ function addTraveler(person,relationship){if(travelerChain.querySelector('.cv3-plan-person'))travelerChain.append(link());const item=personNode(person,relationship||roles[person.role]||'Added to this plan',onTraveler);travelerChain.append(item);return item}
+ subject.forEach(p=>addTraveler(p,roles[p.role]||(p.role?'Team':'Named in your question')));
+ const add=node('button','cv3-plan-add cv3-plan-add-person','Add someone');add.type='button';
+ const picker=node('div','cv3-plan-picker');picker.hidden=true;picker.setAttribute('aria-label','People you can add');
+ const team=overview?.team||[];
+ for(const p of team){if(!p?.id||travelerChain.querySelector('[data-cv3-person-id="'+CSS.escape(p.id)+'"]'))continue;const b=node('button','cv3-plan-choice');b.type='button';b.dataset.cv3PersonId=p.id;b.append(circle(p,{relationship:roles[p.role]||'Team',small:true}),node('span','cv3-person-name',p.name));b.addEventListener('click',()=>{addTraveler(p);b.remove();picker.hidden=true;board.dataset.cv3Touched='yes';recalc()});picker.append(b)}
+ add.addEventListener('click',()=>{board.dataset.cv3Touched='yes';if(!picker.children.length){picker.hidden=false;picker.textContent=team.length?'Everyone listed is already on the plan.':'Your team list is not available yet.';return}picker.hidden=!picker.hidden});
+ peopleBlock.append(node('p','cv3-label',kind==='travel'?'Who is going':'People in this plan'),travelerChain,node('p','cv3-note','Tap a circle to include or leave someone out.'),add,picker);
+ chain.forEach(p=>reviewChain.append(reviewChain.querySelector('.cv3-plan-person')?link():node('span',''),personNode(p,'Reviewer',()=>paintLinks(reviewChain))));
+ reviewChain.querySelector(':scope > span:not(.cv3-plan-link)')?.remove();
+ peopleBlock.append(node('p','cv3-label','Expected approval path'),reviewChain,node('p','cv3-note','Tap a reviewer to keep them on this path. The draft below is what asks for review.'));
+ board.append(peopleBlock);
+ for(const [title,detail] of planSteps(kind,prompt,subject,related))appendStep(title,detail);
+ const addStep=node('button','cv3-quiet-button cv3-plan-add-step','Add a step');addStep.type='button';addStep.addEventListener('click',()=>{appendStep('New step','',true);board.dataset.cv3Touched='yes';syncProgress()});
+ board.append(steps,addStep,progress);
+ if(assumedDays&&kind==='travel')calc.append(node('p','cv3-note','Three days is a starting point until you set the dates.'));
+ calc.append(dayField.wrap,peopleField.wrap,dailyField.wrap,budgetField.wrap,formula,total,balance);board.append(calc);
+ const recs=node('div','cv3-plan-recs');recs.append(node('p','cv3-label','Recommendations'));
+ const answer=assistant.querySelector('.cv-assistant-answer')?.textContent?.trim();if(answer)recs.append(node('article','cv3-plan-rec',answer));
+ const next=[...assistant.children].find(el=>el.classList?.contains('cv-ws-meta'))?.textContent?.trim();
+ if(next){const card=node('article','cv3-plan-rec',next);const use=node('button','cv3-action','Add as a step');use.type='button';use.addEventListener('click',()=>{appendStep('Next',next,true);board.dataset.cv3Touched='yes';syncProgress()});card.append(use);recs.append(card)}
+ for(const p of subject){if(!p.role&&!p.name)continue;const card=node('article','cv3-plan-rec',(p.name||'This person')+(p.role?' is recorded as '+(roles[p.role]||p.role)+'.':' is named in your question.'));const keep=node('button','cv3-action','');keep.type='button';
+  function paintKeep(){const id=p.id||p.name;const circleBtn=travelerChain.querySelector('[data-cv3-person-id="'+CSS.escape(id)+'"]');const on=!!circleBtn&&circleBtn.getAttribute('aria-pressed')==='true';keep.textContent=on?(p.name+' is on the plan'):('Include '+p.name);keep.setAttribute('aria-pressed',String(on))}
+  keep.addEventListener('click',()=>{const id=p.id||p.name;const circleBtn=travelerChain.querySelector('[data-cv3-person-id="'+CSS.escape(id)+'"]');if(!circleBtn)addTraveler(p);else circleBtn.click();board.dataset.cv3Touched='yes';paintKeep();recalc()});paintKeep();card.append(keep);recs.append(card)}
+ if(!related.length)recs.append(node('article','cv3-plan-rec','No matching open task was found in your workspace.'));
+ for(const t of related){const card=node('article','cv3-plan-rec');card.append(node('strong','',t.title||'Task'));const open=node('button','cv3-action','Open task');open.type='button';open.dataset.wsTask=t.id;const use=node('button','cv3-action','Add as a step');use.type='button';use.addEventListener('click',()=>{appendStep(t.title||'Task',t.description||'Open the task and check the latest detail.',true);board.dataset.cv3Touched='yes';syncProgress()});card.append(open,use);recs.append(card)}
+ board.append(recs);
  for(const input of [dayField.input,peopleInput,dailyField.input,budgetField.input])input.addEventListener('input',()=>{if(input===peopleInput)peopleInput.dataset.cv3Edited='yes';board.dataset.cv3Touched='yes';recalc()});
  peopleInput.dataset.cv3Edited='no';recalc();
  const route=assistant.querySelector('.cv-assistant-route');if(route)route.hidden=true;
