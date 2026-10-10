@@ -74,6 +74,24 @@ async function run(){try{
  const beforeSteps=document.querySelectorAll('.cv3-plan-step').length;
  [...document.querySelectorAll('.cv3-plan-rec .cv3-action')].find(b=>b.textContent==='Add as a step')?.click();
  add('A recommendation can become a step',document.querySelectorAll('.cv3-plan-step').length===beforeSteps+1);
+ const sample=[{id:'luna',name:'Luna',role:'ambassador',region:'colombia'},{id:'ammar',name:'Ammar',role:'ambassador',region:'uae'},{id:'balo',name:'Balo',role:'ambassador',region:'uae'},{id:'keiffer',name:'Keiffer',role:'ambassador-lead',region:''}];
+ const typed='i want to ordr 15 camras for the ambasadors';
+ add('A camera order stays a kit plan',window.__cvExperienceV3.planKind(typed)==='kit');
+ add('Fifteen cameras are read from the sentence',window.__cvExperienceV3.readQuantity(typed)===15);
+ const matched=window.__cvExperienceV3.namedPeople(typed,{team:sample});
+ add('Ambassadors are recognized, including typos',matched.map(p=>p.id).sort().join(',')==='ammar,balo,luna');
+ add('The word the is not a person',!matched.some(p=>String(p.name).toLowerCase()==='the'));
+ add('A mistyped name still finds Luna',window.__cvExperienceV3.namedPeople('trip for Lunna',{team:sample}).some(p=>p.id==='luna'));
+ if(ask&&results){ask.value='I want to order 15 cameras for the ambassadors';results.innerHTML='<section class="cv-ws-assistant"><h2>Your next move</h2><p class="cv-assistant-answer">Route the camera request for approval.</p><form data-assistant-submit="draft-2"><label>Estimated amount<input name="amount" type="number"></label><button class="cv-button" type="submit">Create request</button></form></section>';}
+ const camera=await wait(()=>document.querySelector('.cv3-plan-qty'),4000);
+ add('Camera order uses a quantity',camera?.value==='15'&&camera.closest('.cv3-plan-field')?.hidden!==true);
+ add('Daily allowance is not used for cameras',document.querySelector('.cv3-plan-daily')?.closest('.cv3-plan-field')?.hidden===true);
+ add('The plan names ambassadors instead of the',!!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Luna')&&!document.querySelector('.cv3-plan-travelers')?.textContent.includes('Named in your question'));
+ add('Email status shows nothing has been sent',(document.querySelector('.cv3-plan-mail-summary')?.textContent||'').includes('0 sent'));
+ add('The workspace assistant is Cosmos',document.querySelector('.cv3-plan .cv3-kicker')?.textContent==='COSMOS'&&document.querySelector('.cv3-plan')?.getAttribute('aria-label')==='Cosmos');
+ add('Cosmos knows the recorded ambassadors',(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('Luna')&&(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('discovers makers'));
+ add('Progress shows the current stage',!!document.querySelector('.cv3-plan-stage.is-now')&&!!document.querySelector('.cv3-plan-meter'));
+ add('Open items stay visible until the price is set',(document.querySelector('.cv3-plan-ready')?.textContent||'').includes('Unit cost'));
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
 }catch(e){add('Unhandled runtime exception',false,String(e?.message||e))}
  const pre=document.createElement('pre');pre.id='cv3-qa-result';pre.dataset.success=String(tests.every(t=>t.pass));pre.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(pre);
