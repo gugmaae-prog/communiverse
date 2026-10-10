@@ -67,6 +67,17 @@ html[data-cv-social] #cv-work-detail .cv-related [data-open]:focus-visible{outli
 .cv3-person-choice:hover{background:#f6f8fc}
 .cv3-person-choice:focus-visible{outline:2px solid var(--cv3-blue);outline-offset:3px}
 .cv3-person-name{font-size:12px;font-weight:590;line-height:1.2;overflow-wrap:anywhere}
+/* Notify people: circles toggle independently. The original multiple select stays in the form. */
+.cv3-mention-picker{display:grid;gap:8px;min-width:0}
+.cv3-mention-row{display:flex;flex-wrap:wrap;gap:6px}
+.cv3-mention-choice{appearance:none;-webkit-appearance:none;border:1px solid transparent;background:transparent;border-radius:18px;min-width:76px;max-width:108px;padding:8px 6px 7px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:inherit;font:inherit;text-align:center}
+.cv3-mention-choice .cv3-person-circle{width:52px;height:52px;min-width:52px;flex-basis:52px}
+.cv3-mention-choice[aria-pressed=true]{border-color:#a9bfef;background:#f2f6ff}
+.cv3-mention-choice[aria-pressed=true] .cv3-person-circle{box-shadow:0 0 0 2px #fff,0 0 0 4px #245cc8}
+.cv3-mention-choice:hover{background:#f6f8fc}
+.cv3-mention-choice:focus-visible{outline:2px solid var(--cv3-blue);outline-offset:3px}
+.cv3-mention-count{margin:0;font-size:11px;color:var(--cv3-muted)}
+html[data-cv-social] #cv-ws-dialog select[multiple].cv3-native-hidden,.cv-workspace select[multiple].cv3-native-hidden{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;max-height:1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important}
 .cv3-person-role{font-size:10px;color:var(--cv3-muted);line-height:1.2;overflow-wrap:anywhere}
 .cv3-kind-selector{display:grid;gap:12px;margin:13px 0}
 .cv3-kind-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}

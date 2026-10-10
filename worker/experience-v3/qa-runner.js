@@ -20,6 +20,17 @@ async function run(){try{
  const owner=await wait(()=>document.querySelector('.cv3-person-picker'),7000);
  add('Owner dropdown replaced by avatar radio choices',!!owner&&!!owner.querySelectorAll('button[role=radio]').length);
  const chosen=owner?.querySelector('[data-cv3-person-id=luna]');chosen?.click();add('Avatar selection updates existing form control',document.querySelector('#cv-ws-task-form select[name=owner_id]')?.value==='luna');
+ const mentions=await wait(()=>document.querySelector('#cv-ws-comment-form .cv3-mention-picker, #cv-ws-dialog .cv3-mention-picker'),7000);
+ add('Notify people renders as circles',!!mentions&&mentions.querySelectorAll('.cv3-mention-choice .cv3-person-circle').length===5);
+ const notifyHaseeb=mentions?.querySelector('[data-cv3-person-id=haseeb]');const notifyLuna=mentions?.querySelector('[data-cv3-person-id=luna]');
+ notifyHaseeb?.click();notifyLuna?.click();
+ const picked=[...document.querySelectorAll('#cv-ws-comment-form select[name=mentions] option:checked')].map(o=>o.value);
+ add('Several people can stay selected together',picked.includes('haseeb')&&picked.includes('luna')&&picked.length===2,picked.join(','));
+ add('Selected circles stay pressed',notifyHaseeb?.getAttribute('aria-pressed')==='true'&&notifyLuna?.getAttribute('aria-pressed')==='true');
+ notifyHaseeb?.click();
+ const cleared=[...document.querySelectorAll('#cv-ws-comment-form select[name=mentions] option:checked')].map(o=>o.value);
+ add('Clearing one person leaves the others selected',!cleared.includes('haseeb')&&cleared.includes('luna')&&cleared.length===1,cleared.join(','));
+ add('Mention values stay on the original select',new FormData(document.querySelector('#cv-ws-comment-form')).getAll('mentions').join(',')==='luna');
  add('Native owner selector remains serialized',!!document.querySelector('#cv-ws-task-form select[name=owner_id]')?.getAttribute('name'));
  const kind=await wait(()=>document.querySelector('.cv3-kind-grid'),7000);add('Request kind visual tiles',!!kind&&kind.querySelectorAll('[role=radio]').length===11);
  kind?.querySelector('[data-cv3-kind=subscription]')?.click();add('Request tile updates original select',document.querySelector('#cv-ws-request-form select[name=kind]')?.value==='subscription');
