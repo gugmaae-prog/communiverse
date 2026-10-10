@@ -22,6 +22,8 @@ async function run(){try{
  const chosen=owner?.querySelector('[data-cv3-person-id=luna]');chosen?.click();add('Avatar selection updates existing form control',document.querySelector('#cv-ws-task-form select[name=owner_id]')?.value==='luna');
  const mentions=await wait(()=>document.querySelector('#cv-ws-comment-form .cv3-mention-picker, #cv-ws-dialog .cv3-mention-picker'),7000);
  add('Notify people renders as circles',!!mentions&&mentions.querySelectorAll('.cv3-mention-choice .cv3-person-circle').length===5);
+ const lunaTip=mentions?.querySelector('[data-cv3-person-id=luna] .cv3-person-circle')?.dataset.cv3Tooltip;
+ add('Notify circle tooltip is the person name',lunaTip==='Luna',lunaTip||'');
  const notifyHaseeb=mentions?.querySelector('[data-cv3-person-id=haseeb]');const notifyLuna=mentions?.querySelector('[data-cv3-person-id=luna]');
  notifyHaseeb?.click();notifyLuna?.click();
  const picked=[...document.querySelectorAll('#cv-ws-comment-form select[name=mentions] option:checked')].map(o=>o.value);
