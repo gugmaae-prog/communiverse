@@ -146,6 +146,10 @@ html[data-cv-social] #cv-ws-dialog #cv-ws-task-form .cv-ws-check input{width:18p
 .cv3-plan-formula{font-size:15px;font-weight:650;color:#1c2636}
 .cv3-plan-total{font-size:16px;font-weight:700;color:#1c2636}
 html[data-cv-social] .cv3-plan .cv3-plan-step-title,html[data-cv-social] .cv3-plan .cv3-plan-step-detail{border:0;background:transparent;min-height:0;height:auto;max-height:none;box-shadow:none;padding:0}
+.cv3-plan-places{display:flex;flex-wrap:wrap;gap:8px}
+.cv3-plan-places:empty{display:none}
+.cv3-plan-place{border:1px solid #d7e2f6;background:#fff;color:#30455d;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
+.cv3-plan-field[hidden]{display:none}
 .cv3-plan-recs{display:grid;gap:8px}
 .cv3-plan-rec{padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--cv3-line)}
 .cv3-plan-rec .cv3-action{margin-top:8px}
