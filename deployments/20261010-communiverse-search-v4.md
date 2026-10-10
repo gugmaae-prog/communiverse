@@ -78,3 +78,22 @@ These match only those page families; nested non-target pages are passed through
 - Direct shared Homepage URLs containing query strings can use the existing marketplace fallback because the exact homepage route does not cover every query-string variant. Do not add a broad `/communiverse/*` proxy for this without another staging and auth test.
 - This is visual organization and Plug CTA layout, not a new recommendation algorithm.
 - Keep Cloudflare error monitoring and use the route rollback above if a real account encounters a regression.
+
+
+## 10 October 2026 — PR #18 Plug CTA spacing hotfix
+
+**Status:** LIVE; exact Cloudflare Workers source matches the merged GitHub main stylesheet.
+
+- User-reported issue: Plug profile actions "View profile" and "Read their story" were too close or overlapping on the live page.
+- PR: [#18](https://github.com/gugmaae-prog/communiverse/pull/18), source branch `cursor/plug-button-gap-c1ee` (commit `a1579a008ab4eee1c91ca51997b1936dc0b73ca6`), merged by squash commit `872ab4807a567ed50d65157d12b5e751fc86c0eb`.
+- Exactly one module changed: `search-css.txt`, synchronized from `worker/search-v4/search.css`. Source grew from 12,628 to **12,978 bytes**; the added selector applies `margin-top: 14px !important` to the Plug story action and adjacent profile/story controls. The other three Worker modules are byte-preserved.
+- **Production Worker:** `communiverse-search-v4-20261010`. Previous version `62fe3f77-7dd3-4872-8416-02c6e1988a94`; new deployed version `a51eb441-e17e-42b3-9d89-befd50f0c9ee` at 100%.
+- Exact Cloudflare production **route mappings and service bindings remain unchanged**. No changes to marketplace/backend Worker, booking Worker, V3 Workspace, AI knowledge, Supabase or D1/R2.
+- Canary Worker `communiverse-pr18-gap-canary-20261010` deployed only for before-release testing, using all four existing runtime modules with only the CSS replacement.
+- Canva/browser rendering canary checks at 390, 768, 1280px: the live 'View profile' action is followed by the 'Read their story' button with **14px computed spacing**, with no overlap, and the CTA remains inside the card without horizontal page overflow.
+- Post-production browser rendering on the actual **espacios.me** Plug page at 390/768/1280 also measured **14px** spacing, a contained CTA and no horizontal overflow. Both apex and www public stylesheet URLs served the new selector. Homepage and Workspace remain available, and Cloudflare Observability reported **0 active issues** at verification.
+- GitHub PR #18 syntax/invariant CI completed successfully, and Cloudflare's deployed source was compared with the merged `main` CSS exactly.
+
+### Hotfix rollback
+
+Restore the previous Worker version `62fe3f77-7dd3-4872-8416-02c6e1988a94` for **`communiverse-search-v4-20261010` only** using the Cloudflare Workers deployment version controls; do not change zone routes, original Marketplace/Workspace/booking Workers or any database. After rollback verify the public CSS URL and Plug story actions. Alternatively, reconstruct the previous Worker from its four existing modules and the 12,628-byte earlier CSS file, preserving all service bindings. Allow the current CSS cache max-age (120s) or purge only the exact CSS paths if the older/newer revision is still cached.
