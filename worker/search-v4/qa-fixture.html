@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-cv-social="true"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Communiverse Search v4 Fixture</title>
+<style>
+:root{--cv-social-line:#dde4ed;--cv-social-card:#fff;--cv-social-ink:#1c2636;--cv-social-muted:#5f6e82;--cv-social-bg:#f5f6f8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cv-social-bg);color:var(--cv-social-ink);font:14px/1.5 Arial,sans-serif;padding:24px}
+header{max-width:1100px;margin:0 auto 20px;display:flex;justify-content:space-between;align-items:center}
+main{max-width:1100px;margin:auto;padding:20px;background:transparent}
+header strong{font-size:20px;font-weight:530}
+.cv-feed-controls{display:flex;gap:16px;align-items:end;flex-wrap:wrap}
+.cv-feed-controls>label{display:block}
+.cv-feed-search{flex:1;min-width:220px}
+label{font-size:14px;line-height:1.5}
+label>input,label>select{display:block;min-height:48px;border:1px solid #dbe2eb;border-radius:18px;padding:12px 14px;background:#fff;width:100%;margin-top:5px}
+#cv-feed{margin-top:22px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+#cv-feed .tile{background:#e6ebf2;border-radius:18px;min-height:210px}
+.cv-ai-search-button{display:block;margin-top:8px;padding:9px 0;border:0;background:transparent;color:#1b63c6}
+[hidden]{display:none!important}
+</style>
+<link rel="stylesheet" href="/communiverse/__cvsearch_v4.css">
+</head><body>
+<header><strong>Communiverse</strong><nav aria-label="Main navigation">Discover &nbsp;&nbsp; Artists &nbsp;&nbsp; Events &nbsp;&nbsp; Communities &nbsp;&nbsp; Plug</nav></header>
+<main>
+<section class="cv-social cv-feed-page">
+<div class="cv-feed-controls"><label class="cv-feed-search">Find your next favourite<input type="search" id="cv-feed-search" aria-label="Find your next favourite" placeholder="An artist, a material, a feeling…"></label><label>Region<select id="cv-feed-region"><option value="">Everywhere</option><option value="uae">UAE</option></select></label></div>
+<div class="cv-feed-actions"><span>For you</span> &nbsp;&nbsp; Following &nbsp;&nbsp; Saved</div>
+<div id="cv-feed"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
+</section>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  window.__fixtureInputEvents=0;
+  const inp=document.querySelector('#cv-feed-search');inp.addEventListener('input',()=>window.__fixtureInputEvents++);
+  setTimeout(()=>{
+    const label=inp.closest('label');
+    const btn=document.createElement('button');btn.type='button';btn.className='cv-ai-search-button';btn.textContent='Search with AI';
+    btn.addEventListener('click',()=>{window.__fixtureAIClicked=(window.__fixtureAIClicked||0)+1});
+    const panel=document.createElement('div');panel.className='cv-ai-search-results';panel.hidden=true;panel.setAttribute('role','region');
+    label.append(btn,panel);
+  },80);
+});
+</script>
+<script defer src="/communiverse/__cvsearch_v4.js"></script>
+<script defer src="/communiverse/__cvsearch_v4_qa.js"></script>
+</body></html>
