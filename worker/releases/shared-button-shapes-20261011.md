@@ -24,8 +24,8 @@ test at zero traffic using version overrides, and promote the verified version.
 ## Released version
 
 - Worker: `communiverse-marketplace`
-- Version: `72869316-cf64-4e49-9293-5393fd47b083`
-- Deployment: `a91e900e-adfd-4e34-96f1-dac64a7a3625`, 100% traffic
+- Version: `8277a67f-15bc-4bf3-b0c7-d4ae35e0cb40`
+- Deployment: `2d258838-fb4b-4abf-b12d-8c6ef43ac7f6`, 100% traffic
 - Rollback version: `4a659bea-6915-4093-a7e7-8ab9c85ccfb4`
 - Changed module: `social.css`; 118 other modules retained byte-for-byte
 - All seven bindings and compatibility date retained

@@ -7,6 +7,8 @@ html[data-cv-social] {
 }
 
 html[data-cv-social] :is(
+  a.button,
+  button.button,
   .cv-button,
   .cv-quiet-button,
   .cv-google-button,
@@ -16,6 +18,8 @@ html[data-cv-social] :is(
   .cv3-action,
   .cv3-quiet-button,
   .cv3-plan-add
-) {
+),
+/* The search layer has a more specific !important radius for this action. */
+html[data-cv-social] .cv4-search-field .cv4-search-inner > button.cv4-ai-button.cv-ai-search-button {
   border-radius: var(--cv-action-radius) !important;
 }
