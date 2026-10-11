@@ -14,6 +14,6 @@ Build the marketplace from a verified full production export with `scripts/build
 
 Build the workspace with `node scripts/build-workspace-v3.mjs OUTPUT`. Build knowledge with `node worker/business-knowledge/assemble.mjs`; then run `node --test worker/business-knowledge/worker.test.mjs worker/experience-v3/tests/goal-planner.test.mjs`.
 
-Browser fixtures: the existing 64-check workspace integration fixture, 22-check planner fixture and `guidance-qa.html` with 13 additional checks, plus `controls-qa.html` with eight checks for legacy Plug markers, exclusive versus independent selections and search borders and search action sizes and keyboard focus. Test actual CSS widths around 320, 390, 768 and 1440 pixels. Account for browser zoom when using device emulation.
+Browser fixtures: the existing 64-check workspace integration fixture, 22-check planner fixture and `guidance-qa.html` with 13 additional checks, plus `controls-qa.html` with nine checks for legacy Plug markers, exclusive versus independent selections and search borders and search action sizes keyboard focus and hidden states. Test actual CSS widths around 320, 390, 768 and 1440 pixels. Account for browser zoom when using device emulation.
 
 Implementation references: [MDN backdrop-filter](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/backdrop-filter) and [WAI radio group keyboard pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/).
