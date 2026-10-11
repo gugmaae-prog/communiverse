@@ -1,0 +1,25 @@
+<!doctype html><html lang="en" data-cv-social="qa"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Communiverse guidance QA</title><link rel="stylesheet" href="/communiverse/__cvux_v3.css"><link rel="stylesheet" href="/glass.css"><style>body{margin:0;font:15px Arial,sans-serif}main{padding:16px;max-width:1200px;margin:auto}#results{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}</style></head><body><main id="app"></main><pre id="results"></pre><script src="/communiverse/goal-planner.js"></script><script>
+(async()=>{
+ const checks=[],check=(name,pass)=>checks.push({name,pass:!!pass}),wait=async fn=>{for(let i=0;i<100;i++){if(fn())return;await new Promise(r=>setTimeout(r,15));}throw Error('Fixture timed out');};
+ const overview={person:{id:'test-lead',name:'Test Lead'},team:[{id:'test-lead',name:'Test Lead'}],tasks:[],projects:[]};let fail=true,calls=[];
+ window.fetch=async(url,opts)=>{calls.push({url,method:opts.method||'GET'});if(fail)return new Response('{}',{status:403});return Response.json({knowledge:{guidance:[{title:'Partnership development',summary:'General workflow guidance.',questions:['What does each side gain?']}],documents:[{title:'Recorded reference',status:'draft',source_date:'2026-10-02',content:'<img src=x onerror=alert(1)> Source text only.'}],unavailable:[]}});};
+ try{
+  const host=document.createElement('section');host.className='cv-ws-assistant';document.querySelector('#app').append(host);window.__cvGoalPlanner.render(host,'Build partnerships',overview);
+  check('Partnership workflow has six phases',host.querySelectorAll('.cvgp-step').length===6);
+  check('Business context has no headcount control',!host.querySelector('.cvgp-side>.cvgp-field input[type=number]')&&host.querySelector('.cvgp-side label').textContent.includes('market or audience'));
+  check('Costs stay optional and collapsed',!host.querySelector('.cvgp-costs').open);
+  check('General workflows do not invent CEO sign-off',!host.querySelector('.cvgp').textContent.includes('CEO sign-off'));
+  const detail=host.querySelector('.cvgp-guidance');check('Knowledge is not fetched until opened',calls.length===0);detail.open=true;
+  await wait(()=>detail.textContent.includes('could not be checked'));check('Failed lookup has a useful retry state',detail.textContent.includes('again to retry'));
+  fail=false;detail.open=false;await new Promise(r=>setTimeout(r,25));detail.open=true;await wait(()=>detail.textContent.includes('Company references'));
+  check('Only read-only knowledge queries are sent',calls.length===2&&calls.every(c=>c.method==='GET'&&c.url.startsWith('/communiverse/api/knowledge/query?')));
+  check('Guidance and company evidence remain visibly distinct',detail.textContent.includes('not company policy or a live record')&&detail.textContent.includes('draft · 2026-10-02'));
+  check('Source text cannot inject image markup',detail.textContent.includes('<img src=x')&&detail.querySelectorAll('img').length===0);
+  const native=host.querySelector('input[type=checkbox]');check('Independent action selectors remain native and round',native.type==='checkbox'&&getComputedStyle(native).borderRadius==='50%');
+  check('All plan text remains regular weight',[...host.querySelectorAll('*')].every(e=>getComputedStyle(e).fontWeight==='400'));
+  check('Action labels and targets use shared dimensions',[...host.querySelectorAll('.cvgp-action,.cvgp-icon')].filter(e=>e.getClientRects().length).every(e=>getComputedStyle(e).fontSize==='14px'&&e.getBoundingClientRect().height>=43.9));
+  check('No horizontal overflow',document.documentElement.scrollWidth<=innerWidth+1);
+ }catch(e){check('Unhandled exception: '+e.message,false);}
+ document.querySelector('#results').textContent=JSON.stringify({passed:checks.every(c=>c.pass),checks},null,2);
+})();
+</script><script src="/glass.js"></script></body></html>
