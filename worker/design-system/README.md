@@ -2,7 +2,9 @@
 
 The shared marketplace layer owns the palette, regular font weights, action labels, pill actions, circular icon buttons, input surfaces and round selectors. The retained workspace gateway adds topic-specific plans and permission-scoped guidance. Existing search, booking and marketplace wrappers continue to delegate to those workers.
 
-Action labels are 14px with a 44px minimum target. Reading text is 15px; labels are 14px and secondary text is at least 12px. Mobile text fields use 16px. Headings range from 19px to 40px. All text is regular weight. The primary accent is #245ccc; muted text is #55647a on the light palette. Dark mode, forced colors and reduced transparency are supported.
+Action labels are 14px with a 44px minimum target. Reading text is 15px; labels are 14px and secondary text is at least 12px. Mobile text fields use 16px. Headings range from 19px to 40px. All text is regular weight. The primary accent is #245ccc; muted text is #55647a. The product stays light regardless of the device's color preference. Forced colors and reduced transparency remain supported.
+
+The outer sticky header is transparent, without a page-wide rectangle, divider or blur. Blur belongs to the floating navigation capsule. Plug's older fixed pseudo-element overlay is removed, and its cards, artist profiles, marketplace variables, and workspace status pills inherit the light palette. Browser theme metadata also stays light. `scripts/build-light-marketplace.py` patches the verified 125-module export, retaining historical focus assets and adding a new immutable focus URL for current Plug pages.
 
 Native checkboxes remain independent selections and use the same circular dot presentation as radios. Workspace, feed and Plug navigation keep their original button semantics and selected pill styling, without selection dots. Arrow-key radio behavior applies only to actual radio groups. Person and request pickers keep their original form controls. X and trash controls retain the prior shared icon release and accessible labels.
 

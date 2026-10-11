@@ -10,14 +10,14 @@ html[data-cv-social] {
   --cv3-blue:var(--cv-glass-blue)!important; --cv3-ink:var(--cv-glass-ink)!important;
   --cv3-muted:var(--cv-glass-muted)!important; --cv3-line:var(--cv-glass-line)!important;
   --cv3-card:var(--cv-glass-surface)!important; --cv3-soft:var(--cv-glass-soft)!important;
-  color-scheme:light;
+  /* Product theme stays light, including overscroll and native form controls. */
+  color-scheme:light!important;background:var(--cv-glass-bg)!important;color:var(--cv-glass-ink)!important;
+  --cv-ui-bg:var(--cv-glass-bg)!important;--cv-ui-ink:var(--cv-glass-ink)!important;
+  --cv-ui-muted:var(--cv-glass-muted)!important;--cv-ui-card:var(--cv-glass-surface)!important;
+  --cv-ui-glass:var(--cv-glass-surface)!important;--cv-ui-soft:var(--cv-glass-soft)!important;
+  --cv-ui-line:var(--cv-glass-line)!important;--cv-ui-accent:var(--cv-glass-blue)!important;
+  --cv-ui-on-accent:#fff!important;--cv-ui-error:#a12d24!important;--cv-ui-shadow:var(--cv-glass-shadow)!important;
 }
-@media(prefers-color-scheme:dark){html[data-cv-social]{
-  --cv-glass-bg:#131c2b;--cv-glass-ink:#ecf2ff;--cv-glass-muted:#bdcadf;
-  --cv-glass-blue:#a5c5ff;--cv-glass-line:rgba(176,199,237,.23);
-  --cv-glass-surface:rgba(28,41,61,.92);--cv-glass-edge:rgba(193,213,247,.15);
-  --cv-glass-soft:#253b60;--cv-glass-shadow:0 8px 28px rgba(0,0,0,.16),inset 0 1px 0 var(--cv-glass-edge);color-scheme:dark;
-}}
 html[data-cv-social] body{
   background:radial-gradient(ellipse at 12% 0%,rgba(119,168,247,.13),transparent 48%),radial-gradient(ellipse at 90% 16%,rgba(167,191,233,.14),transparent 52%),var(--cv-glass-bg)!important;
   color:var(--cv-glass-ink)!important;font-size:15px!important;line-height:1.55;font-synthesis:none;
@@ -45,7 +45,33 @@ html[data-cv-social] body :is(.cv-feed-tabs button,.filters button)[aria-pressed
 html[data-cv-social] body :is(.cv-feed-tabs button,.filters button)[aria-pressed=false]{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
 html[data-cv-social] body :is([data-cv-ui-icon],.cvgp-icon,.cv-modal-close,.cv-dialog-close,.glass-close){width:44px!important;height:44px!important;min-width:44px!important;max-width:44px!important;flex:0 0 44px!important;padding:0!important;border-radius:50%!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;background:var(--cv-glass-surface)!important;color:var(--cv-glass-ink)!important;border:1px solid var(--cv-glass-line)!important;box-shadow:var(--cv-glass-shadow)!important}
 html[data-cv-social] body :is([data-cv-ui-icon],.cvgp-icon) svg{width:20px!important;height:20px!important}
-html[data-cv-social] #cv-social-header{background:rgba(237,242,248,.74)!important;border-bottom:1px solid var(--cv-glass-line)!important;backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%)}
+/* Glass belongs to the floating controls, not a rectangular page-wide header. */
+html[data-cv-social] #cv-social-header{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-cv-social] #cv-social-header nav{backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%)}
+html[data-cv-social] #cv-social-header .cv-join-chip{color:#fff!important}
+/* Retained Plug and marketplace sheets have their own OS-dark variables. */
+html[data-cv-social] body .cv-plug{
+  --plug-surface:var(--cv-glass-bg)!important;--plug-ink:var(--cv-glass-ink)!important;--plug-muted:var(--cv-glass-muted)!important;
+  --plug-stroke:var(--cv-glass-line)!important;--plug-control:var(--cv-glass-surface)!important;--plug-accent:var(--cv-glass-blue)!important;
+  --plug-card:var(--cv-glass-surface)!important;--plug-highlight:var(--cv-glass-edge)!important;--plug-shadow:rgba(27,51,85,.065)!important;
+  background:transparent!important;
+}
+html[data-cv-social] body .cv-plug::before{content:none!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-cv-social] body .cv-plug .field{background:transparent!important}
+html[data-cv-social] body :is(.cv-artist-profile,.cv-market){
+  --cv-ink:var(--cv-glass-ink)!important;--cv-muted:var(--cv-glass-muted)!important;--cv-surface:var(--cv-glass-bg)!important;
+  --cv-card:var(--cv-glass-surface)!important;--cv-border:var(--cv-glass-line)!important;--cv-line:var(--cv-glass-line)!important;--cv-blue:var(--cv-glass-blue)!important;
+  color:var(--cv-glass-ink)!important;
+}
+html[data-cv-social] body :is(.cv-artist-card,.cv-enquiry-date,.glass-panel-body .glass-card[data-card]:not(.cv-social-orbit):not(.cv-video-orbit)){
+  background:var(--cv-glass-surface)!important;color:var(--cv-glass-ink)!important;border-color:var(--cv-glass-line)!important;box-shadow:var(--cv-glass-shadow)!important;
+}
+html[data-cv-social] body .cv-plug .glass-panel{background:transparent!important;color:var(--cv-glass-ink)!important;border-color:var(--cv-glass-line)!important}
+html[data-cv-social] body :is(.cv-artist-kicker,.cv-artist-card p,.cv-artist-note,.cv-enquiry-date p){color:var(--cv-glass-muted)!important}
+html[data-cv-social] body :is(.cv-artist-tags span,.cv-sample){background:var(--cv-glass-soft)!important;color:var(--cv-glass-muted)!important;border-color:var(--cv-glass-line)!important}
+html[data-cv-social] body .cv-ws-pill:is([data-state=done],[data-state=approved]){background:#e9f6ee!important;color:#24583a!important}
+html[data-cv-social] body .cv-ws-pill:is([data-state=blocked],[data-state=rejected]){background:#fff0ef!important;color:#8a3431!important}
+html[data-cv-social] body .cv-ws-pill:is([data-state=review],[data-state=approval],[data-state=keiffer]){background:var(--cv-glass-soft)!important;color:var(--cv-glass-ink)!important}
 html[data-cv-social] body :is(#cv-social-header nav,.cv-feed-tabs,.cv-ws-tabs,.filters,.cv3-focus-board,.cvgp,.cv-assistant,.cv-event-card,.cv-directory-card,.cv-post-card,.cv-invitation,dialog,.cv-booking,.cv-ws-project-card){
   background:linear-gradient(150deg,var(--cv-glass-edge),transparent 65%),var(--cv-glass-surface)!important;color:var(--cv-glass-ink)!important;
   border:1px solid var(--cv-glass-line)!important;box-shadow:var(--cv-glass-shadow)!important;
@@ -85,8 +111,7 @@ html[data-cv-social] body .cvgp-guidance{margin-top:16px;border-top:1px solid va
 html[data-cv-social] body .cvgp-guidance p{font-size:14px;white-space:pre-line;overflow-wrap:anywhere}
 html[data-cv-social] body .cvgp-guidance a{font-size:13px;overflow-wrap:anywhere}
 @media(max-width:600px){html[data-cv-social] body :is(h1,.cv-social h1,#cv-ws-greeting){font-size:28px!important}html[data-cv-social] body :is(button,[role=button],.cv-button,.cvgp-action){font-size:14px!important}html[data-cv-social] body :is(input,select,textarea):not([type=checkbox]):not([type=radio]){font-size:16px!important}html[data-cv-social] body :is(.filters,.cv-ws-tabs){max-width:100%;overflow-x:auto;flex-wrap:nowrap!important}html[data-cv-social] body :is(.filters,.cv-ws-tabs) button{white-space:nowrap}}
-@media(prefers-color-scheme:dark){html[data-cv-social] #cv-social-header{background:rgba(19,28,43,.8)!important}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html[data-cv-social]{--cv-glass-surface:var(--cv-glass-bg);--cv-glass-edge:var(--cv-glass-bg)}}
-@media(prefers-reduced-transparency:reduce){html[data-cv-social]{--cv-glass-surface:var(--cv-glass-bg);--cv-glass-edge:var(--cv-glass-bg)}html[data-cv-social] body :is(#cv-social-header,dialog,.cv3-focus-board,.cvgp,.cv-assistant){background:var(--cv-glass-bg)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
+@media(prefers-reduced-transparency:reduce){html[data-cv-social]{--cv-glass-surface:var(--cv-glass-bg);--cv-glass-edge:var(--cv-glass-bg)}html[data-cv-social] body :is(#cv-social-header nav,dialog,.cv3-focus-board,.cvgp,.cv-assistant){background:var(--cv-glass-bg)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
 @media(prefers-reduced-motion:reduce){html[data-cv-social] body :is(button,input,dialog,.cvgp){transition:none!important;animation:none!important}}
 @media(forced-colors:active){html[data-cv-social] body :is(input[type=checkbox],input[type=radio]){appearance:auto!important;-webkit-appearance:auto!important}html[data-cv-social] body :is(input[type=checkbox],input[type=radio])::before{content:none}html[data-cv-social] body .cv-selection-dot::after{background:Highlight}}
