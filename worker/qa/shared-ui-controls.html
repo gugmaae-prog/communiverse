@@ -1,0 +1,26 @@
+<!doctype html><html data-cv-social="test" data-cv-controls="legacy-plug"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../shared-ui-controls.css"></head><body>
+<header id="cv-social-header"><a href="#profile" class="cv-profile-chip"><span class="cv-avatar">K</span><span>Keiffer</span></a><a href="#signin" class="cv-signin-chip">Sign in</a></header>
+<main id="fixtures"></main><pre id="results">Testing…</pre>
+<script>
+const closeVariants=[['class="cv-modal-close" aria-label="Close workspace detail"','Close'],['class="cv-dialog-close" aria-label="Close item"','×'],['class="glass-close" aria-label="Close profile"','×'],['data-assistant-close','Close'],['data-close-work','Close work'],['data-close-inline-artist="artist"','Close story'],['data-close-circle-editor','Close'],['data-close-circle-invite','Close'],['data-dismiss-toast aria-label="Dismiss message"','×'],['data-circle-compose-close','Cancel'],['id="toggle"','Close story ×']];
+const deleteVariants=[['data-admin-delete="artist" data-kind="artist"','Delete'],['data-remove="post" data-kind="post"','Remove my post'],['data-remove-circle-post="post"','Remove post'],['data-ws-media-hide="asset"','Remove from gallery'],['class="cv3-plan-remove"','Remove'],['name="action" value="remove" type="submit"','Remove this signup'],['id="permanent"','Delete permanently']];
+fixtures.innerHTML=closeVariants.concat(deleteVariants).map(([attrs,label])=>'<button '+attrs+'>'+label+'</button>').join('')+'<button data-heart="art" aria-label="Remove art">Heart</button><button data-follow="artist" aria-label="Remove artist from my circle">Follow</button><button id="hidden" hidden data-admin-delete="hidden">Delete</button><button id="save">Save task</button>';
+let clicks=0;document.getElementById('permanent').addEventListener('click',()=>clicks++);
+</script><script src="../shared-ui-controls.js"></script><script>
+(async()=>{const rows=[];function check(name,ok){rows.push({name,passed:!!ok});}const flush=()=>new Promise(r=>setTimeout(r,20));
+check('Every close variant becomes an X',closeVariants.every((_,i)=>fixtures.children[i].dataset.cvUiIcon==='close'&&fixtures.children[i].querySelector('svg')));
+check('Every deletion variant becomes a trash icon',deleteVariants.every((_,i)=>fixtures.children[i+closeVariants.length].dataset.cvUiIcon==='delete'));
+check('Accessible names survive icon-only presentation',Array.from(fixtures.querySelectorAll('[data-cv-ui-icon]')).every(b=>b.getAttribute('aria-label')&&b.title&&b.querySelector('svg').getAttribute('aria-hidden')==='true'));
+check('Save, heart and follow actions remain intact',!document.getElementById('save').dataset.cvUiIcon&&!fixtures.querySelector('[data-heart]').dataset.cvUiIcon&&!fixtures.querySelector('[data-follow]').dataset.cvUiIcon);
+check('Original data IDs and form action preserved',fixtures.querySelector('[data-admin-delete]').dataset.adminDelete==='artist'&&fixtures.querySelector('[value="remove"]').name==='action');
+document.getElementById('permanent').click();check('Original listeners remain bound',clicks===1);
+check('Hidden destructive controls remain hidden',getComputedStyle(document.getElementById('hidden')).display==='none');
+check('44px controls and decorative SVG hit testing',Array.from(fixtures.querySelectorAll('[data-cv-ui-icon]:not([hidden])')).every(b=>Math.abs(parseFloat(getComputedStyle(b).width)-44)<0.1&&Math.abs(parseFloat(getComputedStyle(b).height)-44)<0.1&&getComputedStyle(b.firstElementChild).pointerEvents==='none'));
+check('Profile name is hidden; avatar and accessible label remain',getComputedStyle(document.querySelector('.cv-profile-chip>span:last-child')).display==='none'&&document.querySelector('.cv-profile-chip').getAttribute('aria-label').includes('Keiffer')&&document.querySelector('.cv-avatar').textContent==='K');
+const toggle=document.getElementById('toggle');toggle.textContent='Read their story';await flush();check('Expandable story can return to text open action',!toggle.dataset.cvUiIcon&&toggle.textContent==='Read their story'&&!toggle.hasAttribute('aria-label'));toggle.textContent='Close story ×';await flush();check('Expanded story gets its X again',toggle.dataset.cvUiIcon==='close'&&toggle.getAttribute('aria-label')==='Close story');
+const late=document.createElement('button');late.dataset.adminDelete='late';late.textContent='Delete';fixtures.append(late);await flush();check('Late-rendered delete controls update',late.dataset.cvUiIcon==='delete');late.textContent='Delete';await flush();check('Re-rendered labels reapply without duplicating icons',late.querySelectorAll('svg').length===1);
+document.querySelector('.cv-profile-chip').outerHTML='<a href="#profile" class="cv-profile-chip"><span class="cv-avatar">A</span><span>Alison</span></a>';await flush();check('Account hydration keeps avatar-only profile and updates accessible name',document.querySelector('.cv-profile-chip').getAttribute('aria-label').includes('Alison')&&getComputedStyle(document.querySelector('.cv-profile-chip>span:last-child')).display==='none');
+check('Sign-in action remains visible',document.querySelector('.cv-signin-chip').textContent==='Sign in');
+document.getElementById('results').textContent=JSON.stringify({passed:rows.every(r=>r.passed),checks:rows},null,2);
+})();
+</script></body></html>

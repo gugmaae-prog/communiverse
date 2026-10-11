@@ -1,0 +1,79 @@
+/* Icon actions keep their original position and receive a consistent hit area. */
+html[data-cv-social] button[data-cv-ui-icon],
+html[data-cv-social] [role="button"][data-cv-ui-icon] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 44px !important;
+  box-sizing: border-box !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  border: 1px solid var(--cv-social-line, #e0e5ee) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: var(--cv-social-ink, #243248) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+html[data-cv-social] [data-cv-ui-icon] > svg {
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  pointer-events: none !important;
+}
+html[data-cv-social] [data-cv-ui-icon="delete"] {
+  color: #ad3545 !important;
+}
+html[data-cv-social] [data-cv-ui-icon]:hover:not(:disabled) {
+  background: var(--cv-social-card, #f4f6fa) !important;
+}
+html[data-cv-social] [data-cv-ui-icon="delete"]:hover:not(:disabled) {
+  background: #fff0f2 !important;
+}
+html[data-cv-social] [data-cv-ui-icon]:focus-visible {
+  outline: 2px solid var(--cv-social-blue, #1267ff);
+  outline-offset: 3px;
+}
+html[data-cv-social] [data-cv-ui-icon][hidden] {
+  display: none !important;
+}
+
+/* Only the top-right account chip is reduced to an avatar. */
+html[data-cv-social] #cv-social-header .cv-profile-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  padding: 2px !important;
+  gap: 0 !important;
+  box-sizing: border-box !important;
+  border-radius: 50% !important;
+}
+html[data-cv-social] #cv-social-header .cv-profile-chip > span:not(.cv-avatar) {
+  display: none !important;
+}
+html[data-cv-social] #cv-social-header .cv-profile-chip > .cv-avatar,
+html[data-cv-social] #cv-social-header .cv-profile-chip > img {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  overflow: hidden;
+}
+html[data-cv-social] #cv-social-header .cv-profile-chip .cv-avatar > img {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: inherit !important;
+  object-fit: cover !important;
+}
