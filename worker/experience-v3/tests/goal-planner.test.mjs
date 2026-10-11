@@ -40,3 +40,24 @@ test('Artist, community, equipment, travel and training goals receive operationa
 test('General workflow guidance never invents CEO approval',()=>{
  const p=planner.blueprint('Build partnerships');assert.ok(p.steps.some(s=>s.approval));assert.ok(p.steps.filter(s=>s.approval).every(s=>s.approvalLabel==='Required approval before commitments.'));
 });
+test('The submitted restaurant request and meeting variations select planning',()=>{
+ for(const prompt of ['io wnat a meeting with my ambassadros in a restaurant','I want a meeting with my ambassadors in a restaurant','I need to schedule a meeting','Let’s meet with the team','How can we arrange a meeting?']){
+  assert.equal(planner.meetingGoal(prompt),true,prompt);assert.equal(planner.shouldPlan(prompt),true,prompt);
+ }
+});
+test('Meeting record questions, cancellations and negated goals remain outside planning',()=>{
+ for(const prompt of ['Show my upcoming meetings','List meetings from yesterday','When is my meeting?','I want to know when my next meeting is','Cancel my meeting','Reschedule my meeting','I do not want a meeting']){
+  assert.equal(planner.meetingGoal(prompt),false,prompt);assert.equal(planner.shouldPlan(prompt),false,prompt);
+ }
+});
+test('Restaurant meetings have an agenda, venue checks, invitations and follow-up',()=>{
+ const plan=planner.blueprint('io wnat a meeting with my ambassadros in a restaurant');
+ assert.equal(plan.title,'Plan your ambassador meeting');assert.equal(plan.guideId,'meeting-planning');assert.equal(plan.steps.length,6);
+ assert.match(plan.steps[1].title,/restaurant/);assert.match(JSON.stringify(plan.steps[1].actions),/dietary|dietary needs/);assert.match(JSON.stringify(plan.steps[3].actions),/ambassador/);
+ assert.match(plan.steps[4].title,/invitations/);assert.match(plan.steps[5].output,/follow-up/);assert.ok(plan.steps.every(s=>s.owner===''&&s.due===''&&s.actions.every(a=>!a.done)));
+ assert.ok(!/Daily allowance|Working estimate|candidate shortlist/i.test(JSON.stringify(plan)));
+ assert.ok(plan.steps.filter(s=>s.approval).every(s=>s.approvalLabel==='Required approval before booking or spending.'));
+});
+test('A general meeting does not assume a restaurant or recruitment',()=>{
+ const plan=planner.blueprint('I want to arrange a team meeting');assert.equal(plan.title,'Plan your meeting');assert.ok(!/restaurant|Recruit ambassadors/.test(JSON.stringify(plan)));
+});
