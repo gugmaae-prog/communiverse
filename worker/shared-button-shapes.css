@@ -1,0 +1,21 @@
+/* Shared action shape across the public site, account forms and workspace.
+   Keep this scoped to action classes: avatars, icon controls, selectable tiles
+   and clickable content cards retain their own geometry. The retained runtime
+   appends this file to social.css; !important wins over later UI layers. */
+html[data-cv-social] {
+  --cv-action-radius: 999px;
+}
+
+html[data-cv-social] :is(
+  .cv-button,
+  .cv-quiet-button,
+  .cv-google-button,
+  a.cv-text-link,
+  button.cv-text-link,
+  .cv-ai-search-button,
+  .cv3-action,
+  .cv3-quiet-button,
+  .cv3-plan-add
+) {
+  border-radius: var(--cv-action-radius) !important;
+}
