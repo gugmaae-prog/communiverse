@@ -50,6 +50,7 @@ html[data-cv-social] body :is(#cv-social-header nav,.cv-feed-tabs,.cv-ws-tabs,.f
   border:1px solid var(--cv-glass-line)!important;box-shadow:var(--cv-glass-shadow)!important;
 }
 html[data-cv-social] body :is(.cv-feed-tabs,.cv-ws-tabs,.filters){border-radius:999px!important}
+html[data-cv-social] body :is(.cv-feed-tabs,.cv-ws-tabs,.cv-plug .filters)>button{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important}
 html[data-cv-social] body :is(dialog,.cv3-focus-board,.cvgp,.cv-assistant){border-radius:24px!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 html[data-cv-social] body :is(.cv3-focus-item,.cv-ws-row,.cv-ws-stat,.cvgp-step,.cvgp-main,.cvgp-side,.cvgp-review,.cvgp-footer,.cvgp-review-row,.cv3-route-preview,.cv3-person-picker,.cv3-kind-selector,.cv3-mention-picker,.cv3-avatar-group){background:var(--cv-glass-surface)!important;color:var(--cv-glass-ink)!important;border-color:var(--cv-glass-line)!important;border-radius:18px}
 html[data-cv-social] body :is(.cvgp-goal,.cvgp-step[open]>summary){background:var(--cv-glass-soft)!important;color:var(--cv-glass-ink)!important;border-color:var(--cv-glass-line)!important}
