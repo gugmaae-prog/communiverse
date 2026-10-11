@@ -9,7 +9,12 @@
   const button = (label, action, primary = false) => { const b = el('button', 'cvgp-action' + (primary ? ' is-primary' : ''), label); b.type = 'button'; b.addEventListener('click', action); return b; };
   const glyph = kind => { const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); for (const [k,v] of Object.entries({viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':'1.7','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true'})) s.setAttribute(k,v); const p = document.createElementNS(s.namespaceURI,'path'); p.setAttribute('d',kind==='trash'?'M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6M14 10v6':kind==='close'?'M6 6l12 12M18 6 6 18':'M6 9l6 6 6-6'); s.append(p); return s; };
   const recruitment = prompt => /\bamb[a-z]*[ds][a-z]*r?s?\b/i.test(prompt) && (/\b(recruit\w*|hir\w*)\b/i.test(prompt) || /\b(?:look\w*|find\w*|seek\w*|search\w*|need\w*|want\w*|get)(?:\s+(?:for|more|new|some|additional|\d+|an?)){0,5}\s+amb[a-z]*[ds][a-z]*r?s?\b/i.test(prompt));
-  const shouldPlan = prompt => recruitment(prompt) || /\b(plan\w*|organis\w*|organiz\w*|launch\w*|create\w*|prepar\w*|recruit\w*|look\w*|need\w*|want\w*|build\w*|develop\w*|improve\w*|train\w*|onboard\w*)\b/i.test(prompt) || /how (?:do|can|should) (?:i|we)/i.test(prompt);
+  const meetingTopic = prompt => /\b(meet(?:ings?)?|catch[ -]?up|working lunch|team lunch|dinner meeting)\b/i.test(prompt);
+  const meetingGoal = prompt => meetingTopic(prompt)
+    && !/^\s*(?:show|list|find|search|when is|when are|where is|where are|who is|who are|cancel|delete|reschedule)\b/i.test(prompt)
+    && !/\b(?:(?:want|need|would like)\s+to\s+(?:know|see|check|find out)|(?:do not|don't|no longer)\s+(?:want|need|plan))\b/i.test(prompt)
+    && /\b(want\w*|wnat|wanna|need\w*|plan\w*|organis\w*|organiz\w*|arrang\w*|schedul\w*|set up|hold|host|book|prepar\w*|create\w*|let[’']?s|can (?:i|we|you)|could (?:i|we|you))\b/i.test(prompt);
+  const shouldPlan = prompt => meetingTopic(prompt) ? meetingGoal(prompt) : recruitment(prompt) || /\b(plan\w*|organis\w*|organiz\w*|launch\w*|create\w*|prepar\w*|recruit\w*|look\w*|need\w*|want\w*|build\w*|develop\w*|improve\w*|train\w*|onboard\w*)\b/i.test(prompt) || /how (?:do|can|should) (?:i|we)/i.test(prompt);
   // Each phase has a concrete output and editable actions; no invented dates or fees.
   const phase = (title, summary, actions, output, approval = false) => ({id:crypto.randomUUID(),title,summary,actions:actions.map(label=>({label,done:false})),output,approval,owner:'',due:''});
   function guidePlan(prompt, ids) {
@@ -19,6 +24,17 @@
     return {title:g.title,guideId:g.id,intro:g.summary,steps:g.steps.map(([title,summary,output])=>phase(title,summary,[summary,'Confirm the responsible person and any missing information','Record the outcome and next step'],output,/review commitments|request approval|review.*approval|confirm decisions/i.test(title))).map(s=>({...s,approvalLabel:'Required approval before commitments.'}))};
   }
   function blueprint(prompt) {
+    if (meetingGoal(prompt)) {
+      const ambassadors=/\bamb[a-z]*[ds][a-z]*r?s?\b/i.test(prompt),restaurant=/\b(restaur\w*|dinner|lunch|cafe|café)\b/i.test(prompt);
+      return {title:ambassadors?'Plan your ambassador meeting':'Plan your meeting',guideId:'meeting-planning',intro:restaurant?'A practical plan for meeting together at a restaurant. Confirm the people, place and time before sending invitations.':'Agree the purpose, people and arrangements, then prepare an invitation for review.',steps:[
+        phase('Agree the purpose and people','Decide what the meeting should achieve and who needs to join.',[ambassadors?'Choose the ambassadors who should attend; confirm the programme lead':'Choose the participants and meeting owner','Define the decisions, updates or support needed','Ask about availability, dietary requirements and access needs'],'Meeting purpose and attendee shortlist'),
+        phase(restaurant?'Find a suitable restaurant':'Choose the place and format',restaurant?'Choose a place where the group can comfortably hear and speak to one another.':'Choose an in-person venue or a suitable meeting link.',restaurant?['Confirm the city and compare quiet, accessible restaurants with enough seating','Check menu choices, dietary needs, parking or transport, and group availability','Ask for a written quote and check minimum spend, deposits and cancellation terms']:['Confirm the city or online format','Check capacity, accessibility and practical needs','Confirm venue or meeting-link availability'],'Venue shortlist and practical requirements'),
+        phase('Confirm time and costs','Agree availability and review any commitments before booking.',['Collect participant availability and confirm the date, start/end time and time zone',restaurant?'Confirm headcount and the quoted meal or venue cost; leave unknown amounts unset':'Confirm headcount and any venue or equipment costs','Get the required spending approval before paying a deposit or making commitments'],'Confirmed arrangements and any required approval',true),
+        phase('Prepare the agenda','Keep the discussion focused and leave space for decisions.',[ambassadors?'Cover programme priorities and a brief update from each ambassador':'Cover the meeting purpose and participant updates','Discuss blockers, ideas and support needed','Leave time to agree actions, owners and the next check-in'],'Agenda and supporting materials'),
+        phase('Review and send invitations','Make it easy for people to understand and confirm the arrangements.',['Prepare the attendee list, date/time, time zone, location or map link and agenda','Review the invitation before scheduling and sending it','Track replies and reconfirm attendance and venue requirements'],'Reviewed invitations and attendance responses'),
+        phase('Meet and follow up','Turn the conversation into clear next steps.',['Use the agenda and record decisions during the meeting','Confirm an owner and due date for each agreed action','Share the reviewed summary and next check-in; record any actual costs'],'Meeting notes, assigned actions and follow-up')
+      ].map(s=>({...s,approvalLabel:s.approval?'Required approval before booking or spending.':''}))};
+    }
     if (recruitment(prompt)) return {title:'Recruit ambassadors',intro:'A recruitment plan, from finding people to helping them succeed.',steps:[
       phase('Define the brief','Agree on the role, region and what success looks like.',['Describe who the ambassador will represent','Define responsibilities and selection criteria','Agree how the programme will measure success'],'Recruitment brief'),
       phase('Find candidates','Use community referrals, relevant networks and targeted outreach.',['Map the communities and maker networks in the target region','Prepare an outreach message and application questions','Ask for referrals and record interested candidates'],'Candidate pool'),
@@ -95,7 +111,20 @@
     main.append(sectionHead,steps,addStep);
     const review=el('section','cvgp-review');review.hidden=true;review.setAttribute('aria-label','Review plan');
     const foot=el('div','cvgp-footer'),status=el('p','cvgp-status','Draft only — no tasks created yet.');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
-    const actions=el('div','cvgp-actions'),save=button('Save draft',()=>persist(true)),next=button('Review plan',showReview,true);actions.append(save,next);foot.append(status,actions);
+    const isMeeting=pattern.guideId==='meeting-planning';
+    if(isMeeting)board.classList.add('is-meeting');
+    if(isMeeting)status.textContent='Draft plan · no meeting scheduled or invitations sent.';
+    const actions=el('div','cvgp-actions'),save=button('Save draft',()=>persist(true)),next=button(isMeeting?'Review task plan':'Review plan',showReview,!isMeeting);actions.append(save,next);foot.append(status,actions);
+    if(isMeeting)actions.append(button('Prepare invitation',()=>{
+      const trigger=document.querySelector('[data-ws-meeting-new]');if(!trigger){status.textContent='Open Schedule a meeting to prepare your invitation.';return;}
+      trigger.click();const form=document.querySelector('#cv-ws-dialog form[data-ws-enhanced="meeting"]');if(!form){status.textContent='The invitation form could not open. Try Schedule a meeting.';return;}
+      form.elements.title.value=pattern.title==='Plan your ambassador meeting'?'Ambassador meeting':'Team meeting';
+      form.elements.location.value=text(model.region,240);
+      const agenda=model.steps.find(s=>/agenda/i.test(s.title))||blueprint(prompt).steps[3];
+      form.elements.note.value=['Purpose: '+text(model.goal,500),'Proposed agenda:',...agenda.actions.map(a=>'- '+a.label)].join('\n').slice(0,2000);
+      status.textContent='Invitation draft opened. Choose attendees and times, then review before sending.';
+      form.elements.title.focus();
+    },true));
     function changed(){board.dataset.cv3Touched='yes';status.textContent='Unsaved changes · no tasks created yet.';}
     function persist(announce=false){if(!storageKey){status.textContent='Wait for your workspace account to load, then try again.';return false;}try{model.savedAt=Date.now();localStorage.setItem(storageKey,JSON.stringify(model));const keys=[];for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key?.startsWith('cv-goal-plan:v1:'+encodeURIComponent(profile.id)+':'))keys.push(key);}if(keys.length>20){keys.filter(k=>k!==storageKey).sort((a,b)=>{try{return JSON.parse(localStorage.getItem(a)).savedAt-JSON.parse(localStorage.getItem(b)).savedAt;}catch{return 0;}}).slice(0,keys.length-20).forEach(k=>localStorage.removeItem(k));}if(announce)status.textContent='Draft saved in this browser · no new tasks created.';return true;}catch{status.textContent='This browser could not save the draft. Keep this page open and try again.';return false;}}
     function labeled(label,value,change,{type='text',placeholder='Not set',max=250,min,step}={}){const wrap=el('label','cvgp-field',label),input=el('input');input.type=type;input.value=value || '';input.placeholder=placeholder;input.maxLength=max;if(min!==undefined)input.min=min;if(step)input.step=step;input.addEventListener('input',()=>{change(input.value);changed();});wrap.append(input);return {wrap,input};}
@@ -103,7 +132,7 @@
     function paintSteps(openIndex=0){steps.replaceChildren();count.textContent=model.steps.length+' phases';model.steps.forEach((step,index)=>{
       const detail=el('details','cvgp-step');detail.setAttribute('name',accordionName);detail.open=index===openIndex;const summary=el('summary'),num=el('span','cvgp-number',String(index+1)),copy=el('span','cvgp-summary-copy');copy.append(el('strong','',step.title),el('span','',step.summary));summary.append(num,copy,glyph('chevron'));detail.append(summary);
       const content=el('div','cvgp-step-content'),list=el('div','cvgp-checklist');step.actions.forEach(action=>{const label=el('label'),check=el('input');check.type='checkbox';check.checked=action.done;check.addEventListener('change',()=>{action.done=check.checked;changed();});label.append(check,el('span','',action.label));list.append(label);});content.append(list);
-      const fields=el('div','cvgp-step-fields');fields.append(ownerSelect(step),labeled('Due date (optional)',step.due,v=>step.due=v,{type:'date'}).wrap);content.append(fields,el('p','cvgp-output','Output: '+step.output));if(step.approval)content.append(el('p','cvgp-approval',step.approvalLabel||'CEO sign-off required before commitments.'));
+      const fields=el('div','cvgp-step-fields');fields.hidden=isMeeting;fields.append(ownerSelect(step),labeled('Due date (optional)',step.due,v=>step.due=v,{type:'date'}).wrap);content.append(fields,el('p','cvgp-output','Output: '+step.output));if(step.approval)content.append(el('p','cvgp-approval',step.approvalLabel||'CEO sign-off required before commitments.'));
       const edit=button('Edit phase',()=>{editor.hidden=!editor.hidden;if(!editor.hidden)editor.querySelector('input')?.focus();}),editor=el('div','cvgp-editor');editor.hidden=true;
       const phaseTitle=labeled('Phase title',step.title,v=>{step.title=v;copy.querySelector('strong').textContent=v;},{max:140});const description=labeled('Summary',step.summary,v=>{step.summary=v;copy.querySelector('span').textContent=v;},{max:500});const actionField=el('label','cvgp-field','Actions (one per line)'),area=el('textarea');area.rows=4;area.value=step.actions.map(a=>a.label).join('\n');area.maxLength=2000;area.addEventListener('input',()=>{step.actions=area.value.split('\n').filter(s=>s.trim()).slice(0,10).map(label=>({label:text(label,500),done:false}));changed();});actionField.append(area);editor.append(phaseTitle.wrap,description.wrap,actionField,labeled('Expected output',step.output,v=>{step.output=v;content.querySelector('.cvgp-output').textContent='Output: '+v;}).wrap,button('Done editing',()=>paintSteps(index)));
       const controls=el('div','cvgp-phase-actions'),remove=button('Delete phase',()=>{if(model.steps.length===1){status.textContent='Keep at least one phase in the plan.';return;}model.steps.splice(index,1);changed();paintSteps(Math.min(index,model.steps.length-1));});remove.className='cvgp-icon';remove.setAttribute('aria-label','Delete phase '+step.title);remove.title='Delete phase';remove.replaceChildren(glyph('trash'));controls.append(edit,remove);content.append(editor,controls);detail.append(content);
@@ -111,7 +140,7 @@
     });}
     side.append(el('h3','','A few details first'),el('p','cvgp-muted','Answer these to tailor the plan.'));
     const audienceContext=['sales-pipeline','partnership-development','business-planning'].includes(pattern.guideId)||pattern.title==='Plan the content';const showHeadcount=!audienceContext;
-    side.append(labeled(recruitment(prompt)?'Where should we recruit?':audienceContext?'Which market or audience?':pattern.guideId==='artist-discovery'?'Which craft or region?':'Where will this happen?',model.region,v=>model.region=v).wrap);
+    side.append(labeled(recruitment(prompt)?'Where should we recruit?':isMeeting?'Restaurant or location (optional)':audienceContext?'Which market or audience?':pattern.guideId==='artist-discovery'?'Which craft or region?':'Where will this happen?',model.region,v=>model.region=v).wrap);
     if(showHeadcount)side.append(labeled(recruitment(prompt)?'How many ambassadors?':pattern.guideId==='artist-discovery'?'How many artists? (optional)':'How many people? (optional)',model.count,v=>model.count=v,{type:'number',min:'1',step:'1'}).wrap);
     side.append(labeled(recruitment(prompt)?'When should they start?':'Target date (optional)',model.start,v=>model.start=v,{type:'date'}).wrap);
     const costs=el('details','cvgp-costs'),costTitle=el('summary','', 'Costs (optional)');costTitle.append(glyph('chevron'));costs.append(costTitle,el('p','cvgp-muted','Add only if funding is needed.'));
@@ -164,5 +193,5 @@
     else if(model.savedAt)status.textContent='Saved draft restored from this browser.';
     return board;
   }
-  window.__cvGoalPlanner={release:'20261011-planner',recruitment,shouldPlan,blueprint,contextFrom,render};
+  window.__cvGoalPlanner={release:'20261012-meeting-planner',recruitment,meetingGoal,shouldPlan,blueprint,contextFrom,render};
 })();

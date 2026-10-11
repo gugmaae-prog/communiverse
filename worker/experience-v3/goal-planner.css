@@ -71,3 +71,5 @@ html[data-cv-social] .cvgp [hidden]{display:none!important}
 
 .cvgp-pending>form{display:none!important}
 .cvgp-pending-note{color:#596981;font-size:14px}
+/* Meeting goals lead with the plan; task assignment remains in its review flow. */
+@media(max-width:720px){.cvgp.is-meeting .cvgp-side{grid-row:auto}}
