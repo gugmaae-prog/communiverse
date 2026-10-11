@@ -54,3 +54,7 @@ Thumbs.db
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Reproducible retained knowledge build
+/worker/business-knowledge/dist/
+__pycache__/

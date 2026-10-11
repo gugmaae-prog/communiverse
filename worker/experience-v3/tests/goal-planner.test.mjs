@@ -4,7 +4,8 @@ import vm from 'node:vm';
 import {webcrypto} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 const source=await readFile(new URL('../goal-planner.js',import.meta.url),'utf8');
-const context={window:{},crypto:webcrypto};vm.runInNewContext(source,context);const planner=context.window.__cvGoalPlanner;
+const guides=JSON.parse(await readFile(new URL('../../design-system/operating-guides.json',import.meta.url),'utf8'));
+const context={window:{__cvOperatingGuides:guides},crypto:webcrypto};vm.runInNewContext(source,context);const planner=context.window.__cvGoalPlanner;
 test('Recruitment intent tolerates the submitted typos and distinguishes equipment',()=>{
  for(const p of ['I am looking for ambassadors','i am lookig for more ambasadors','We need 5 new ambassadors','Find an ambassador','Recruit ambassadors in Colombia'])assert.equal(planner.recruitment(p),true,p);
  for(const p of ['I need cameras for ambassadors','Plan an ambassador trip for Luna','Who are our ambassadors?','Find a camera for ambassadors'])assert.equal(planner.recruitment(p),false,p);
@@ -27,4 +28,15 @@ test('Informational questions do not become a working plan',()=>{
 test('Only explicit recruitment context is filled from the goal',()=>{
  const details=planner.contextFrom('We need 5 new ambassadors in Colombia starting 2026-11-01');assert.equal(details.count,'5');assert.equal(details.region,'Colombia');assert.equal(details.start,'2026-11-01');
  assert.equal(planner.contextFrom('We have 3 ambassadors and want more').count,'');assert.equal(planner.contextFrom('I am looking for ambassadors').start,'');
+});
+test('Sales, partnerships and business planning use their own workflow',()=>{
+ for(const [prompt,title,output] of [['Improve sales','Sales and customer follow-up','Qualified opportunity'],['Build partnerships','Partnership development','Partner shortlist'],['Plan our revenue model','Business and revenue planning','Business model']]){
+  const plan=planner.blueprint(prompt);assert.equal(plan.title,title);assert.equal(plan.steps.length,6);assert.ok(plan.steps.some(s=>s.output.includes(output)));assert.ok(plan.steps.every(s=>!s.owner&&!s.due));
+ }
+});
+test('Artist, community, equipment, travel and training goals receive operational steps',()=>{
+ for(const [prompt,id] of [['Find new artists','artist-discovery'],['Build community engagement','community-programmes'],['Plan camera equipment','equipment-procurement'],['Plan a trip','travel-planning'],['Prepare team training','team-onboarding']])assert.equal(planner.blueprint(prompt).title,guides.find(g=>g.id===id).title);
+});
+test('General workflow guidance never invents CEO approval',()=>{
+ const p=planner.blueprint('Build partnerships');assert.ok(p.steps.some(s=>s.approval));assert.ok(p.steps.filter(s=>s.approval).every(s=>s.approvalLabel==='Required approval before commitments.'));
 });

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import worker, {knowledge, domainsFor, isAction, documentScope, RELEASE} from './dist/worker.mjs';
+import {factualAnswer} from './dist/worker.mjs';
 const here = new URL('.',import.meta.url);
 function fixture(){
  const sql = new DatabaseSync(':memory:');
@@ -98,3 +99,14 @@ test('tomorrow and this-week date windows are applied',async()=>{const f=fixture
 test('domain classification and read/action separation',()=>{assert.ok(domainsFor('How many sales this month?').includes('sales'));assert.equal(isAction('Show what Haseeb needs to approve'),false);assert.equal(isAction('Create a task'),true);assert.equal(isAction('How do I create a task?'),false);});
 test('revenue model questions include business strategy rather than only sales records',()=>{for(const q of ['What are our five revenue streams?','Explain the revenue model','What is our value proposition?','What are the product pillars?'])assert.ok(domainsFor(q).includes('business'),q);});
 test('empty live results retain aggregate source provenance',async()=>{const f=fixture();f.sql.exec('DELETE FROM cv_artist_transactions');const k=await ask(f,'How many sales?','haseeb');assert.ok(k.sources.some(s=>s.collection==='cv_artist_transactions'&&s.id==='query-summary'));});
+test('Operating guidance covers all requested topics with explicit provenance',async()=>{
+ const f=fixture();for(const [q,id] of [['ambassadors','ambassador-recruitment'],['artists','artist-discovery'],['workshop','event-operations'],['content','content-production'],['sales','sales-pipeline'],['partnerships','partnership-development'],['business strategy','business-planning'],['communities','community-programmes'],['camera kit','equipment-procurement'],['travel trip','travel-planning'],['product experiment','product-experiments'],['team training','team-onboarding']]){
+  const k=await ask(f,q);assert.ok(k.guidance.some(g=>g.id===id),q);assert.ok(k.guidance.every(g=>g.status==='general-guidance'&&g.steps.length>=6));assert.ok(k.sources.some(s=>s.collection==='communiverse_operating_guides'));assert.match(factualAnswer(k),/not company policy or a live record/);
+ }
+});
+test('General guidance does not widen private document or live record access',async()=>{
+ const f=fixture(),k=await ask(f,'Plan partnerships and sales','member',{domains:['sales','business']});assert.ok(k.guidance.some(g=>g.id==='partnership-development'));assert.ok(!k.documents.some(d=>d.id==='lead-doc'));assert.ok(result(k,'sales').records.every(r=>r.artist_id==='a1'));
+});
+test('Guidance is absent for unrelated record lookups and still requires authentication',async()=>{
+ const f=fixture();assert.equal((await ask(f,'Show tasks')).guidance.length,0);const r=await worker.fetch(req({query:'Plan partnerships'},'unknown','knowledge/query'),f.env);assert.equal(r.status,401);
+});
