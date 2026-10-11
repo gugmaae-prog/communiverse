@@ -8,5 +8,6 @@ check('Independent filters keep several selections',document.querySelector('[ari
 const inputs=[...document.querySelectorAll('input[type=checkbox]')];inputs.forEach(i=>i.checked=true);check('Native independent selections stay round and multiple',inputs.every(i=>i.checked&&i.type==='checkbox'&&getComputedStyle(i).borderRadius==='50%'));
 check('Search has one shared border',parseFloat(getComputedStyle(document.querySelector('.cv4-search-inner')).borderTopWidth)>0&&getComputedStyle(document.querySelector('input[type=search]')).borderTopWidth==='0px');
 const ai=document.querySelector('.cv4-ai-button');check('AI keeps the same label size and target as other actions',getComputedStyle(ai).fontSize==='14px'&&ai.getBoundingClientRect().height>=43.9);
+document.querySelector('input[type=search]').focus();check('Keyboard focus stays visible on the search surface',getComputedStyle(document.querySelector('.cv4-search-inner')).outlineStyle==='solid'&&parseFloat(getComputedStyle(document.querySelector('.cv4-search-inner')).outlineWidth)>0);
 document.querySelector('#results').textContent=JSON.stringify({passed:checks.every(c=>c.pass),checks},null,2);}));
 </script></body></html>
