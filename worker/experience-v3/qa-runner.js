@@ -92,6 +92,18 @@ async function run(){try{
  add('Cosmos knows the recorded ambassadors',(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('Luna')&&(document.querySelector('.cv3-cosmos-knows')?.textContent||'').includes('discovers makers'));
  add('Progress shows the current stage',!!document.querySelector('.cv3-plan-stage.is-now')&&!!document.querySelector('.cv3-plan-meter'));
  add('Open items stay visible until the price is set',(document.querySelector('.cv3-plan-ready')?.textContent||'').includes('Unit cost'));
+ if(ask&&results){const initial=document.createElement('p');initial.id='cv-ws-status';initial.textContent='Loading your workspace…';ask.parentElement.append(initial);setTimeout(()=>{results.hidden=true;initial.textContent='';},120);ask.value='i am lookig for more ambasadors';ask.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));}
+ const recruiting=await wait(()=>document.querySelector('.cvgp-step'),4000);
+ add('Recruitment prompt opens seven goal-specific phases',!!recruiting&&document.querySelectorAll('.cvgp-step').length===7);
+ add('Recruitment does not reuse the travel calculator',!document.querySelector('.cv3-plan-calc')&&!document.querySelector('.cv3-plan-travelers'));
+ add('Recruitment stays visible after the native workspace finishes loading',results?.hidden===false);
+ add('Recruitment leaves target headcount unset',document.querySelector('.cvgp-side input[type=number]')?.value==='');
+ if(ask&&results){ask.value='I need a subscription';results.innerHTML='<section class="cv-ws-assistant"><p class="cv-assistant-answer">Review this support request.</p><form data-assistant-submit="support"><input name="amount"><button type="submit">Submit request</button></form></section>';}
+ await wait(()=>document.querySelector('.cv-ws-assistant')?.dataset.cv3Plan==='yes',3000);
+ add('Simple support requests keep their original form without a travel calculator',!!document.querySelector('[data-assistant-submit=support]')&&!document.querySelector('.cvgp')&&!document.querySelector('.cv3-plan-calc'));
+ if(ask&&results){ask.value='Who are our ambassadors?';results.innerHTML='<section class="cv-ws-assistant"><p class="cv-assistant-answer">These are the recorded ambassadors.</p></section>';}
+ await wait(()=>document.querySelector('.cv-ws-assistant')?.dataset.cv3Plan==='yes',3000);
+ add('Informational answers remain answers without a loading-plan notice',!document.querySelector('.cvgp')&&!document.querySelector('.cvgp-pending-note'));
  const width=document.documentElement.clientWidth,overflow=document.documentElement.scrollWidth-width;add('No horizontal overflow',overflow<=3,'overflow='+overflow+' width='+width);
 }catch(e){add('Unhandled runtime exception',false,String(e?.message||e))}
  const pre=document.createElement('pre');pre.id='cv3-qa-result';pre.dataset.success=String(tests.every(t=>t.pass));pre.textContent=JSON.stringify({passed:tests.filter(x=>x.pass).length,total:tests.length,tests});document.body.append(pre);
