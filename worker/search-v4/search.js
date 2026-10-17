@@ -75,12 +75,12 @@
   if(parent&&FEEDS.some(sel=>parent.matches(sel)))parent.classList.add('cv4-toolbar');
  }
  function applyCirclesBranding(){
-  const replace=value=>String(value).replace(/Espacios\\s+Plug/gi,'Circles').replace(/\\bPlug\\b/gi,'Circles');
+  const replace=value=>String(value).replace(/Espacios\s+Plug/gi,'Circles').replace(/\bPlug\b/gi,'Circles');
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   const nodes=[];let current;
   while((current=walker.nextNode())){
    if(current.parentElement?.closest('script,style,noscript,code,pre,textarea,input,select,option'))continue;
-   if(/\\bplug\\b/i.test(current.nodeValue||''))nodes.push(current);
+   if(/\bplug\b/i.test(current.nodeValue||''))nodes.push(current);
   }
   for(const node of nodes)node.nodeValue=replace(node.nodeValue||'');
   for(const el of document.querySelectorAll('[title],[aria-label],[alt],[placeholder],[content],a[href]')){
@@ -88,7 +88,7 @@
     const value=el.getAttribute(attr);if(value&&/plug/i.test(value))el.setAttribute(attr,replace(value));
    }
    const href=el.getAttribute('href');
-   if(href&&href.startsWith('/communiverse/plug'))el.setAttribute('href',href.replace(/^\\/communiverse\\/plug(?=\\/|$)/,'/communiverse/circles'));
+   if(href&&href.startsWith('/communiverse/plug'))el.setAttribute('href',href.replace(/^\/communiverse\/plug(?=\/|$)/,'/communiverse/circles'));
   }
  }
  function scan(){
