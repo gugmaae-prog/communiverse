@@ -2,7 +2,7 @@
 import previous from './home-plug-20261007-v4-entry.js';
 import STYLE from './shared-plug-ui-20261007.css';
 import SCRIPT from './shared-plug-ui-20261007.txt';
-export const RELEASE='20261007-shared-plug-ui-1';
+export const RELEASE='20261017-circles-rebrand-1';
 const ROOT='/communiverse',PREFIX=ROOT+'/_public/'+RELEASE;
 const pages=new Set([ROOT,ROOT+'/',...['about','how-it-works','makers','for-founders','for-brands','for-startups','contact','ambassadors','circles'].flatMap(p=>[ROOT+'/'+p,ROOT+'/'+p+'/'])]);
 const hosts=new Set(['espacios.me','www.espacios.me']);
