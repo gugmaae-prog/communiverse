@@ -35,7 +35,7 @@ The V8 gateway deployment is `19ee7690-006b-4d56-a88f-048c67aa88ec`, promoted on
 
 | Capability | Status |
 | --- | --- |
-| Circles display naming; labelled phone people rows; retained desktop constellation | Deployed in V8; legacy `/communiverse/plug/` links still work |
+| Circles display naming; labelled phone people rows; retained desktop constellation | V8 presentation is deployed; this branch adds canonical-route and legacy-redirect source changes pending review/deployment |
 | Paired request-field alignment, preview padding, plus/minus disclosures, denser sheets/sticky headers | Deployed presentation foundation; not universal mobile certification |
 | Shared account shortcuts, fifteen typed sheet fields, authorized Tools read/query and source cards | Tools V7 foundation deployed |
 | Canonical Work/task progress, management, conversations and media | Existing full-stack services retained; each workflow still needs its own acceptance tests |
@@ -105,7 +105,7 @@ The upper-right avatar is a shared shortcut menu, not a second module hierarchy:
 
 Build both menu and direct-link behavior from current capabilities. A hidden tab, name, role shown in a profile, URL parameter or AI output is never an access grant. Preserve native form state, Back/Forward and focus when reusing Profile. Photo changes use canonical upload/preview/save and refresh the real account image; role/permission fields are not self-editable.
 
-Circles is the new **display name** for the legacy directory. Keep existing person/filter/query URLs compatible. Community-circle records and the people directory are different entities; a vocabulary change must not merge them. Application-owned restored headers, accessible labels and navigation use Circles. Do not blindly rename user-authored notes, IDs, stored data or immutable historical assets.
+Circles is the canonical **display name and planned public route** for the legacy people directory. This migration introduces `/communiverse/circles/` and redirects `/communiverse/plug/` and its person routes to their Circles equivalents, while mapping canonical Circles requests to the existing Plug-owned upstream paths so existing profile data and handlers remain intact. Community-circle records and the people directory are different entities; a vocabulary change must not merge them. Do not rename user-authored notes, IDs, stored data or immutable historical assets. Root-level legacy `/plug/u/` profile routes and Cloudflare zone route mappings are owned outside this gateway and require a separate deployment step before the migration is complete.
 
 ## Data, identity and access boundaries
 
@@ -474,3 +474,8 @@ The broader marketplace, paid bookings, kit entitlements, applications and film-
 The existing `app/`, `components/`, `data/`, `public/`, audit files and source branches are preserved. Development: `npm install`, then `npm run dev` at `/communiverse/`. The old readme is preserved verbatim at [`docs/legacy/README-before-production-reconciliation.md`](docs/legacy/README-before-production-reconciliation.md); its deployment directions are historical and superseded by this notice.
 
 See [`PRODUCTION.md`](PRODUCTION.md) for the deployment boundary and outstanding source-recovery requirement.
+
+
+## Circles rename — 17 October 2026
+
+A source-level migration branch establishes `/communiverse/circles/` as the canonical directory route, redirects legacy `/communiverse/plug/` routes, updates shared navigation labels, and rewrites legacy branding in public HTML attributes and text. It deliberately preserves upstream data paths, profile identifiers, authentication, messages, and stored content. This is **not live until the reviewed source is deployed and the exact Cloudflare route mappings are updated**. The root-level `/plug/u/:id` profile service is outside the scoped Search V4 gateway and must be migrated with its owning Worker before declaring a complete product-wide rename.

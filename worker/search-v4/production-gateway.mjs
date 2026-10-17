@@ -1,7 +1,7 @@
-/* Communiverse unified Search V4 — production presentation Worker.
- * Deploy only to six approved public pages and three versioned assets.
- * Never shadow workspace, auth, booking API, marketplace API or knowledge routes.
- * Keep existing V3/booking/marketplace Workers authoritative for business logic.
+/* Communiverse Circles migration — scoped public presentation Worker.
+ * Circles is the canonical public name and route for the legacy Plug directory.
+ * Existing marketplace data, identity, auth, profile IDs and message handlers remain authoritative.
+ * This source change does not itself update Cloudflare zone route mappings or deploy a Worker.
  */
 import SEARCH_CSS from './search-css.txt';
 import SEARCH_JS from './search-js.txt';
@@ -10,9 +10,9 @@ const BASE='/communiverse/';
 const SCRIPT=BASE+'__cvsearch_v4.js';
 const STYLE=BASE+'__cvsearch_v4.css';
 const PLUG_SCRIPT=BASE+'__cvsearch_v4_plug_fix.js';
-const VERSION='20261010-search-v4';
+const VERSION='20261017-circles-rebrand-1';
 const PUBLIC_PAGES=new Set([
-  BASE, BASE+'artists/', BASE+'events/', BASE+'communities/', BASE+'plug/', BASE+'discover/'
+  BASE, BASE+'artists/', BASE+'events/', BASE+'communities/', BASE+'circles/', BASE+'discover/'
 ]);
 const ASSET_MAP={
  [SCRIPT]:[SEARCH_JS,'text/javascript; charset=utf-8'],
@@ -28,6 +28,18 @@ const asset=(request,entry)=>new Response(request.method==='HEAD'?null:entry[0],
 const unavailable=()=>Response.json({error:'Communiverse is temporarily unavailable.'},{
  status:503,headers:{'Cache-Control':'no-store'}
 });
+function upstreamPath(path){
+  return path.replace(/^\/communiverse\/circles(?=\/|$)/, '/communiverse/plug');
+}
+function isCirclesPath(path){
+  return path===BASE+'circles/' || /^\/communiverse\/circles\/(?:person|u)\/[^/]+\/?$/.test(path);
+}
+function replaceBrand(value){
+  return String(value).replace(/Espacios\s+Plug/gi,'Circles').replace(/\bPlug\b/gi,'Circles');
+}
+function rewriteInternalHref(value){
+  return value.replace(/^\/communiverse\/plug(?=\/|$)/, '/communiverse/circles');
+}
 function sourceFor(path,env){
   // Root /communiverse/ has the existing V3 inline-artwork enhancement.
   if(path===BASE||path===BASE+'workspace/'||
@@ -40,7 +52,9 @@ function sourceFor(path,env){
 }
 async function original(request,env){
   const url=new URL(request.url);
-  const runtime=sourceFor(url.pathname,env);
+  const path=upstreamPath(url.pathname);
+  const runtime=sourceFor(path,env);
+  url.pathname=path;
   if(!runtime)return unavailable();
   // Service-binding fetch bypasses zone routing and keeps the ORIGINAL
   // runtime/authorization for requests, including POST and uploads.
@@ -48,32 +62,47 @@ async function original(request,env){
   url.host='espacios.me';
   return runtime.fetch(new Request(url,request));
 }
+class BrandRewriter{
+  element(el){
+    for(const attr of ['title','aria-label','alt','placeholder','content']){
+      const value=el.getAttribute(attr);
+      if(value&&/plug/i.test(value))el.setAttribute(attr,replaceBrand(value));
+    }
+    const href=el.getAttribute('href');
+    if(href&&href.startsWith('/communiverse/plug'))el.setAttribute('href',rewriteInternalHref(href));
+  }
+}
 class Head{
   element(head){
     head.append('<link rel="stylesheet" href="'+STYLE+'" data-cv-search-release="'+VERSION+'">',{html:true});
   }
 }
 class Body{
-  constructor(plug){this.plug=plug}
+  constructor(circles){this.circles=circles}
   element(body){
     let scripts='<script defer src="'+SCRIPT+'"></script>';
-    if(this.plug)scripts+='<script defer src="'+PLUG_SCRIPT+'"></script>';
+    if(this.circles)scripts+='<script defer src="'+PLUG_SCRIPT+'"></script>';
     body.append(scripts,{html:true});
   }
 }
 export default{
  async fetch(request,env){
   const url=new URL(request.url),path=url.pathname;
+  if(/^\/communiverse\/plug(?:\/|$)/.test(path)&&['GET','HEAD'].includes(request.method)){
+    url.pathname=path.replace(/^\/communiverse\/plug(?=\/|$)/,'/communiverse/circles');
+    if(url.pathname==='/communiverse/circles')url.pathname+='/';
+    return new Response(null,{status:308,headers:{Location:url.toString(),'Cache-Control':'public, max-age=300','X-Communiverse-Canonical':'Circles'}});
+  }
   if(Object.hasOwn(ASSET_MAP,path)&&['GET','HEAD'].includes(request.method))
     return asset(request,ASSET_MAP[path]);
   if(path===BASE+'__cvsearch_v4_health'&&request.method==='GET')
-    return Response.json({ok:true,release:VERSION,scope:'six public pages',mode:'production'},{
+    return Response.json({ok:true,release:VERSION,scope:'public pages and Circles profiles',mode:'production'},{
       headers:{'Cache-Control':'no-store'}
     });
   const response=await original(request,env);
   // Even if a route pattern matches a subpage/API with query parameters,
   // its existing response is returned unmodified.
-  if(request.method!=='GET'||!PUBLIC_PAGES.has(path)||!response.ok||
+  if(request.method!=='GET'||(!PUBLIC_PAGES.has(path)&&!isCirclesPath(path))||!response.ok||
      !String(response.headers.get('Content-Type')||'').toLowerCase().includes('text/html'))
     return response;
   const headers=new Headers(response.headers);
@@ -84,7 +113,7 @@ export default{
       (rule,options)=>options.includes("'self'")?rule:"style-src 'self' "+options));
   headers.set('X-Communiverse-Search',VERSION);
   return new HTMLRewriter()
-    .on('head',new Head()).on('body',new Body(path===BASE+'plug/'))
+    .on('*',new BrandRewriter()).on('head',new Head()).on('body',new Body(isCirclesPath(path)))
     .transform(new Response(response.body,{
       status:response.status,statusText:response.statusText,headers
     }));
