@@ -4,9 +4,10 @@ import STYLE from './shared-plug-ui-20261007.css';
 import SCRIPT from './shared-plug-ui-20261007.txt';
 export const RELEASE='20261007-shared-plug-ui-1';
 const ROOT='/communiverse',PREFIX=ROOT+'/_public/'+RELEASE;
-const pages=new Set([ROOT,ROOT+'/',...['about','how-it-works','makers','for-founders','for-brands','for-startups','contact','ambassadors','plug'].flatMap(p=>[ROOT+'/'+p,ROOT+'/'+p+'/'])]);
+const pages=new Set([ROOT,ROOT+'/',...['about','how-it-works','makers','for-founders','for-brands','for-startups','contact','ambassadors','circles'].flatMap(p=>[ROOT+'/'+p,ROOT+'/'+p+'/'])]);
 const hosts=new Set(['espacios.me','www.espacios.me']);
 export default {async fetch(request,env,ctx){const u=new URL(request.url);if(!hosts.has(u.hostname))return previous.fetch(request,env,ctx);
+const legacy=u.pathname.match(/^\\/communiverse\\/plug(?=\\/|$)/);if(legacy&&['GET','HEAD'].includes(request.method)){u.pathname=u.pathname.replace(/^\\/communiverse\\/plug(?=\\/|$)/,'/communiverse/circles');if(u.pathname==='/communiverse/circles')u.pathname+='/';return new Response(null,{status:308,headers:{Location:u.toString(),'Cache-Control':'public, max-age=300','X-Communiverse-Canonical':'Circles'}});}
 const asset=u.pathname===PREFIX+'.css'?['text/css; charset=utf-8',STYLE]:u.pathname===PREFIX+'.js'?['application/javascript; charset=utf-8',SCRIPT]:null;
 if(asset){const h={'Content-Type':asset[0],'Cache-Control':'public, max-age=31536000, immutable','X-Communiverse-Release':RELEASE,'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Frame-Options':'SAMEORIGIN','Permissions-Policy':'camera=(), microphone=(), geolocation=()'};if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers:{...h,'Cache-Control':'no-store',Allow:'GET, HEAD'}});return new Response(request.method==='HEAD'?null:asset[1],{headers:h});}
 const page=pages.has(u.pathname)||/^\/communiverse\/plug\/(?:person|u)\/[^/]+\/?$/.test(u.pathname);
