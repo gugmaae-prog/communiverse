@@ -78,10 +78,10 @@ class Head{
   }
 }
 class Body{
-  constructor(plug){this.plug=plug}
+  constructor(circles){this.circles=circles}
   element(body){
     let scripts='<script defer src="'+SCRIPT+'"></script>';
-    if(this.plug)scripts+='<script defer src="'+PLUG_SCRIPT+'"></script>';
+    if(this.circles)scripts+='<script defer src="'+PLUG_SCRIPT+'"></script>';
     body.append(scripts,{html:true});
   }
 }
@@ -96,7 +96,7 @@ export default{
   if(Object.hasOwn(ASSET_MAP,path)&&['GET','HEAD'].includes(request.method))
     return asset(request,ASSET_MAP[path]);
   if(path===BASE+'__cvsearch_v4_health'&&request.method==='GET')
-    return Response.json({ok:true,release:VERSION,scope:'six public pages',mode:'production'},{
+    return Response.json({ok:true,release:VERSION,scope:'public pages and Circles profiles',mode:'production'},{
       headers:{'Cache-Control':'no-store'}
     });
   const response=await original(request,env);
