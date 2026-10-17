@@ -1,5 +1,5 @@
 /* Shared presentation only. All gallery, directory and form handlers remain owned by production. */
-(()=>{'use strict';const RELEASE='20261007-shared-plug-ui-1';if(window.__cvSharedUIRelease===RELEASE)return;window.__cvSharedUIRelease=RELEASE;
+(()=>{'use strict';const RELEASE='20261017-circles-rebrand-1';if(window.__cvSharedUIRelease===RELEASE)return;window.__cvSharedUIRelease=RELEASE;
 const primary=[['How it works','/communiverse/how-it-works/'],['Makers','/communiverse/makers/'],['Circles','/communiverse/circles/'],['Experiences','/communiverse/#experiences'],['Brands','/communiverse/for-brands/'],['Ambassadors','/communiverse/ambassadors/']];
 const extra=[['About','/communiverse/about/'],['Founders','/communiverse/for-founders/'],['Startups','/communiverse/for-startups/']];
 let host,menu,toggle,more,observer,lastPath='',frame=0;const html=document.documentElement;
