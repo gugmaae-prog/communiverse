@@ -71,9 +71,6 @@ class BrandRewriter{
     const href=el.getAttribute('href');
     if(href&&href.startsWith('/communiverse/plug'))el.setAttribute('href',rewriteInternalHref(href));
   }
-  text(text){
-    if(text.text&&/plug/i.test(text.text))text.replace(replaceBrand(text.text));
-  }
 }
 class Head{
   element(head){
