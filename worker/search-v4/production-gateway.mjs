@@ -29,16 +29,16 @@ const unavailable=()=>Response.json({error:'Communiverse is temporarily unavaila
  status:503,headers:{'Cache-Control':'no-store'}
 });
 function upstreamPath(path){
-  return path.replace(/^\\/communiverse\\/circles(?=\\/|$)/, '/communiverse/plug');
+  return path.replace(/^\/communiverse\/circles(?=\/|$)/, '/communiverse/plug');
 }
 function isCirclesPath(path){
-  return path===BASE+'circles/' || /^\\/communiverse\\/circles\\/(?:person|u)\\/[^/]+\\/?$/.test(path);
+  return path===BASE+'circles/' || /^\/communiverse\/circles\/(?:person|u)\/[^/]+\/?$/.test(path);
 }
 function replaceBrand(value){
-  return String(value).replace(/Espacios\\s+Plug/gi,'Circles').replace(/\\bPlug\\b/gi,'Circles');
+  return String(value).replace(/Espacios\s+Plug/gi,'Circles').replace(/\bPlug\b/gi,'Circles');
 }
 function rewriteInternalHref(value){
-  return value.replace(/^\\/communiverse\\/plug(?=\\/|$)/, '/communiverse/circles');
+  return value.replace(/^\/communiverse\/plug(?=\/|$)/, '/communiverse/circles');
 }
 function sourceFor(path,env){
   // Root /communiverse/ has the existing V3 inline-artwork enhancement.
@@ -91,8 +91,8 @@ class Body{
 export default{
  async fetch(request,env){
   const url=new URL(request.url),path=url.pathname;
-  if(/^\\/communiverse\\/plug(?:\\/|$)/.test(path)&&['GET','HEAD'].includes(request.method)){
-    url.pathname=path.replace(/^\\/communiverse\\/plug(?=\\/|$)/,'/communiverse/circles');
+  if(/^\/communiverse\/plug(?:\/|$)/.test(path)&&['GET','HEAD'].includes(request.method)){
+    url.pathname=path.replace(/^\/communiverse\/plug(?=\/|$)/,'/communiverse/circles');
     if(url.pathname==='/communiverse/circles')url.pathname+='/';
     return new Response(null,{status:308,headers:{Location:url.toString(),'Cache-Control':'public, max-age=300','X-Communiverse-Canonical':'Circles'}});
   }
