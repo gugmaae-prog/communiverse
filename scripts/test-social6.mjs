@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import{resolve}from'node:path';import{pathToFileURL}from'node:url';
+const dir=resolve(process.argv[2]||'../social6-candidate'),{cleanDisplay}=await import(pathToFileURL(dir+'/social-presentation.js'));
+assert.equal(cleanDisplay('Explore ↗ ▶'), 'Explore  ');
+assert.equal(cleanDisplay('Studio 👨‍👩‍👧‍👦 🧑🏽‍🎨'), 'Studio  ');
+assert.equal(cleanDisplay('Dubai 🇦🇪 · Manila 🇵🇭'), 'Dubai  · Manila ');
+assert.equal(cleanDisplay('Step 1️⃣ • 12 items'), 'Step  • 12 items');
+assert.equal(cleanDisplay('© 2026 · Studio® · Mark™'), '© 2026 · Studio® · Mark™');
+assert.equal(cleanDisplay('©️ ®️ ™️'), '  ');
+assert.equal(cleanDisplay('₹ 120 · AED 50 · ₱ 250 · S/ 40'), '₹ 120 · AED 50 · ₱ 250 · S/ 40');
+assert.equal(cleanDisplay('Lucía · 北京 · الفنان · لاہور'), 'Lucía · 北京 · الفنان · لاہور');
+assert.equal(cleanDisplay('Following ✓ · View ⤴️ · Make 🤙🏻'), 'Following  · View  · Make ');
+assert.equal(cleanDisplay('می\u200Dں'), 'می\u200Dں');
+console.log(JSON.stringify({pass:true,checks:['arrows and play glyphs','ZWJ families and skin tones','country flags','keycap sequences','copyright and trademark preservation','emoji copyright variants','currency preservation','localized artist names','decorative status glyphs','non-emoji joiner preservation']}));

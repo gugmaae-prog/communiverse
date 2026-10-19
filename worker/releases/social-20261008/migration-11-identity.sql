@@ -1,0 +1,5 @@
+-- Shared public identity and private contact settings. Existing authentication stays intact.
+CREATE TABLE IF NOT EXISTS cv_identity_profiles(identity_id TEXT PRIMARY KEY,profile_slug TEXT NOT NULL UNIQUE,name TEXT NOT NULL,photo_url TEXT NOT NULL DEFAULT '',photo_key TEXT NOT NULL DEFAULT '',photo_type TEXT NOT NULL DEFAULT '',photo_version INTEGER NOT NULL DEFAULT 1,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS cv_identity_contacts(identity_id TEXT PRIMARY KEY,email TEXT NOT NULL DEFAULT '',phone TEXT NOT NULL DEFAULT '',email_verified INTEGER NOT NULL DEFAULT 0,pending_email TEXT NOT NULL DEFAULT '',confirmation_hash TEXT,confirmation_expires_at INTEGER,updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE UNIQUE INDEX IF NOT EXISTS cv_identity_contacts_confirmation ON cv_identity_contacts(confirmation_hash) WHERE confirmation_hash IS NOT NULL;
+CREATE TABLE IF NOT EXISTS cv_identity_photo_history(id TEXT PRIMARY KEY,identity_id TEXT NOT NULL,object_key TEXT NOT NULL,content_type TEXT NOT NULL,bytes INTEGER NOT NULL,sha256 TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);

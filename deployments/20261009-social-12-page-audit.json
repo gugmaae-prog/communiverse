@@ -1,0 +1,1686 @@
+{
+  "version": "4a659bea-6915-4093-a7e7-8ab9c85ccfb4",
+  "pass": true,
+  "mode": "live",
+  "checkedAt": "2026-10-09T01:11:52.946Z",
+  "pagesChecked": 186,
+  "videosChecked": 33,
+  "issues": [],
+  "styleGlyphPages": [],
+  "pages": [
+    {
+      "path": "/communiverse/discover/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 3,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/workspace/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/events/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/communities/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/profile/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/sign-in/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/join/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/galleries/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/about/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/how-it-works/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/makers/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/for-founders/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/for-brands/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/ambassadors/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/for-startups/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/contact/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/works/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 4,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/people/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/events/host/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/apply/belong/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/apply/artist/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/apply/client/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/apply/ambassador/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/lucia-quintero/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/amina-rahmani/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/matteo-bellini/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 2,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/elias-korhonen/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/leila-al-mansouri/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/priya-mehta/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/awa-diop/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/sora-nakamura/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/nia-okafor/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artists/diego-salazar/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.exchangerate-api.com",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/sign-in/?next=%2Fcommuniverse%2Fworkspace%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-9b3fb8f11b072f23",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-5d69aac8c796e233",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-nia-okafor",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-matteo-bellini",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-22600b3e22c94a70",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-sora-nakamura",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a331f603688e945e",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-c0d0562b72221e43",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/profile/?intent=collector",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-e4473519cf156091",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-8b4853368f73a55e",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-awa-diop",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-d9a43113c364f476",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-0638109c4823a2d1",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-da615b1a785a4045",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a66013417719f244",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fx.com%2Fjenkatemw",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fxdc.org%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-6a6d1c885cd519d8",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-99ded0c4549724ba",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-e7c22595e649e4cf",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=ambassadors",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f8a9159e977ddfaf",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-58e865303f1b0db9",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-62dea426e9bc6785",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-987bca4ba7d24b14",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-03d1fee208fece28",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-8cea5cd6b044b7ba",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-bc14d83551f43690",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-95c0ea6c8dbfd112",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-e6ed61c815cbb07e",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-76b65307ced003c7",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-29d49ab616035d4b",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-cdabc9c6a70fd56b",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-5844eeb74e4f204f",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-cb89afb1b92d99fc",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-701cda7fbe67e567",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-4f920b8bee89c92d",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-1d7c6966f88c0c75",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-44e3cfcbf681a567",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-1f4a39247e3bbc83",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-3f0504e22c47a766",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-fef647b9cf8cafd0",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-69beb5fd0d8c5c00",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-38efbc64e33221e4",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-b4f9e9b2ca0b76c9",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-2e3bcdf85e861d86",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-18c762cb4ae7fd22",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-cdbd1c010d7515c0",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-be4119c3699c33a1",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f3341affb55cadec",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-2ddebd1c379d2597",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-ab41016a14b061c5",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-4aa2187d507f01e4",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-2adbf17b43c391fd",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a16b2b74f8adf447",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-b0a35f368949e818",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-fcc5a4328bd4221d",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-ac9faaffcd537d8c",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-dce8c6cb208a067f",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-3b690d15c5f871b4",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-79cf7c2bd9b9240d",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-bdb083035aa67931",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-952916acc0216513",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-34435470667abd06",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-1e7a93dcb4a0ceca",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-daa3ef0d6ecf6d7b",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f7c172fd15bf3191",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-bd7ef735800e2744",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-25c71ca457c49d0d",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a5111ac0d80804f1",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a8c53fc25f599cf8",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-0482f1f0a4ab97c5",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-7a30c68247a4de87",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-fec5b37e33160eab",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a46752f245b151de",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-0a17093df5f67347",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-c51dde55b671179c",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-dd74b87a8eee8fad",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-202a663f0f89d95b",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-08900a6678fe9558",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-91724d5dc4592387",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-7684744d10a76ce5",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-80755c163e766a5c",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-961249114898bf7f",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-4673305f370e42a0",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f348e469ce185753",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-3ce9477b975e3816",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a05eb22d8a2da951",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-afa0f477ba02696e",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-bcdb48880c2f7811",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-696131df6c2c9b32",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f7b6b854d6c7d94c",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-7f9a5c041819ca74",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-2e98a51a3c148771",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-820dc36bfd3ec0e4",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-6fd2457f9d27150c",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-876712317126020e",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-b751c0ab05c144a4",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-f8c8b3debf1d67c0",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a15c82adeba2cc75",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-172725f88540f763",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-0051171330c5ba41",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-e6c3750513041350",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-a2ad1ffeefca4865",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-cf3da09bf1fce06b",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-bb89c5785a4001cb",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-5cc39d40bc521d56",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=artist-d5e673106e111846",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/haseeb-wasim/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/alison-gonzalez/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/abel-thomas/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/louis-mitchell/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/elferah-saidil/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/keiffer/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/hassan-b-mirza/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/luna/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/turbooz/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/abdallah-mahmoudd/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 1,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/viktoriya-melny/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/tariq-al-salman/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/person/shakiba-binchi/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?person=member-c661455e-df47-4c55-9519-cc6add995130",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?person=member-3af385ce-6efa-4879-98d9-70568d8bb7fb",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=cv-luna",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=cv-turbooz",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/?id=cv-abdallah-mahmoudd",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?person=member-a2171769-119f-424f-9721-200402b8eb93",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/stories/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 12,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/ambassadors/metrics/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/join/?intent=artist",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-lucia-quintero",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-amina-rahmani",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-matteo-bellini",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-leila-al-mansouri",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-elias-korhonen",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-priya-mehta",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-awa-diop",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-sora-nakamura",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-nia-okafor",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fabdallha_mahmoudd%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/artist/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Ft_alsalman%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fcultureme.co%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fcommuni8%2F",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/ambassadors/report/",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    },
+    {
+      "path": "/communiverse/plug/?filter=artists&person=artist-diego-salazar",
+      "status": 200,
+      "release": "20261009-social-12",
+      "emojiFree": true,
+      "videos": 0,
+      "controls": 0,
+      "autoplayLoopInline": true
+    }
+  ]
+}

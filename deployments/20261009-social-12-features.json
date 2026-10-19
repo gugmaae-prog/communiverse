@@ -1,0 +1,35 @@
+{
+  "pass": true,
+  "version": "4a659bea-6915-4093-a7e7-8ab9c85ccfb4",
+  "mode": "live",
+  "checkedAt": "2026-10-09T01:10:48.713Z",
+  "sharedIdentityPhotos": 13,
+  "plugPhotosSynced": true,
+  "staffHeaderAcrossPublicPages": true,
+  "staffProfileAndJoinReuseWorkspace": true,
+  "privateGuestBoundaries": true,
+  "actualGroqAssisted": true,
+  "staff": [
+    {
+      "name": "Keiffer",
+      "sharedPhoto": true,
+      "artistScope": 111,
+      "finance": true
+    },
+    {
+      "name": "Luna",
+      "sharedPhoto": true,
+      "artistScope": 35,
+      "finance": true
+    },
+    {
+      "name": "Abel",
+      "sharedPhoto": true,
+      "artistScope": 113,
+      "finance": false
+    }
+  ],
+  "realProductionEmailsSent": 0,
+  "productionProfilesCreated": 0,
+  "productionWorkRecordsCreated": 0
+}

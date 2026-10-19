@@ -1,0 +1,11 @@
+# Artist galleries and compact animated Plug
+
+Each of the ten artisan detail trays now has a standalone named gallery link outside the detail cards. Artist pages share the Communiverse marketplace header, pale palette, typography and rounded cards. Films have curved edges and separate descriptions. The gallery includes craft references, workshop and group session request actions, and a concept collection with a store enquiry action. Sample-profile and media-reference attribution remain.
+
+Workshop, group-session and store actions open the retained contact form with known artist and intent prefilled. Optional dates and estimated group size are copied into the existing message payload with native input events, preserving React state and the original form backend. Dates, availability, price and delivery require confirmation; this does not add automatic bookings, checkout, inventory or payment. Old commission links redirect to the respective gallery. No database records or schema changes are introduced by deployment.
+
+Below 760px the selected orb and its nearby peers animate again over 640ms. The detail tray stays fixed; card height does not change portrait offsets or scene height. At 390x844, video is 112x199 and text cards are 224x204, with horizontal browsing, independent scrolling and a persistent gallery action outside the cards. Reduced motion, close, keyboard navigation and playback controls remain. Hidden-stage width is guarded during responsive layout changes.
+
+This scoped wrapper retains the exact ten modules from the current production marketplace version and adds four. Old immutable styles, scripts, the original marketplace, legacy service/D1 bindings, application routes and original glass video remain unchanged. Assemble using scripts/prepare-plug-gallery.mjs against a freshly verified current capture. Do not deploy the old Next source against production.
+
+The final gallery revision embeds its stylesheet directly in artist page HTML because their retained CSP permits inline styles and blocks external stylesheets. The policy is unchanged. Presentation asset URLs and all CSS/JS bytes remain gallery-1; the final entrypoint/release is gallery-1a. Against gallery-1, thirteen of fourteen modules remain identical; against the prior refine baseline, all ten modules remain identical.

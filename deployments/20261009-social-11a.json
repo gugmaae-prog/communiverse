@@ -1,0 +1,2986 @@
+{
+  "release": "20261009-social-11a",
+  "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+  "sourceCommit": "1ea4c71d2207b1ab6f1f1addecbdace6d6b9543f",
+  "worker": "communiverse-marketplace",
+  "deploymentId": "cd288559-0e6c-4f21-bc7c-8cee006a43b9",
+  "traffic": 100,
+  "rollbackVersion": "cff0f8c0-61e7-4438-ae1f-811597abbf6d",
+  "originalPreWorkspaceVersion": "9294ed0c-40bd-4336-8aa8-d31879606192",
+  "compatibilityDate": "2026-09-27",
+  "modules": [
+    {
+      "name": "glass-shaping.mp4",
+      "content_type": "application/octet-stream",
+      "sha256": "06885145008d24f0fb2e95517ec9a69cba7e19cc50ae0c920241f65285b0320c",
+      "bytes": 1838802
+    },
+    {
+      "name": "market-data.js",
+      "content_type": "application/javascript+module",
+      "sha256": "8c89dc441b734412a3781bca4faf147ef706bddebfdf3e8a05b68837ebee2f06",
+      "bytes": 6390
+    },
+    {
+      "name": "market-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "4cf8884bcf023d6aab9499965f25a72e63157fa47e491ec6be07601637cb516e",
+      "bytes": 11038
+    },
+    {
+      "name": "market-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "edcd55a82eccf8a9ee119475a39d16815339b13cad1c11cabfaa3fa4c3612085",
+      "bytes": 48318
+    },
+    {
+      "name": "market-image-basket.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "ff01f6a0ff531becc4e3387d5c79643d16ad1612a65650e931bb572c39c09487",
+      "bytes": 244332
+    },
+    {
+      "name": "market-image-ceramic.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "18cd40f88d6aec37c37713ec5bd36f104e061cab3fe4183f31cb38b6478cb903",
+      "bytes": 175123
+    },
+    {
+      "name": "market-image-cups.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "9219c5649dfb7887c091b6388cbb0e0d8bc90f54dd4b9ee71594ca557d65415e",
+      "bytes": 203390
+    },
+    {
+      "name": "market-image-glass.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "9d8c7bea4e564caa495a8c6aeabdf3d39face7c2e7fe800c164a0c2097518a16",
+      "bytes": 250618
+    },
+    {
+      "name": "market-image-metal.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "0dc09b6b1fc43c68d2b7e4663bb9034214d90837579521a51d704233713dc247",
+      "bytes": 157194
+    },
+    {
+      "name": "market-image-paper-set.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "b8f64b7314632c6458264ec21da93a9dca20455fe40d0c0646f2468344b885d8",
+      "bytes": 276453
+    },
+    {
+      "name": "market-image-paper.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "bfddc7116686a9c7dbbd7a9898e6d01a09f7134452c2d1aa7afd84ebbaf7036f",
+      "bytes": 257250
+    },
+    {
+      "name": "market-image-print.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "8bb5ba3458321db0bf166b237ce0fe16a1f528f1ae4bb2d6687616531a793b2c",
+      "bytes": 328966
+    },
+    {
+      "name": "market-image-process-baskets.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "9239a0db05805ea155ee5b18ce1e694ae9492b1b00835eacdab334921b511357",
+      "bytes": 257014
+    },
+    {
+      "name": "market-image-process-ceramics.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "be8bda464658992f8a5bf6aee261598c80550bc49db860b3e2fc970cbe4a72df",
+      "bytes": 237551
+    },
+    {
+      "name": "market-image-process-glass.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "88dc28de0c2984c7924dfff185e67003ca8d757c7af9ba7a75b902fc5badb844",
+      "bytes": 224824
+    },
+    {
+      "name": "market-image-process-metal.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "8ba99caf3064b614703865ad9f929e80043e4ec49786eef7ac61ec37357bc578",
+      "bytes": 214456
+    },
+    {
+      "name": "market-image-process-paper.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "e66231bd947dd874b2d6bcc3bdf118ecb0c532947e6f99133ace1674b79de7b3",
+      "bytes": 216651
+    },
+    {
+      "name": "market-image-process-printing.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "0e876ce755d483a48d4b2776b9fbe537ff467f880ce4af146339a7a9607db20b",
+      "bytes": 294536
+    },
+    {
+      "name": "market-image-process-textiles.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "f79e5a9c2303ae6142e06eb0bfbadc00ab1b35edb315dde84b4d506411d5cd9c",
+      "bytes": 247153
+    },
+    {
+      "name": "market-image-process-wire.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "8822cd2b67b3ecf6aa0665c8bc95e3ff06bc9d2940ca0b79d27928393ff6d1e6",
+      "bytes": 228218
+    },
+    {
+      "name": "market-image-process-wood.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "c326f71f1c7ce6c5282c58b8d0365cc783643d1359e75c0b925b2c8007991be1",
+      "bytes": 242925
+    },
+    {
+      "name": "market-image-runner.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "e4502cf0eb01fe621c469e40c4ea820052dc7913b6363b22545db4d13e7d4f04",
+      "bytes": 296554
+    },
+    {
+      "name": "market-image-silver.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "eaee10b3c6cf8a484d6a77eb04d9e8cc461dbfa19c0689ba34579d357f88d16e",
+      "bytes": 160493
+    },
+    {
+      "name": "market-image-spoons.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "14d81afee292c3fdb5aa03e574921738b778bd374e0b90e255a0559bddc3a544",
+      "bytes": 269366
+    },
+    {
+      "name": "market-image-textile.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "dd22d0b11177e82b5b8b6d1f7717f6a3a30b4e313e8d57130bca6140915da8b7",
+      "bytes": 306928
+    },
+    {
+      "name": "market-image-tray.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "6b041838c5fad364d6bffb2c94c03eadd6f5ec748b40d66fdc0d673eb6d8fd89",
+      "bytes": 227398
+    },
+    {
+      "name": "market-image-tumblers.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "324395bbf65ca18a7f027b36842ebebb9cb2c2fc129eddf1c932af9e7ed3e0bb",
+      "bytes": 194263
+    },
+    {
+      "name": "market-image-wire.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "5975b05ebcf70482a2bcc8baa924117ba26b2924aedb17c08b8eef5f3ddf445b",
+      "bytes": 170100
+    },
+    {
+      "name": "market-image-wood.jpg",
+      "content_type": "application/octet-stream",
+      "sha256": "133b071cab65856fe6d500427e332ce8b7e1df8b2a389c68089afd25df3be26b",
+      "bytes": 180929
+    },
+    {
+      "name": "market-images.js",
+      "content_type": "application/javascript+module",
+      "sha256": "8366e6723bcb176817315cc9b9d521d4bf5b974775ccfbbfe4449fc03fafd64e",
+      "bytes": 3034
+    },
+    {
+      "name": "market-inline.css",
+      "content_type": "text/plain",
+      "sha256": "633e12f6a6904722cd95ff33ca67e701152458522e5ecf92f54aebd1780759a1",
+      "bytes": 12360
+    },
+    {
+      "name": "market-join-links.txt",
+      "content_type": "text/plain",
+      "sha256": "8cc114ad667b6fb74c078eaf626e52bb506359eca4406c7dd0600272466b37ec",
+      "bytes": 1459
+    },
+    {
+      "name": "market-members.js",
+      "content_type": "application/javascript+module",
+      "sha256": "f9b1f7bb8a19d995f5506a7712c884256e735de605cbff104c9d723c91f77306",
+      "bytes": 10901
+    },
+    {
+      "name": "market-orbits.css",
+      "content_type": "text/plain",
+      "sha256": "f42f60c5d221b826a1a9ac3aa09bd98dc4bf09378f5c2728b85358ad1998cf2e",
+      "bytes": 8849
+    },
+    {
+      "name": "market-rates.txt",
+      "content_type": "text/plain",
+      "sha256": "b667ee4a4692f255e918ffb89a4e2e6701719e8506fb3fb54c024a3dfe042e60",
+      "bytes": 412
+    },
+    {
+      "name": "market-views.js",
+      "content_type": "application/javascript+module",
+      "sha256": "52e60282ad48364f9e4758f4068e46665965c5fd837cae03b2b1a002c5e9aa5d",
+      "bytes": 13758
+    },
+    {
+      "name": "market.css",
+      "content_type": "text/plain",
+      "sha256": "4df653dd6c36f6b65264699bec3e6db46b8d1bdc50a7b1d368e1ff64d5c92465",
+      "bytes": 12070
+    },
+    {
+      "name": "market.txt",
+      "content_type": "text/plain",
+      "sha256": "e697747fdb199f738e45587b386734442da697363dc0743812dd97bd39ed24ab",
+      "bytes": 12539
+    },
+    {
+      "name": "plug-artists-data.js",
+      "content_type": "application/javascript+module",
+      "sha256": "e552a2e21d37ccd13ae678aae97d25c22a3887a81949075bce2297d38a83e0dc",
+      "bytes": 7203
+    },
+    {
+      "name": "plug-artists-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "4eec2fe730593abcfb48f341765cc6bcb70ca7cef077282c3202f93e8ef191f2",
+      "bytes": 5120
+    },
+    {
+      "name": "plug-artists-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "c10cb94d40cd87e9fb9d35d21cac85f5095d2ca13796a0fb7f7d1d8d13368438",
+      "bytes": 38762
+    },
+    {
+      "name": "plug-artists.css",
+      "content_type": "text/plain",
+      "sha256": "d5b26beff24e34ed4af906b329cc633fa5919af98a9854e00e6397f2e6d538da",
+      "bytes": 4270
+    },
+    {
+      "name": "plug-gallery-data.js",
+      "content_type": "application/javascript+module",
+      "sha256": "82f24c096ebfdf097eaa9380c846d3e587d00ca7f625d9c860e5f830a28a9f5c",
+      "bytes": 10789
+    },
+    {
+      "name": "plug-gallery-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "e48c3ed671f5aa6478fe9c8eda49e6e5adf8f394d0192abf07a830e81d8e5dbf",
+      "bytes": 4219
+    },
+    {
+      "name": "plug-gallery-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "613434cdcc2739f17b4d027c2e167864d49009ac6ad0e7b264d5711e70e32a4a",
+      "bytes": 45456
+    },
+    {
+      "name": "plug-gallery.css",
+      "content_type": "text/plain",
+      "sha256": "d3d8d63f94034246cb0b4a750f4fed6d674555813480b65e1b105a8db41ecb19",
+      "bytes": 13138
+    },
+    {
+      "name": "plug-orbits-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "04bfe84293f637875b78778157bbf69536b7b2089aa11e15ee9a26f9f87be820",
+      "bytes": 2018
+    },
+    {
+      "name": "plug-orbits-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "3b19f716a2d39bf565dbe83dd3f91d62bb7cb5d52297bda410b6a59a191a95ec",
+      "bytes": 48350
+    },
+    {
+      "name": "plug-orbits.css",
+      "content_type": "text/plain",
+      "sha256": "c88f7565ff2865fad5326da0555a8b2fbe3367a6ee9f5342d60a6b29cd4cf271",
+      "bytes": 4132
+    },
+    {
+      "name": "plug-refine-data.js",
+      "content_type": "application/javascript+module",
+      "sha256": "7e74b51000c68d5450b04b35c5d17588a877fd2694acebeb1e4faaf8f4786dbf",
+      "bytes": 8445
+    },
+    {
+      "name": "plug-refine-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "596eb690f5fcb6c0ccfb6d8e74319fbf186a771ffc9791b5195efa658053e63d",
+      "bytes": 3752
+    },
+    {
+      "name": "plug-refine-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "91586a5170da4a59dc80bc5e18af4df3fa11fb922e2714056065cc386b3726e3",
+      "bytes": 43718
+    },
+    {
+      "name": "plug-refine.css",
+      "content_type": "text/plain",
+      "sha256": "9a9f117646a4f995f92dfc60b082eccaa161b8dd7266ace3d8f1b42bcb59e78f",
+      "bytes": 8861
+    },
+    {
+      "name": "script.js",
+      "content_type": "application/javascript+module",
+      "sha256": "7ec5e900e8db82464542d2c10422c02f92386d985a0e62894a2db73158b60561",
+      "bytes": 3518241
+    },
+    {
+      "name": "simple-nav-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "04795e966b216a540ca8bef3ebd52ecb5b25a79c8d3aa471e14d62dee2899196",
+      "bytes": 2247
+    },
+    {
+      "name": "simple-nav.css",
+      "content_type": "text/plain",
+      "sha256": "a24a76b6e56762063b5c3fb502c59e6b2a1744e503fc0bc217bb3da4e969fd84",
+      "bytes": 1977
+    },
+    {
+      "name": "simple-nav.txt",
+      "content_type": "text/plain",
+      "sha256": "89af8dc6946f464393ff7773f39eef61c77563f0f80b11e89809399ab93f4a2f",
+      "bytes": 3619
+    },
+    {
+      "name": "social-10-booking.txt",
+      "content_type": "text/plain",
+      "sha256": "cc35f4944b37a1f1b7f292bfe53d734ddb42029f42299a427ea6817cd4c344d6",
+      "bytes": 11833
+    },
+    {
+      "name": "social-10-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "7c44c8f79e715f5bb3e106109afc5eb9cce895898aef2bec204ecc5cd522f530",
+      "bytes": 52004
+    },
+    {
+      "name": "social-10-workspace.txt",
+      "content_type": "text/plain",
+      "sha256": "edb5d696f13feaae5a00c169080e7fdaa07606af6fea16360fe55934263e0444",
+      "bytes": 29706
+    },
+    {
+      "name": "social-10.txt",
+      "content_type": "text/plain",
+      "sha256": "29be4e6c5a621882737dac040adc0553604090674d60626c3f56d0c8d36d38c8",
+      "bytes": 281046
+    },
+    {
+      "name": "social-10b-booking.txt",
+      "content_type": "text/plain",
+      "sha256": "e6110c058f54f4d43d29873276c35d5a0c7f50f5c98336842b6ee17322853237",
+      "bytes": 12502
+    },
+    {
+      "name": "social-10b-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "c9694a63441a9ae4b7a37b89d06b85c0afd22c7ef9fb868de275b3e861227684",
+      "bytes": 52005
+    },
+    {
+      "name": "social-10b-workspace.txt",
+      "content_type": "text/plain",
+      "sha256": "edb5d696f13feaae5a00c169080e7fdaa07606af6fea16360fe55934263e0444",
+      "bytes": 29706
+    },
+    {
+      "name": "social-10b.txt",
+      "content_type": "text/plain",
+      "sha256": "064921b9e2278c60ad51d5cf14ee5debdf8fe32975e4660bc40a370eac9d337d",
+      "bytes": 281047
+    },
+    {
+      "name": "social-1b-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "70b7fe7f9c136ba7a14662be6f0c1f131c029c6fa82f9fc3a7b1b2352ab87ee3",
+      "bytes": 48865
+    },
+    {
+      "name": "social-1b.txt",
+      "content_type": "text/plain",
+      "sha256": "ea9c6e5cd77db7e779e19b50f7c8b9c00e34ac1881ef4caab3c05f1c03783ce0",
+      "bytes": 25119
+    },
+    {
+      "name": "social-2-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "d86cd892146cde35be66916c3eb1834eb95f56adfc70a9b9fda9ad742e83b3a1",
+      "bytes": 48985
+    },
+    {
+      "name": "social-2.txt",
+      "content_type": "text/plain",
+      "sha256": "5d424c44cfe01e5296b9acea72013c966b50c2b7a194419336eb3118f4793f51",
+      "bytes": 31479
+    },
+    {
+      "name": "social-3-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "6425c1a81739340450d7668c17437cbd549285db6d1198440e6658c9c81f11b8",
+      "bytes": 49674
+    },
+    {
+      "name": "social-3.txt",
+      "content_type": "text/plain",
+      "sha256": "5d424c44cfe01e5296b9acea72013c966b50c2b7a194419336eb3118f4793f51",
+      "bytes": 31479
+    },
+    {
+      "name": "social-4-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "6425c1a81739340450d7668c17437cbd549285db6d1198440e6658c9c81f11b8",
+      "bytes": 49674
+    },
+    {
+      "name": "social-4.txt",
+      "content_type": "text/plain",
+      "sha256": "5d424c44cfe01e5296b9acea72013c966b50c2b7a194419336eb3118f4793f51",
+      "bytes": 31479
+    },
+    {
+      "name": "social-5-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "c028e29b8b7d2e4783d1df715cc8809f15c8e677f84f3981e7bf557c8e1e11d7",
+      "bytes": 49479
+    },
+    {
+      "name": "social-5.txt",
+      "content_type": "text/plain",
+      "sha256": "cdadcea8ca7b9a23d508273d9c1abb4ec22b82cfc7b754596faee1c08eeaf19b",
+      "bytes": 39267
+    },
+    {
+      "name": "social-5b-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "77d20597f75eb986a6e1a45d513c3b0b3b4a820d59153eb68276b2a46d43a133",
+      "bytes": 49712
+    },
+    {
+      "name": "social-5b.txt",
+      "content_type": "text/plain",
+      "sha256": "cdadcea8ca7b9a23d508273d9c1abb4ec22b82cfc7b754596faee1c08eeaf19b",
+      "bytes": 39267
+    },
+    {
+      "name": "social-6-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "97570996cbc5a6a441f2496ab8af0f3e128754faa3a47d7d89b0cb4ffbbe60d7",
+      "bytes": 50097
+    },
+    {
+      "name": "social-6.txt",
+      "content_type": "text/plain",
+      "sha256": "d97bc9191545e6a26416a7bdd0610a357697f67bde5f78a30b472a11d7dd6b7a",
+      "bytes": 49341
+    },
+    {
+      "name": "social-7-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "97570996cbc5a6a441f2496ab8af0f3e128754faa3a47d7d89b0cb4ffbbe60d7",
+      "bytes": 50097
+    },
+    {
+      "name": "social-7.txt",
+      "content_type": "text/plain",
+      "sha256": "d97bc9191545e6a26416a7bdd0610a357697f67bde5f78a30b472a11d7dd6b7a",
+      "bytes": 49341
+    },
+    {
+      "name": "social-8-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "97570996cbc5a6a441f2496ab8af0f3e128754faa3a47d7d89b0cb4ffbbe60d7",
+      "bytes": 50097
+    },
+    {
+      "name": "social-8.txt",
+      "content_type": "text/plain",
+      "sha256": "f50729134a0e746e06660b8853c8f7af3cee26c7a6c7fa3c141680078ab34d5c",
+      "bytes": 50099
+    },
+    {
+      "name": "social-9-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "97570996cbc5a6a441f2496ab8af0f3e128754faa3a47d7d89b0cb4ffbbe60d7",
+      "bytes": 50097
+    },
+    {
+      "name": "social-9.txt",
+      "content_type": "text/plain",
+      "sha256": "0453d67d68c62a5a96c4376c65e38b25a25a206df66bc30d6e5314e564ce40cb",
+      "bytes": 67712
+    },
+    {
+      "name": "social-ai.js",
+      "content_type": "application/javascript+module",
+      "sha256": "89941249863318f4b63b17b39e48957e96a3db2c0090de02de633a56c1f34066",
+      "bytes": 10763
+    },
+    {
+      "name": "social-artist-workspace.js",
+      "content_type": "application/javascript+module",
+      "sha256": "b36326c0cf5f4473e39b34adc38df01fe8304a4ea1e4f9ad8b1197fb8e5ac74d",
+      "bytes": 29696
+    },
+    {
+      "name": "social-auth.js",
+      "content_type": "application/javascript+module",
+      "sha256": "61b3e35bc104af458bffa1e8fada23f70a4047ce555fb9898b52d6371877608c",
+      "bytes": 8733
+    },
+    {
+      "name": "social-backend.js",
+      "content_type": "application/javascript+module",
+      "sha256": "090203f48cdd94b4b93fc907e70c3f9d59639412c699fa87d952c59c9399ef89",
+      "bytes": 33792
+    },
+    {
+      "name": "social-booking.js",
+      "content_type": "application/javascript+module",
+      "sha256": "861f3c155d0ad73e1bfcbdd9c2bd2e1ff979811cdcb9722cdcc53c2fd19cb3b0",
+      "bytes": 12993
+    },
+    {
+      "name": "social-booking.txt",
+      "content_type": "text/plain",
+      "sha256": "0d27904fd63177b838dc82ef22a77c47bd92e7879485e1a2365b78b56aef7d7f",
+      "bytes": 12727
+    },
+    {
+      "name": "social-circles.js",
+      "content_type": "application/javascript+module",
+      "sha256": "1721b244a2458bb3d91f236e170e76f37652e06608f5b21d86bc9673e0c8dbe2",
+      "bytes": 11219
+    },
+    {
+      "name": "social-collaboration.js",
+      "content_type": "application/javascript+module",
+      "sha256": "4ab90b6f1769be208ea301f6a5c94a7b4cfb5be7581ae44249b0647d0381ebd8",
+      "bytes": 33663
+    },
+    {
+      "name": "social-collected.txt",
+      "content_type": "text/plain",
+      "sha256": "f75fde7d3fff57431fb50674e4343b999534806451b56e85e7efd298107ec048",
+      "bytes": 245405
+    },
+    {
+      "name": "social-countries.txt",
+      "content_type": "text/plain",
+      "sha256": "caf378691afcf46705e01c839a27104b75ea9fb71a98946b27422f8314cf06dd",
+      "bytes": 27172
+    },
+    {
+      "name": "social-data.js",
+      "content_type": "application/javascript+module",
+      "sha256": "f81693107cf45e02253d0cfb7f322676c911b8c1287815858ff7e85bf4d2a6c8",
+      "bytes": 8724
+    },
+    {
+      "name": "social-entry.js",
+      "content_type": "application/javascript+module",
+      "sha256": "4dd8aa8cf64e9773338b73e0d34f2145146d1370d71269e1484743094511c75d",
+      "bytes": 32195
+    },
+    {
+      "name": "social-focus.txt",
+      "content_type": "text/plain",
+      "sha256": "c9694a63441a9ae4b7a37b89d06b85c0afd22c7ef9fb868de275b3e861227684",
+      "bytes": 52005
+    },
+    {
+      "name": "social-identity.js",
+      "content_type": "application/javascript+module",
+      "sha256": "c17c1579c132224da85c29f5dc1a675dd18620729f69c5446ae47db2ef9f57ab",
+      "bytes": 11143
+    },
+    {
+      "name": "social-identity.txt",
+      "content_type": "text/plain",
+      "sha256": "5e7ecec275e3b6e41f23ad8910af5faefeec43b37ed52fd5f9dc12ea172418bf",
+      "bytes": 4703
+    },
+    {
+      "name": "social-images.txt",
+      "content_type": "text/plain",
+      "sha256": "3ea01561443601358b23900aea2dbdb2ad78ebaa4d535a93aa1305e51c8fcb75",
+      "bytes": 155604
+    },
+    {
+      "name": "social-presentation.js",
+      "content_type": "application/javascript+module",
+      "sha256": "5e184d38c25caad13071026d219dcfbc0e33d1c41832f1b0ee959984e950aa2b",
+      "bytes": 478
+    },
+    {
+      "name": "social-publishing.js",
+      "content_type": "application/javascript+module",
+      "sha256": "2ee19ca9d50fbdda23f41466dc168810c6fe51181bffe68d6d2383a798321fb7",
+      "bytes": 6336
+    },
+    {
+      "name": "social-rates.txt",
+      "content_type": "text/plain",
+      "sha256": "ac1bda4248634ddbc86aa17910e3a57f20f9e699decda2a19097276eea5769f2",
+      "bytes": 3679
+    },
+    {
+      "name": "social-views.js",
+      "content_type": "application/javascript+module",
+      "sha256": "38d6d90d1d8cb9aa260bd1498ef83227e304a139e917755046d3cdd080d0e3bd",
+      "bytes": 27907
+    },
+    {
+      "name": "social-workspace-views.js",
+      "content_type": "application/javascript+module",
+      "sha256": "6c47e1015b034ca378c2bb5f9816d2056c5e4703ff2b8cf9cb474766cc59dd16",
+      "bytes": 3208
+    },
+    {
+      "name": "social-workspace.css",
+      "content_type": "text/plain",
+      "sha256": "a238d5a9cb4b7caaa9d4218cdd3da8b0ca4379040d35c4c06866f20d8082786d",
+      "bytes": 24657
+    },
+    {
+      "name": "social-workspace.js",
+      "content_type": "application/javascript+module",
+      "sha256": "7dd7560bdedaf8075565ff98ef67dbb57529d79db31899b4e5ff5532a213da1f",
+      "bytes": 30357
+    },
+    {
+      "name": "social-workspace.txt",
+      "content_type": "text/plain",
+      "sha256": "8e7f07408951841a5309a3188aa7bf8cc4924a5056a4f6dba5374f2121871750",
+      "bytes": 92872
+    },
+    {
+      "name": "social.css",
+      "content_type": "text/plain",
+      "sha256": "3b67347070b2304d7000863a3807d32174b02370acb0fe272c69672f76ea64dd",
+      "bytes": 55160
+    },
+    {
+      "name": "social.txt",
+      "content_type": "text/plain",
+      "sha256": "6f626d70e3d0d196fe6396f2f837f839d0f781de71214c487f7f2c67d31ad937",
+      "bytes": 283073
+    }
+  ],
+  "originalModulesRetained": 57,
+  "historicalImmutableURLsRetained": 28,
+  "currentImmutableURLsRetainedUnchanged": 5,
+  "bindings": [
+    {
+      "name": "COMMUNIVERSE_DB",
+      "type": "d1"
+    },
+    {
+      "name": "COMMUNIVERSE_MEDIA",
+      "type": "r2_bucket"
+    },
+    {
+      "name": "EMAIL",
+      "type": "send_email"
+    },
+    {
+      "name": "GROQ_API_KEY",
+      "type": "secret_text"
+    },
+    {
+      "name": "LEGACY",
+      "type": "service"
+    },
+    {
+      "name": "SUPABASE_PUBLIC_KEY",
+      "type": "plain_text"
+    },
+    {
+      "name": "SUPABASE_URL",
+      "type": "plain_text"
+    }
+  ],
+  "runtimeAI": {
+    "provider": "Groq",
+    "secretBinding": "GROQ_API_KEY",
+    "actualAssistedSearchVerified": true,
+    "privateSupabaseCopy": "encrypted Vault; no frontend grants",
+    "automaticActions": false
+  },
+  "tests": {
+    "upload-verification": {
+      "pass": true,
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "release": "20261009-social-11a",
+      "verifiedAt": "2026-10-08T23:44:21.739Z",
+      "modulesVerified": 111,
+      "originalModulesRetained": 57,
+      "assetsRetained": true,
+      "bindingsRetained": true,
+      "observabilityRetained": true,
+      "compatibilityDate": "2026-09-27"
+    },
+    "source-commit-verification": {
+      "pass": true,
+      "commit": "1ea4c71d2207b1ab6f1f1addecbdace6d6b9543f",
+      "filesVerified": 31,
+      "checkedAt": "2026-10-08T23:44:12.051Z"
+    },
+    "preserved-live": {
+      "pass": true,
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "mode": "live",
+      "checkedAt": "2026-10-08T23:48:43.220Z",
+      "release": "20261009-social-11a",
+      "checks": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/about/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/makers/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/for-founders/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/for-brands/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/for-startups/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/contact/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/ambassadors/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/events/host/",
+          "status": 200
+        },
+        {
+          "path": "/communiverse/plug/person/haseeb-wasim/",
+          "status": 200
+        }
+      ],
+      "oldImmutableScriptsVerified": 33,
+      "privateMemberProjection": true,
+      "currencyRetained": true,
+      "eventStateCounts": {
+        "upcoming": 35,
+        "now": 25,
+        "past": 32,
+        "places": 11
+      },
+      "artistsExcludeAmbassadors": true,
+      "routes": [
+        {
+          "pattern": "espacios.me/communiverse*",
+          "script": "communiverse-marketplace"
+        },
+        {
+          "pattern": "www.espacios.me/communiverse*",
+          "script": "communiverse-marketplace"
+        },
+        {
+          "pattern": "mail.espacios.me/communiverse/auth/callback*",
+          "script": "communiverse-marketplace"
+        }
+      ],
+      "wwwStatus": 200
+    },
+    "features-live": {
+      "pass": true,
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "mode": "live",
+      "checkedAt": "2026-10-08T23:48:48.196Z",
+      "calendarCounts": {
+        "upcoming": 34,
+        "today": 20,
+        "week": 24,
+        "next-week": 20,
+        "month": 33,
+        "past": 38,
+        "places": 11
+      },
+      "galleries": 27,
+      "galleryFilterVerified": true,
+      "artCircles": 22,
+      "interestDiscovery": true,
+      "invitationLanding": true,
+      "guestFollowBoundary": true,
+      "internalPages": true,
+      "initialImagesOnCloudflare": true,
+      "optimizedImagesChecked": 3,
+      "imageHashSamples": 3,
+      "googlePKCEAndPrivateCookie": true,
+      "googleProviderRedirect": true,
+      "firstPartyRelay": true,
+      "guestOnboardingBlocked": true,
+      "publicProfilesCreated": 0,
+      "mailHomeRetained": true
+    },
+    "extra-live": {
+      "pass": true,
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "mode": "live",
+      "checkedAt": "2026-10-08T23:48:31.704Z",
+      "sharedIdentityPhotos": 13,
+      "plugPhotosSynced": true,
+      "staffHeaderAcrossPublicPages": true,
+      "staffProfileAndJoinReuseWorkspace": true,
+      "privateGuestBoundaries": true,
+      "actualGroqAssisted": true,
+      "staff": [
+        {
+          "name": "Haseeb",
+          "sharedPhoto": true,
+          "artistScope": 113,
+          "finance": true
+        },
+        {
+          "name": "Luna",
+          "sharedPhoto": true,
+          "artistScope": 35,
+          "finance": true
+        },
+        {
+          "name": "Abel",
+          "sharedPhoto": true,
+          "artistScope": 113,
+          "finance": false
+        }
+      ],
+      "realProductionEmailsSent": 0,
+      "productionProfilesCreated": 0,
+      "productionWorkRecordsCreated": 0
+    },
+    "page-audit-live": {
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "pass": true,
+      "mode": "live",
+      "checkedAt": "2026-10-08T23:49:44.571Z",
+      "pagesChecked": 186,
+      "videosChecked": 33,
+      "issues": [],
+      "styleGlyphPages": [],
+      "pages": [
+        {
+          "path": "/communiverse/workspace/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/discover/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 3,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/events/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/communities/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/profile/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/sign-in/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/join/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/galleries/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/how-it-works/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/about/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/makers/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/for-founders/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/for-brands/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/for-startups/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/ambassadors/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/contact/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/people/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/works/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 4,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/events/host/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/apply/belong/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/apply/artist/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/apply/client/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/apply/ambassador/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/sign-in/?next=%2Fcommuniverse%2Fworkspace%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/amina-rahmani/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/lucia-quintero/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/matteo-bellini/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 2,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/elias-korhonen/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/leila-al-mansouri/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/priya-mehta/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/awa-diop/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/sora-nakamura/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/nia-okafor/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artists/diego-salazar/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.exchangerate-api.com",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-9b3fb8f11b072f23",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-nia-okafor",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-5d69aac8c796e233",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-matteo-bellini",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a331f603688e945e",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-22600b3e22c94a70",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-sora-nakamura",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-c0d0562b72221e43",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/profile/?intent=collector",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=ambassadors",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-e4473519cf156091",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-awa-diop",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-8b4853368f73a55e",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-d9a43113c364f476",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-0638109c4823a2d1",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-da615b1a785a4045",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a66013417719f244",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fx.com%2Fjenkatemw",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fxdc.org%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-6a6d1c885cd519d8",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-e7c22595e649e4cf",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-99ded0c4549724ba",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f8a9159e977ddfaf",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-62dea426e9bc6785",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-58e865303f1b0db9",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-987bca4ba7d24b14",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-03d1fee208fece28",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-8cea5cd6b044b7ba",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-95c0ea6c8dbfd112",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-e6ed61c815cbb07e",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-bc14d83551f43690",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-76b65307ced003c7",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-29d49ab616035d4b",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-cdabc9c6a70fd56b",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-5844eeb74e4f204f",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-cb89afb1b92d99fc",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-1d7c6966f88c0c75",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-701cda7fbe67e567",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-4f920b8bee89c92d",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-44e3cfcbf681a567",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-1f4a39247e3bbc83",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-3f0504e22c47a766",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-fef647b9cf8cafd0",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-69beb5fd0d8c5c00",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-38efbc64e33221e4",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-b4f9e9b2ca0b76c9",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-2e3bcdf85e861d86",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-18c762cb4ae7fd22",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-cdbd1c010d7515c0",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-be4119c3699c33a1",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f3341affb55cadec",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-2ddebd1c379d2597",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-ab41016a14b061c5",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-4aa2187d507f01e4",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-2adbf17b43c391fd",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a16b2b74f8adf447",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-b0a35f368949e818",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-ac9faaffcd537d8c",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-dce8c6cb208a067f",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-fcc5a4328bd4221d",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-79cf7c2bd9b9240d",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-3b690d15c5f871b4",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-bdb083035aa67931",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-952916acc0216513",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-34435470667abd06",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-daa3ef0d6ecf6d7b",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-1e7a93dcb4a0ceca",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f7c172fd15bf3191",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-bd7ef735800e2744",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a5111ac0d80804f1",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a8c53fc25f599cf8",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-25c71ca457c49d0d",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-0482f1f0a4ab97c5",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-fec5b37e33160eab",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-7a30c68247a4de87",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-0a17093df5f67347",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-c51dde55b671179c",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a46752f245b151de",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-dd74b87a8eee8fad",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-08900a6678fe9558",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-202a663f0f89d95b",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-91724d5dc4592387",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-80755c163e766a5c",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f348e469ce185753",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-7684744d10a76ce5",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-961249114898bf7f",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-4673305f370e42a0",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-3ce9477b975e3816",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a05eb22d8a2da951",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-afa0f477ba02696e",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f7b6b854d6c7d94c",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-bcdb48880c2f7811",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-696131df6c2c9b32",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-7f9a5c041819ca74",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-2e98a51a3c148771",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-820dc36bfd3ec0e4",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-876712317126020e",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-b751c0ab05c144a4",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-6fd2457f9d27150c",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-f8c8b3debf1d67c0",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a15c82adeba2cc75",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-172725f88540f763",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-0051171330c5ba41",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-e6c3750513041350",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-a2ad1ffeefca4865",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-cf3da09bf1fce06b",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-bb89c5785a4001cb",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-5cc39d40bc521d56",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=artist-d5e673106e111846",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/haseeb-wasim/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/alison-gonzalez/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/abel-thomas/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/louis-mitchell/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/elferah-saidil/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/keiffer/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/hassan-b-mirza/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/luna/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/turbooz/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/abdallah-mahmoudd/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 1,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/tariq-al-salman/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/viktoriya-melny/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/person/shakiba-binchi/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?person=member-a2171769-119f-424f-9721-200402b8eb93",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?person=member-c661455e-df47-4c55-9519-cc6add995130",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?person=member-3af385ce-6efa-4879-98d9-70568d8bb7fb",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=cv-luna",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=cv-turbooz",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/?id=cv-abdallah-mahmoudd",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/stories/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 12,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/ambassadors/metrics/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/join/?intent=artist",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-amina-rahmani",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-lucia-quintero",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-matteo-bellini",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-elias-korhonen",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-priya-mehta",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-leila-al-mansouri",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-awa-diop",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-nia-okafor",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-sora-nakamura",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/artist/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fabdallha_mahmoudd%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Ft_alsalman%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fcommuni8%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/reference/?url=https%3A%2F%2Fwww.instagram.com%2Fcultureme.co%2F",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/ambassadors/report/",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        },
+        {
+          "path": "/communiverse/plug/?filter=artists&person=artist-diego-salazar",
+          "status": 200,
+          "release": "20261009-social-11a",
+          "emojiFree": true,
+          "videos": 0,
+          "controls": 0,
+          "autoplayLoopInline": true
+        }
+      ]
+    },
+    "identity-ai-tests": {
+      "pass": true,
+      "checkedAt": "2026-10-08T23:42:20.936Z",
+      "assertions": 171,
+      "actualRuntime": true,
+      "productionEmailsSent": 0,
+      "localEmailCalls": 1,
+      "externalModelCalls": 0,
+      "localModelCalls": 8,
+      "checks": [
+        "real staff and verified member sessions",
+        "staff photo identity and public shared mapping",
+        "private contacts and profile-bound verification",
+        "unverified or wrong actor cannot change another photo",
+        "curated artist alias shares current profile image",
+        "failed photo database write cleans up R2 object",
+        "invalid avatar URI returns 404",
+        "private documents cannot be published",
+        "studio media requires ownership and exact artist file target",
+        "image/video publication tags and local currency",
+        "public work hiding removes feed and media projection",
+        "hidden member media denied before corrective migration",
+        "member withdrawal atomically hides explicit member and linked-gallery publications",
+        "inactive owner cannot race a fresh publication",
+        "curated source works and private R2 history survive member withdrawal",
+        "actual studio ledger separates currencies and pending income",
+        "actual sales idempotency and stock conservation",
+        "client geography requires explicit consent",
+        "assigned ambassador financial scope",
+        "private payouts require CEO approval before Operations payment",
+        "no artisan response exposes internal payout ledger",
+        "workspace AI results follow project/task scopes",
+        "studio AI results follow curated and member ownership",
+        "AI model receives only search query and allowlisted draft context",
+        "no credential in responses or public records",
+        "inactive circle owner excluded from public search",
+        "timeout/provider/key-missing search fallback",
+        "draft never persists actions or sends messages"
+      ]
+    },
+    "ai-public11-tests": {
+      "pass": true,
+      "checkedAt": "2026-10-08T23:42:20.685Z",
+      "assertions": 184,
+      "actualRuntime": true,
+      "localModelCalls": 18,
+      "externalModelCalls": 0,
+      "productionWrites": 0,
+      "checks": [
+        "fresh public artist and collector searchable before any photo row",
+        "kind artist matches verified intent and approved artist link",
+        "unverified intent remains a person until verified",
+        "business public story/location/craft/tags searchable",
+        "hidden member and retired staff excluded",
+        "orphan identity profile not public search data",
+        "all public catalogue artist and ambassador circles person-searchable",
+        "person ids deduplicated with richer tags preserved",
+        "unfiltered search uses one artist profile representation",
+        "private contacts and ledgers excluded from results",
+        "remote model sees only query"
+      ]
+    },
+    "booking11-tests": {
+      "pass": true,
+      "checkedAt": "2026-10-08T23:42:20.785Z",
+      "assertions": 72,
+      "actualRuntime": true,
+      "productionRequestsCreated": 0,
+      "checks": [
+        "verified real member studio settings overlay public booking",
+        "actual artist-confirmed date and AED price",
+        "current shared member portrait",
+        "unverified intent and hidden identities excluded",
+        "approved linked identity eligible",
+        "eligible workspace artists share public artist-directory eligibility",
+        "business location/craft/story overlay drives public region filter",
+        "Events reflect actual workshop region and local price",
+        "unconfirmed and disabled-host workshops stay out of Events",
+        "verified artist intent and approved identity may host standalone event",
+        "unverified artist intent cannot publish event",
+        "unknown member price and availability stay null/empty",
+        "host timezone day boundary",
+        "selectable member workshop accepts group request",
+        "retry creates one request",
+        "country/capacity/date/artist validation",
+        "removed and disabled-hosting slots cannot be selected",
+        "legacy ten studio guide requests preserved"
+      ]
+    },
+    "collaboration-tests": {
+      "pass": true,
+      "checkedAt": "2026-10-08T23:42:21.004Z",
+      "productionMessagesSent": 0,
+      "localEmailCalls": 9,
+      "checks": [
+        "real staff and verified artisan sessions",
+        "participant-only messages and replies",
+        "CEO cannot read unrelated conversations",
+        "cross-thread reply rejection",
+        "message retries",
+        "private R2 media metadata and checksum",
+        "type and size validation",
+        "artist media ownership",
+        "file hiding atomically removes published feed projection and retains private object",
+        "private contacts absent from directory",
+        "unverified contact blocks invitations",
+        "meeting overlap trigger and atomic rollback",
+        "invitation outbox claim and safe retries",
+        "private recipient messages and calendar attachment",
+        "declining frees capacity and reaccept conflicts",
+        "organizer-only cancellation and calendar export",
+        "cancellation cannot overtake an in-flight invitation",
+        "inactive staff history stays readable without access escalation",
+        "task join requires project scope and approval",
+        "no project access escalation",
+        "mentions require target access",
+        "structured subscription stays in existing approval requests",
+        "CEO approval precedes Operations resource execution"
+      ]
+    },
+    "browser-verification": {
+      "pass": true,
+      "version": "37e7cd9a-11b4-4c1d-84e7-e43afa632c30",
+      "checkedAt": "2026-10-08T23:47:01.704700+00:00",
+      "nativeBrowser": "Chrome",
+      "localMutatingFixturesOnly": true,
+      "realEmailsSent": 0,
+      "teamPortraits": 13,
+      "portraitDimensions": [
+        48,
+        48
+      ],
+      "localChecks": [
+        "team sign-in",
+        "six team views and three artist views",
+        "main navigation and enhanced routes",
+        "private thread creation",
+        "reply preserves unsent draft",
+        "send clears draft",
+        "artist availability form",
+        "257 countries",
+        "320px studio no horizontal overflow",
+        "390px shared circles no horizontal overflow",
+        "844x390 landscape dialog within viewport"
+      ],
+      "stagedChecks": {
+        "release": "20261009-social-11",
+        "desktopWidth": 1280,
+        "mobileWidth": 390,
+        "landscapeWidth": 844,
+        "singleHeader": true,
+        "artistPinsAfterHydration": 20,
+        "plugProfiles": 127,
+        "selectedProfile": "cv-haseeb-wasim",
+        "mobileSelectedWidth": 157.79,
+        "mobileNeighborWidth": 44,
+        "publicPlaybackControls": 0,
+        "horizontalOverflow": false
+      },
+      "uiVMAssertions": 58,
+      "uiVMTimezones": [
+        "UTC",
+        "Asia/Dubai",
+        "America/Bogota"
+      ],
+      "baselineBrowserVersion": "cff0f8c0-61e7-4438-ae1f-811597abbf6d",
+      "interactiveScriptsByteIdenticalToVerifiedBaseline": true,
+      "headerTests": 21,
+      "newRelease": "20261009-social-11a",
+      "nativeCheckScope": "Workspace and responsive interactions tested on baseline; unchanged script bytes verified for final patch. New server header checked separately.",
+      "newHeaderNative": {
+        "release": "20261009-social-11a",
+        "viewportWidth": 1280,
+        "scrollWidth": 1280,
+        "headerCount": 1,
+        "guestJoinVisible": true,
+        "scriptsUseUnchanged11URLs": true
+      }
+    },
+    "syntax-verification": {
+      "pass": true,
+      "checkedAt": "2026-10-08T23:42:21.088Z",
+      "modulesParsed": 50
+    },
+    "header-tests": {
+      "assertions": 21,
+      "passed": true,
+      "source": "../social11a-candidate/social-views.js",
+      "pass": true,
+      "checkedAt": "2026-10-08T23:53:44.861058+00:00"
+    }
+  },
+  "migrations": {
+    "pass": true,
+    "applied": true,
+    "additive": true,
+    "checkedAt": "2026-10-08T22:48:12.755Z",
+    "migrations": [
+      {
+        "file": "migration-11-identity.sql",
+        "sha256": "f0b88800533cf53caea6becc418f4ff8a221de05706cb85acbaf4be1e4bcab46"
+      },
+      {
+        "file": "migration-11-artist.sql",
+        "sha256": "2dde7940c5b55bf458d0604c2d145bbc71bd559f81f74c4319f2080f5c6f2bc9"
+      },
+      {
+        "file": "migration-11-collaboration.sql",
+        "sha256": "ce6896f6c6ec4553d1dc25ed3ff417c331bc9774bf9784784da5684e05c94ed1"
+      },
+      {
+        "file": "migration-11-publishing.sql",
+        "sha256": "e541c9d265814be1be3df77a2419a1c6e908241d263f7e35dec8ccf002c2b490"
+      }
+    ],
+    "existingRecordsPreserved": [
+      {
+        "table": "cv_members",
+        "rows": 3,
+        "sha256": "f94bdabbbc7873b2f6a1b5ff8024e0b2888beb485c646a05aaa4111991e25a54"
+      },
+      {
+        "table": "cv_posts",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_hearts",
+        "rows": 6,
+        "sha256": "b7de20f45176c5c74de1e75831645e939048e11e4fbbdafad0f19c97883edf03"
+      },
+      {
+        "table": "cv_follows",
+        "rows": 2,
+        "sha256": "6e9756707d86fa0335c16456e80c83f470a18c89cc4b2b5ef2fc619f691ac80d"
+      },
+      {
+        "table": "cv_hosted_events",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_circles",
+        "rows": 22,
+        "sha256": "2df0443733a2321ecdc1be4575ce633516567683ef87d58dc50565e3f920f1a9"
+      },
+      {
+        "table": "cv_circle_follows",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_circle_posts",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "waitlist_submissions",
+        "rows": 6,
+        "sha256": "3976d320802938a71acae858c232e939ebe1ada6631b2eafae4cffd289b656db"
+      },
+      {
+        "table": "cv_staff",
+        "rows": 13,
+        "sha256": "1c61e669e690d1594e9d6f5884b2cb59320b819c42d1dbfc07d05c7ec481767d"
+      },
+      {
+        "table": "cv_projects",
+        "rows": 6,
+        "sha256": "6abd9772973895cbf32d350b75f55f878c5fffc4b016ae114a729dfd7c974105"
+      },
+      {
+        "table": "cv_project_members",
+        "rows": 25,
+        "sha256": "222e300f84fda9d22950a845583d0e1c6ed91271810b9d30fe90d90ae12d3542"
+      },
+      {
+        "table": "cv_tasks",
+        "rows": 15,
+        "sha256": "5256c3952e888afe8d5359dda04535146dbcf2be39fc8c59ac15f5f0f20c5473"
+      },
+      {
+        "table": "cv_team_requests",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_workspace_comments",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_workspace_assets",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_workspace_activity",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_workspace_notifications",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_artist_pipeline",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_workshop_slots",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "table": "cv_group_requests",
+        "rows": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    ],
+    "counts": [
+      [
+        {
+          "n": 13
+        }
+      ],
+      [
+        {
+          "ambassador_id": "ammar",
+          "n": 43
+        },
+        {
+          "ambassador_id": "balo",
+          "n": 33
+        },
+        {
+          "ambassador_id": "luna",
+          "n": 35
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ],
+      [
+        {
+          "n": 0
+        }
+      ]
+    ],
+    "contactsInvented": 0,
+    "ownershipClaimsCreated": 0,
+    "productionTestRecords": 0,
+    "messagesSent": 0
+  },
+  "publishingWithdrawalMigration": {
+    "pass": true,
+    "applied": true,
+    "checkedAt": "2026-10-08T23:26:25.853Z",
+    "file": "migration-11b-publishing-visibility.sql",
+    "sha256": "b3b080e7eee8fe43407007af841d63b923dbeb4eae958f71adaa743cf38c77ab",
+    "publicWorkBefore": 0,
+    "publicWorkAfter": 0,
+    "publicWithdrawalOnly": true,
+    "privateObjectsDeleted": 0,
+    "triggers": [
+      {
+        "name": "cv_studio_publish_active_file"
+      },
+      {
+        "name": "cv_studio_hide_member_publication"
+      },
+      {
+        "name": "cv_studio_publish_active_owner"
+      }
+    ]
+  },
+  "nativeLive": {
+    "release": "20261009-social-11a",
+    "viewer": "existing signed-in workspace user",
+    "staffHeaderPhotoLoaded": true,
+    "joinReplacedByWorkspaceAccount": true,
+    "teamPortraitsLoaded": 13,
+    "portraitSize": [
+      48,
+      48
+    ],
+    "desktopWidth": 1280,
+    "horizontalOverflow": false
+  },
+  "productionTestProfilesCreated": 0,
+  "productionTestWorkRecordsCreated": 0,
+  "realTestMeetingEmailsSent": 0,
+  "limits": {
+    "revenue": "Recorded transactions; no automatic payment processor ingestion",
+    "email": "Participant confirmed contacts and outbox; provider acceptance is separate from inbox delivery",
+    "geoDemographics": "Consented location aggregates; no inferred sensitive demographics"
+  },
+  "checkedAt": "2026-10-08T23:53:09.095521+00:00"
+}

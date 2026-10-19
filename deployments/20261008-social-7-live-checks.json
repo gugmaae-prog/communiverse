@@ -1,0 +1,63 @@
+{
+  "pass": true,
+  "version": "fa70f38a-d4d0-4834-983d-690e44587f3b",
+  "release": "20261008-social-7",
+  "checkedAt": "2026-10-08T17:34:57.760Z",
+  "checks": [
+    {
+      "path": "/communiverse/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/discover/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/events/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/artists/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/artist/?id=cv-luna",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/communities/?region=peru",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/profile/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/sign-in/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/join/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/plug/?person=cv-luna",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/artists/amina-rahmani/",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/how-it-works/",
+      "status": 200
+    }
+  ],
+  "feedItemsVerified": 156,
+  "mediaObjectsVerified": 6,
+  "originalVideosIdentical": true,
+  "privateSessionBoundary": true,
+  "csrf": true,
+  "productionTestProfilesCreated": 0,
+  "mode": "live"
+}

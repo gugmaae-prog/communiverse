@@ -1,0 +1,155 @@
+{
+  "release": "20261008-simple-nav-1",
+  "worker": "communiverse-marketplace",
+  "sourceCommit": "ded9c4948b256b18174c8f8ef822312a5f9abe42",
+  "deployment": {
+    "version": "62b35c00-4a47-4a11-a02e-aedd41d2dad5",
+    "deployment": {
+      "id": "cbf4c477-ab75-48fd-8363-6b0db47071d0"
+    },
+    "rollbackVersion": "83f1bdb4-e7e4-44ef-8679-967a5cb4b382"
+  },
+  "sourceProof": {
+    "pass": true,
+    "version": "62b35c00-4a47-4a11-a02e-aedd41d2dad5",
+    "release": "20261008-simple-nav-1",
+    "verifiedAt": "2026-10-07T22:53:45.018Z",
+    "modulesVerified": 17,
+    "originalModulesRetained": 14,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "liveChecks": {
+    "pass": true,
+    "version": "62b35c00-4a47-4a11-a02e-aedd41d2dad5",
+    "release": "20261008-simple-nav-1",
+    "mode": "live",
+    "pages": [
+      {
+        "path": "how-it-works",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "about",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "makers",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "for-founders",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "for-brands",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "for-startups",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "contact",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "ambassadors",
+        "status": 200,
+        "head": 200
+      },
+      {
+        "path": "plug/person/haseeb-wasim",
+        "status": 200,
+        "head": 200
+      }
+    ],
+    "immutableScriptVerified": true,
+    "marketplaceHeadersRetained": true,
+    "plugPeople": 23,
+    "ambassadors": 3,
+    "galleryCSSRetained": true,
+    "checkedAt": "2026-10-07T22:56:09.293Z"
+  },
+  "browserChecks": {
+    "pass": true,
+    "desktop": {
+      "active": "Discover",
+      "headers": 1,
+      "labels": [
+        "Discover",
+        "Artists",
+        "Workshops",
+        "Plug"
+      ],
+      "more": false,
+      "release": "20261008-simple-nav-1",
+      "scrollWidth": 1440,
+      "width": 1440
+    },
+    "mobile": {
+      "headers": 1,
+      "links": [
+        {
+          "height": 44,
+          "text": "Discover",
+          "width": 78.3515625
+        },
+        {
+          "height": 44,
+          "text": "Artists",
+          "width": 66.234375
+        },
+        {
+          "height": 44,
+          "text": "Workshops",
+          "width": 92.46875
+        },
+        {
+          "height": 44,
+          "text": "Plug",
+          "width": 53.6171875
+        }
+      ],
+      "menuButtons": 0,
+      "release": "20261008-simple-nav-1",
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "smallMobile": {
+      "navWidth": 287.671875,
+      "scrollWidth": 320,
+      "width": 320
+    },
+    "previewChecks": {
+      "artistsNavigation": true,
+      "plugNavigation": true,
+      "contactRequestPrefill": true,
+      "ambassadorPagePreserved": true
+    },
+    "screenshots": [
+      "outputs/communiverse-simple-header-live.png",
+      "outputs/communiverse-simple-header-desktop-live.png",
+      "outputs/communiverse-simple-header-mobile-live.png"
+    ],
+    "checkedAt": "2026-10-07T22:57:07.833Z"
+  },
+  "routePatterns": [
+    "espacios.me/communiverse*",
+    "www.espacios.me/communiverse*"
+  ],
+  "previousModulesRetained": 14,
+  "newModules": 3,
+  "databaseWrites": false,
+  "formSubmissions": 0,
+  "securityPoliciesUnchanged": true
+}

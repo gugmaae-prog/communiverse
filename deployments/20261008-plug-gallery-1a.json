@@ -1,0 +1,200 @@
+{
+  "release": "20261008-plug-gallery-1a",
+  "assetRelease": "20261008-plug-gallery-1",
+  "worker": "communiverse-marketplace",
+  "sourceCommit": "05a43e29d421863be114c6140e95ea061bf128f6",
+  "deployment": {
+    "version": "83f1bdb4-e7e4-44ef-8679-967a5cb4b382",
+    "deployment": {
+      "id": "d9b82c9a-1801-4100-af5d-869b37d43426"
+    },
+    "rollbackVersion": "f5aa267f-1886-4703-b942-29851a21470b"
+  },
+  "sourceProof": {
+    "pass": true,
+    "version": "83f1bdb4-e7e4-44ef-8679-967a5cb4b382",
+    "release": "20261008-plug-gallery-1a",
+    "verifiedAt": "2026-10-07T22:41:26.268Z",
+    "modulesVerified": 14,
+    "originalModulesRetained": 13,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "liveChecks": {
+    "pass": true,
+    "mode": "live",
+    "version": "83f1bdb4-e7e4-44ef-8679-967a5cb4b382",
+    "release": "20261008-plug-gallery-1a",
+    "people": 23,
+    "coolKids": 10,
+    "ambassadors": 3,
+    "artists": 10,
+    "backOffice": 6,
+    "profiles": [
+      {
+        "name": "Amina Rahmani",
+        "path": "/communiverse/artists/amina-rahmani/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Luc\u00eda Quintero",
+        "path": "/communiverse/artists/lucia-quintero/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Matteo Bellini",
+        "path": "/communiverse/artists/matteo-bellini/",
+        "videos": 2,
+        "status": 200
+      },
+      {
+        "name": "Nia Okafor",
+        "path": "/communiverse/artists/nia-okafor/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Sora Nakamura",
+        "path": "/communiverse/artists/sora-nakamura/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Leila Al Mansouri",
+        "path": "/communiverse/artists/leila-al-mansouri/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Priya Mehta",
+        "path": "/communiverse/artists/priya-mehta/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Diego Salazar",
+        "path": "/communiverse/artists/diego-salazar/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Awa Diop",
+        "path": "/communiverse/artists/awa-diop/",
+        "videos": 1,
+        "status": 200
+      },
+      {
+        "name": "Elias Korhonen",
+        "path": "/communiverse/artists/elias-korhonen/",
+        "videos": 1,
+        "status": 200
+      }
+    ],
+    "sourceBytesVerified": true,
+    "glassRangeVerified": true,
+    "glassOriginalBytes": 1838802,
+    "checkedAt": "2026-10-07T22:42:50.942Z"
+  },
+  "browserChecks": {
+    "pass": true,
+    "mobile": {
+      "ctaOutside": true,
+      "release": "20261008-plug-gallery-1a",
+      "sceneHeight": 480,
+      "scrollWidth": 390,
+      "selectedWidth": 96,
+      "video": [
+        {
+          "height": 199,
+          "paused": false,
+          "ready": 4,
+          "width": 112
+        }
+      ],
+      "width": 390
+    },
+    "animation": {
+      "before": {
+        "h": 480,
+        "w": 49
+      },
+      "during": {
+        "h": 480,
+        "w": 53.12317657470703
+      },
+      "finalWidth": 96,
+      "sceneHeightUnchanged": true,
+      "immutableScriptRetained": true
+    },
+    "galleryMobile": {
+      "actions": [
+        {
+          "insideCard": false,
+          "text": "Schedule a workshop \u2197"
+        },
+        {
+          "insideCard": false,
+          "text": "Plan a group session \u2197"
+        },
+        {
+          "insideCard": false,
+          "text": "Request this piece \u2197"
+        }
+      ],
+      "inline": true,
+      "navDisplay": "flex",
+      "scrollWidth": 390,
+      "storeImage": [
+        {
+          "loaded": true
+        }
+      ],
+      "videoRadius": "24px",
+      "width": 390
+    },
+    "galleryDesktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "inlineCSS": true,
+      "maxWidth": "1180px",
+      "navDisplay": "flex",
+      "videoRadius": "24px",
+      "actionsOutsideCards": true
+    },
+    "request": {
+      "date": "2026-11-20",
+      "message": "Group session request for Amina Rahmani\nCraft: Ceramic restoration\n\nMy request: \nGroup size: 6\nPreferred date: 2026-11-20",
+      "size": "6",
+      "subject": "Group session request \u00b7 Amina Rahmani",
+      "submit": "Send session request \u2197",
+      "title": "Group session request | Communiverse"
+    },
+    "localChecks": {
+      "close": true,
+      "filters": true,
+      "reducedMotionPausesVideo": true,
+      "workshopPrefill": true,
+      "storePrefill": true
+    },
+    "submissions": 0,
+    "screenshots": [
+      "outputs/communiverse-mobile-gallery-live.png",
+      "outputs/communiverse-gallery-sessions-live.png"
+    ]
+  },
+  "routePatterns": [
+    "espacios.me/communiverse*",
+    "www.espacios.me/communiverse*"
+  ],
+  "priorRefineModulesRetained": 10,
+  "priorGalleryModulesRetained": 13,
+  "modules": 14,
+  "databaseWrites": false,
+  "formSubmissions": 0,
+  "artistStylePolicyUnchanged": true,
+  "espaciosHomepageStatus": 200
+}

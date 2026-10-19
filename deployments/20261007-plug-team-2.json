@@ -1,0 +1,66 @@
+{
+  "release": "20261007-plug-team-2",
+  "worker": "communiverse",
+  "worker_version_id": "fb1e0cac-7c50-4a38-a8f3-18cc0b0effc6",
+  "deployment_id": "4d0fa6b2-a0fa-4294-b040-5d10dda62bd3",
+  "traffic_percentage": 100,
+  "rollback_version_id": "20069b83-8987-4ee5-a322-e299746f01fd",
+  "source_commit": "bc603d9913e064837c5c28611864e1e3f9dd3f4c",
+  "changed_modules": [
+    "members-20261007-entry.js",
+    "shared-plug-ui-20261007-entry.js"
+  ],
+  "unchanged_modules": 123,
+  "database_changes": false,
+  "upload_verification": {
+    "pass": true,
+    "version": "fb1e0cac-7c50-4a38-a8f3-18cc0b0effc6",
+    "release": "20261007-plug-team-2",
+    "verifiedAt": "2026-10-07T18:19:20.330Z",
+    "modulesVerified": 125,
+    "originalModulesRetained": 123,
+    "assetsRetained": true,
+    "bindingsRetained": true,
+    "observabilityRetained": true,
+    "compatibilityDate": "2026-09-27"
+  },
+  "live_verification": {
+    "pass": true,
+    "people": 13,
+    "coolKids": 10,
+    "ambassadors": 3,
+    "importedArtistsRemoved": 58,
+    "portraitsLoaded": 13,
+    "routes": [
+      {
+        "path": "/communiverse/",
+        "status": 200
+      },
+      {
+        "path": "/communiverse/contact/",
+        "status": 200
+      },
+      {
+        "path": "/communiverse/media/gallery-20261007/fine-lettering.mp4",
+        "status": 200
+      }
+    ],
+    "desktop": {
+      "width": 1280,
+      "scrollWidth": 1280,
+      "filtersVisible": true,
+      "filterClicks": true,
+      "filterTop": 96,
+      "headerBottom": 84
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "filtersVisible": true,
+      "filterClicks": true,
+      "filterTop": 86,
+      "headerBottom": 74,
+      "lunaProfileOpens": true
+    }
+  }
+}

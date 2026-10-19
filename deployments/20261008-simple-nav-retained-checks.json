@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-10-07T22:56:08.042Z",
+  "release": "20261007-plug-team-2",
+  "mode": "ordinary-public-requests-no-override",
+  "databaseWrites": false,
+  "checks": [
+    {
+      "label": "exact deployed js matches GitHub",
+      "passed": true,
+      "path": "/communiverse/_public/20261007-plug-team-2.js",
+      "bytes": 5279,
+      "sha256": "8cd2902668ff48230e94a6620b9478db588e0fdc396309b939568ad288cb3b41"
+    },
+    {
+      "label": "exact deployed css matches GitHub",
+      "passed": true,
+      "path": "/communiverse/_public/20261007-plug-team-2.css",
+      "bytes": 13337,
+      "sha256": "d2e7c707410be028feea0076d96be457c2f7b2a4e8fb548c415dcc8d33115292"
+    },
+    {
+      "label": "/communiverse/",
+      "passed": true,
+      "status": 200,
+      "routeOwner": "marketplace",
+      "marketplaceRelease": "20261008-marketplace-6"
+    },
+    {
+      "label": "/communiverse/about/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/how-it-works/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/makers/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/for-founders/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/for-brands/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/for-startups/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/contact/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/ambassadors/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/plug/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "/communiverse/plug/person/haseeb-wasim/",
+      "passed": true,
+      "status": 200,
+      "release": "20261007-plug-team-2"
+    },
+    {
+      "label": "Communiverse contains artists, Cool Kids and three ambassadors",
+      "passed": true,
+      "people": 23,
+      "artists": 10,
+      "coolKids": 10,
+      "ambassadors": 3
+    },
+    {
+      "label": "private route internal/",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "label": "private route ral/",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "label": "private route api/admin/",
+      "passed": true,
+      "status": 404
+    },
+    {
+      "label": "prior immutable squeeze-4.js",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "label": "prior immutable squeeze-4.css",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "label": "MP4 byte-range delivery remains intact",
+      "passed": true,
+      "status": 206,
+      "contentRange": "bytes 0-15/598425"
+    }
+  ]
+}
