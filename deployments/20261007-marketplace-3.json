@@ -1,0 +1,20 @@
+{
+  "release": "20261007-marketplace-3",
+  "date_utc": "2026-10-07T19:14:14.993601Z",
+  "worker": "communiverse-marketplace",
+  "worker_version": "8479eb13-a092-4d0d-beed-dffd620a2de8",
+  "deployment": "06a3129d-dffa-4820-86ca-09f0eb6253ca",
+  "traffic_percentage": 100,
+  "source_commit": "64c79d486153cc0b746988c24b8b6e2627ef9132",
+  "routes": ["https://espacios.me/communiverse/*", "https://www.espacios.me/communiverse/*"],
+  "legacy_binding": "communiverse",
+  "data": "Applications use the existing LEGACY /communiverse/api/waitlist handler and WAITLIST_DB D1 binding. No dedicated Supabase project was created.",
+  "verification": {
+    "focused_tests": "10 passed",
+    "build": "npm run build:marketplace passed",
+    "live_routes": "13 listed marketplace and delegated public routes returned HTTP 200",
+    "mobile": "390px live browser check: no page overflow, full four-tab navigation, larger swipeable artist cards",
+    "oauth_entry": "Google and LinkedIn entry routes returned HTTP 302 to their respective providers; a user sign-in was not completed in QA",
+    "application": "Belong application returned HTTP 201 with reference 8d53f201-f87b-4819-8c44-f812b679a3db; record confirmed in WAITLIST_DB and marked test"
+  }
+}
