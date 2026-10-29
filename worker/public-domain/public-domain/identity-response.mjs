@@ -1,3 +1,4 @@
+import {platformCopy,brandResponse} from './brand-copy.mjs';
 import STYLE from './identity-style.css.txt';
 import CLIENT from './identity-client.js.txt';
 import {identities,peopleText,roleCards} from './identity.mjs';
@@ -12,7 +13,7 @@ const portraits={
 };
 export async function identityResponse(response,request){
  if(!['GET','HEAD'].includes(request.method)||!response.headers.get('Content-Type')?.includes('text/html'))return response;
- const html=peopleText(await response.text());if(!html.includes('cv-social-header')&&!html.includes('cv-workspace'))return new Response(html,response);
+ const original=await response.text(),url=new URL(request.url);if(!url.hostname.endsWith('communiverseclubs.com')&&!url.pathname.startsWith('/communiverse/'))return new Response(original,response);const html=platformCopy(peopleText(original));if(!html.includes('cv-social-header')&&!html.includes('cv-workspace'))return new Response(html,response);
  const h=new Headers(response.headers);for(const k of ['content-length','content-encoding','etag'])h.delete(k);h.set('Cache-Control','private, no-store');
  const authPath=new URL(request.url).pathname;
  const oldHost=new URL(request.url).origin===OLD;
@@ -28,5 +29,5 @@ export async function identityResponse(response,request){
  .on('.cv-account-page > p',{text(t){if(t.text.includes('Or use your username and password'))t.replace('Or sign in with email and password');}})
  .on('.cv-account-recovery p',{element(e){e.setInnerContent('Open the link we send to your email, then choose a new password.');}});
  for(const[selector,size]of Object.entries(portraits))rewriter=rewriter.on(selector,{element(e){e.setAttribute('data-cv-avatar',size);}});
- return rewriter.transform(new Response(html,{status:response.status,headers:h}));
+ return brandResponse(rewriter.transform(new Response(html,{status:response.status,headers:h})));
 }

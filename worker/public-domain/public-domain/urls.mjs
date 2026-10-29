@@ -1,3 +1,4 @@
+import {platformCopy} from './brand-copy.mjs';
 import {portraitText} from './portrait-refresh.mjs';
 export const OLD='https://espacios.me';
 export const ORIGIN='https://communiverseclubs.com';
@@ -32,7 +33,7 @@ export function link(value,origin=ORIGIN){
 export function rewrite(source,origin){
  // Only new, separately versioned client URLs use this transformation.
  // The original versioned assets and their contents are retained unchanged.
- return portraitText(source).replace(/\bCool Kids\b/gi,'People')
+ return platformCopy(portraitText(source)).replace(/\bCool Kids\b/gi,'People')
  .replace('function masonry(){', 'function masonry(){window.CVSyncFeedPromotions?.();')
  .replace("const label=input.closest('label');if(!label)return;","const label=input.closest('label');if(!label)return;label.classList.add('cv4-search-field');")
  .replace(/https:\/\/(?:www\.)?espacios\.me\/communiverse(?=[/"'?#\s<]|$)/g,'/communiverse')
