@@ -1,0 +1,28 @@
+{
+  "deploymentId": "f78653cb-1630-4b60-ad65-f5209d6fcfeb",
+  "versions": [
+    {
+      "version_id": "3879ee91-5f0f-44db-a412-df034a2f1142",
+      "percentage": 100
+    },
+    {
+      "version_id": "29964e9f-2d18-4405-b5be-f72e02ff9e08",
+      "percentage": 0
+    }
+  ],
+  "publicRelease": "public-domain-20261029-v25",
+  "siteFixesTrafficPromoted": false,
+  "rollback": {
+    "strategy": "percentage",
+    "versions": [
+      {
+        "version_id": "771fd47e-62f4-4243-801c-13cd6f9edbc6",
+        "percentage": 100
+      },
+      {
+        "version_id": "29964e9f-2d18-4405-b5be-f72e02ff9e08",
+        "percentage": 0
+      }
+    ]
+  }
+}
