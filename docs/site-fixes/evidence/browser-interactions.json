@@ -1,0 +1,18 @@
+{
+  "environment": "Local candidate browser, no public writes",
+  "report": {
+    "reasonOptions": 5,
+    "optionalDetailsLimit": 1000,
+    "closeControls": 1,
+    "resetDisablesSubmit": true,
+    "escapeReturnsFocusToReport": true,
+    "tabContainmentVerified": true
+  },
+  "circles": {
+    "outsideClickDeselects": true,
+    "escapeClosesArtworkThenProfile": true,
+    "directLinkEscapeVerified": true,
+    "cardCloseButtonsAdded": false
+  },
+  "screenshots": "375px and 1440px, local public-data fallback; overall-empty catalogues are labeled fixtures"
+}

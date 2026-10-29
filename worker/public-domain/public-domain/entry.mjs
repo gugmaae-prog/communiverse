@@ -1,3 +1,5 @@
+import ACCOUNT_CLIENT from './account-client.js.txt';
+import JOIN_LINKS from './join-links.js.txt';
 import {accessibilitySupport} from './accessibility.mjs';
 import ACCESSIBILITY_CLIENT from './accessibility.js.txt';
 import {seoSupport,sitemap} from './seo.mjs';
@@ -5,7 +7,7 @@ import {securityPolicy,communiverseRequest,privateArtifactPath,cspReport,securit
 import {brandedAccountRoute,accountSupport} from './account-origin.mjs';
 import {formSupport} from './form-support.mjs';
 import FORM_CLIENT from './form-support.js.txt';
-import {guardForm,FORM_ACTIONS,formEndpoint} from './form-security.mjs';
+import {guardForm,FORM_ACTIONS,formEndpoint,withoutChallengeToken} from './form-security.mjs';
 import {reportAPI} from './report.mjs';
 import {artistPath,artistSlugs,artistIdFromSlug,workIdFromSlugs} from './record-routes.mjs';
 import {artistById,catalogue,knownPersonIds,worksPage,artistPage,workPage,selectedCircleHTML,recordStyle,eventRecordPage} from './record-pages.mjs';
@@ -76,7 +78,7 @@ async function guest(request,env,ctx,path){
 function jsonLinks(v,origin){return typeof v==='string'?(/^(?:\/communiverse\/|https:\/\/(?:www\.)?espacios\.me\/communiverse\/)/.test(v)?link(v,origin):v):Array.isArray(v)?v.map(x=>jsonLinks(x,origin)):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,jsonLinks(x,origin)])):v;}
 async function adapt(response,request,readFeed){response=brandResponse(legalSupport(response,request));const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
  if(request.method==='HEAD')return new Response(null,{status:response.status,headers:h});
- if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
+ if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).replace(/\/$/,'')==='/api/galleries'&&u.searchParams.has('id')&&!data.galleries?.some(g=>g.id===u.searchParams.get('id')))return Response.json({error:'Gallery not found.'},{status:404,headers:h});if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
  if(!type.includes('text/html'))return new Response(response.body,{status:response.status,headers:h});
  if(response.status>=500)return error(response.status,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');
  const html=rewrite(await response.text(),u.origin),isEvent=clean(u.pathname)==='/event/',isCircles=['/circles/','/plug/'].includes(clean(u.pathname)),people=isCircles?circlePeople(html,artistWorks):null,featured=['/','/discover/'].includes(clean(u.pathname)),isWorkshops=clean(u.pathname)==='/workshops/';
@@ -85,7 +87,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  return identityResponse(new HTMLRewriter()
  .on('head',{element(e){e.append('<style data-cv-records>'+recordStyle+'</style><script defer src="'+CLIENT_BASE+'record-actions.js"></script><style data-cv-discovery>'+discoveryStyle+'</style><script type="application/json" id="cv-discovery-config">'+JSON.stringify(discoveryConfig).replaceAll('<','\\u003c')+'</script>',{html:true});}})
  .on('head',{element(e){e.prepend('<script defer src="'+CLIENT_BASE+'discovery-ui.js"></script>'+(featured?'<script defer src="'+CLIENT_BASE+'feed-discovery.js"></script>':'')+'<script defer src="'+CLIENT_BASE+'navigation.js"></script><script type="application/json" id="cv-runtime-config">'+JSON.stringify({publicOrigin:u.origin,pageBase:'/',apiBase:PREFIX+'/api/',assetBase:PREFIX+'/_',accountOrigin:OLD,accountBase:OLD+PREFIX+'/'})+'</script>'+(u.origin===PREVIEW?'<meta name="robots" content="noindex,nofollow">':''),{html:true});}})
- .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';e.setAttribute(attr,link(e.getAttribute(attr),u.origin));}})
+ .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';const value=e.getAttribute(attr);try{if(e.tagName==='a'&&['/for-founders','/for-brands','/for-startups'].includes(new URL(value,u.origin).pathname.replace(/\/$/,''))){e.remove();return;}}catch{}e.setAttribute(attr,link(value,u.origin));}})
  .on('#cv-circle-filters > label:first-child',{element(e){const classes=new Set((e.getAttribute('class')||'').split(/\s+/).filter(Boolean));classes.add('cv4-search-field');e.setAttribute('class',[...classes].join(' '));}})
  .on('#cv-social-header nav a[href*="artists"],#cv-marketplace-nav a[href*="artists"]',{element(e){e.remove();}})
  .on('#cv-social-header nav a[href*="circles"],#cv-marketplace-nav a[href*="circles"]',{element(e){if(clean(u.pathname)==='/artist/')e.setAttribute('aria-current','page');}})
@@ -107,7 +109,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  .on('#cv-focus-data',{element(e){if(people)e.remove();}})
  .on('link[rel="stylesheet"]',{element(e){if(people&&/\/_public\/2026100[678]-plug-/.test(e.getAttribute('href')||''))e.remove();}})
  .on('script[src]',{element(e){if(people&&/(?:\/circles\.js|\/__cvsearch_v4(?:_plug_fix)?\.js|\/__cvprofile_20261013_v11\.js|\/__cvmobile_20261013_v8\.js)(?:\?|$)/.test(e.getAttribute('src')||''))e.remove();}})
- .on('script[src],link[as="script"]',{element(e){const attr=e.tagName==='script'?'src':'href',src=e.getAttribute(attr)||'';if(technical(src)&&/\.js(?:[?#]|$)/.test(src)&&!src.startsWith(CLIENT_BASE))e.setAttribute(attr,CLIENT_BASE+clean(src).slice(1));}})
+ .on('script[src],link[as="script"]',{element(e){const attr=e.tagName==='script'?'src':'href',src=e.getAttribute(attr)||'';if(/\/__cvfix_v2\.js(?:[?#]|$)/.test(src)){e.remove();return;}if(technical(src)&&/\.js(?:[?#]|$)/.test(src)&&!src.startsWith(CLIENT_BASE))e.setAttribute(attr,CLIENT_BASE+clean(src).slice(1));}})
  .on('link[rel="canonical"],meta[property="og:url"]',{element(e){e.setAttribute(e.tagName==='link'?'href':'content',canonical(request.url));}})
  .on('#plan-session',{element(e){const q=new URLSearchParams(u.search);q.set('cv_account','1');e.setInnerContent('<h2>Plan a group session</h2><p>Choose a time and we will help you arrange your session.</p><a class="cv-button" href="'+OLD+internal(clean(u.pathname))+'?'+escape(q.toString())+'#plan-session">Plan a session</a>',{html:true});}})
  .transform(new Response(html,{status:response.status,headers:h})),request);
@@ -116,11 +118,13 @@ const browserNavigation=`(()=>{'use strict';window.CV_URLS=Object.freeze(JSON.pa
 const application={async fetch(request,env,ctx){const u=new URL(request.url);
  env={...env,EMAIL:env.EMAIL||env.REGISTRATION_EMAIL};
  if(hosts.has(u.hostname)&&u.pathname==='/sitemap.xml')return sitemap();
- if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS.fetch(request);
+ if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS?env.ASSETS.fetch(request):error(404,'Image not found','This image is unavailable.');
  if(communiverseRequest(request)&&privateArtifactPath(u.pathname))return error(404,'Page not found','Explore Communiverse through the links below.');
- if(hosts.has(u.hostname)&&u.pathname==='/api/csp-report')return cspReport(request,env);
+ if(communiverseRequest(request)&&clean(u.pathname)==='/api/csp-report')return cspReport(request,env);
  if(hosts.has(u.hostname)&&u.pathname==='/.well-known/security.txt')return new Response(request.method==='HEAD'?null:securityText('https://communiverseclubs.com'),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
  if(hosts.has(u.hostname)&&u.pathname==='/robots.txt')return new Response(request.method==='HEAD'?null:robots(u.origin),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
+ if(u.pathname===CLIENT_BASE+'account-client.js')return new Response(request.method==='HEAD'?null:ACCOUNT_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ if(u.pathname===CLIENT_BASE+'_public/20261008-marketplace-1b-join.js')return new Response(request.method==='HEAD'?null:JOIN_LINKS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'accessibility.js')return new Response(request.method==='HEAD'?null:ACCESSIBILITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'form-support.js')return new Response(request.method==='HEAD'?null:FORM_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'record-actions.js')return new Response(request.method==='HEAD'?null:RECORD_ACTIONS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
@@ -128,7 +132,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(u.pathname===CLIENT_BASE+'legal-links.js')return new Response(request.method==='HEAD'?null:LEGAL_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'identity.js')return new Response(request.method==='HEAD'?null:IDENTITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  const isLegacy=['espacios.me','www.espacios.me'].includes(u.hostname)&&u.pathname.startsWith(PREFIX+'/');
- if(request.method==='POST'&&isLegacy&&FORM_ACTIONS[formEndpoint(request)]&&!['workshop-enquiry','event-rsvp','report'].includes(formEndpoint(request))){try{const blocked=await guardForm(request,env,await readRegistrationBody(request.clone()));if(blocked)return blocked;}catch(e){return Response.json({error:e.status?e.message:'Check your form details.'},{status:e.status||400,headers:headers()});}}
+ if(request.method==='POST'&&isLegacy&&FORM_ACTIONS[formEndpoint(request)]&&!['workshop-enquiry','event-rsvp','report'].includes(formEndpoint(request))){try{const b=await readRegistrationBody(request.clone()),blocked=await guardForm(request,env,b);if(blocked)return blocked;request=withoutChallengeToken(request,b);}catch(e){return Response.json({error:e.status?e.message:'Check your form details.'},{status:e.status||400,headers:headers()});}}
  if(request.method==='POST'&&isLegacy&&formEndpoint(request)==='report')return reportAPI(request,env);
  if(!hosts.has(u.hostname)){
   if(['espacios.me','www.espacios.me'].includes(u.hostname)&&/^\/communiverse\/api\/account\/(login|register|credentials|recover)\/?$/.test(u.pathname)){const response=await updatedAccountAPI(request,env);if(response.status===201)background(ctx,observeRegistration(request,response.clone(),env,ctx));return response;}
@@ -166,6 +170,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(['/clubs/','/communities/'].includes(p)&&u.searchParams.has('circle')){const checkURL=new URL(request.url);checkURL.search='?id='+encodeURIComponent(u.searchParams.get('circle'));const check=await guest(new Request(checkURL),env,ctx,internal('/api/circles'));if(!check.ok||(await check.json()).circle?.id!==u.searchParams.get('circle'))return error(404,'Club not found','Explore the clubs in Communiverse.');}
  if(p==='/ambassadors/')return adapt(ambassadorsPage(),request);
  if(p==='/api/circles')return adapt(await clubDiscovery(request,r=>guest(r,env,ctx,internal('/api/circles'))),request);
+ if(['/plug/','/communities/'].includes(p)){u.pathname=p==='/plug/'?'/circles/':'/clubs/';return redirect(u.href,301);}
  if(p==='/discover/'){u.pathname='/';return redirect(u.href,301);}
  if(p==='/api/feed'&&u.searchParams.get('surface')==='home')return adapt(await homeFeed(request,r=>guest(r,env,ctx,internal('/api/feed'))),request);
  if(['/privacy/','/terms/'].includes(p))return adapt(legalPage(p),request);

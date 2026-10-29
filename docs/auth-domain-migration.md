@@ -27,3 +27,9 @@ Set `CV_ACCOUNT_CUTOVER_READY=false` and restore the previous reviewed version/t
 ## Current gate
 
 Disabled. D1 writes and retained authentication providers have not passed end-to-end acceptance. LinkedIn project configuration and the upstream fixed-origin OAuth/profile handlers remain blockers. No DNS, provider, database-policy or account cutover mutation was made by this PR.
+
+## Owned-handler regression evidence
+
+The final integration tests use an isolated local D1 database and mocked single-use Siteverify responses. They exercise fresh password sign-in by username and email, both existing API path conventions, host-only cookie attributes, an authenticated member read, refusal of cross-origin requests, a collector's denied event-hosting write, malformed recovery tokens, replayed challenges and browser-scoped logout that retains another browser's session. Frontend configuration is initialized by an external script with JSON data, so it does not depend on inline execution under CSP. Public record return paths stay on the approved origin; API and external destinations are rejected.
+
+The adapter dispatches owned authenticated data handlers and retains Home curation, active-hub discovery and programme additions. It preserves WebSocket upgrade responses and the route-specific workspace capability policy. Connected profiles and OAuth handlers with a fixed upstream origin remain a provider/release-owner dependency. Local fixtures do not establish production D1 capacity, successful real provider/recovery email flows or acceptance of every retained role. The production readiness flag remains false.

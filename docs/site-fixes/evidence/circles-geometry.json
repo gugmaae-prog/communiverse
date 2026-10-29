@@ -1,0 +1,102 @@
+[
+  {
+    "name": "phone",
+    "overflow": false,
+    "people": 14,
+    "portraitRatios": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "positioned": true,
+    "touching": [],
+    "visible": 18,
+    "width": 375
+  },
+  {
+    "name": "desktop",
+    "overflow": false,
+    "people": 14,
+    "portraitRatios": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "positioned": true,
+    "touching": [],
+    "visible": 18,
+    "width": 1440
+  },
+  {
+    "name": "landscape",
+    "overflow": false,
+    "people": 14,
+    "portraitRatios": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "positioned": true,
+    "touching": [],
+    "visible": 18,
+    "width": 845
+  },
+  {
+    "name": "landscape-reduced-motion",
+    "overflow": false,
+    "people": 14,
+    "portraitRatios": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "positioned": true,
+    "touching": [],
+    "visible": 18,
+    "width": 845
+  }
+]

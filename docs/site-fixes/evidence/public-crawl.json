@@ -1,0 +1,1861 @@
+{
+  "candidate": "29964e9f-2d18-4405-b5be-f72e02ff9e08",
+  "commit": "43f00b3b6a4abd077f5c880d8d80867d64eaba33",
+  "checkedAt": "2026-10-29T16:17:39.681Z",
+  "environment": "Cloudflare 0% candidate through version overrides, anonymous requests only",
+  "sitemapPages": 171,
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Communiverse | Culture, commerce and community",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "title": "About Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/ambassadors/",
+      "status": 200,
+      "title": "Ambassadors | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/",
+      "status": 200,
+      "title": "Chandni Padia | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/between-bloom-and-orbit/",
+      "status": 200,
+      "title": "Between Bloom and Orbit | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/botanical-chorus-in-red/",
+      "status": 200,
+      "title": "Botanical Chorus in Red | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/botanical-rhythm/",
+      "status": 200,
+      "title": "Botanical Rhythm | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/compass-of-the-sea/",
+      "status": 200,
+      "title": "Compass of the Sea | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/continuum-interrupted/",
+      "status": 200,
+      "title": "Continuum, Interrupted | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/imperfect-perfection/",
+      "status": 200,
+      "title": "Imperfect Perfection | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/quiet-entanglements/",
+      "status": 200,
+      "title": "Quiet Entanglements | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/roots-in-faith/",
+      "status": 200,
+      "title": "Roots in Faith | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/the-space-between-movements/",
+      "status": 200,
+      "title": "The Space Between Movements | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/where-the-blue-opens/",
+      "status": 200,
+      "title": "Where the Blue Opens | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/chandni-padia/works/whispers-within-the-leaves/",
+      "status": 200,
+      "title": "Whispers Within the Leaves | Chandni Padia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/",
+      "status": 200,
+      "title": "Cristina Gabriela | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/works/forms-shaped-by-the-sea/",
+      "status": 200,
+      "title": "Forms Shaped by the Sea | Cristina Gabriela | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/works/the-shelter-within/",
+      "status": 200,
+      "title": "The Shelter Within | Cristina Gabriela | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/works/threshold/",
+      "status": 200,
+      "title": "Threshold | Cristina Gabriela | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/works/truth-path-of-light/",
+      "status": 200,
+      "title": "Truth – Path of Light | Cristina Gabriela | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/cristina-gabriela/works/volterra/",
+      "status": 200,
+      "title": "Volterra | Cristina Gabriela | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/gemma-gallagher/",
+      "status": 200,
+      "title": "Gemma Gallagher | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/gemma-gallagher/works/all-along/",
+      "status": 200,
+      "title": "All Along | Gemma Gallagher | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/gemma-gallagher/works/beloved/",
+      "status": 200,
+      "title": "Beloved | Gemma Gallagher | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/gemma-gallagher/works/light-of-your-soul/",
+      "status": 200,
+      "title": "Light of Your Soul | Gemma Gallagher | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/ms-petunya/",
+      "status": 200,
+      "title": "Ms. Petunya | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/ms-petunya/works/shared-memories/",
+      "status": 200,
+      "title": "Shared Memories | Ms. Petunya | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/sophiko/",
+      "status": 200,
+      "title": "Sophiko | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/sophiko/works/ocean-studies-rays/",
+      "status": 200,
+      "title": "Ocean Studies · Rays | Sophiko | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/sophiko/works/ocean-studies-shoal/",
+      "status": 200,
+      "title": "Ocean Studies · Shoal | Sophiko | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/",
+      "status": 200,
+      "title": "Tamer Karam | Artist | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/bilanggo/",
+      "status": 200,
+      "title": "Bilanggo | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/break-time/",
+      "status": 200,
+      "title": "Break Time | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/calm/",
+      "status": 200,
+      "title": "Calm | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/chaos-invites/",
+      "status": 200,
+      "title": "Chaos Invites | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/chaos-offers/",
+      "status": 200,
+      "title": "Chaos Offers | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/checkpoint-s/",
+      "status": 200,
+      "title": "Checkpoint(s) | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/cover-up-1234/",
+      "status": 200,
+      "title": "Cover up 1234 | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/eccle-11-9-10/",
+      "status": 200,
+      "title": "Eccle. 11:9-10 | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/ganun-parin-naman-ang-kabuhayan-gusto-lang-po-namin-maramdaman-ang-sinasabing-kaginhawaan/",
+      "status": 200,
+      "title": "Ganun parin naman ang kabuhayan gusto lang po namin maramdaman ang sinasabing kaginhawaan | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/heart-part-4/",
+      "status": 200,
+      "title": "Heart Part 4 | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/hugas-kamay/",
+      "status": 200,
+      "title": "Hugas kamay? | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/id-be-happy-to-slaughter-them/",
+      "status": 200,
+      "title": "I’d be happy to slaughter them.. | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/jx3c-42/",
+      "status": 200,
+      "title": "JX3C+42 | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/life-is-sacred/",
+      "status": 200,
+      "title": "Life is Sacred | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/memento-mori/",
+      "status": 200,
+      "title": "Memento Mori | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/opinions/",
+      "status": 200,
+      "title": "Opinions | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/process-of-devotion/",
+      "status": 200,
+      "title": "Process of Devotion | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/self-portrait/",
+      "status": 200,
+      "title": "Self Portrait | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/so-far/",
+      "status": 200,
+      "title": "So far | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/social-anesthesia-installation-view/",
+      "status": 200,
+      "title": "Social Anesthesia — installation view | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/somnus-at-4-00am/",
+      "status": 200,
+      "title": "Somnus at 4:00am | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/the-hanged-man/",
+      "status": 200,
+      "title": "The Hanged Man | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/untitled/",
+      "status": 200,
+      "title": "Untitled | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/visual-noise-embroidered-garment/",
+      "status": 200,
+      "title": "Visual Noise · Embroidered Garment | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/visual-noise-reflective-forms/",
+      "status": 200,
+      "title": "Visual Noise · Reflective Forms | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/artists/tamer-karam/works/visual-noise-sky/",
+      "status": 200,
+      "title": "Visual Noise · Sky | Tamer Karam | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/circles/",
+      "status": 200,
+      "title": "Circles | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/",
+      "status": 200,
+      "title": "Clubs | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=beyond-the-frame",
+      "status": 200,
+      "title": "Beyond the frame | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=glass-light",
+      "status": 200,
+      "title": "Glass &amp; light | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=glaze-experiments",
+      "status": 200,
+      "title": "Glaze experiments | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=indigo-natural-dyes",
+      "status": 200,
+      "title": "Indigo &amp; natural dyes | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=ink-handmade-paper",
+      "status": 200,
+      "title": "Ink on handmade paper | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=light-studies",
+      "status": 200,
+      "title": "Light studies | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=local-colombia",
+      "status": 200,
+      "title": "Colombia creative circle | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=local-uae",
+      "status": 200,
+      "title": "UAE creative circle | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=metal-in-miniature",
+      "status": 200,
+      "title": "Metal in miniature | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=prints-without-a-press",
+      "status": 200,
+      "title": "Prints without a press | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=tiny-sculptures",
+      "status": 200,
+      "title": "Tiny sculptures | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=visible-seams",
+      "status": 200,
+      "title": "Visible seams | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=wood-grain-studies",
+      "status": 200,
+      "title": "Wood grain studies | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/clubs/?circle=woven-from-nature",
+      "status": 200,
+      "title": "Woven from nature | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/contact/",
+      "status": 200,
+      "title": "Contact Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-040adec646521658",
+      "status": 200,
+      "title": "Reading Group: Reading the Street – Voice, Aesthetics, and Meaning Across Regions | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-0c4c7deaa01ded34",
+      "status": 200,
+      "title": "Water as a Common Ground: Notes from a Majlis | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-1f76192f95bdbe50",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: The Blazing Sun | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-1fb3240828e786e3",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: Afterlives | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-242be154ac44632b",
+      "status": 200,
+      "title": "Exhibition Opening – Artists’ Rooms: Lulua Alyahya, Shezad Dawood, Walid Siti | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-2bedb7b9abd41686",
+      "status": 200,
+      "title": "Art Dubai 2027 | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-2e3bcdf85e861d86",
+      "status": 200,
+      "title": "Artists’ Rooms: Kamruzzaman Shadhin | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-3473400cada8e843",
+      "status": 200,
+      "title": "Film – Shezad Dawood, The New Dream Machine Project | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-3b690d15c5f871b4",
+      "status": 200,
+      "title": "Artist’s Room: Shezad Dawood | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-3def728608ffb693",
+      "status": 200,
+      "title": "Family Sundays at the Jameel: Summer.Set.Go! | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-4fdde1c00119fd42",
+      "status": 200,
+      "title": "Family Sundays at the Jameel: Like a River Flows by Farah Fawzi Ali | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-544b77043279c3fa",
+      "status": 200,
+      "title": "Artist Led Session: Book Binding with Majd Ismail | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-55a7c0cbbd1b6b63",
+      "status": 200,
+      "title": "Reading Group: Reading the Street – Session 1: Institutionalising the Street | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-6009e04db0df37e5",
+      "status": 200,
+      "title": "Symposium – Anywhere, Everywhere | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-66002247fd13c33e",
+      "status": 200,
+      "title": "Writing Workshop: When Artists Write | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-66a4a174a971a5ee",
+      "status": 200,
+      "title": "Family Sundays at the Jameel: Games. Paths. Stories | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-67aed149d57edd8c",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: in collaboration with The Culturist Film Club | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-69b25253c6cf6bb5",
+      "status": 200,
+      "title": "Workshop: Mind to Map – Translating Thought into Form, by Meera Abdulrahim Salem | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-6a76861553458d90",
+      "status": 200,
+      "title": "Library Circles: Rend Beiruti | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-6ad8ad0886701a76",
+      "status": 200,
+      "title": "Tour – Library Circles: Rend Beiruti | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-6c6837edd88e71d1",
+      "status": 200,
+      "title": "Youth Takeover 2026 | Community Assembly: Sound &amp; Music | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-6d053dd75621ddb4",
+      "status": 200,
+      "title": "The Making Mind at Jameel Arts Centre | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-70bbd8d1042c0165",
+      "status": 200,
+      "title": "Artist Talk—Panos Aprahamian: The Karantina Trilogy | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-788ef0a973050252",
+      "status": 200,
+      "title": "Waterlands, Elemental Dreams | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-7ffce9bbfaa2bfb3",
+      "status": 200,
+      "title": "Family Sundays at the Jameel: Shapes, Stories and Memories | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-8480863c141fc482",
+      "status": 200,
+      "title": "Library Circles: Haneena P. A. – Sufrah Salon | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-8520e1f80ad66af2",
+      "status": 200,
+      "title": "Performance: Strings/∅ – an ambient listening experience, by Lucio Avancena | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-8658acf6ab713241",
+      "status": 200,
+      "title": "Children’s Workshop: Surreal Subjects | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-8d8c35fcf95d75cc",
+      "status": 200,
+      "title": "Artist-Led Masterclass with Richi Bhatia: Studio Tour and Assemblage Making | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-90ba6ff0739bcd02",
+      "status": 200,
+      "title": "Family Workshop: Weaving and Macrame by Maggie Kabariti | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-94ea9a3167bbe31a",
+      "status": 200,
+      "title": "Post Occupancy Architecture Workshop—Interspecies Futures | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-956c445df0ffc17a",
+      "status": 200,
+      "title": "Down to Earth 2026 | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-961249114898bf7f",
+      "status": 200,
+      "title": "Artist’s Room: Lulua Alyahya | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-964f0d7d66bd6741",
+      "status": 200,
+      "title": "Film – Panos Aprahamian, The Karantina Trilogy | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-a0bd620a5523e13a",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: Memory of Princess Mumbi | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-a0d9300a6947a224",
+      "status": 200,
+      "title": "Workshop—Anywhere, Everywhere with Suha Hassan | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-a3494d9d5fa44210",
+      "status": 200,
+      "title": "Family Sundays at the Jameel: Best of 2026! | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-b0a35f368949e818",
+      "status": 200,
+      "title": "Artist’s Room: Bani Abidi | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-b3f2d18eb4d292e3",
+      "status": 200,
+      "title": "Reading Group: Reading the Street – Session 2: The Street as a Shared Terrain | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-bc8c03641e4578ec",
+      "status": 200,
+      "title": "Educators Circle: Teaching Artist Workshop and Studio Visit with Chafa Ghaddar | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c088e269691420a9",
+      "status": 200,
+      "title": "Artist-Led Masterclass: A Deeper Encounter with the Art Jameel Collection | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c2d3916277db2080",
+      "status": 200,
+      "title": "Summer Arts Camp: Make.Act.Play | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c6dfcc4df3f77893",
+      "status": 200,
+      "title": "Children’s Workshop: Mapping Impressions with Rashid Almehiri | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c7c521278e762f46",
+      "status": 200,
+      "title": "Playscape: I Dreamt of a City Everyone Calls Home | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c8f9620c41ec2fae",
+      "status": 200,
+      "title": "Salah Elmur: Just as the Heart of a Mango is a Stone | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-c943013b1df62c90",
+      "status": 200,
+      "title": "Artist’s Garden: Amphibious Timelapse by the Rice Brewing Sisters Club | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-ce0b6a715326bbe5",
+      "status": 200,
+      "title": "Children’s Workshop: Storytelling and World Building with ambi | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-communiverse-noa-wetex-2026",
+      "status": 200,
+      "title": "Communiverse × NOA at WETEX 2026 | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-d0e7ea0fed142649",
+      "status": 200,
+      "title": "Performance—Respiriting: The Water Diviners | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-d7c9a6fc82c4fc47",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: Do You Love Me? | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-d93a7a2fc276180d",
+      "status": 200,
+      "title": "Jameel’s Summer Cinema: John Lilly and the Earth Coincidence Control Office | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-da8906cd12a5b314",
+      "status": 200,
+      "title": "Afrah Shafiq: Nobody Knows For Certain | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-avid-entrepreneurship-2026",
+      "status": 200,
+      "title": "Navigating Cultural Entrepreneurship in the UAE and Beyond | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-festival-tote-2026",
+      "status": 200,
+      "title": "Design Your Own Festival Tote | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-herding-unheard-2026",
+      "status": 200,
+      "title": "Herding the Unheard: Traces of an Unwritten Language | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-nour-hage-2026",
+      "status": 200,
+      "title": "What We Leave Behind: Recipes, Memories &amp; Making | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-oblong-aperitivo-2026",
+      "status": 200,
+      "title": "Art Aperitivo: Cocktails and Culture | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-resonance-gemma-2026",
+      "status": 200,
+      "title": "RESONANCE · Gemma Gallagher | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-sky-earth-2026",
+      "status": 200,
+      "title": "The Sky Held It, the Earth Remembered | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-taking-form-2026",
+      "status": 200,
+      "title": "Taking Form · Rana Begum | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-terrain-2026",
+      "status": 200,
+      "title": "What We Carry Becomes the Terrain | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-dubai-wool-memory-2026",
+      "status": 200,
+      "title": "Wool as Memory: Needle-Felting Workshop | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-e238156540f0565d",
+      "status": 200,
+      "title": "Reading Group: Reading the Street – Session 3: Surface, Statecraft and Controlled Visibility | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-e6792a6aba46494e",
+      "status": 200,
+      "title": "Children’s Workshop: From Story to Trace… From Trace to Story by Nagham Hammoush and Life in Arabic | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-e7c22595e649e4cf",
+      "status": 200,
+      "title": "Artist’s Room: Walid Siti | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-ebe001f2e0e3bccf",
+      "status": 200,
+      "title": "Opening Talk—Salah Elmur: Just as the Heart of a Mango is a Stone | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-f1768b37dc85d2cd",
+      "status": 200,
+      "title": "Tour &amp; Workshop: The Space between Structures — Assembly-led tour of the Youth Takeover 2026: Not the Season | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-f657a74bf7cf301a",
+      "status": 200,
+      "title": "Night School 2027: Afterimage | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/event/?id=event-wakos-ceramic-ties-2026",
+      "status": 200,
+      "title": "WAKOS: Ceramic Ties – Peru and the Emirates | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/events/",
+      "status": 200,
+      "title": "Events | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/events/avid-learning-poetry-night/",
+      "status": 200,
+      "title": "Avid Learning poetry night | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/exhibitions/wetex-2026/",
+      "status": 200,
+      "title": "WETEX 2026 | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/galleries/",
+      "status": 200,
+      "title": "Galleries | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-art-basel",
+      "status": 200,
+      "title": "Art Basel | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-art-dubai",
+      "status": 200,
+      "title": "Art Dubai | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-artesanias-de-colombia",
+      "status": 200,
+      "title": "Artesanías de Colombia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-bogota-chamber-of-commerce",
+      "status": 200,
+      "title": "Bogotá Chamber of Commerce | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-china-ceramics-museum",
+      "status": 200,
+      "title": "China Ceramics Museum | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-hayy-jameel",
+      "status": 200,
+      "title": "Hayy Jameel | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-ilham-gallery",
+      "status": 200,
+      "title": "ILHAM Gallery | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-india-art-fair",
+      "status": 200,
+      "title": "India Art Fair | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-india-art-festival",
+      "status": 200,
+      "title": "India Art Festival | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-islamic-arts-museum-malaysia",
+      "status": 200,
+      "title": "Islamic Arts Museum Malaysia | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-jameel-arts-centre",
+      "status": 200,
+      "title": "Jameel Arts Centre | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-lok-virsa-heritage-museum",
+      "status": 200,
+      "title": "Lok Virsa Heritage Museum | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-luneta-art-fair",
+      "status": 200,
+      "title": "Luneta Art Fair | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-museo-larco",
+      "status": 200,
+      "title": "Museo Larco | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-museum-of-applied-arts",
+      "status": 200,
+      "title": "Museum of Applied Arts | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-national-crafts-museum-hastkala-academy",
+      "status": 200,
+      "title": "National Crafts Museum &amp; Hastkala Academy | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-national-heritage-culture-division",
+      "status": 200,
+      "title": "National Heritage &amp; Culture Division | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-national-museum-of-anthropology",
+      "status": 200,
+      "title": "National Museum of Anthropology | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/gallery/?id=gallery-sharjah-art-foundation",
+      "status": 200,
+      "title": "Sharjah Art Foundation | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/how-it-works/",
+      "status": 200,
+      "title": "How Communiverse works",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/privacy/",
+      "status": 200,
+      "title": "Privacy | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/terms/",
+      "status": 200,
+      "title": "Terms | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/works/",
+      "status": 200,
+      "title": "Works | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    },
+    {
+      "path": "/workshops/",
+      "status": 200,
+      "title": "Office workshops in Dubai | Communiverse",
+      "release": "public-domain-20261029-v26",
+      "brandLeaks": []
+    }
+  ],
+  "extraLinks": [
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-sophiko",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/workshops/?session=aura-painting",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-luna",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/workshops/?session=guided-meditation",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/people/",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/circles/?filter=people"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=ambassadors&person=cv-luna",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/person/keiffer/",
+      "status": 302,
+      "location": "https://preview.communiverseclubs.com/circles/?person=cv-keiffer"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/person/luna/",
+      "status": 302,
+      "location": "https://preview.communiverseclubs.com/circles/?person=cv-luna"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=ambassadors",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-chandni-padia",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/chandni-padia/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-tamer-karam",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/tamer-karam/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-cristina-gabriela",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/cristina-gabriela/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-sophiko",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/sophiko/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-ms-petunya",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/ms-petunya/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/artist/?id=artist-gemma-gallagher",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/gemma-gallagher/"
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=people",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-haseeb-wasim",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-alison-gonzalez",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-louis-mitchell",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-hira-e-silsby",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-elferah-saidil",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-keiffer",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=cv-hassan-b-mirza",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-ms-petunya",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-chandni-padia",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-tamer-karam",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-sophiko",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-cristina-gabriela",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?person=artist-gemma-gallagher",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-gemma-gallagher",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-ms-petunya",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/events/?state=past",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-the-space-between-movements",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-heart-part-4",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-imperfect-perfection",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-visual-noise-wetex",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-ganun-parin-naman-ang-kabuhayan-gusto-lang-po-namin-maramdaman-ang-sinasabing-ka",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-untitled",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-life-is-sacred",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-visual-noise-sky-wetex",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-opinions",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-i-d-be-happy-to-slaughter-them",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-the-hanged-man",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela&art=work-cristina-volterra-wetex",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-so-far",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-jx3c-42",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-continuum-interrupted",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-sophiko&art=work-sophiko-ocean-shoal",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-compass-of-the-sea",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-between-bloom-and-orbit",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela&art=work-cristina-gabriela-threshold",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-checkpoint-s",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-where-the-blue-opens",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-whispers-within-the-leaves",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-bilanggo",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-ms-petunya&art=work-shared-memories-ms-petunya",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-chaos-invites",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-hugas-kamay",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-quiet-entanglements",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-gemma-gallagher&art=work-gemma-gallagher-light-of-your-soul",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela&art=work-cristina-sea-forms-wetex",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-process-of-devotion",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-cover-up-1234",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-chaos-offers",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-botanical-rhythm",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela&art=work-cristina-gabriela-the-shelter-within",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-break-time",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-gemma-gallagher&art=work-gemma-gallagher-beloved",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-self-portrait",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-roots-in-faith",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-calm",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-sophiko&art=work-sophiko-ocean-studies",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-visual-noise-garment-wetex",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-memento-mori",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-eccle-11-9-10",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-gemma-gallagher&art=work-gemma-gallagher-all-along",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-somnus-at-4-00am",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-cristina-gabriela&art=work-cristina-gabriela-truth-path-of-light",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-tamer-karam&art=work-tamer-social-anesthesia-installation-view",
+      "status": 200,
+      "location": null
+    },
+    {
+      "url": "https://preview.communiverseclubs.com/circles/?filter=artists&person=artist-chandni-padia&art=work-chandni-padia-botanical-chorus-in-red",
+      "status": 200,
+      "location": null
+    }
+  ],
+  "clients": [
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/account-client.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/form-support.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/identity.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/discovery-ui.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/navigation.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261008-marketplace-1b-join.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_render/events-framing-20261027-v6/client.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261011-navigation.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_browse/dubai-scroll-20261022-v1/tools.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261009-social-12-booking.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261009-social-12-identity.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261009-social-12-controls-20261011b.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_circles/20261022-v1/circles.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_render/events-framing-20261027-v6/event-banners.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_render/events-framing-20261027-v6/session.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_render/events-framing-20261027-v6/boot.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/legal-links.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/record-actions.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/workshops.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/artwork-experience.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/registrations.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/accessibility.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_brand/20261020-v21/workspace.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_responsive/20261022-v25/workspace.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/__cvmobile_20261013_v8.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_responsive/20261022-v25/refinement.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_responsive/20261022-v25/navigation.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_responsive/20261022-v25/layout.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/__cvsearch_v4.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_render/events-framing-20261027-v6/events.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/feed-discovery.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_public/20261011-light-focus.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/circles-directory.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_exhibitions/20261020-v27/exhibition.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_exhibitions/wetex-recap-20261022-v2/recap.js",
+      "status": 200
+    },
+    {
+      "path": "/communiverse/_domain/public-domain-20261029-v26/_events/avid-blog-20261022-v2/event.js",
+      "status": 200
+    }
+  ],
+  "checks": [
+    {
+      "path": "/artist/?id=unknown",
+      "status": 404
+    },
+    {
+      "path": "/artists/unknown/",
+      "status": 404
+    },
+    {
+      "path": "/artists/sophiko/works/unknown/",
+      "status": 404
+    },
+    {
+      "path": "/circles/?person=unknown",
+      "status": 404
+    },
+    {
+      "path": "/event/?id=unknown",
+      "status": 404
+    },
+    {
+      "path": "/gallery/?id=unknown",
+      "status": 404
+    },
+    {
+      "path": "/clubs/?circle=unknown",
+      "status": 404
+    },
+    {
+      "path": "/api/galleries?id=unknown",
+      "status": 404
+    },
+    {
+      "path": "/.env",
+      "status": 404
+    },
+    {
+      "path": "/missing.js.map",
+      "status": 404
+    },
+    {
+      "path": "/discover/?q=clay",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/?q=clay"
+    },
+    {
+      "path": "/artist/?id=artist-sophiko",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/artists/sophiko/"
+    },
+    {
+      "path": "/people/",
+      "status": 301,
+      "location": "https://preview.communiverseclubs.com/circles/?filter=people"
+    }
+  ],
+  "forms": {
+    "honeypot": {
+      "status": 200,
+      "body": {
+        "ok": true,
+        "message": "Thank you. Your submission was received."
+      }
+    },
+    "missingToken": {
+      "status": 400,
+      "body": {
+        "error": "Complete the security check and try again."
+      }
+    },
+    "successfulLiveDeliveryTested": false
+  },
+  "headers": {
+    "content-security-policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com; img-src 'self' https: data:; media-src 'self' blob:; connect-src 'self' https://challenges.cloudflare.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; frame-src 'self' https://challenges.cloudflare.com",
+    "content-security-policy-report-only": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; media-src 'self' https:; font-src 'self' data:; connect-src 'self' https://challenges.cloudflare.com https://ypkfganbwdvcjrcxygta.supabase.co https://goyallnmiyvayxgwcpjz.supabase.co; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://espacios.me; object-src 'none'; report-uri /api/csp-report; report-to cv-csp",
+    "cross-origin-opener-policy": "same-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-communiverse-domain": "public-domain-20261029-v26",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY"
+  },
+  "routingRetries": [],
+  "normalTrafficRelease": "public-domain-20261029-v25",
+  "problems": []
+}

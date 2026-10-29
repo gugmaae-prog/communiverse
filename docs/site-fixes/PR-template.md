@@ -12,8 +12,7 @@ See docs/site-fixes/recon.md for the verified source, hosting, routing, data, fo
 - [ ] Workshop prices, currency, durations and group sizes
 - [ ] Hira's portrait
 - [ ] Sharing-image design sign-off
-- [ ] Confirm Home-only exclusions for the three specified artworks
-- [ ] Turnstile production configuration
+- [ ] Successful production Turnstile challenge and transactional delivery acceptance
 - [ ] Account write capacity and OAuth provider configuration before cutover
 - [ ] Review CSP reports before switching the new policy to enforcement
 

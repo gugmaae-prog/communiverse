@@ -1,0 +1,249 @@
+
+> communiverse-public-worker@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: actual artwork report dialog exposes reason, optional details, one close and linked form labels
+ok 1 - actual artwork report dialog exposes reason, optional details, one close and linked form labels
+  ---
+  duration_ms: 2201.488417
+  type: 'test'
+  ...
+# Subtest: branded account cutover requires explicit readiness and a reviewed destination
+ok 2 - branded account cutover requires explicit readiness and a reviewed destination
+  ---
+  duration_ms: 2.2005
+  type: 'test'
+  ...
+# Subtest: account links, query return paths and recovery fragments use one origin without cross-domain sessions
+ok 3 - account links, query return paths and recovery fragments use one origin without cross-domain sessions
+  ---
+  duration_ms: 0.841333
+  type: 'test'
+  ...
+# Subtest: branded return paths include validated public records while rejecting external and API destinations
+ok 4 - branded return paths include validated public records while rejecting external and API destinations
+  ---
+  duration_ms: 0.296541
+  type: 'test'
+  ...
+# Subtest: platform copy is branded while technical hosts, IDs and real third-party names remain
+ok 5 - platform copy is branded while technical hosts, IDs and real third-party names remain
+  ---
+  duration_ms: 1.621833
+  type: 'test'
+  ...
+# Subtest: branded owned password API supports fresh sign-in, host-only cookies, authenticated reads, role boundaries and recovery errors with isolated D1
+ok 6 - branded owned password API supports fresh sign-in, host-only cookies, authenticated reads, role boundaries and recovery errors with isolated D1
+  ---
+  duration_ms: 2665.304834
+  type: 'test'
+  ...
+# Subtest: directory removes only the requested circles and preserves every artist and photographed Elferah
+ok 7 - directory removes only the requested circles and preserves every artist and photographed Elferah
+  ---
+  duration_ms: 10.653209
+  type: 'test'
+  ...
+# Subtest: old artist directory links preserve selection, search and fragments
+ok 8 - old artist directory links preserve selection, search and fragments
+  ---
+  duration_ms: 0.243917
+  type: 'test'
+  ...
+# Subtest: every current circle fits its screen with separated, accessible targets
+ok 9 - every current circle fits its screen with separated, accessible targets
+  ---
+  duration_ms: 434.326208
+  type: 'test'
+  ...
+# Subtest: six artist positions are staggered on phone and landscape
+ok 10 - six artist positions are staggered on phone and landscape
+  ---
+  duration_ms: 0.161458
+  type: 'test'
+  ...
+# Subtest: extremely short accessible windows grow rather than losing circles
+ok 11 - extremely short accessible windows grow rather than losing circles
+  ---
+  duration_ms: 27.62625
+  type: 'test'
+  ...
+# Subtest: selected portrait stays anchored and variable cards never touch at phone, tablet or desktop widths
+ok 12 - selected portrait stays anchored and variable cards never touch at phone, tablet or desktop widths
+  ---
+  duration_ms: 172.537708
+  type: 'test'
+  ...
+# Subtest: featured artist changes at Dubai midnight, not UTC midnight
+ok 13 - featured artist changes at Dubai midnight, not UTC midnight
+  ---
+  duration_ms: 0.874625
+  type: 'test'
+  ...
+# Subtest: each artist receives one day in every complete rotation, across month/year boundaries
+ok 14 - each artist receives one day in every complete rotation, across month/year boundaries
+  ---
+  duration_ms: 0.222125
+  type: 'test'
+  ...
+# Subtest: an open page refreshes its single featured artist at midnight and on return
+ok 15 - an open page refreshes its single featured artist at midnight and on return
+  ---
+  duration_ms: 7.716917
+  type: 'test'
+  ...
+# Subtest: active hubs affect discovery without deleting global or future records
+ok 16 - active hubs affect discovery without deleting global or future records
+  ---
+  duration_ms: 22.86925
+  type: 'test'
+  ...
+# Subtest: empty states distinguish populated, filtered-empty and overall-empty data
+ok 17 - empty states distinguish populated, filtered-empty and overall-empty data
+  ---
+  duration_ms: 0.073625
+  type: 'test'
+  ...
+# Subtest: filtered club responses retain a dynamic overall count and actual empty data is explicit
+ok 18 - filtered club responses retain a dynamic overall count and actual empty data is explicit
+  ---
+  duration_ms: 1.229
+  type: 'test'
+  ...
+# Communiverse development form: Turnstile keys are missing.
+# Subtest: Turnstile fails closed in production and validates hostname, action and single-use outcomes
+ok 19 - Turnstile fails closed in production and validates hostname, action and single-use outcomes
+  ---
+  duration_ms: 3.808167
+  type: 'test'
+  ...
+# Subtest: filled honeypot drops without limiter, persistence or delivery
+ok 20 - filled honeypot drops without limiter, persistence or delivery
+  ---
+  duration_ms: 0.30125
+  type: 'test'
+  ...
+# Communiverse registration unavailable Error
+# Communiverse development form: Turnstile keys are missing.
+# Communiverse development form: abuse limiter is not configured.
+# Subtest: existing Durable Object namespace atomically admits five concurrent attempts and isolates notification objects
+ok 21 - existing Durable Object namespace atomically admits five concurrent attempts and isolates notification objects
+  ---
+  duration_ms: 2326.923959
+  type: 'test'
+  ...
+# Subtest: validated challenges are stripped before legacy body-size limits, and email-link sign-in is protected
+ok 22 - validated challenges are stripped before legacy body-size limits, and email-link sign-in is protected
+  ---
+  duration_ms: 0.77125
+  type: 'test'
+  ...
+# Subtest: limiter RPC failures and malformed replies fail closed, including sanitized CSP reporting
+ok 23 - limiter RPC failures and malformed replies fail closed, including sanitized CSP reporting
+  ---
+  duration_ms: 8.006916
+  type: 'test'
+  ...
+# Subtest: Home interleaves artists, caps each batch, excludes only named/flagged records and loses no eligible works
+ok 24 - Home interleaves artists, caps each batch, excludes only named/flagged records and loses no eligible works
+  ---
+  duration_ms: 1.3465
+  type: 'test'
+  ...
+# Subtest: Home cursor validates catalogue/filter identity and leaves artist/saved requests unchanged
+ok 25 - Home cursor validates catalogue/filter identity and leaves artist/saved requests unchanged
+  ---
+  duration_ms: 28.651334
+  type: 'test'
+  ...
+# Subtest: legal drafts render with existing shell, placeholders and form/footer links
+ok 26 - legal drafts render with existing shell, placeholders and form/footer links
+  ---
+  duration_ms: 2532.690375
+  type: 'test'
+  ...
+# Subtest: draft policy and cookie inventory retain human review placeholders
+ok 27 - draft policy and cookie inventory retain human review placeholders
+  ---
+  duration_ms: 1.3865
+  type: 'test'
+  ...
+# Subtest: notification templates keep the verified sender and use the gated account destination
+ok 28 - notification templates keep the verified sender and use the gated account destination
+  ---
+  duration_ms: 1.277917
+  type: 'test'
+  ...
+# Subtest: shared portrait update reaches embedded hydration records, responsive HTML and JSON without replacing future uploads
+ok 29 - shared portrait update reaches embedded hydration records, responsive HTML and JSON without replacing future uploads
+  ---
+  duration_ms: 7.098834
+  type: 'test'
+  ...
+# Subtest: actual retained discovery API handles reads and protects writes with either supported payload parameter
+ok 30 - actual retained discovery API handles reads and protects writes with either supported payload parameter
+  ---
+  duration_ms: 28.43525
+  type: 'test'
+  ...
+# Subtest: public Join helper remains available when retained services and D1 cannot read
+ok 31 - public Join helper remains available when retained services and D1 cannot read
+  ---
+  duration_ms: 2030.286375
+  type: 'test'
+  ...
+# Communiverse social unavailable service
+# Subtest: all six artist and 48 artwork routes return record-specific initial HTML, legacy redirects and branded unknown 404s
+ok 32 - all six artist and 48 artwork routes return record-specific initial HTML, legacy redirects and branded unknown 404s
+  ---
+  duration_ms: 3210.183791
+  type: 'test'
+  ...
+# Subtest: version promotion refuses missing live acceptance and refuses accidental account cutover
+ok 33 - version promotion refuses missing live acceptance and refuses accidental account cutover
+  ---
+  duration_ms: 1.644083
+  type: 'test'
+  ...
+# Subtest: security headers are tenant-scoped; shared-host HSTS is never emitted and enforcement is retained
+ok 34 - security headers are tenant-scoped; shared-host HSTS is never emitted and enforcement is retained
+  ---
+  duration_ms: 1642.764333
+  type: 'test'
+  ...
+# Communiverse social unavailable service
+# Subtest: sitemap and metadata derive from real records, with unique canonicals, SSR and 1200 by 630 images
+ok 35 - sitemap and metadata derive from real records, with unique canonicals, SSR and 1200 by 630 images
+  ---
+  duration_ms: 9958.597625
+  type: 'test'
+  ...
+# Subtest: Hira follows Louis in DOM/keyboard order, requests no image and preserves every other name and role
+ok 36 - Hira follows Louis in DOM/keyboard order, requests no image and preserves every other name and role
+  ---
+  duration_ms: 16.474875
+  type: 'test'
+  ...
+# Communiverse social unavailable service
+# Subtest: Home serves a curated real catalogue and canonical navigation through the actual Worker
+ok 37 - Home serves a curated real catalogue and canonical navigation through the actual Worker
+  ---
+  duration_ms: 679.819333
+  type: 'test'
+  ...
+# Subtest: workshop enquiry prepares an encoded email only, preserving names and keeping a fixed recipient
+ok 38 - workshop enquiry prepares an encoded email only, preserving names and keeping a fixed recipient
+  ---
+  duration_ms: 0.534041
+  type: 'test'
+  ...
+1..38
+# tests 38
+# suites 0
+# pass 38
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13199.015
