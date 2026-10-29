@@ -2,7 +2,7 @@
 
 ## Production and source ownership
 
-The verified public release is `public-domain-20261029-v25`, version `802e5e6d-760f-4946-801a-2dab6fbc8273`, on `communiverse-workspace-ux-v3-20261009` at 100% traffic. The repository's root Next.js export and legacy Wrangler configuration are not its deployment owner. Do not deploy that configuration against the live stack.
+At source reconciliation, the verified public release was `public-domain-20261029-v25`, version `802e5e6d-760f-4946-801a-2dab6fbc8273`, on `communiverse-workspace-ux-v3-20261009` at 100% traffic. The later runtime compatibility update and zero-percent site candidate are recorded in [release verification](release-verification.md). The repository's root Next.js export and legacy Wrangler configuration are not its deployment owner. Do not deploy that configuration against the live stack.
 
 `worker/public-domain/` reconciles the current edge wrapper, 146 checksummed retained modules, 321 checksummed static files, and existing public catalogue snapshots. It excludes database backups, credentials, raw Worker settings, notification recipient addresses, private submissions, and unlisted duplicate local files. Notification recipients must be configured through the server-only `CV_NOTIFICATION_RECIPIENTS` setting before a deployment. The live recipient list is retained privately by the release owner, not copied into this public repository.
 
