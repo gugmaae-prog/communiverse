@@ -1,0 +1,24 @@
+{
+  "375": {
+    "count": 48,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 111
+      }
+    ],
+    "overflow": false,
+    "violations": []
+  },
+  "1440": {
+    "count": 48,
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 112
+      }
+    ],
+    "overflow": false,
+    "violations": []
+  }
+}
