@@ -5,7 +5,7 @@ import {securityPolicy,communiverseRequest,privateArtifactPath,cspReport,securit
 import {brandedAccountRoute,accountSupport} from './account-origin.mjs';
 import {formSupport} from './form-support.mjs';
 import FORM_CLIENT from './form-support.js.txt';
-import {guardForm,FORM_ACTIONS,formEndpoint} from './form-security.mjs';
+import {guardForm,FORM_ACTIONS,formEndpoint,withoutChallengeToken} from './form-security.mjs';
 import {reportAPI} from './report.mjs';
 import {artistPath,artistSlugs,artistIdFromSlug,workIdFromSlugs} from './record-routes.mjs';
 import {artistById,catalogue,knownPersonIds,worksPage,artistPage,workPage,selectedCircleHTML,recordStyle,eventRecordPage} from './record-pages.mjs';
@@ -85,7 +85,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  return identityResponse(new HTMLRewriter()
  .on('head',{element(e){e.append('<style data-cv-records>'+recordStyle+'</style><script defer src="'+CLIENT_BASE+'record-actions.js"></script><style data-cv-discovery>'+discoveryStyle+'</style><script type="application/json" id="cv-discovery-config">'+JSON.stringify(discoveryConfig).replaceAll('<','\\u003c')+'</script>',{html:true});}})
  .on('head',{element(e){e.prepend('<script defer src="'+CLIENT_BASE+'discovery-ui.js"></script>'+(featured?'<script defer src="'+CLIENT_BASE+'feed-discovery.js"></script>':'')+'<script defer src="'+CLIENT_BASE+'navigation.js"></script><script type="application/json" id="cv-runtime-config">'+JSON.stringify({publicOrigin:u.origin,pageBase:'/',apiBase:PREFIX+'/api/',assetBase:PREFIX+'/_',accountOrigin:OLD,accountBase:OLD+PREFIX+'/'})+'</script>'+(u.origin===PREVIEW?'<meta name="robots" content="noindex,nofollow">':''),{html:true});}})
- .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';e.setAttribute(attr,link(e.getAttribute(attr),u.origin));}})
+ .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';const value=e.getAttribute(attr);try{if(e.tagName==='a'&&['/for-founders','/for-brands','/for-startups'].includes(new URL(value,u.origin).pathname.replace(/\/$/,''))){e.remove();return;}}catch{}e.setAttribute(attr,link(value,u.origin));}})
  .on('#cv-circle-filters > label:first-child',{element(e){const classes=new Set((e.getAttribute('class')||'').split(/\s+/).filter(Boolean));classes.add('cv4-search-field');e.setAttribute('class',[...classes].join(' '));}})
  .on('#cv-social-header nav a[href*="artists"],#cv-marketplace-nav a[href*="artists"]',{element(e){e.remove();}})
  .on('#cv-social-header nav a[href*="circles"],#cv-marketplace-nav a[href*="circles"]',{element(e){if(clean(u.pathname)==='/artist/')e.setAttribute('aria-current','page');}})
@@ -107,7 +107,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  .on('#cv-focus-data',{element(e){if(people)e.remove();}})
  .on('link[rel="stylesheet"]',{element(e){if(people&&/\/_public\/2026100[678]-plug-/.test(e.getAttribute('href')||''))e.remove();}})
  .on('script[src]',{element(e){if(people&&/(?:\/circles\.js|\/__cvsearch_v4(?:_plug_fix)?\.js|\/__cvprofile_20261013_v11\.js|\/__cvmobile_20261013_v8\.js)(?:\?|$)/.test(e.getAttribute('src')||''))e.remove();}})
- .on('script[src],link[as="script"]',{element(e){const attr=e.tagName==='script'?'src':'href',src=e.getAttribute(attr)||'';if(technical(src)&&/\.js(?:[?#]|$)/.test(src)&&!src.startsWith(CLIENT_BASE))e.setAttribute(attr,CLIENT_BASE+clean(src).slice(1));}})
+ .on('script[src],link[as="script"]',{element(e){const attr=e.tagName==='script'?'src':'href',src=e.getAttribute(attr)||'';if(/\/__cvfix_v2\.js(?:[?#]|$)/.test(src)){e.remove();return;}if(technical(src)&&/\.js(?:[?#]|$)/.test(src)&&!src.startsWith(CLIENT_BASE))e.setAttribute(attr,CLIENT_BASE+clean(src).slice(1));}})
  .on('link[rel="canonical"],meta[property="og:url"]',{element(e){e.setAttribute(e.tagName==='link'?'href':'content',canonical(request.url));}})
  .on('#plan-session',{element(e){const q=new URLSearchParams(u.search);q.set('cv_account','1');e.setInnerContent('<h2>Plan a group session</h2><p>Choose a time and we will help you arrange your session.</p><a class="cv-button" href="'+OLD+internal(clean(u.pathname))+'?'+escape(q.toString())+'#plan-session">Plan a session</a>',{html:true});}})
  .transform(new Response(html,{status:response.status,headers:h})),request);
@@ -128,7 +128,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(u.pathname===CLIENT_BASE+'legal-links.js')return new Response(request.method==='HEAD'?null:LEGAL_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'identity.js')return new Response(request.method==='HEAD'?null:IDENTITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  const isLegacy=['espacios.me','www.espacios.me'].includes(u.hostname)&&u.pathname.startsWith(PREFIX+'/');
- if(request.method==='POST'&&isLegacy&&FORM_ACTIONS[formEndpoint(request)]&&!['workshop-enquiry','event-rsvp','report'].includes(formEndpoint(request))){try{const blocked=await guardForm(request,env,await readRegistrationBody(request.clone()));if(blocked)return blocked;}catch(e){return Response.json({error:e.status?e.message:'Check your form details.'},{status:e.status||400,headers:headers()});}}
+ if(request.method==='POST'&&isLegacy&&FORM_ACTIONS[formEndpoint(request)]&&!['workshop-enquiry','event-rsvp','report'].includes(formEndpoint(request))){try{const b=await readRegistrationBody(request.clone()),blocked=await guardForm(request,env,b);if(blocked)return blocked;request=withoutChallengeToken(request,b);}catch(e){return Response.json({error:e.status?e.message:'Check your form details.'},{status:e.status||400,headers:headers()});}}
  if(request.method==='POST'&&isLegacy&&formEndpoint(request)==='report')return reportAPI(request,env);
  if(!hosts.has(u.hostname)){
   if(['espacios.me','www.espacios.me'].includes(u.hostname)&&/^\/communiverse\/api\/account\/(login|register|credentials|recover)\/?$/.test(u.pathname)){const response=await updatedAccountAPI(request,env);if(response.status===201)background(ctx,observeRegistration(request,response.clone(),env,ctx));return response;}
