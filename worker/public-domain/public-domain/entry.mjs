@@ -1,4 +1,5 @@
 import ACCOUNT_CLIENT from './account-client.js.txt';
+import JOIN_LINKS from './join-links.js.txt';
 import {accessibilitySupport} from './accessibility.mjs';
 import ACCESSIBILITY_CLIENT from './accessibility.js.txt';
 import {seoSupport,sitemap} from './seo.mjs';
@@ -123,6 +124,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(hosts.has(u.hostname)&&u.pathname==='/.well-known/security.txt')return new Response(request.method==='HEAD'?null:securityText('https://communiverseclubs.com'),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
  if(hosts.has(u.hostname)&&u.pathname==='/robots.txt')return new Response(request.method==='HEAD'?null:robots(u.origin),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
  if(u.pathname===CLIENT_BASE+'account-client.js')return new Response(request.method==='HEAD'?null:ACCOUNT_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ if(u.pathname===CLIENT_BASE+'_public/20261008-marketplace-1b-join.js')return new Response(request.method==='HEAD'?null:JOIN_LINKS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'accessibility.js')return new Response(request.method==='HEAD'?null:ACCESSIBILITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'form-support.js')return new Response(request.method==='HEAD'?null:FORM_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'record-actions.js')return new Response(request.method==='HEAD'?null:RECORD_ACTIONS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
