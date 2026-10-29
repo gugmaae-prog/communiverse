@@ -1,3 +1,5 @@
+import {legalPage,legalSupport} from './legal.mjs';
+import LEGAL_CLIENT from './legal-links.js.txt';
 import {identityResponse,CLIENT as IDENTITY_CLIENT} from './identity-response.mjs';
 import {accountAPI as updatedAccountAPI} from './accounts.mjs';
 export {RegistrationDelivery} from './registration-delivery.mjs';
@@ -54,7 +56,7 @@ async function guest(request,env,ctx,path){
  catch(error){const fallback=await publicFallback(fallbackRequest);if(fallback){retryLiveAt=Date.now()+60000;return fallback;}throw error;}
 }
 function jsonLinks(v,origin){return typeof v==='string'?(/^(?:\/communiverse\/|https:\/\/(?:www\.)?espacios\.me\/communiverse\/)/.test(v)?link(v,origin):v):Array.isArray(v)?v.map(x=>jsonLinks(x,origin)):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,jsonLinks(x,origin)])):v;}
-async function adapt(response,request){const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
+async function adapt(response,request){response=legalSupport(response,request);const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
  if(request.method==='HEAD')return new Response(null,{status:response.status,headers:h});
  if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
  if(!type.includes('text/html'))return new Response(response.body,{status:response.status,headers:h});
@@ -88,6 +90,7 @@ async function adapt(response,request){const u=new URL(request.url),h=adjusted(r
 const browserNavigation=`(()=>{'use strict';const old='https://espacios.me',prefix='/communiverse',protectedPath=/^\\/(workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account|events\\/host)(\\/|$)/;function target(value){let u;try{u=new URL(value,location.href)}catch{return value}if(![location.origin,old].includes(u.origin))return value;if(u.origin===old&&u.searchParams.get('cv_account')==='1')return value;const p=u.pathname.replace(/^\\/communiverse(?=\\/|$)/,'')||'/';if(p==='/artists/'||p==='/artists'){u.pathname='/circles/';u.searchParams.set('filter','artists');return u.pathname+u.search+u.hash}if(protectedPath.test(p))return old+prefix+p+u.search+u.hash;if(u.origin===old&&u.pathname.startsWith(prefix+'/')&&!/^\\/(api(?:\\/|$)|_)/.test(p))return p+u.search+u.hash;return value}function update(root){for(const a of root.querySelectorAll('#cv-social-header nav a,#cv-marketplace-nav a'))if(a.textContent.trim()==='Artists')a.remove();for(const e of root.querySelectorAll('a[href],form[action]')){const a=e.tagName==='FORM'?'action':'href',v=e.getAttribute(a),n=target(v);if(n!==v)e.setAttribute(a,n)}}document.addEventListener('DOMContentLoaded',()=>{update(document);new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1){if(n.matches('a[href],form[action]')){const a=n.tagName==='FORM'?'action':'href';n.setAttribute(a,target(n.getAttribute(a)))}update(n)}}).observe(document.body,{childList:true,subtree:true})});document.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(!a)return;const n=target(a.href);if(n.startsWith(old+prefix+'/')){e.preventDefault();e.stopImmediatePropagation();location.assign(n)}},true);})();`;
 export default {async fetch(request,env,ctx){const u=new URL(request.url);
  env={...env,EMAIL:env.EMAIL||env.REGISTRATION_EMAIL};
+ if(u.pathname===CLIENT_BASE+'legal-links.js')return new Response(request.method==='HEAD'?null:LEGAL_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'identity.js')return new Response(request.method==='HEAD'?null:IDENTITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(!hosts.has(u.hostname)){
   if(['espacios.me','www.espacios.me'].includes(u.hostname)&&/^\/communiverse\/api\/account\/(login|register|credentials|recover)\/?$/.test(u.pathname)){const response=await updatedAccountAPI(request,env);if(response.status===201)background(ctx,observeRegistration(request,response.clone(),env,ctx));return response;}
@@ -104,7 +107,7 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url);
   }
   const response=await retained.fetch(request,env,ctx);
   if(/^\/communiverse\/api\/(account|auth|workspace)\/logout\/?$/.test(u.pathname)&&response.ok){for(const name of ['__Host-cv-oauth','__Host-cv-onboard','__Host-cv-auth-flow'])response.headers.append('Set-Cookie',name+'=; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=0');}
-  return identityResponse(response,request);
+  return legalSupport(await identityResponse(response,request),request);
  }
  if(u.protocol==='http:'||u.hostname==='www.communiverseclubs.com'){u.protocol='https:';if(u.hostname.startsWith('www.'))u.hostname='communiverseclubs.com';return redirect(u.href,308);}
  const p=clean(u.pathname),origin=request.headers.get('Origin');
@@ -113,6 +116,7 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url);
  if(!read(request.method)||request.headers.get('Upgrade'))return Response.json({error:'Sign in on Espacios to continue.',signInUrl:OLD+PREFIX+'/sign-in/'},{status:request.method==='OPTIONS'?403:401,headers:headers()});
  if(accountPath(p))return redirect(OLD+internal(p)+u.search,302);
  if(['/circles/','/plug/'].includes(p)&&u.searchParams.has('work')&&artworkContext[u.searchParams.get('work')]){const work=u.searchParams.get('work');u.searchParams.set('art',work);u.searchParams.delete('work');if(!u.searchParams.has('person'))u.searchParams.set('person',artworkContext[work].artist);return redirect(u.href,302);}
+ if(['/privacy/','/terms/'].includes(p))return adapt(legalPage(p),request);
  if(p==='/workshops')return redirect(u.origin+'/workshops/'+u.search,308);
  if(p==='/workshops/')return adapt(workshopResponse(request),request);
  if(p==='/favicon.png'||p==='/favicon.ico'||p==='/apple-touch-icon.png')return new Response(request.method==='HEAD'?null:p==='/apple-touch-icon.png'?TOUCH_ICON:FAVICON,{headers:{...headers(),'Content-Type':'image/png','Cache-Control':'public,max-age=300'}});
