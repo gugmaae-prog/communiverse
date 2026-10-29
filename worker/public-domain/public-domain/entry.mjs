@@ -166,6 +166,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(['/clubs/','/communities/'].includes(p)&&u.searchParams.has('circle')){const checkURL=new URL(request.url);checkURL.search='?id='+encodeURIComponent(u.searchParams.get('circle'));const check=await guest(new Request(checkURL),env,ctx,internal('/api/circles'));if(!check.ok||(await check.json()).circle?.id!==u.searchParams.get('circle'))return error(404,'Club not found','Explore the clubs in Communiverse.');}
  if(p==='/ambassadors/')return adapt(ambassadorsPage(),request);
  if(p==='/api/circles')return adapt(await clubDiscovery(request,r=>guest(r,env,ctx,internal('/api/circles'))),request);
+ if(['/plug/','/communities/'].includes(p)){u.pathname=p==='/plug/'?'/circles/':'/clubs/';return redirect(u.href,301);}
  if(p==='/discover/'){u.pathname='/';return redirect(u.href,301);}
  if(p==='/api/feed'&&u.searchParams.get('surface')==='home')return adapt(await homeFeed(request,r=>guest(r,env,ctx,internal('/api/feed'))),request);
  if(['/privacy/','/terms/'].includes(p))return adapt(legalPage(p),request);
