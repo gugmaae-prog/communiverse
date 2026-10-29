@@ -50,7 +50,7 @@ import {OLD,ORIGIN,PREVIEW,PREFIX,RELEASE,CLIENT_BASE,read,clean,internal,accoun
 const refreshedEvents=JSON.parse(EVENT_REFRESH);
 const background=(ctx,task)=>ctx.waitUntil(task.catch(error=>console.error('Communiverse notification pending',error.name)));
 const hosts=new Set(['communiverseclubs.com','www.communiverseclubs.com','preview.communiverseclubs.com']);
-const peopleAliases={"haseeb-wasim":"cv-haseeb-wasim","alison-gonzalez":"cv-alison-gonzalez","abel-thomas":"cv-abel-thomas","louis-mitchell":"cv-louis-mitchell","elferah-saidil":"cv-elferah-saidil","keiffer":"cv-keiffer","hassan-b-mirza":"cv-hassan-b-mirza","luna":"cv-luna","turbooz":"cv-turbooz","abdallah-mahmoudd":"cv-abdallah-mahmoudd","tariq-al-salman":"cv-tariq-al-salman","viktoriya-melny":"cv-viktoriya-melny","shakiba-binchi":"cv-shakiba-binchi"};
+const peopleAliases={"hira-e-silsby":"cv-hira-e-silsby","haseeb-wasim":"cv-haseeb-wasim","alison-gonzalez":"cv-alison-gonzalez","abel-thomas":"cv-abel-thomas","louis-mitchell":"cv-louis-mitchell","elferah-saidil":"cv-elferah-saidil","keiffer":"cv-keiffer","hassan-b-mirza":"cv-hassan-b-mirza","luna":"cv-luna","turbooz":"cv-turbooz","abdallah-mahmoudd":"cv-abdallah-mahmoudd","tariq-al-salman":"cv-tariq-al-salman","viktoriya-melny":"cv-viktoriya-melny","shakiba-binchi":"cv-shakiba-binchi"};
 const pages=new Set(['discover','artists','artist','events','event','exhibitions','clubs','circles','communities','plug','about','contact','how-it-works','reference','galleries','gallery','privacy','terms','workshops','ambassadors']);
 const publicAPIs=new Set(['artists','feed','item','events','event','galleries','community','comments','circles','circles/posts','location','prices']);
 let retryLiveAt=0;
