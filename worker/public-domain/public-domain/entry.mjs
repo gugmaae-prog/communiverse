@@ -1,3 +1,4 @@
+import {seoSupport,sitemap} from './seo.mjs';
 import {securityPolicy,communiverseRequest,privateArtifactPath,cspReport,securityText,robots} from './security-policy.mjs';
 import {brandedAccountRoute,accountSupport} from './account-origin.mjs';
 import {formSupport} from './form-support.mjs';
@@ -5,7 +6,7 @@ import FORM_CLIENT from './form-support.js.txt';
 import {guardForm,FORM_ACTIONS,formEndpoint} from './form-security.mjs';
 import {reportAPI} from './report.mjs';
 import {artistPath,artistIdFromSlug,workIdFromSlugs} from './record-routes.mjs';
-import {artistById,catalogue,knownPersonIds,worksPage,artistPage,workPage,selectedCircleHTML,recordStyle} from './record-pages.mjs';
+import {artistById,catalogue,knownPersonIds,worksPage,artistPage,workPage,selectedCircleHTML,recordStyle,eventRecordPage} from './record-pages.mjs';
 import RECORD_ACTIONS from './record-actions.js.txt';
 import {clubDiscovery} from './discovery-policy.mjs';
 import {discoveryConfig,discoveryStyle,ambassadorsPage} from './discovery-pages.mjs';
@@ -112,6 +113,8 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
 const browserNavigation=`(()=>{'use strict';window.CV_URLS=Object.freeze(JSON.parse(document.getElementById('cv-runtime-config')?.textContent||'{}'));const old='https://espacios.me',prefix='/communiverse',protectedPath=/^\\/(workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account|events\\/host)(\\/|$)/;function target(value){let u;try{u=new URL(value,location.href)}catch{return value}if(![location.origin,old].includes(u.origin))return value;if(u.origin===old&&u.searchParams.get('cv_account')==='1')return value;const p=u.pathname.replace(/^\\/communiverse(?=\\/|$)/,'')||'/';if(p==='/artists/'||p==='/artists'){u.pathname='/circles/';u.searchParams.set('filter','artists');return u.pathname+u.search+u.hash}if(p.startsWith('/account/'))return value;if(protectedPath.test(p))return old+prefix+p+u.search+u.hash;if(u.origin===old&&u.pathname.startsWith(prefix+'/')&&!/^\\/(api(?:\\/|$)|_)/.test(p))return p+u.search+u.hash;return value}function update(root){for(const a of root.querySelectorAll('#cv-social-header nav a,#cv-marketplace-nav a'))if(a.textContent.trim()==='Artists')a.remove();for(const e of root.querySelectorAll('a[href],form[action]')){const a=e.tagName==='FORM'?'action':'href',v=e.getAttribute(a),n=target(v);if(n!==v)e.setAttribute(a,n)}}document.addEventListener('DOMContentLoaded',()=>{update(document);new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1){if(n.matches('a[href],form[action]')){const a=n.tagName==='FORM'?'action':'href';n.setAttribute(a,target(n.getAttribute(a)))}update(n)}}).observe(document.body,{childList:true,subtree:true})});document.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(!a)return;const n=target(a.href);if(n.startsWith(old+prefix+'/')){e.preventDefault();e.stopImmediatePropagation();location.assign(n)}},true);})();`;
 const application={async fetch(request,env,ctx){const u=new URL(request.url);
  env={...env,EMAIL:env.EMAIL||env.REGISTRATION_EMAIL};
+ if(hosts.has(u.hostname)&&u.pathname==='/sitemap.xml')return sitemap();
+ if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS.fetch(request);
  if(communiverseRequest(request)&&privateArtifactPath(u.pathname))return error(404,'Page not found','Explore Communiverse through the links below.');
  if(hosts.has(u.hostname)&&u.pathname==='/api/csp-report')return cspReport(request,env);
  if(hosts.has(u.hostname)&&u.pathname==='/.well-known/security.txt')return new Response(request.method==='HEAD'?null:securityText('https://communiverseclubs.com'),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
@@ -155,7 +158,8 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(['/works','/works/'].includes(p)){if(u.searchParams.has('artist')&&!artistById.has(u.searchParams.get('artist')))return error(404,'Artist not found','Explore the artists in Communiverse.');if(p==='/works'){u.pathname='/works/';return redirect(u.href,301);}return adapt(worksPage(u),request);}
  if(p==='/api/artists'&&u.searchParams.has('id')&&!artistById.has(u.searchParams.get('id')))return Response.json({error:'Artist not found.'},{status:404,headers:headers()});
  if(p==='/api/item'&&!artworkContext[u.searchParams.get('id')])return Response.json({error:'Artwork not found.'},{status:404,headers:headers()});
- if(['/event/','/gallery/'].includes(p)){const check=await guest(request,env,ctx,internal(p==='/event/'?'/api/event':'/api/galleries'));const data=await check.json();if(!check.ok||!(p==='/event/'?data.event?.id===u.searchParams.get('id'):data.galleries?.some(g=>g.id===u.searchParams.get('id'))))return error(404,'Page not found','Explore Communiverse through the links below.');}
+ if(p==='/event/'){const checkURL=new URL(request.url);checkURL.pathname='/api/event';const result=await programmeResponse(new Request(checkURL),r=>guest(r,env,ctx,internal('/api/event')));const data=await result.json();if(!result.ok||data.event?.id!==u.searchParams.get('id'))return error(404,'Event not found','Explore the events in Communiverse.');return adapt(eventRecordPage(data.event),request);}
+ if(p==='/gallery/'){const check=await guest(request,env,ctx,internal(p==='/event/'?'/api/event':'/api/galleries'));const data=await check.json();if(!check.ok||!(p==='/event/'?data.event?.id===u.searchParams.get('id'):data.galleries?.some(g=>g.id===u.searchParams.get('id'))))return error(404,'Page not found','Explore Communiverse through the links below.');}
  if(['/clubs/','/communities/'].includes(p)&&u.searchParams.has('circle')){const checkURL=new URL(request.url);checkURL.search='?id='+encodeURIComponent(u.searchParams.get('circle'));const check=await guest(new Request(checkURL),env,ctx,internal('/api/circles'));if(!check.ok||(await check.json()).circle?.id!==u.searchParams.get('circle'))return error(404,'Club not found','Explore the clubs in Communiverse.');}
  if(p==='/ambassadors/')return adapt(ambassadorsPage(),request);
  if(p==='/api/circles')return adapt(await clubDiscovery(request,r=>guest(r,env,ctx,internal('/api/circles'))),request);
@@ -191,4 +195,4 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  try{return await adapt(await guest(request,env,ctx,internal(p)),request,r=>guest(r,env,ctx,internal('/api/feed')));}catch(e){console.error('Public domain read unavailable',e.message);return error(503,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');}
 }};
 
-export default {async fetch(request,env,ctx){return securityPolicy(await accountSupport(formSupport(await application.fetch(request,env,ctx),request,env),request,env),request,env);}};
+export default {async fetch(request,env,ctx){return securityPolicy(seoSupport(await accountSupport(formSupport(await application.fetch(request,env,ctx),request,env),request,env),request),request,env);}};

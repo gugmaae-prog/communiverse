@@ -1,0 +1,277 @@
+[
+  {
+    "path": "/communiverse/_share/20261029-v1/default.jpg",
+    "bytes": 86984,
+    "sha256": "22399d27c264a2adc1b799fa5d0fef483d7cbb04f03fc6f61109aea508efd65a"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-gemma-gallagher.jpg",
+    "bytes": 51369,
+    "sha256": "83f58a97e836e7841cb63224e76119ac784bfced8f3d482f134553d5d3c62098"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-ms-petunya.jpg",
+    "bytes": 69113,
+    "sha256": "62bd9b149738e27bac3156e3146122260bcf20ab3a9d363a7723ab485c96de08"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-chandni-padia.jpg",
+    "bytes": 58732,
+    "sha256": "9ddb0e251779b168eab9b567bd0474b52212c0a60aa57ddf375b75cbd92592c2"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-tamer-karam.jpg",
+    "bytes": 62468,
+    "sha256": "8810524f7719ae88f7004aaa3a9948eef77d8ceedd69ef4f1bc57fdcbe0e15ee"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-sophiko.jpg",
+    "bytes": 43116,
+    "sha256": "d5899985b239377c6866d6e4bb999de055404bd1c1b26879ea9b2e19625eafff"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/artist-cristina-gabriela.jpg",
+    "bytes": 53959,
+    "sha256": "8478cc9b0e4f579fe207ea647c689f21ca38039d2fedf8a29d8c3a244aae9e3e"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-the-space-between-movements.jpg",
+    "bytes": 53025,
+    "sha256": "e1cbb18e6f0ab7434c526de64150dbad4405b7099336b24c9a6afd542d8b1d2c"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-heart-part-4.jpg",
+    "bytes": 23431,
+    "sha256": "72cbc15a01531b92861e231dd1ff7cf9804e3337730479f1436c4061c3515c36"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-imperfect-perfection.jpg",
+    "bytes": 57811,
+    "sha256": "dec57b1d52a3c3627b854da58bd5bc70ca59331a3c6083fc3a3717090621019a"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-visual-noise-sky-wetex.jpg",
+    "bytes": 61798,
+    "sha256": "3e97d91dfb17b47b00e1930951f04eb55bf85fe30c93cb224b410bffcb9e0aec"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-opinions.jpg",
+    "bytes": 65140,
+    "sha256": "621ee7c015419ca0214c16cdbf8d2ee9590eaee697cd5d24dcffe35547829f2b"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-ganun-parin-naman-ang-kabuhayan-gusto-lang-po-namin-maramdaman-ang-sinasabing-ka.jpg",
+    "bytes": 88941,
+    "sha256": "f900da04347a8b9209fe5ef4f957d8445b19e4bfce17e9c1c2b8975118d66041"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-visual-noise-wetex.jpg",
+    "bytes": 82985,
+    "sha256": "2678079588db2cf8a7c5659f93f48932c58b91ca47427a410988d66a4111d87a"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-so-far.jpg",
+    "bytes": 37487,
+    "sha256": "7d15e612d825b61c5746d9abd3114f078182f16fa7f48a47c6565274e5a2ba49"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-untitled.jpg",
+    "bytes": 57578,
+    "sha256": "75a15c1bbb6258c0cebea890375facf9094fbfc2e50a64c0beca666fb29dc7a1"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-life-is-sacred.jpg",
+    "bytes": 41335,
+    "sha256": "55841003bcfefd9a8caecfeb6788329c70bf6156ead764904db16c1bc9c8f136"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-i-d-be-happy-to-slaughter-them.jpg",
+    "bytes": 59682,
+    "sha256": "f2afc07c85d8c8c22bfee630b72d8035f0d8e1ece653df6e222ac02cd7a8c6db"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-the-hanged-man.jpg",
+    "bytes": 62522,
+    "sha256": "0a2505b492dcd85f0e729a7c8c169e52aae6d81e47036b499be271d3b785fa2b"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-continuum-interrupted.jpg",
+    "bytes": 46678,
+    "sha256": "547f6abfb1f4ed9c91aed34aed7ca8ce6acda022796c20349c5010453d49dc56"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-cristina-volterra-wetex.jpg",
+    "bytes": 48433,
+    "sha256": "a37c794dc28c7c583f54827a064b3616c0aa5fe6569dcdbcefa3c267f061ef98"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-sophiko-ocean-shoal.jpg",
+    "bytes": 87181,
+    "sha256": "2f4e04e34006b1dc85f9f83696471f4d20836cf2af07d77e6720b4820bb32749"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-jx3c-42.jpg",
+    "bytes": 51407,
+    "sha256": "53fdcde146d4341b02b9e2ed9be3ba7417ba229a888d19ec0c00c4d08dce5dbb"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-compass-of-the-sea.jpg",
+    "bytes": 91376,
+    "sha256": "d48b190047ec58fccc858acecaa9b4ed63150474614690679cd89662bc10badb"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-shared-memories-ms-petunya.jpg",
+    "bytes": 55170,
+    "sha256": "bf793bbf3d9f7d72d93e0aca014adbaf0693b9d85076b4bedd95a522dd3823d8"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-between-bloom-and-orbit.jpg",
+    "bytes": 71841,
+    "sha256": "c217d2d666cc6007147467cff463a4716503468db198eb00a17d61219be674b6"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-where-the-blue-opens.jpg",
+    "bytes": 59322,
+    "sha256": "de4413b3d31a65b1267f4082b330a54d0a0f5b7735baf8d1582a6bb9e8ed9905"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-cristina-gabriela-threshold.jpg",
+    "bytes": 60463,
+    "sha256": "606bc9da203a405c1e21535671d02942b5eef20032af537f9a2b4bc38fbc9665"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-checkpoint-s.jpg",
+    "bytes": 46922,
+    "sha256": "6cad4b038d66bc5cefa94b883b78fa0b22b56aeb975b3cafb42a11e9ba6c4cb6"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-whispers-within-the-leaves.jpg",
+    "bytes": 84718,
+    "sha256": "1ff5b002211338e66ead789e2a5429d85a1c4aef3d62afe76a3e4479d0a7921f"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-bilanggo.jpg",
+    "bytes": 62393,
+    "sha256": "cce56304a1a64f7831b2cc3c8d36fa597a1fdb221320611641cf0b69a2f638c4"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-quiet-entanglements.jpg",
+    "bytes": 54960,
+    "sha256": "d6007ce7c42f974ee0f76f9841b11f231e895f96e46ed228c6ee8a38751bc1bb"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-chaos-invites.jpg",
+    "bytes": 37143,
+    "sha256": "43a0533a1a8987a89718206498fc1401b70ac8a4a2d21037f095dc04d80b4458"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-gemma-gallagher-light-of-your-soul.jpg",
+    "bytes": 58867,
+    "sha256": "d31c43f4043fa489203197de3fa551ae559f8705d6823ff2ed5656ad25014b03"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-hugas-kamay.jpg",
+    "bytes": 60591,
+    "sha256": "e470e8b57540a7cb3660c238d6f8a1707c182b6f06cf5a50f6928579fffde018"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-cristina-sea-forms-wetex.jpg",
+    "bytes": 72639,
+    "sha256": "2a569a56b5aabe630c1bbe352079cc18c99846f72b30218e7430a70d2fd92e50"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-break-time.jpg",
+    "bytes": 25447,
+    "sha256": "7e1c7a17eface839c79dde74da2bd430f48377fe539d81717bb8954c84c962d9"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-process-of-devotion.jpg",
+    "bytes": 77869,
+    "sha256": "f31b12ece723adc98d1f05e70c8be40a23b904881ef6ac60133b112f7a0c270d"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-botanical-rhythm.jpg",
+    "bytes": 69717,
+    "sha256": "ccc744d04ad7b3b73b147c955a2adb87a223b40f22a9b13ed7a71c567ba73fec"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-visual-noise-garment-wetex.jpg",
+    "bytes": 82076,
+    "sha256": "bd86c1140f3a9da6becd7f2b04e0dbea29951fb600dfa818bde950688c4ee32f"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-chaos-offers.jpg",
+    "bytes": 37879,
+    "sha256": "fe7c83b25e6b3ea5621da4145cb1091cc03c2b0061960aaaa1aefbc2ed64d648"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-cover-up-1234.jpg",
+    "bytes": 42835,
+    "sha256": "c095539e6b4c67e347ab7847d2939013a060c94751782b7c43d9b2efaa07b5c3"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-cristina-gabriela-the-shelter-within.jpg",
+    "bytes": 54273,
+    "sha256": "74b775d7f8df2695ae3a2d70a5aa68f24d9242d0e573ba15c15aa6093297e6dc"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-gemma-gallagher-beloved.jpg",
+    "bytes": 46579,
+    "sha256": "d93151de6064df43292039852a335f98f547f1604c87ad9a8e69408853eb78c3"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-self-portrait.jpg",
+    "bytes": 89479,
+    "sha256": "3d6c17b5c6e1bcb41988386f621e296ab9ecf12bb4bcdf62e9ffd4731f9fc365"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-calm.jpg",
+    "bytes": 46037,
+    "sha256": "d6b9c44992372d3e90935db110ee8a65bdf7f2e3666b738e9eec8a5e9cec94e6"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-cristina-gabriela-truth-path-of-light.jpg",
+    "bytes": 49495,
+    "sha256": "65a7223e9e4adad1e7730640dbc86cfebc6d2cdd16a8d3165fa9c0b8addb74fe"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-roots-in-faith.jpg",
+    "bytes": 54641,
+    "sha256": "2330f45cb6459e64d6abf7fbc3a23f10a3da3c02ca6911d9a6c138933d2f62ee"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-sophiko-ocean-studies.jpg",
+    "bytes": 72170,
+    "sha256": "67e46b41fd333c7507fabddd62ff5f9202784319e73f0e524198a4fed92b64d5"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-memento-mori.jpg",
+    "bytes": 50661,
+    "sha256": "d557308a3924d89d20be38955a65e4fe812864ca86a01085f1ff5fff12d84d07"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-eccle-11-9-10.jpg",
+    "bytes": 47253,
+    "sha256": "522e2a5d0a173c49b130d3b242f6d32d0cb7ff2224bee8f00824b35b7a2452c0"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-somnus-at-4-00am.jpg",
+    "bytes": 46825,
+    "sha256": "c71792217b8d8687740374ebcd9f679adbc818033b38bfd86438a7eee49f23c4"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-gemma-gallagher-all-along.jpg",
+    "bytes": 51122,
+    "sha256": "754ef409b973d745f7b0f3ca2783db4beadfa41d27820b1b10004fdbd16eb210"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-chandni-padia-botanical-chorus-in-red.jpg",
+    "bytes": 51035,
+    "sha256": "2e5cb3fa7a507dea2fcca77a70d9c842f6d9100e9fe97691707417c4ac1fa96a"
+  },
+  {
+    "path": "/communiverse/_share/20261029-v1/work-tamer-social-anesthesia-installation-view.jpg",
+    "bytes": 47554,
+    "sha256": "21dd5b263375d90e24cfb649ab0fb60fd1ae38dbabd008afbc8e7667a1091d4e"
+  }
+]
