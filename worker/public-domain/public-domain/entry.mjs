@@ -76,7 +76,7 @@ async function guest(request,env,ctx,path){
 function jsonLinks(v,origin){return typeof v==='string'?(/^(?:\/communiverse\/|https:\/\/(?:www\.)?espacios\.me\/communiverse\/)/.test(v)?link(v,origin):v):Array.isArray(v)?v.map(x=>jsonLinks(x,origin)):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,jsonLinks(x,origin)])):v;}
 async function adapt(response,request,readFeed){response=brandResponse(legalSupport(response,request));const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
  if(request.method==='HEAD')return new Response(null,{status:response.status,headers:h});
- if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
+ if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).replace(/\/$/,'')==='/api/galleries'&&u.searchParams.has('id')&&!data.galleries?.some(g=>g.id===u.searchParams.get('id')))return Response.json({error:'Gallery not found.'},{status:404,headers:h});if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
  if(!type.includes('text/html'))return new Response(response.body,{status:response.status,headers:h});
  if(response.status>=500)return error(response.status,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');
  const html=rewrite(await response.text(),u.origin),isEvent=clean(u.pathname)==='/event/',isCircles=['/circles/','/plug/'].includes(clean(u.pathname)),people=isCircles?circlePeople(html,artistWorks):null,featured=['/','/discover/'].includes(clean(u.pathname)),isWorkshops=clean(u.pathname)==='/workshops/';
@@ -116,7 +116,7 @@ const browserNavigation=`(()=>{'use strict';window.CV_URLS=Object.freeze(JSON.pa
 const application={async fetch(request,env,ctx){const u=new URL(request.url);
  env={...env,EMAIL:env.EMAIL||env.REGISTRATION_EMAIL};
  if(hosts.has(u.hostname)&&u.pathname==='/sitemap.xml')return sitemap();
- if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS.fetch(request);
+ if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS?env.ASSETS.fetch(request):error(404,'Image not found','This image is unavailable.');
  if(communiverseRequest(request)&&privateArtifactPath(u.pathname))return error(404,'Page not found','Explore Communiverse through the links below.');
  if(hosts.has(u.hostname)&&u.pathname==='/api/csp-report')return cspReport(request,env);
  if(hosts.has(u.hostname)&&u.pathname==='/.well-known/security.txt')return new Response(request.method==='HEAD'?null:securityText('https://communiverseclubs.com'),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
