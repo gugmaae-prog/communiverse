@@ -1,3 +1,4 @@
+import {teamPeople} from './team.mjs';
 import {portraitData} from './portrait-refresh.mjs';
 import {link} from './urls.mjs';
 export const removedPeople=new Set(['cv-tariq-al-salman','cv-viktoriya-melny','cv-abel-thomas','cv-shakiba-binchi','member-c661455e-df47-4c55-9519-cc6add995130','cv-abdallah-mahmoudd','cv-turbooz']);
@@ -6,10 +7,11 @@ export const groups=[['communiverse','Everyone'],['people','People'],['ambassado
 export function circlePeople(html,worksForArtist){
  const raw=html.match(/<script[^>]*id="cv-focus-data"[^>]*>([\s\S]*?)<\/script>/)?.[1];
  if(!raw)return null;
- return portraitData(JSON.parse(raw)).map(p=>({...p,category:['cool-kids','members'].includes(p.category)?'people':p.category,group:p.group==='Cool Kids'?'People':p.group})).filter(p=>!removedPeople.has(p.slug)).map(p=>({...p,...(p.category==='artists'&&worksForArtist?{workPhotos:worksForArtist(p.slug)}:{}),profileUrl:link(p.profileUrl),image:p.portrait?.url||({'cv-keiffer':'/communiverse/_circles/20261022-v1/keiffer-1024.webp','cv-luna':'/communiverse/_circles/20261022-v1/luna-1024.webp'}[p.slug])||p.image}));
+ return teamPeople(portraitData(JSON.parse(raw)).map(p=>({...p,category:['cool-kids','members'].includes(p.category)?'people':p.category,group:p.group==='Cool Kids'?'People':p.group})).filter(p=>!removedPeople.has(p.slug)).map(p=>({...p,...(p.category==='artists'&&worksForArtist?{workPhotos:worksForArtist(p.slug)}:{}),profileUrl:link(p.profileUrl),image:p.portrait?.url||({'cv-keiffer':'/communiverse/_circles/20261022-v1/keiffer-1024.webp','cv-luna':'/communiverse/_circles/20261022-v1/luna-1024.webp'}[p.slug])||p.image})));
 }
 export function circleImage(p){
  const sizes='(max-width:600px) 140px,184px';
+ if(!p.image)return `<span class="cv-person-photo cv-identity-placeholder" data-person="${esc(p.slug)}" role="img" aria-label="Initials for ${esc(p.name)}"><span class="cv-person-initials" aria-hidden="true">${esc(p.initials||p.name.split(/\s+/).map(v=>v[0]).slice(0,2).join(''))}</span></span>`;
  return `<span class="cv-person-photo" data-person="${esc(p.slug)}"><img src="${esc(p.image)}" ${p.portrait?.variants?'srcset="'+esc(p.portrait.variants.map(v=>v.url+' '+v.width+'w').join(', '))+'" sizes="'+sizes+'"':''} width="1024" height="1024" alt="Portrait of ${esc(p.name)}" loading="eager" decoding="async"><span class="cv-person-initials" hidden aria-hidden="true">${esc(p.name.split(/\s+/).slice(0,2).map(v=>v[0]).join(''))}</span></span>`;
 }
 export function directoryHTML(people,url,detailHTML=''){

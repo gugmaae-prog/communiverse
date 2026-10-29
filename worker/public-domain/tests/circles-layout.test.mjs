@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {circleLayout} from '../public-domain/circles-layout.mjs';
 const viewports=[[296,318],[366,580],[744,730],[820,178],[1256,560],[1000,510]];
 test('every current circle fits its screen with separated, accessible targets',()=>{
- for(const [width,height] of viewports)for(let count=1;count<=13;count++){
+ for(const [width,height] of viewports)for(let count=1;count<=14;count++){
   const p=circleLayout(width,height,count),label=`${width}x${height}/${count}`;
   assert.equal(p.nodes.length,count,label);assert(!p.height||p.height<=height,label+' overflow');assert(p.diameter>=44,label);
   p.nodes.forEach((a,i)=>{
