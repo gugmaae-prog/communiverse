@@ -1,0 +1,42 @@
+[
+  {
+    "aboutKept": true,
+    "images": [
+      {
+        "alt": "Light of Your Soul",
+        "loaded": true
+      },
+      {
+        "alt": "Beloved",
+        "loaded": true
+      },
+      {
+        "alt": "All Along",
+        "loaded": true
+      }
+    ],
+    "imagesKept": true,
+    "positionsRestored": true,
+    "width": 375
+  },
+  {
+    "aboutKept": true,
+    "images": [
+      {
+        "alt": "Light of Your Soul",
+        "loaded": true
+      },
+      {
+        "alt": "Beloved",
+        "loaded": true
+      },
+      {
+        "alt": "All Along",
+        "loaded": true
+      }
+    ],
+    "imagesKept": true,
+    "positionsRestored": true,
+    "width": 1440
+  }
+]
