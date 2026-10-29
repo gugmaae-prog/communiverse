@@ -2,10 +2,10 @@
  const statusFor=form=>form.querySelector('[role="status"]');
  function connect(form){if(form.dataset.connected)return;form.dataset.connected='true';let requestId=crypto.randomUUID(),done=false;
  form.addEventListener('input',()=>{if(done){requestId=crypto.randomUUID();done=false;statusFor(form).textContent='';}});
- form.addEventListener('submit',async event=>{event.preventDefault();if(done||!form.reportValidity()||form.dataset.sending)return;const button=form.querySelector('button[type="submit"]'),status=statusFor(form),label=button.textContent,data=Object.fromEntries(new FormData(form));data.consent=form.elements.consent.checked;data.requestId=requestId;form.dataset.sending='true';button.disabled=true;button.textContent='Sending…';status.textContent='';
+ form.addEventListener('submit',async event=>{event.preventDefault();if(done||!form.reportValidity()||form.dataset.sending)return;const button=form.querySelector('button[type="submit"]'),status=statusFor(form),label=button.textContent,data=Object.fromEntries(new FormData(form));data.consent=form.elements.consent.checked;data.requestId=requestId;data.turnstileToken=window.CVForms?.payload(form.dataset.registration==='event'?'event-rsvp':'workshop-enquiry',data).turnstileToken||'';form.dataset.sending='true';button.disabled=true;button.textContent='Sending…';status.textContent='';
  try{const response=await fetch(form.action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}),result=await response.json();if(!response.ok)throw Error(result.error||'We couldn’t save this right now. Please try again.');status.textContent=result.message;done=true;button.textContent='Sent';}
  catch(error){status.textContent=error.message||'Please check your connection and try again.';button.textContent=label;}
- finally{delete form.dataset.sending;button.disabled=false;}
+ finally{window.CVForms?.reset(form);delete form.dataset.sending;button.disabled=false;}
  });}
  document.querySelectorAll('form[data-registration]').forEach(connect);
  if(!/^\/event\/?$/.test(location.pathname))return;
