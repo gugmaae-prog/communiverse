@@ -1,0 +1,24 @@
+name: Communiverse public Worker checks
+on:
+  pull_request:
+    paths: ['worker/public-domain/**', 'docs/site-fixes/**', '.github/workflows/public-domain-checks.yml']
+permissions:
+  contents: read
+jobs:
+  public-worker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker/public-domain
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/public-domain/package-lock.json
+      - run: npm ci
+      - run: npm run verify:source
+      - run: npm run build
+      - run: npm run lint
+      - run: npm test

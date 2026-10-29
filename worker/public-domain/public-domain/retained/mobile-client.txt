@@ -1,0 +1,46 @@
+/* Presentation-only. Preserve native forms, values, listeners and permission gates. */
+(() => {
+  'use strict';
+  if (window.__cvMobileRelease === '20261013-mobile-v8') return;
+  window.__cvMobileRelease = '20261013-mobile-v8';
+  let frame = 0, stopped = false;
+  const pending = new Set();
+  function normalize(root) {
+    const labels = root.matches?.('.cv-form-row > label') ? [root] : [...(root.querySelectorAll?.('.cv-form-row > label') || [])];
+    for (const label of labels) {
+      if (label.querySelector(':scope > .cvm-label-copy')) continue;
+      const control = label.querySelector(':scope > input:not([type=hidden]):not([type=checkbox]):not([type=radio]), :scope > select, :scope > textarea');
+      if (!control) continue;
+      const contents = [...label.childNodes].slice(0, [...label.childNodes].indexOf(control));
+      if (!contents.some(n => n.textContent.trim())) continue;
+      if (contents.some(n => n.nodeType === 1 && (!n.matches('span,small,strong') || n.querySelector('input,select,textarea,button,a')))) continue;
+      // Reparent only label copy. Do not clone or recreate the actual input.
+      const copy = document.createElement('span');
+      copy.className = 'cvm-label-copy';
+      label.insertBefore(copy, contents[0]);
+      copy.append(...contents);
+    }
+  }
+  function flush() {
+    frame = 0;
+    if (stopped) return;
+    const roots = [...pending]; pending.clear();
+    for (const root of roots) if (root.isConnected) normalize(root);
+  }
+  const observer = new MutationObserver(records => {
+    for (const record of records) for (const node of record.addedNodes) {
+      if (node.nodeType !== 1 || node.matches('.cvm-label-copy') || node.closest('.cvm-label-copy')) continue;
+      pending.add(node.closest('.cv-form-row') || node);
+    }
+    if (pending.size && !frame) frame = requestAnimationFrame(flush);
+  });
+  function start() {
+    normalize(document);
+    observer.observe(document.body, {childList:true, subtree:true});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();
+  addEventListener('pagehide', event => {
+    cancelAnimationFrame(frame); frame = 0; pending.clear();
+    if (!event.persisted) { stopped = true; observer.disconnect(); }
+  });
+})();

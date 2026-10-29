@@ -1,0 +1,21 @@
+(()=>{'use strict';
+ const selector='[data-ws-logout],#cv-signout,[data-cva-action="signout"]';let busy=false;
+ const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('communiverse-session'):null;
+ const leave=()=>location.replace('/communiverse/sign-in/?signed_out=1');
+ channel?.addEventListener('message',e=>{if(e.data?.type!=='signed-out')return;if(location.pathname.startsWith('/communiverse/workspace'))leave();else location.reload()});
+ window.addEventListener('pageshow',e=>{if(e.persisted)location.reload()});
+ window.addEventListener('click',async e=>{
+  const button=e.target instanceof Element?e.target.closest(selector):null;if(!button)return;
+  e.preventDefault();e.stopImmediatePropagation();if(busy)return;busy=true;
+  const buttons=[...document.querySelectorAll(selector)],labels=buttons.map(b=>b.innerHTML);buttons.forEach(b=>{b.disabled=true;b.setAttribute('aria-busy','true');b.textContent='Signing out…'});
+  let notice=document.getElementById('cv-signout-status');if(!notice){notice=document.createElement('p');notice.id='cv-signout-status';notice.setAttribute('role','status');notice.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:2147483000;max-width:calc(100vw - 32px);padding:12px 18px;background:#fff;color:#17283b;border:1px solid #cbd4e3;border-radius:14px;box-shadow:0 8px 32px #0002;';document.body.append(notice)}notice.textContent='Signing out…';
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
+  try{
+   const response=await fetch('/communiverse/api/account/logout',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'},body:'{}',signal:controller.signal});
+   const result=await response.json();if(!response.ok||!result.ok)throw Error();
+   channel?.postMessage({type:'signed-out'});leave();
+  }catch{
+   busy=false;buttons.forEach((b,i)=>{b.disabled=false;b.removeAttribute('aria-busy');b.innerHTML=labels[i]});notice.textContent='Could not sign out. Check your connection and try again.';
+  }finally{clearTimeout(timer)}
+ },true);
+})();

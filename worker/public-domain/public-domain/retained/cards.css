@@ -1,0 +1,30 @@
+html:has(dialog.cv-card-sheet[open]){overflow:hidden;scrollbar-gutter:stable}
+html[data-cv-social] body dialog:is(#cv-work-dialog,#cv-artist-dialog).cv-card-sheet{box-sizing:border-box;position:fixed;inset:0;margin:auto;width:min(1060px,calc(100% - 32px));max-width:1060px;height:auto;max-height:calc(100dvh - 32px);padding:0 28px 28px;border:1px solid var(--cv-social-line,#dfe3ec);border-radius:28px!important;backdrop-filter:none!important;background:var(--cv-social-bg,#f5f6f8)!important;color:var(--cv-social-ink,#18202e);overflow:auto;overscroll-behavior:contain;box-shadow:0 20px 80px #12223c30;text-align:left}
+dialog.cv-card-sheet::backdrop{background:rgb(14 24 40 / .48);backdrop-filter:none}
+.cv-card-sheet .cv-card-toolbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;margin:0 -4px 20px;padding:10px 0;background:var(--cv-social-bg,#f5f6f8);border-bottom:1px solid var(--cv-social-line,#dfe3ec)}
+.cv-card-sheet .cv-card-title{font-size:16px;font-weight:600;line-height:1.4;margin:0;min-width:0;overflow-wrap:anywhere}
+html[data-cv-social] .cv-card-sheet .cv-card-toolbar .cv-modal-close{position:static;flex:0 0 44px;width:44px;height:44px;min-height:44px;margin:0;display:grid;place-items:center;border-radius:50%;border:1px solid var(--cv-social-line,#dfe3ec);background:var(--cv-social-bg,#f5f6f8);color:inherit;cursor:pointer}
+.cv-card-sheet .cv-modal-close svg{width:20px;height:20px}
+html[data-cv-social] .cv-card-sheet .cv-work-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.cv-card-sheet .cv-work-layout>div{min-width:0}.cv-card-sheet .cv-work-layout>div:first-child>img,.cv-card-sheet .cv-work-layout>div:first-child>video{display:block;width:100%;height:auto;max-height:70dvh;object-fit:contain;border-radius:18px}
+.cv-card-sheet .cv-work-layout h2{font-size:clamp(25px,3vw,38px);line-height:1.15;margin:8px 0 20px;overflow-wrap:anywhere}
+.cv-card-sheet p{line-height:1.65}.cv-card-sheet .cv-work-facts>div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px}.cv-card-sheet dd{margin:0;overflow-wrap:anywhere}
+.cv-card-sheet .cv-work-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.cv-card-sheet .cv-work-maker{margin:8px 0 24px}
+.cv-card-sheet .cv-work-maker img{width:72px;height:72px;object-fit:cover;border-radius:50%}
+.cv-card-sheet .cv-card-artist{display:flex;align-items:center;gap:20px;margin:0 0 22px}.cv-card-sheet .cv-card-artist>img{width:96px;height:96px;flex:0 0 96px;object-fit:cover;border-radius:50%}.cv-card-sheet .cv-card-artist h2{margin:4px 0 10px;font-size:clamp(26px,4vw,40px)}
+.cv-card-sheet .cv-card-bio{max-width:76ch}.cv-card-sheet .cv-card-error{padding:24px 0}.cv-card-sheet section{margin-top:28px}
+.cv-card-sheet .cv-card-loading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;min-height:220px}.cv-card-sheet .cv-card-loading img{width:100%;max-height:55dvh;object-fit:contain;border-radius:18px}
+.cv-pin-media,.cv-artist-pin-media{touch-action:manipulation;transition:opacity 120ms ease}.cv-pin-media:active,.cv-artist-pin-media:active{opacity:.8}
+html[data-cv-social] .cv-card-sheet .cv-related,html[data-cv-social] .cv-card-sheet .cv-inline-works{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:700px){html[data-cv-social] body dialog:is(#cv-work-dialog,#cv-artist-dialog).cv-card-sheet{width:calc(100% - 16px);max-height:calc(100dvh - 16px);padding:0 18px max(22px,env(safe-area-inset-bottom));border-radius:22px!important}.cv-card-sheet .cv-card-toolbar{min-height:64px;margin-bottom:16px}.cv-card-sheet .cv-card-title{font-size:14px}html[data-cv-social] .cv-card-sheet .cv-work-layout,.cv-card-sheet .cv-card-loading{grid-template-columns:minmax(0,1fr);gap:22px}.cv-card-sheet .cv-work-layout>div:first-child>img,.cv-card-sheet .cv-work-layout>div:first-child>video{max-height:45dvh}.cv-card-sheet .cv-card-artist{gap:14px}.cv-card-sheet .cv-card-artist>img{width:76px;height:76px;flex-basis:76px}.cv-card-sheet .cv-work-facts>div{grid-template-columns:minmax(0,1fr);gap:4px}html[data-cv-social] .cv-card-sheet .cv-related,html[data-cv-social] .cv-card-sheet .cv-inline-works{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.cv-pin-media,.cv-artist-pin-media{transition:none}}
+
+html[data-cv-social] #cv-artist-profile>div>.cv-kicker::before{content:none}
+/* Portraits have stable geometry; the artwork remains in the portfolio. */
+html[data-cv-social] .cv-artist-pin-media{aspect-ratio:4/5;overflow:hidden;background:var(--cv-social-surface,#e9edf4)}
+html[data-cv-social] .cv-artist-pin-media>img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.cv-portrait-missing{display:flex;min-width:0;min-height:180px;width:100%;height:100%;aspect-ratio:4/5;align-items:center;justify-content:center;flex-direction:column;gap:20px;background:var(--cv-social-surface,#e9edf4);color:var(--cv-social-muted,#53627a);border-radius:inherit}
+html[data-cv-social] .cv-artist-pin-media .cv-portrait-missing>span{font-size:clamp(40px,7vw,88px);font-weight:400;letter-spacing:-.04em}.cv-portrait-missing small{font-size:13px}
+html[data-cv-social] #cv-artist-profile>img[data-artist-portrait]{width:100%;height:auto;max-height:680px;aspect-ratio:4/5;object-fit:cover;border-radius:24px}
+html[data-cv-social] .cv-card-artist>img[data-artist-portrait],html[data-cv-social] .cv-similar-artists img[data-artist-portrait]{object-fit:cover}
+@media(max-width:700px){html[data-cv-social] #cv-artist-profile>img[data-artist-portrait]{max-height:520px;aspect-ratio:1/1}}

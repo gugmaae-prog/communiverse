@@ -1,0 +1,55 @@
+/* Shared identity geometry: artwork and club covers keep their own aspect ratios. */
+:root{--cv-face-small:40px;--cv-face-medium:64px;--cv-face-card:88px;--cv-face-profile:144px}
+html body #cv-social-header nav[aria-label="Main navigation"]{justify-content:center!important;align-items:center!important;max-width:100%;box-sizing:border-box}
+html body #cv-social-header nav[aria-label="Main navigation"] a{flex:0 0 auto!important;justify-content:center;white-space:nowrap}
+@media(max-width:600px){html body #cv-social-header nav[aria-label="Main navigation"] a{flex:1 1 0!important;min-width:0!important;padding-inline:clamp(6px,2vw,12px)!important}}
+html body img[data-cv-avatar],html body .cv-avatar,html body .cv-portrait-missing,html body .cv-identity-placeholder{
+ box-sizing:border-box!important;aspect-ratio:1/1!important;border-radius:50%!important;object-fit:cover!important;
+ object-position:var(--cv-face-position,50% 50%)!important;flex-shrink:0!important;overflow:hidden;
+}
+html body img[data-cv-avatar]:not([data-cv-avatar="orbit"]){width:var(--cv-face-size,64px)!important;height:var(--cv-face-size,64px)!important;min-width:var(--cv-face-size,64px)!important;min-height:var(--cv-face-size,64px)!important;max-width:var(--cv-face-size,64px)!important;max-height:var(--cv-face-size,64px)!important}
+html body [data-cv-avatar="small"]{--cv-face-size:var(--cv-face-small)}
+html body [data-cv-avatar="card"]{--cv-face-size:var(--cv-face-card)}
+html body [data-cv-avatar="profile"]{--cv-face-size:var(--cv-face-profile)}
+html body img[data-cv-avatar="orbit"]{width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:100%!important;max-height:100%!important}
+html body .cv-person-photo{aspect-ratio:1/1!important;border-radius:50%!important;flex-shrink:0!important;overflow:hidden!important}
+html body :is(.cv-avatar,.cv-identity-placeholder){display:inline-grid;place-items:center;width:var(--cv-face-size,40px);height:var(--cv-face-size,40px);background:linear-gradient(145deg,#f7faff,#dbe5f4);color:#43556e;font:600 16px/1 system-ui;border:1px solid #ffffffaa}
+html body .cv-avatar>img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important}
+html body .cv-identity-placeholder[hidden],html body img[data-cv-avatar][hidden]{display:none!important}
+html body img[data-cv-circle-link]{cursor:pointer}
+html body img[data-cv-circle-link]:focus-visible{outline:2px solid #245bcc;outline-offset:5px}
+html body :is(.cv-photo-form,.cv-profile-hero,.cv-card-artist,.cv-work-artist){min-width:0;gap:16px}
+html body :is(.cv-event-artist,.cv-event-person){display:flex;align-items:center;gap:16px;min-width:0}
+html body :is(.cv-event-artist,.cv-event-person)>div{min-width:0}
+/* Icons must have dimensions before scripts enhance the form, including old routes. */
+html body :is(.cv4-search-symbol,.cv4-ai-sparkle),html body :is(.cv4-search-inner,.cv-people-search)>svg,html body .cv-people-search>div>svg{
+ display:block!important;width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;max-width:18px!important;max-height:18px!important;flex:0 0 18px!important;align-self:center!important;margin:0!important;
+}
+html body .cv4-search-inner{display:flex!important;align-items:center!important;gap:10px!important;min-width:0!important;box-sizing:border-box!important;min-height:52px!important;height:52px!important;padding:0 14px!important}
+html body .cv4-search-inner>input[type=search]{box-sizing:border-box!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;max-width:100%!important;height:50px!important;min-height:0!important;border:0!important;padding:0!important;background:transparent!important;box-shadow:none!important;margin:0!important}
+html body .cv4-search-inner>[hidden]{display:none!important}
+html body .cv-account-page{width:min(100%,680px);margin-inline:auto;box-sizing:border-box;padding:clamp(20px,4vw,40px);overflow-wrap:anywhere}
+html body .cv-account-page :is(input,select,textarea){box-sizing:border-box;max-width:100%;min-width:0;font-size:16px}
+html body .cv-account-page :is(input:not([type=checkbox]),select){min-height:48px}
+html body .cv-role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+html body .cv-role-grid button{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:108px;padding:18px;text-align:left;border:1px solid #ffffffc9;border-radius:22px;background:linear-gradient(145deg,#ffffffba,#ffffff52);backdrop-filter:blur(18px);color:inherit;box-shadow:0 8px 30px #1f36500a;font:inherit;cursor:pointer}
+html body .cv-role-grid button[aria-pressed=true]{border-color:#386cce;box-shadow:0 0 0 2px #386cce20}
+html body .cv-role-grid button span{font-size:14px;line-height:1.45;color:var(--cv-social-muted,#566174)}
+html body .cv-onboarding-guide{padding:20px;border-radius:22px;background:#ffffff79;border:1px solid #ffffffbf;margin:20px 0}
+html body .cv-onboarding-guide h2{font-size:22px;margin:0 0 10px}
+html body .cv-onboarding-guide ol{margin:0;padding-left:20px;line-height:1.75}
+html body .cv-account-page .cv-form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+html body .cv-account-page label{min-width:0}
+html body .cv-account-page :is(.cv-sso-options,.cv-profile-links){display:flex;flex-wrap:wrap;gap:12px}
+html body .cv-account-page .cv-sso-options>a{flex:1 1 180px;text-align:center;justify-content:center;min-height:48px}
+html body .cv-account-page form[hidden]{display:none!important}
+html body .cv-account-page :is(.cv-button,.cv-quiet-button){min-height:44px}
+html body .cv-session-actions{display:flex;flex-wrap:wrap;gap:12px;margin-block:20px}
+@media(max-width:600px){:root{--cv-face-profile:112px;--cv-face-card:76px}html body .cv-account-page{padding:20px 16px}html body .cv-role-grid{grid-template-columns:1fr;gap:10px}html body .cv-role-grid button{min-height:78px;padding:16px}html body .cv-account-page .cv-form-row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html body [data-cv-avatar]{transition:none!important}}
+
+/* Profile introductions use the same portrait scale as the rest of the site. */
+html body .cv-artist-profile{display:grid!important;grid-template-columns:var(--cv-face-profile) minmax(0,1fr)!important;align-items:start!important;gap:clamp(24px,4vw,48px)!important}
+html body .cv-artist-profile>img,html body .cv-artist-profile>.cv-portrait-missing{width:var(--cv-face-profile)!important;height:var(--cv-face-profile)!important;align-self:start!important}
+html body .cv-artist-profile>div{min-width:0}
+@media(max-width:600px){html body .cv-artist-profile{grid-template-columns:minmax(0,1fr)!important;gap:24px!important}html body .cv-artist-profile>img,html body .cv-artist-profile>.cv-portrait-missing{justify-self:center}}

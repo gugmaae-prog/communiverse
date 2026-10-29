@@ -1,0 +1,44 @@
+/* Presentation only: keep original form controls, records and handlers. */
+(()=>{
+ 'use strict';
+ if(window.__cvRefinementV9)return;window.__cvRefinementV9=true;
+ const shorten=(text,max=150)=>text.length<=max?text:text.slice(0,max).replace(/\s+\S*$/,'')+'…';
+ function requestType(){
+  const form=document.querySelector('#cv-ws-request-form');
+  if(!form)return;
+  const select=form.querySelector('select[name="kind"]'),tiles=form.querySelector('.cv3-kind-selector');
+  if(!select||!tiles||select.dataset.cv9Type)return;
+  // The native change event already owns resource fields and approval routing.
+  select.dataset.cv9Type='native';select.classList.remove('cv3-native-hidden');
+  select.removeAttribute('aria-hidden');select.removeAttribute('tabindex');
+  tiles.hidden=true;tiles.inert=true;tiles.dataset.cv9Retired='true';
+  const hint=document.createElement('p');hint.className='cv9-request-kind-hint';hint.id='cv9-request-kind-hint';
+  const descriptions=new Set((select.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean));descriptions.add(hint.id);
+  select.setAttribute('aria-describedby',[...descriptions].join(' '));
+  select.closest('label').after(hint);
+  function explain(){
+   const tile=[...tiles.querySelectorAll('[data-cv3-kind]')].find(x=>x.dataset.cv3Kind===select.value);
+   hint.textContent=tile?.querySelector('small')?.textContent||'';
+   hint.hidden=!hint.textContent;
+  }
+  select.addEventListener('change',explain);explain();
+ }
+ function descriptions(){
+  for(const paragraph of document.querySelectorAll('.cvp-task-description,.cv-ws-card>p:not([class])')){
+   if(paragraph.closest('.cv9-description')||paragraph.textContent.trim().length<180)continue;
+   const full=paragraph.textContent.trim(),details=document.createElement('details'),summary=document.createElement('summary');
+   details.className='cv9-description';summary.setAttribute('aria-label','Read full description');
+   const preview=document.createElement('span'),label=document.createElement('span');
+   preview.className='cv9-description-preview';preview.textContent=shorten(full);
+   label.className='cv9-description-label';label.textContent='Read more';
+   summary.append(preview,label);paragraph.before(details);details.append(summary,paragraph);
+   details.addEventListener('toggle',()=>{label.textContent=details.open?'Read less':'Read more';summary.setAttribute('aria-label',details.open?'Hide full description':'Read full description')});
+  }
+ }
+ let scheduled=false;
+ function apply(){scheduled=false;requestType();descriptions()}
+ let frame=0;
+ function schedule(){if(scheduled)return;scheduled=true;frame=requestAnimationFrame(apply)}
+ function start(){apply();const host=document.querySelector('#cv-workspace');if(!host)return;const observer=new MutationObserver(schedule);observer.observe(host,{childList:true,subtree:true});addEventListener('pagehide',event=>{cancelAnimationFrame(frame);scheduled=false;if(!event.persisted)observer.disconnect();});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();

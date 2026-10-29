@@ -1,0 +1,13 @@
+/* Set up only the regions that require client layout. The shared shell stays visible. */
+(()=>{'use strict';
+const root=document.documentElement;root.classList.add('cv-first-render');
+const fallback=setTimeout(()=>root.classList.add('cv-first-fallback'),8000);
+function start(){
+ const lists=[...document.querySelectorAll('[data-cv-first-list]')];
+ const check=()=>{for(const list of lists){const pending=!list.children.length;list.toggleAttribute('data-cv-first-pending',pending);list.setAttribute('aria-busy',String(pending))}
+ if(!document.querySelector('.cv-masonry:not(.cv-laid-out),.cv-plug:not([data-glass-ready]),[data-cv-first-pending]')){clearTimeout(fallback);observer.disconnect()}};
+ const observer=new MutationObserver(check);observer.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','data-glass-ready']});check();
+ addEventListener('pageshow',check);addEventListener('pagehide',e=>{if(!e.persisted){clearTimeout(fallback);observer.disconnect()}},{once:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();

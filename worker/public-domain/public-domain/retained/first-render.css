@@ -1,0 +1,16 @@
+/* Current search geometry is part of the document, before the search enhancement. */
+html[data-cv-social] #cv-shared-header,html[data-cv-social] #cv-marketplace-nav{display:none!important}
+/* The constellation needs viewport measurements; never show the old hero arrangement. */
+html[data-cv-social] .cv-plug:not([data-glass-ready]) .stage{display:flex!important;flex-wrap:wrap;align-content:flex-start;justify-content:space-evenly;gap:32px;min-height:360px;padding-block:80px;box-sizing:border-box}
+html[data-cv-social] .cv-plug:not([data-glass-ready]) .stage>.node{position:relative!important;inset:auto!important;transform:none!important;width:80px!important;height:80px!important;opacity:1!important;flex:0 0 80px}
+html[data-cv-social] .cv-plug:not([data-glass-ready]) .stage>.node[data-cv-initial-hidden]{display:none!important}
+html[data-cv-social] .cv-plug:not([data-glass-ready]) .stage>.node .cap{display:none!important}
+/* Local placeholders reserve space until the final geometry exists, without hiding the page. */
+html.cv-first-render:not(.cv-first-fallback) .cv-plug:not([data-glass-ready]) .stage>.node{visibility:hidden!important}
+html.cv-first-render:not(.cv-first-fallback) .cv-masonry:not(.cv-laid-out)>*{visibility:hidden!important}
+html.cv-first-render:not(.cv-first-fallback) :is(.cv-masonry:not(.cv-laid-out),.cv-plug:not([data-glass-ready]) .stage,[data-cv-first-pending]){position:relative;min-height:320px}
+html.cv-first-render:not(.cv-first-fallback) :is(.cv-masonry:not(.cv-laid-out),[data-cv-first-pending])::before{content:"";display:block;position:absolute;inset:0 0 auto;height:260px;border-radius:22px;background:repeating-linear-gradient(90deg,rgba(128,151,183,.12) 0,rgba(128,151,183,.12) calc(33.333% - 16px),transparent calc(33.333% - 16px),transparent 33.333%);pointer-events:none}
+html.cv-first-render:not(.cv-first-fallback) .cv-plug:not([data-glass-ready]) .stage::before{content:"";position:absolute;inset:60px 0 auto;height:100px;background:radial-gradient(circle,rgba(128,151,183,.14) 0 38px,transparent 39px) 0 0/33.333% 100px;pointer-events:none}
+#cv-artist-profile[data-cv-first-pending]{min-height:420px}
+#cv-artist-profile[data-cv-first-pending] h1{font-size:clamp(26px,4vw,40px)}
+@media(max-width:600px){html[data-cv-social] .cv-plug:not([data-glass-ready]) .stage{gap:24px;min-height:300px;padding-block:50px}html.cv-first-render:not(.cv-first-fallback) :is(.cv-masonry:not(.cv-laid-out),[data-cv-first-pending])::before{height:220px;background-size:150% 100%}}

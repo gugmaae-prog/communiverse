@@ -1,0 +1,67 @@
+/* Shared spacing and reflow. Preserve the existing controls and content. */
+html.cv-responsive-v24{--cv-action-gap:12px;--cv-header-height:128px;--cv-feedback-duration:140ms}
+html.cv-responsive-v24 :is(main,.cv-social,#cv-workspace,#cv-ws-app,#cv-ws-content,.cv5-management-panel,.cv5-management-tools-host,.cvt-content){min-width:0;max-width:100%;box-sizing:border-box}
+html.cv-responsive-v24 :is(.cv-ws-heading,.cv-ws-toolbar,.cv-ws-tools,.cv-ws-footer,.cv-ws-detail-actions,.cv-ws-inline-actions,.cv-detail-actions,.cv-circle-actions,.cv-profile-links,.cv-profile-save,.cv5-management-card-actions,.cv5-management-pages,.cvt-actions,.cvt-document-actions,.cvt-pagination){gap:var(--cv-action-gap)!important;flex-wrap:wrap}
+html.cv-responsive-v24 :is(.cv-ws-heading,.cv-ws-tools,.cv-form-row,.cv5-management-toolbar,.cv5-management-form-grid,.cvt-editor-head)>*{min-width:0;max-width:100%}
+html.cv-responsive-v24 :is(.cv-invitation,#cv-ws-login){display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px}
+html.cv-responsive-v24 :is(.cv-invitation,#cv-ws-login)>:is(h1,h2,h3,p){flex:0 0 100%;min-width:0;margin-block:0}
+html.cv-responsive-v24 :is(.cv-invitation,#cv-ws-login)>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:10px 16px;box-sizing:border-box;white-space:normal;overflow-wrap:anywhere;text-align:center;line-height:1.5}
+html.cv-responsive-v24 :is(.cv-invitation,#cv-ws-login)>[hidden]{display:none!important}
+html.cv-responsive-v24 :is(.cv-ws-tabs,.cv-ws-subtabs,.cv5-management-tabs,.cvp-work-tabs){gap:8px!important;flex-wrap:wrap;max-width:100%}
+html.cv-responsive-v24 :is(.cv-feed-tabs,.cvp-work-switch){gap:8px!important;flex-wrap:wrap}
+html.cv-responsive-v24 .cv5-management-tabs>.cv5-management-tab{flex:1 0 auto;overflow-wrap:normal;word-break:normal}
+html.cv-responsive-v24[data-cv-social] body #main>.filters{gap:8px!important;flex-wrap:wrap!important}
+html.cv-responsive-v24 :is(.cv-ws-toolbar,.cv-ws-detail-actions,.cv-ws-inline-actions,.cv-ws-footer,.cv5-management-card-actions,.cvt-actions)>:is(a,button){min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+html.cv-responsive-v24 :is(.cv-ws-heading,.cv-ws-welcome,.cv-ws-momentum,.cv5-management-header,.cvt-header){gap:16px!important}
+html.cv-responsive-v24 .cv-ws-welcome>div{min-width:0;overflow-wrap:anywhere}
+html.cv-responsive-v24 .cv-ws-toolbar{flex:0 1 auto;align-items:center;justify-content:flex-end}
+html.cv-responsive-v24 :is(.cv-ws-tools>label,.cv5-management-identity>span,.cv4-header-copy){min-width:0;overflow-wrap:anywhere}
+html.cv-responsive-v24 :is(.cv-ws-form,.cv-profile-settings,.cv5-management-form-grid,.cvt-dialog) :is(label,fieldset){min-width:0;max-width:100%}
+html.cv-responsive-v24 :is(.cv-workspace,.cv5-management,.cvt-tools,.cv-profile-dialog) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-width:0;max-width:100%;box-sizing:border-box}
+html.cv-responsive-v24 .cv-profile-connection{flex-wrap:wrap;gap:16px}
+html.cv-responsive-v24 .cv-profile-connection>div{flex:1 1 240px;min-width:0}
+html.cv-responsive-v24 .cv-profile-connection>button{flex:0 1 auto;max-width:100%;white-space:normal}
+html.cv-responsive-v24 .cv-profile-save [role=status]{min-width:min(150px,100%);overflow-wrap:anywhere}
+html.cv-responsive-v24 :is(.cv5-management-filters,.cv5-management-form-grid,.cv5-management-facts){grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+html.cv-responsive-v24 :is(.cvt-table-scroll,.cvp-work-board){max-width:100%;overscroll-behavior-inline:contain}
+html.cv-responsive-v24 :is(dialog[open],.cva-panel,.cvp-chat-dialog){max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);box-sizing:border-box;overscroll-behavior:contain}
+html.cv-responsive-v24 :is(dialog[open],.cvp-chat-dialog) :is(h1,h2,h3,p,label){overflow-wrap:anywhere}
+html.cv-responsive-v24 :is(.cv5-management-panel,.cv5-management-drawer,[id=plan-session],[id=cv-artist-works]){scroll-margin-top:calc(var(--cv-header-height) + 16px)}
+html.cv-responsive-v24 :is(input,textarea,select,button,summary,a):focus-visible{scroll-margin-block:calc(var(--cv-header-height) + 16px) 32px}
+/* Keep full hit areas, then wrap; never squeeze labels into neighbouring controls. */
+@media(max-width:700px){
+ html.cv-responsive-v24 body:has(#cv-workspace) .cvch-rail{position:relative!important;inset:auto!important;transform:none!important;flex-direction:row!important;justify-content:center;width:fit-content;max-width:calc(100% - 32px);margin:16px auto 24px}
+ html.cv-responsive-v24 .cv-ws-heading{align-items:flex-start;flex-wrap:wrap}
+ html.cv-responsive-v24 .cv-ws-toolbar{justify-content:flex-start;flex-basis:100%}
+ html.cv-responsive-v24 .cv-ws-tools{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px!important}
+ html.cv-responsive-v24 .cv-ws-tools>label{flex:1 0 100%}
+ html.cv-responsive-v24 .cv-ws-tools>button{flex:1 1 140px}
+ html.cv-responsive-v24 .cv-profile-handles{grid-template-columns:minmax(0,1fr);gap:16px}
+ html.cv-responsive-v24 .cv5-management-identity{flex-wrap:wrap}
+ html.cv-responsive-v24 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head{position:relative}
+ html.cv-responsive-v24 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document :is(.cvs-document-history,.cvs-help,.cvs-inspector,.cvt-sheet-view)[open]{flex-basis:100%;width:100%}
+ html.cv-responsive-v24 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document :is(.cvs-history-body,.cvs-help>.cvt-sheet-help,.cvs-inspector-body,.cvs-toolbar .cvt-sheet-query){position:static;left:auto;right:auto;width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin-top:8px!important;grid-template-columns:minmax(0,1fr)}
+}
+html.cv-responsive-v24 body #cv-social-header nav{color:inherit!important}
+html.cv-responsive-v24 body #cv-social-header nav a:not([aria-current=page]){color:inherit!important}
+@media(max-width:480px){
+ html.cv-responsive-v24 body #cv-social-header nav{width:100%!important;justify-content:space-between!important;gap:0!important;overflow:visible!important}
+ html.cv-responsive-v24 body #cv-social-header nav a{flex:1 1 auto!important;min-width:0!important;padding-inline:5px!important;font-size:12px!important;min-height:44px!important}
+}
+/* On short screens the header scrolls away instead of occupying the working area. */
+@media(max-height:520px){
+ html.cv-responsive-v24 #cv-social-header{position:relative!important;top:auto!important}
+ html.cv-responsive-v24 :is(.cv5-management-panel,.cv5-management-drawer,[id=plan-session],[id=cv-artist-works]){scroll-margin-top:16px}
+ html.cv-responsive-v24 :is(input,textarea,select,button,summary,a):focus-visible{scroll-margin-block:16px}
+ html.cv-responsive-v24 .cv4-root{min-height:280px}
+ html.cv-responsive-v24 .cv4-root .cv4-header{flex-wrap:wrap;gap:8px}
+ html.cv-responsive-v24 :is(dialog[open],#cv-ws-dialog.cv-profile-dialog){max-height:calc(100dvh - 16px);padding:16px}
+}
+/* Resizing is direct manipulation; don't animate stale circle coordinates. */
+html.cv-responsive-v24.cv-layout-resizing .cv-plug .node{transition:none!important}
+@media(prefers-reduced-motion:no-preference){
+ html.cv-responsive-v24 :is(.cv-button,.cv-quiet-button,.cv-text-link,.cv-ws-tabs button,.cv-ws-subtabs button,.cv5-management-tab){transition:background-color var(--cv-feedback-duration) ease-out,color var(--cv-feedback-duration) ease-out,border-color var(--cv-feedback-duration) ease-out}
+}
+@media(prefers-reduced-motion:reduce){
+ html.cv-responsive-v24 :is(.cv-workspace,.cv5-management,.cvt-tools,dialog) *,html.cv-responsive-v24 .cv-plug .node{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

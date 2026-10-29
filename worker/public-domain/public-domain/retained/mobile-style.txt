@@ -1,0 +1,279 @@
+/* Communiverse mobile V8: append after the retained V3/polish styles. */
+
+/* Native details own keyboard activation, focus and the open state.
+   Draw the affordance without adding text to the accessible summary name. */
+html.cv-polish-v5 body details > summary:not([hidden]) {
+  list-style: none !important;
+  cursor: pointer;
+}
+
+html.cv-polish-v5 body details > summary:not([hidden]):not(.cv4-icon) {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  min-block-size: 44px;
+}
+
+html.cv-polish-v5 body details > summary::marker {
+  content: "";
+}
+
+html.cv-polish-v5 body details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Reuse the same pseudo-element as the existing answer accordions.
+   The second selector overrides Plug's retained content:none!important. */
+html.cv-polish-v5 body details > summary::after,
+html.cv-polish-v5 body .cv-plug details.glass-extra > summary::after {
+  --cvm-mark-size: 12px;
+  --cvm-mark-stroke: 2px;
+  content: "" !important;
+  display: inline-block;
+  position: static;
+  box-sizing: border-box;
+  flex: 0 0 24px;
+  inline-size: 24px;
+  block-size: 24px;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 1px solid var(--cv-glass-line, #dbe2ef);
+  border-radius: 50%;
+  color: var(--cv-glass-blue, #245ccc);
+  background-color: var(--cv-glass-soft, #e7eefb);
+  background-image: linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--cvm-mark-size) var(--cvm-mark-stroke),
+                   var(--cvm-mark-stroke) var(--cvm-mark-size);
+  pointer-events: none;
+}
+
+html.cv-polish-v5 body details[open] > summary::after,
+html.cv-polish-v5 body .cv-plug details.glass-extra[open] > summary::after {
+  background-size: var(--cvm-mark-size) var(--cvm-mark-stroke),
+                   var(--cvm-mark-stroke) 0;
+}
+
+/* Preserve the dimensions and original icons of native conversation menus. */
+html.cv-polish-v5 body details > summary.cv4-icon:not([hidden]) {
+  position: relative;
+}
+
+html.cv-polish-v5 body details > summary.cv4-icon::after {
+  --cvm-mark-size: 7px;
+  --cvm-mark-stroke: 1px;
+  position: absolute;
+  inset-block-start: 2px;
+  inset-inline-end: 2px;
+  inline-size: 12px;
+  block-size: 12px;
+  margin: 0;
+}
+
+/* Only these planner summaries append glyph('chevron') in retained V3.
+   Media play SVGs and every other summary icon keep their native styling. */
+html.cv-polish-v5 body .cvgp-step > summary > svg:last-child,
+html.cv-polish-v5 body .cvgp-costs > summary > svg:last-child {
+  display: none;
+}
+
+html.cv-polish-v5 body .cv3-route-preview {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding-inline: 16px;
+}
+
+/* The client wraps only label copy, leaving native controls in their labels.
+   Grow the copy, rather than the input, to align paired controls when it wraps. */
+html.cv-polish-v5 body .cv-form-row:has(> label > .cvm-label-copy) {
+  align-items: stretch;
+}
+
+html.cv-polish-v5 body .cv-form-row > label:has(> .cvm-label-copy):not([hidden]):not(.cv-ws-check):not(:has(> input:is([type="checkbox"], [type="radio"]), > select[multiple], > .cv3-native-hidden)) {
+  /* Retained #cv-ws-dialog label also explicitly sets display:grid. */
+  display: flex !important;
+  flex-direction: column;
+  /* Retained #cv-ws-dialog labels explicitly align themselves to start. */
+  align-self: stretch !important;
+  min-inline-size: 0;
+  gap: 8px;
+}
+
+html.cv-polish-v5 body .cv-form-row > label > .cvm-label-copy:not([hidden]) {
+  display: block;
+  flex: 1 0 auto;
+  min-block-size: 21px;
+  color: var(--cv-glass-ink, #243248);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.5;
+}
+
+html.cv-polish-v5 body .cv-form-row > label > .cvm-label-copy > span:not([hidden]) {
+  display: inline;
+  color: var(--cv-glass-muted, #55647a);
+  font-weight: inherit;
+}
+
+html.cv-polish-v5 body .cv-form-row > label:has(> .cvm-label-copy) > :is(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]), select:not([multiple]), textarea):not([hidden]):not(.cv3-native-hidden) {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  margin: 0;
+}
+
+/* Bound scrolling to the native sheet region; its tabindex/role stay intact.
+   Vertical scrolling gives the sticky header a local containing scrollport. */
+html.cv-polish-v5 body .cvt-table-scroll {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  max-block-size: min(65dvh, 640px);
+  overflow: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-block: 120px 12px;
+  scroll-padding-inline: 12px;
+}
+
+html.cv-polish-v5 body .cvt-table thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  padding: 8px 10px;
+  background: var(--cvt-wash, #edf2f8);
+}
+
+html.cv-polish-v5 body .cvt-table tbody th {
+  padding: 6px 8px;
+}
+
+html.cv-polish-v5 body .cvt-table .cvt-cell,
+html.cv-polish-v5 body .cvt-table td:last-child:not(.cvt-cell) {
+  padding: 4px 6px;
+}
+
+html.cv-polish-v5 body .cvt-table .cvt-cell > :is(input.cvt-cell-control:not([type="checkbox"]):not([type="hidden"]), select.cvt-cell-control):not([hidden]) {
+  min-block-size: 44px;
+  padding: 8px;
+}
+
+@media (max-width: 720px) {
+  /* Enough room for Region values and the native select indicator at 16px. */
+  html.cv-polish-v5 body .cv-feed-controls > label:has(> :is(#cv-feed-region, #cv-artist-region)):not([hidden]) {
+    flex: 1 1 180px;
+    min-inline-size: min(100%, 180px);
+    max-inline-size: 100%;
+  }
+
+  html.cv-polish-v5 body :is(#cv-feed-region, #cv-artist-region, .cv-region-picker select, select[name="region"]):not([hidden]):not(.cv3-native-hidden) {
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+    min-block-size: 44px;
+    padding-block: 10px;
+    padding-inline: 12px 32px;
+    font-size: 16px !important;
+    line-height: 1.5;
+    color: var(--cv-glass-ink, #243248);
+    color-scheme: light;
+  }
+
+  /* Inline widths set by the native column resizer still take precedence. */
+  html.cv-polish-v5 body .cvt-table thead th:not(:first-child),
+  html.cv-polish-v5 body .cvt-table .cvt-cell {
+    min-inline-size: 160px;
+  }
+}
+
+@media (forced-colors: active) {
+  html.cv-polish-v5 body details > summary::after,
+  html.cv-polish-v5 body .cv-plug details.glass-extra > summary::after {
+    forced-color-adjust: none;
+    color: ButtonText;
+    border-color: ButtonText;
+    background-color: Canvas;
+  }
+}
+
+/* Phone Circles: original nodes and profile actions, in a stable scrollable layout. */
+html.cv-mobile-v8 .cv-plug.cv-circles-list .stage {
+  height:auto!important; min-height:0!important; display:grid!important;
+  grid-template-columns:minmax(0,1fr); gap:12px; padding:8px 0 24px;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node:not([hidden]) {
+  position:relative!important; inset:auto!important; transform:none!important;
+  width:100%!important; height:auto!important; min-height:80px!important;
+  aspect-ratio:auto!important;
+  display:grid!important; grid-template-columns:56px minmax(0,1fr); align-items:center; gap:16px;
+  padding:12px 16px!important; border-radius:20px!important; box-sizing:border-box;
+  color:var(--cv-social-ink,#263953); text-decoration:none; overflow:visible!important;
+  background:var(--cv-social-card,rgba(255,255,255,.72))!important;
+  border:1px solid var(--cv-social-line,#d7e2ee)!important;
+  box-shadow:0 8px 24px rgba(35,53,80,.04)!important;
+  content-visibility:auto; contain-intrinsic-size:auto 80px; touch-action:manipulation;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node[hidden] {display:none!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node::before,
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node::after {display:none!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node:is(:hover,.is-selected) {
+  background:var(--cv-social-soft,#eaf1ff)!important; border-color:var(--cv-social-blue,#2662eb)!important;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node:focus-visible {outline:2px solid var(--cv-social-blue,#2662eb);outline-offset:3px;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node :is(img,.ph) {
+  width:56px!important; height:56px!important; position:relative!important; inset:auto!important;
+  border-radius:50%!important; object-fit:cover; grid-column:1; grid-row:1;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .node img[hidden] {display:none!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .cvm-person-copy {display:grid;gap:4px;min-width:0;grid-column:2;grid-row:1;text-align:left;overflow-wrap:anywhere;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .cvm-person-copy strong {font-size:16px;line-height:1.4;font-weight:500;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .cvm-person-copy small {font-size:14px;line-height:1.45;color:var(--cv-social-muted,#526782);}
+html.cv-mobile-v8 .cv-plug:not(.cv-circles-list) .cvm-person-copy {display:none;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-identity {display:none!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel {
+  position:relative!important; inset:auto!important; width:100%!important; height:auto!important;
+  transform:none!important; opacity:1!important; visibility:visible!important; pointer-events:auto!important;
+  padding:16px!important; box-sizing:border-box; border-radius:20px; grid-column:1/-1;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel[aria-hidden=true] {display:none!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel-top {display:flex!important;align-items:center;gap:12px;justify-content:space-between;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel-top > span {min-width:0;overflow-wrap:anywhere;font-size:14px;line-height:1.45;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel-body {display:grid!important;gap:16px;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel :is(.glass-card,.cv-gallery-orbit) {
+  position:relative!important; inset:auto!important; width:100%!important; height:auto!important;
+  max-height:none!important; transform:none!important; opacity:1!important;
+  padding:16px!important; overflow:visible!important; box-sizing:border-box;
+}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel h2 {font-size:22px!important;line-height:1.3!important;margin:8px 0!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel p {font-size:16px!important;line-height:1.5!important;margin:8px 0!important;display:block!important;-webkit-line-clamp:unset!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-panel :is(.glass-close,.cv-card-expand,.glass-link,.glass-social) {min-height:44px!important;min-width:44px!important;font-size:14px!important;touch-action:manipulation;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .glass-extra[open] {display:block!important;}
+html.cv-mobile-v8 .cv-plug.cv-circles-list .cv-films {max-width:100%;}
+/* Override the retained absolute orbit layer, not merely its display mode. */
+html.cv-mobile-v8 .cv-circles-list #cv-person-work {
+  min-height:0!important; max-height:none!important; overflow:visible!important;
+}
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .glass-panel-body {
+  position:relative!important; inset:auto!important; width:100%!important; height:auto!important;
+  transform:none!important; overflow:visible!important; display:grid!important; gap:16px;
+}
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .glass-panel-body .glass-card[data-card],
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .cv-gallery-orbit {
+  position:relative!important; inset:auto!important; width:100%!important; height:auto!important;
+  min-height:0!important; max-height:none!important; transform:none!important; opacity:1!important;
+  padding:16px!important; overflow:visible!important; box-sizing:border-box;
+}
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .glass-card[data-card] h2 {font-size:22px!important;line-height:1.3!important;margin:8px 0!important;}
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .glass-card[data-card] p {font-size:16px!important;line-height:1.5!important;margin:8px 0!important;display:block!important;-webkit-line-clamp:unset!important;}
+html.cv-mobile-v8 .cv-circles-list #cv-person-work .glass-close {opacity:1!important;color:var(--cv-social-ink,#263953)!important;background:var(--cv-social-soft,#eaf1ff)!important;}
+@media(max-width:360px) {
+  html.cv-mobile-v8 .cv-plug.cv-circles-list .filters {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-flow:row!important;grid-template-rows:none!important;gap:4px!important;width:100%!important;padding:4px!important;box-sizing:border-box;}
+  html.cv-mobile-v8 .cv-plug.cv-circles-list .filters button {min-width:0!important;min-height:44px!important;font-size:14px!important;padding:8px!important;white-space:normal;}
+  html.cv-mobile-v8 #cv-social-header nav {display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:4px!important;min-width:0!important;width:100%!important;box-sizing:border-box;padding:4px!important;}
+  html.cv-mobile-v8 #cv-social-header nav a {flex:0 0 auto!important;min-height:44px!important;padding:0 10px!important;font-size:14px!important;white-space:nowrap;}
+}

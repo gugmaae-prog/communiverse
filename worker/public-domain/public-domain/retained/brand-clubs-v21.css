@@ -1,0 +1,8 @@
+/* The orange optical mark accompanies the existing Communiverse wordmark. */
+html [data-cv-brand="v21"]{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;text-decoration:none}
+html [data-cv-brand="v21"]>.cv-brand-mark{display:block;width:34px;height:34px;flex:0 0 34px;min-height:0;max-height:none;object-fit:contain;border-radius:50%;margin:0}
+html [data-cv-brand="v21"]>.cv-brand-name{font:inherit!important;color:inherit!important;letter-spacing:inherit;line-height:inherit}
+html footer [data-cv-brand="v21"]>.cv-brand-mark{width:28px;height:28px;flex-basis:28px}
+html [data-cv-brand="v21"]:focus-visible{outline:2px solid var(--cv-social-blue,#1267ff);outline-offset:5px;border-radius:8px}
+@media(max-width:600px){html #cv-social-header [data-cv-brand="v21"]{gap:7px}html #cv-social-header [data-cv-brand="v21"]>.cv-brand-mark{width:30px;height:30px;flex-basis:30px}}
+@media(max-width:380px){html #cv-social-header .cv-universe-logo[data-cv-brand="v21"]{font-size:16px!important}html #cv-social-header [data-cv-brand="v21"]>.cv-brand-mark{width:26px;height:26px;flex-basis:26px}}
