@@ -1,0 +1,142 @@
+[
+  {
+    "aboutKept": true,
+    "animations": [
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      },
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      },
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      }
+    ],
+    "artworkCount": 3,
+    "images": [
+      {
+        "alt": "Light of Your Soul",
+        "loaded": true
+      },
+      {
+        "alt": "Beloved",
+        "loaded": true
+      },
+      {
+        "alt": "All Along",
+        "loaded": true
+      }
+    ],
+    "imagesKept": true,
+    "width": 375
+  },
+  {
+    "aboutKept": true,
+    "animations": [
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      },
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      },
+      {
+        "frames": [
+          {
+            "opacity": 0
+          },
+          {
+            "opacity": 1
+          }
+        ],
+        "options": {
+          "duration": 140,
+          "easing": "ease-out",
+          "fill": "both"
+        },
+        "target": "cv-glass-card cv-scene-art-story"
+      }
+    ],
+    "artworkCount": 3,
+    "images": [
+      {
+        "alt": "Light of Your Soul",
+        "loaded": true
+      },
+      {
+        "alt": "Beloved",
+        "loaded": true
+      },
+      {
+        "alt": "All Along",
+        "loaded": true
+      }
+    ],
+    "imagesKept": true,
+    "width": 1440
+  }
+]
