@@ -1,0 +1,178 @@
+[
+  {
+    "file": "home-375.jpg",
+    "path": "/",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "workshops-form-375.jpg",
+    "path": "/workshops/",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 1863.5,
+    "fixture": false
+  },
+  {
+    "file": "artist-375.jpg",
+    "path": "/artists/sophiko/",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "404-375.jpg",
+    "path": "/artists/not-a-person/",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "privacy-375.jpg",
+    "path": "/privacy/",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "events-empty-375.jpg",
+    "path": "/events/",
+    "apiError": false,
+    "empty": "QA fixture: overall-empty catalogue\n\nNo events listed yet. Our first Communiverse events in the UAE are coming soon.\n\nReset filtersOffice workshopshello@communiverseclubs.com",
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 496.5,
+    "fixture": true
+  },
+  {
+    "file": "clubs-empty-375.jpg",
+    "path": "/clubs/",
+    "apiError": false,
+    "empty": "QA fixture: overall-empty catalogue\n\nNo clubs yet. Start the first one.\n\nCreate a club",
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 622,
+    "fixture": true
+  },
+  {
+    "file": "circles-artwork-375.jpg",
+    "path": "/circles/?person=artist-sophiko&art=work-sophiko-ocean-shoal",
+    "apiError": false,
+    "empty": null,
+    "height": 812,
+    "overflow": false,
+    "width": 375,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "home-1440.jpg",
+    "path": "/",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "workshops-form-1440.jpg",
+    "path": "/workshops/",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 947,
+    "fixture": false
+  },
+  {
+    "file": "artist-1440.jpg",
+    "path": "/artists/sophiko/",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "404-1440.jpg",
+    "path": "/artists/not-a-person/",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "privacy-1440.jpg",
+    "path": "/privacy/",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 0,
+    "fixture": false
+  },
+  {
+    "file": "events-empty-1440.jpg",
+    "path": "/events/",
+    "apiError": false,
+    "empty": "QA fixture: overall-empty catalogue\n\nNo events listed yet. Our first Communiverse events in the UAE are coming soon.\n\nReset filtersOffice workshopshello@communiverseclubs.com",
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 368.5,
+    "fixture": true
+  },
+  {
+    "file": "clubs-empty-1440.jpg",
+    "path": "/clubs/",
+    "apiError": false,
+    "empty": "QA fixture: overall-empty catalogue\n\nNo clubs yet. Start the first one.\n\nCreate a club",
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 324,
+    "fixture": true
+  },
+  {
+    "file": "circles-artwork-1440.jpg",
+    "path": "/circles/?person=artist-sophiko&art=work-sophiko-ocean-shoal",
+    "apiError": false,
+    "empty": null,
+    "height": 925,
+    "overflow": false,
+    "width": 1440,
+    "y": 0,
+    "fixture": false
+  }
+]

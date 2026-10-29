@@ -1,0 +1,14 @@
+{
+  "candidate": "29964e9f-2d18-4405-b5be-f72e02ff9e08",
+  "endpoint": "/api/csp-report",
+  "attempts": 20,
+  "counts": {
+    "204": 5,
+    "429": 15
+  },
+  "releases": [
+    null
+  ],
+  "checkedAt": "2026-10-29T16:17:15.449Z",
+  "notificationEnqueued": false
+}

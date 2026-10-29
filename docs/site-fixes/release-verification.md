@@ -1,17 +1,44 @@
-# Release verification and guarded promotion
+# A-K integration, verification and guarded release
 
-The source reconciliation and A-K workstreams are stacked PRs. This follow-up records final integration verification and the safe candidate upload/staging tools. Original retained modules and assets remain hash-checked.
+## Source and PR order
 
-Integration repairs: filtered club API responses now carry an actual unfiltered overallTotal, so a populated catalogue's filtered-empty state cannot be confused with an overall-empty catalogue. Unknown gallery API identifiers return HTTP 404. Missing sharing assets return 404 instead of assuming an assets binding exists.
+The source reconciliation is #32. Workstreams A-K are separate stacked PRs #33-43, in order. Integration PR #44 is based on K and contains the final repairs, release tools and sanitized evidence. [Recon](recon.md) maps the actual Worker, catalogue, services, forms, authentication and tenant boundaries. The root Next.js deployment remains guarded.
 
-The release script verifies the expected current production version, a clean committed source tree, all original/added hashes, all twelve existing bindings and production form configuration before upload. Secret values are passed only to Cloudflare's secret bindings and are never written to the public repository or evidence. Asset upload preserves all 321 original assets and adds 55 sharing images. The script supports staging the candidate at 0% while v25 stays at 100% and records the rollback assignment.
+## Exact release state
 
-Promotion acceptance is separate: successful public crawl, Circles checks, real production form delivery, default sharing-image approval and a rollback record are required. Account cutover must remain false. The release gate refuses promotion when those inputs are absent. D1/provider acceptance remains independently required for accounts.
+At the final verification checkpoint on 29 October 2026:
 
-A free managed Turnstile widget was created for Communiverse and its retained account host. Its secret is held in Cloudflare; publication evidence contains no value. Existing sender and private notification recipients remain server-owned. No email DNS, billing, production database policy or destructive cleanup is included.
+| State | Worker version | Traffic |
+| --- | --- | --- |
+| Public v25 with runtime compatibility | `771fd47e-62f4-4243-801c-13cd6f9edbc6` | 100% |
+| Full A-K candidate | `29964e9f-2d18-4405-b5be-f72e02ff9e08` | 0% |
+| Pre-work v25 rollback | `802e5e6d-760f-4946-801a-2dab6fbc8273` | 0% |
 
-Final evidence and release state are added after the candidate checks. Local screenshots are explicitly candidate views; overall-empty screenshots are labeled QA fixtures because live events and clubs remain populated. Axe is used as the plan's permitted accessibility audit; Lighthouse numeric scores are not claimed.
+The candidate source commit is `43f00b3b6a4abd077f5c880d8d80867d64eaba33`. Later evidence-only commits do not change its runtime. Deployment `4faed79f-e305-4a2d-9c3a-790ec77f004a` records the assignment. The account cutover flag is false. Normal public responses still identify v25.
 
-The zero-percent edge test identified the Durable Object version boundary: the active v25 class did not yet expose the new limiter RPC. A compatibility release uses the reviewed v25 source snapshot and all 321 original assets, replacing only registration-delivery.mjs with a backwards-compatible class. It keeps the public v25 release and adds no namespace, schema or notification-state migration. Local tests preserve completed legacy notification receipts and reject limiter calls on notification objects. After that runtime update, the full site candidate stays at zero traffic. The live edge admits exactly five of twenty concurrent sanitized CSP reports, with fifteen HTTP 429 responses; no notification is enqueued by this test.
+The runtime compatibility update is a real production change. A zero-percent candidate initially could not call the new limiter RPC because Durable Object code follows the active version. The compatibility release uses the reviewed source-reconciliation/v25 snapshot, all 321 original assets and a backward-compatible RegistrationDelivery class. It changes no namespace, schema or existing notification state. Local tests preserve legacy completed receipts and prevent mixing limiter and notification objects.
 
-The Cloudflare candidate crawl covers 171 sitemap pages, all six artists and 48 artwork pages, 48 versioned client assets before the final account initializer, plus additional internal links. It returns no route/client/visible-platform-copy problems after retired links and a workspace-only public script are removed. The filled honeypot returns HTTP 200 without sending, and a valid form payload without a token returns HTTP 400. Successful live challenge plus email delivery remains untested, so full site promotion stays blocked along with sharing-image sign-off. All live account readiness flags remain disabled.
+## Verification evidence
+
+- Build and owned-module/client syntax lint pass; all 38 tests pass. Tests cover stable artist/work URLs, initial HTML and metadata, unknown-record 404s, redirects, Home curation/pagination, hubs, reports, honeypots, Turnstile failure/replay, concurrent limiter transactions, duplicate receipts and isolated D1 authentication boundaries.
+- Original 146 retained modules and 321 assets remain hash-verified. The 55 new 1200x630 sharing images have a separate manifest. Publication scan covers 589 files with zero findings; high-confidence token scanning of 380 tracked text files finds none. Dependency audit reports zero vulnerabilities.
+- The final anonymous Cloudflare crawl covers 171 sitemap pages, including all six artists and 48 works, plus discovered versioned clients and additional internal links. See [crawl evidence](evidence/public-crawl.json) for exact counts, headers and results. Filled honeypots return 200 without delivery; valid payloads lacking a challenge return 400. A repeated Join-client probe returns 200 ten times after removing its unnecessary retained-service/D1 dependency.
+- The final edge concurrency probe returns five HTTP 204 responses and fifteen HTTP 429 responses for twenty concurrent sanitized CSP reports. It queues no notifications. A new regression also verifies limiter storage errors and malformed RPC replies return 503; CSP reporting does not silently accept limiter failures.
+- Axe reports zero automated violations on Home, Workshops, selected Circles and an artist portfolio at 375px and 1440px. Gradient contrast remains an incomplete/manual audit item. No Lighthouse 95+ score or completed performance acceptance is claimed.
+- Browser geometry checks at 375px, 1440px, 845px landscape and reduced motion find 14 people, 1:1 portraits, no touching cards and no horizontal overflow. Outside click deselects; Escape closes artwork and then profile, including direct links with body focus. No Circles card close buttons were added. The report dialog has one close control, five reasons, optional 1000-character details, focus containment/return and a disabled reset state.
+- Sixteen screenshots cover 375px and 1440px. They show the local candidate/public-data fallback. Overall-empty event/club examples are labeled QA fixtures; catalogue records were not deleted. Screenshot pixels precede only nonvisual keyboard and limiter failure-handling changes.
+- Initial requests immediately after an upload briefly reached v25 at two URLs. The later complete verification run records routing retries and version headers separately; this does not establish user acceptance of the candidate.
+
+## Integration repairs
+
+The retained browser API used both body and data parameter names. Its adapter now supports both, protects writes and reports successful catalogue reads without referencing an undefined variable. The public Join helper is owned and independent of D1. Active-hub overall totals distinguish filtered emptiness. Unknown gallery API records return 404. Stale workspace-only script links and retired public links are removed. Account configuration initializes externally; prefixed APIs, host-only cookies, logout cleanup, safe returns and WebSocket responses are preserved behind the disabled cutover. Security applies to generated pages without broadening shared-host HSTS or global CSP reporting paths. Required labels, visible card names, report reset state and sticky header contrast are repaired.
+
+## Promotion gates and human inputs
+
+Full site promotion remains blocked by successful production Turnstile plus notification-delivery acceptance and default sharing-image design sign-off, as required by the user's plan. Production widget and secret configuration are installed. The verified sender and private notification recipients remain unchanged. No real challenge was solved and no successful live email delivery is claimed.
+
+Branded accounts remain independently blocked by production D1 write capacity and all retained authentication providers passing end-to-end. Current edge logs additionally confirm daily D1 read-quota exhaustion. Public catalogue fallback responses are not proof of write readiness. LinkedIn project access/configuration remains unverified. [The account runbook](../auth-domain-migration.md) records callback, recovery, provider changes and rollback. No DNS changes are needed or performed.
+
+Legal review/placeholders, workshop facts and Hira's actual portrait remain human inputs. The legal draft banners and neutral HS avatar are intentional. Sharing images require approval. Supabase exposure/RLS was inspected read-only; existing shared policies were not changed. CSP remains report-only for the new policy pending review.
+
+The release tool verifies current ownership, existing twelve bindings, clean committed source, all source/asset hashes, production form configuration and acceptance inputs. Normal rollback keeps the compatibility v25 at 100%. The deeper pre-work version is recorded above. No billing, DNS, database-policy, destructive cleanup, payments or visual redesign is included.
