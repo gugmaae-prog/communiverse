@@ -4,7 +4,7 @@ export const OLD='https://espacios.me';
 export const ORIGIN='https://communiverseclubs.com';
 export const PREVIEW='https://preview.communiverseclubs.com';
 export const PREFIX='/communiverse';
-export const RELEASE='public-domain-20261029-v25';
+export const RELEASE='public-domain-20261029-v26';
 export const CLIENT_BASE=PREFIX+'/_domain/'+RELEASE+'/';
 const accounts=/^\/(?:workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account)(?:\/|$)/;
 export const read=m=>m==='GET'||m==='HEAD';
@@ -28,12 +28,12 @@ export function link(value,origin=ORIGIN){
  if(accountPath(u.pathname))return OLD+internal(clean(u.pathname))+u.search+u.hash;
  if(technical(u.pathname))return internal(clean(u.pathname))+u.search+u.hash;
  if(clean(u.pathname).replace(/\/$/,'')==='/artists'){u.pathname='/circles/';u.searchParams.set('filter','artists');if(u.searchParams.has('artist')){u.searchParams.set('person',u.searchParams.get('artist'));u.searchParams.delete('artist');}return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;}
- u.pathname=clean(u.pathname);return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;
+ u.pathname=clean(u.pathname);if(u.pathname.replace(/\/$/,'')==='/discover')u.pathname='/';return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;
 }
 export function rewrite(source,origin){
  // Only new, separately versioned client URLs use this transformation.
  // The original versioned assets and their contents are retained unchanged.
- return platformCopy(portraitText(source)).replace(/\bCool Kids\b/gi,'People')
+ return platformCopy(portraitText(source)).replace(/\bCool Kids\b/gi,'People').replace("const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);","if(location.pathname==='/')q.set('surface','home');const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);")
  .replace('function masonry(){', 'function masonry(){window.CVSyncFeedPromotions?.();')
  .replace("const label=input.closest('label');if(!label)return;","const label=input.closest('label');if(!label)return;label.classList.add('cv4-search-field');")
  .replace(/https:\/\/(?:www\.)?espacios\.me\/communiverse(?=[/"'?#\s<]|$)/g,'/communiverse')

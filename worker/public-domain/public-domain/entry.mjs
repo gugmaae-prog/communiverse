@@ -1,3 +1,5 @@
+import {homeFeed} from './home-feed.mjs';
+import {tile as homeTile} from './retained/first-render-templates.mjs';
 import {brandResponse} from './brand-copy.mjs';
 import {legalPage,legalSupport} from './legal.mjs';
 import LEGAL_CLIENT from './legal-links.js.txt';
@@ -57,13 +59,13 @@ async function guest(request,env,ctx,path){
  catch(error){const fallback=await publicFallback(fallbackRequest);if(fallback){retryLiveAt=Date.now()+60000;return fallback;}throw error;}
 }
 function jsonLinks(v,origin){return typeof v==='string'?(/^(?:\/communiverse\/|https:\/\/(?:www\.)?espacios\.me\/communiverse\/)/.test(v)?link(v,origin):v):Array.isArray(v)?v.map(x=>jsonLinks(x,origin)):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,jsonLinks(x,origin)])):v;}
-async function adapt(response,request){response=brandResponse(legalSupport(response,request));const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
+async function adapt(response,request,readFeed){response=brandResponse(legalSupport(response,request));const u=new URL(request.url),h=adjusted(response,u.origin),type=h.get('Content-Type')||'';
  if(request.method==='HEAD')return new Response(null,{status:response.status,headers:h});
  if(type.includes('application/json')){let data=portraitData(await response.json());if(clean(u.pathname).startsWith('/api/circles')){const fix=c=>c&&c.cover?.startsWith('/communiverse/_public/20261008-marketplace-1/')?{...c,cover:c.cover+'?cv_original=1'}:c;if(data.circles)data.circles=data.circles.map(fix);if(data.circle)data.circle=fix(data.circle);}return new Response(JSON.stringify(jsonLinks(data,u.origin)),{status:response.status,headers:h});}
  if(!type.includes('text/html'))return new Response(response.body,{status:response.status,headers:h});
  if(response.status>=500)return error(response.status,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');
  const html=rewrite(await response.text(),u.origin),isEvent=clean(u.pathname)==='/event/',isCircles=['/circles/','/plug/'].includes(clean(u.pathname)),people=isCircles?circlePeople(html,artistWorks):null,featured=['/','/discover/'].includes(clean(u.pathname)),isWorkshops=clean(u.pathname)==='/workshops/';
- let workCount=0;
+ let home=null;if(featured){const feedURL=new URL(request.url);feedURL.pathname='/api/feed';feedURL.searchParams.set('surface','home');const result=await homeFeed(new Request(feedURL),readFeed||publicFallback);if(result.ok)home=await result.json();}
  return identityResponse(new HTMLRewriter()
  .on('head',{element(e){e.prepend((featured?'<script defer src="'+CLIENT_BASE+'feed-discovery.js"></script>':'')+'<script src="'+CLIENT_BASE+'navigation.js"></script><script>window.CV_URLS=Object.freeze('+JSON.stringify({publicOrigin:u.origin,pageBase:'/',apiBase:PREFIX+'/api/',assetBase:PREFIX+'/_',accountOrigin:OLD,accountBase:OLD+PREFIX+'/'})+');</script>'+(u.origin===PREVIEW?'<meta name="robots" content="noindex,nofollow">':''),{html:true});}})
  .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';e.setAttribute(attr,link(e.getAttribute(attr),u.origin));}})
@@ -71,12 +73,16 @@ async function adapt(response,request){response=brandResponse(legalSupport(respo
  .on('#cv-social-header nav a[href*="artists"],#cv-marketplace-nav a[href*="artists"]',{element(e){e.remove();}})
  .on('#cv-social-header nav a[href*="circles"],#cv-marketplace-nav a[href*="circles"]',{element(e){if(clean(u.pathname)==='/artist/')e.setAttribute('aria-current','page');}})
  .on('link[rel~="icon"],link[rel="apple-touch-icon"]',{element(e){e.remove();}})
- .on('head',{element(e){e.append('<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png?v=20261028-v1"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261028-v1"><style data-cv-workshops>'+WORKSHOP_STYLE+'</style>'+((people||featured||isWorkshops)?'<style data-cv-people>'+CIRCLE_STYLE+(people?CONSTELLATION_STYLE:'')+'</style>':'')+(people?'<script defer src="'+CLIENT_BASE+'circles-directory.js"></script>':'')+(isWorkshops?'<script defer src="'+CLIENT_BASE+'workshops.js"></script>':''),{html:true});}})
+ .on('head',{element(e){e.append('<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png?v=20261028-v1"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261028-v1"><style data-cv-workshops>'+WORKSHOP_STYLE+'</style>'+((people||featured||isWorkshops)?'<style data-cv-people>'+CIRCLE_STYLE+(featured?'.cv-home-intro{margin:0 0 24px;max-width:780px}.cv-home-intro h1{font-size:clamp(30px,4vw,46px)!important;line-height:1.15!important;margin:0 0 12px!important}.cv-home-intro p{font-size:16px;line-height:1.6;margin:0;max-width:66ch}':'')+(people?CONSTELLATION_STYLE:'')+'</style>':'')+(people?'<script defer src="'+CLIENT_BASE+'circles-directory.js"></script>':'')+(isWorkshops?'<script defer src="'+CLIENT_BASE+'workshops.js"></script>':''),{html:true});}})
  .on('head',{element(e){e.append('<style data-cv-search-sizing>'+SEARCH_STYLE+'</style><style data-cv-artwork-glass>'+ORBIT_STYLE+'</style><script defer src="'+CLIENT_BASE+'artwork-experience.js"></script><script type="application/json" id="cv-artwork-context">'+JSON.stringify(artworkContext).replaceAll('<','\\u003c')+'</script>',{html:true});}})
  .on('head',{element(e){if(isEvent||isWorkshops)e.append('<script defer src="'+CLIENT_BASE+'registrations.js"></script>',{html:true});}})
- .on('.cv-feed-page',{element(e){if(featured)e.prepend(featuredArtist(),{html:true});}})
- .on('#cv-feed > .cv-pin[data-id]',{element(e){if(!featured)return;workCount++;if(workCount===3||workCount===11)e.after(workshopPromo(workCount===3?0:1),{html:true});}})
+ .on('.cv-feed-page',{element(e){if(featured)e.prepend('<section class="cv-home-intro"><h1>Your Communiverse</h1><p>We connect culture, commerce and community. Discover artists and artisans, learn their craft, and collect their work.</p></section>'+featuredArtist(),{html:true});}})
+ .on('h1.cv-visually-hidden',{element(e){if(featured)e.remove();}})
+ .on('#cv-feed-initial',{element(e){if(home)e.setInnerContent(JSON.stringify(home).replaceAll('<','\\u003c'),{html:true});}})
+ .on('#cv-feed',{element(e){if(home)e.setInnerContent(home.items.map((item,i)=>rewrite(homeTile(item),u.origin)+(i===2?workshopPromo(0):i===10?workshopPromo(1):'')).join(''),{html:true});}})
  .on('#cv-feed',{element(e){if(featured)e.after(discoveryData(),{html:true});}})
+ .on('footer a[href^="mailto:hello@communiverseclubs.com"]',{element(e){e.setInnerContent('hello@communiverseclubs.com');}})
+ .on('a[href="/works/"],a[href="/communiverse/works/"]',{element(e){e.remove();}})
  .on('nav[aria-label="Footer navigation"]',{element(e){e.append('<a href="/workshops/">Office workshops</a>',{html:true});}})
  .on('#cv-artist-profile',{element(e){if(u.searchParams.get('id')==='artist-sophiko')e.after('<aside class="cv-artist-workshop-note"><h2>Paint with Sophiko.</h2><p>Bring an aura painting workshop to your office.</p><a class="cv-workshop-button" href="/workshops/?session=aura-painting#enquire">Plan a team workshop</a></aside>',{html:true});}})
  .on('.cv-plug',{element(e){if(people)e.replace(directoryHTML(people,u),{html:true});}})
@@ -117,13 +123,15 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url);
  if(!read(request.method)||request.headers.get('Upgrade'))return Response.json({error:'Sign in to continue.',signInUrl:OLD+PREFIX+'/sign-in/'},{status:request.method==='OPTIONS'?403:401,headers:headers()});
  if(accountPath(p))return redirect(OLD+internal(p)+u.search,302);
  if(['/circles/','/plug/'].includes(p)&&u.searchParams.has('work')&&artworkContext[u.searchParams.get('work')]){const work=u.searchParams.get('work');u.searchParams.set('art',work);u.searchParams.delete('work');if(!u.searchParams.has('person'))u.searchParams.set('person',artworkContext[work].artist);return redirect(u.href,302);}
+ if(p==='/discover/'){u.pathname='/';return redirect(u.href,301);}
+ if(p==='/api/feed'&&u.searchParams.get('surface')==='home')return adapt(await homeFeed(request,r=>guest(r,env,ctx,internal('/api/feed'))),request);
  if(['/privacy/','/terms/'].includes(p))return adapt(legalPage(p),request);
  if(p==='/workshops')return redirect(u.origin+'/workshops/'+u.search,308);
  if(p==='/workshops/')return adapt(workshopResponse(request),request);
  if(p==='/favicon.png'||p==='/favicon.ico'||p==='/apple-touch-icon.png')return new Response(request.method==='HEAD'?null:p==='/apple-touch-icon.png'?TOUCH_ICON:FAVICON,{headers:{...headers(),'Content-Type':'image/png','Cache-Control':'public,max-age=300'}});
  if(p.replace(/\/$/,'')==='/artists')return redirect(link(u.href,u.origin),308);
  const person=p.match(/^\/circles\/person\/([^/]+)\/?$/);if(person&&peopleAliases[person[1]]){const q=new URLSearchParams(u.search);q.set('person',peopleAliases[person[1]]);return redirect(u.origin+'/circles/?'+q,302);}
- const alias={'/works':'/discover/','/people':'/circles/','/ambassadors':'/circles/?filter=ambassadors'}[p.replace(/\/$/,'')];if(alias){const to=new URL(alias,u.origin);for(const[k,v]of u.searchParams)if(!to.searchParams.has(k))to.searchParams.append(k,v);return redirect(to.href,302);}
+ const alias={'/works':'/discover/','/people':'/circles/?filter=people','/ambassadors':'/circles/?filter=ambassadors'}[p.replace(/\/$/,'')];if(alias){const to=new URL(alias,u.origin);for(const[k,v]of u.searchParams)if(!to.searchParams.has(k))to.searchParams.append(k,v);return redirect(to.href,301);}
  if(u.pathname===CLIENT_BASE+'registrations.js')return new Response(request.method==='HEAD'?null:REGISTRATION_CLIENT,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'navigation.js')return new Response(request.method==='HEAD'?null:browserNavigation,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'circles-directory.js')return new Response(request.method==='HEAD'?null:CIRCLE_CLIENT.replace('/* CIRCLE_LAYOUT */',circleLayout.toString()).replace('/* CIRCLE_SCENE */',circleScene.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
@@ -144,5 +152,5 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url);
  if(p.replace(/\/$/,'')==='/makers'){const q=new URLSearchParams(u.search);q.set('filter','artists');return redirect(u.origin+'/circles/?'+q,308);}
  if(p!=='/'&&(!pages.has(p.split('/')[1])||(/^\/(?:privacy|terms|workshops|exhibitions)\/?$/.test(p))||(p.split('/').filter(Boolean).length>1&&!['/exhibitions/wetex-2026/','/events/avid-learning-poetry-night/'].includes(p.endsWith('/')?p:p+'/'))))return error(404,'Page not found','Explore Communiverse through the links below.');
  if(p!==u.pathname||!p.endsWith('/'))return redirect(u.origin+p+(p.endsWith('/')?'':'/')+u.search,308);
- try{return await adapt(await guest(request,env,ctx,internal(p)),request);}catch(e){console.error('Public domain read unavailable',e.message);return error(503,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');}
+ try{return await adapt(await guest(request,env,ctx,internal(p)),request,r=>guest(r,env,ctx,internal('/api/feed')));}catch(e){console.error('Public domain read unavailable',e.message);return error(503,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');}
 }};
