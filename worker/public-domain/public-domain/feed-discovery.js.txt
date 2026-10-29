@@ -1,5 +1,6 @@
 (()=>{'use strict';
  const feed=document.getElementById('cv-feed');if(!feed)return;
+ const mediaSizes=JSON.parse(document.getElementById('cv-feed-image-sizes')?.textContent||'{}');window.CVFeedMediaSize=value=>{try{return mediaSizes[new URL(value,location.href).pathname];}catch{return null;}};
  const template=document.getElementById('cv-workshop-feed-templates');
  function syncPromotions(){
   if(!template)return;

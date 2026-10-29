@@ -1,3 +1,4 @@
+import {improveFeedClient} from './feed-performance.mjs';
 import {artistPath} from './record-routes.mjs';
 import {platformCopy} from './brand-copy.mjs';
 import {portraitText} from './portrait-refresh.mjs';
@@ -5,7 +6,7 @@ export const OLD='https://espacios.me';
 export const ORIGIN='https://communiverseclubs.com';
 export const PREVIEW='https://preview.communiverseclubs.com';
 export const PREFIX='/communiverse';
-export const RELEASE='public-domain-20261029-v26';
+export const RELEASE='public-domain-20261029-v27';
 export const CLIENT_BASE=PREFIX+'/_domain/'+RELEASE+'/';
 const accounts=/^\/(?:workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account)(?:\/|$)/;
 export const read=m=>m==='GET'||m==='HEAD';
@@ -34,7 +35,7 @@ export function link(value,origin=ORIGIN){
 export function rewrite(source,origin){
  // Only new, separately versioned client URLs use this transformation.
  // The original versioned assets and their contents are retained unchanged.
- return platformCopy(portraitText(source)).replace(/async function api\(path,(data|body)\)\{/,(_,arg)=>'async function api(path,'+arg+'){const __cvWrite='+arg+'!==undefined;if('+arg+'&&window.CVForms)'+arg+'=window.CVForms.payload(path,'+arg+');').replace("if(!r.ok)throw Object.assign(Error(d.error||'Please try again.'),{status:r.status});return d;","if(typeof __cvWrite!=='undefined'&&__cvWrite&&window.CVForms){const f=document.activeElement?.closest('form');if(f)window.CVForms.reset(f);}if(!r.ok)throw Object.assign(Error(d.error||'Please try again.'),{status:r.status});window.CVDiscovery?.response(path,d);return d;").replace("delete window.__cvFirstData[path];return data","delete window.__cvFirstData[path];window.CVDiscovery?.response(path,data);return data").replace(/\bCool Kids\b/gi,'People').replace("const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);","if(location.pathname==='/')q.set('surface','home');const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);")
+ return platformCopy(portraitText(improveFeedClient(source))).replace(/async function api\(path,(data|body)\)\{/,(_,arg)=>'async function api(path,'+arg+'){const __cvWrite='+arg+'!==undefined;if('+arg+'&&window.CVForms)'+arg+'=window.CVForms.payload(path,'+arg+');').replace("if(!r.ok)throw Object.assign(Error(d.error||'Please try again.'),{status:r.status});return d;","if(typeof __cvWrite!=='undefined'&&__cvWrite&&window.CVForms){const f=document.activeElement?.closest('form');if(f)window.CVForms.reset(f);}if(!r.ok)throw Object.assign(Error(d.error||'Please try again.'),{status:r.status});window.CVDiscovery?.response(path,d);return d;").replace("delete window.__cvFirstData[path];return data","delete window.__cvFirstData[path];window.CVDiscovery?.response(path,data);return data").replace(/\bCool Kids\b/gi,'People').replace("const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);","if(location.pathname==='/')q.set('surface','home');const gallery=new URL(location.href).searchParams.get('gallery');if(gallery)q.set('gallery',gallery);")
  .replace('function masonry(){', 'function masonry(){window.CVSyncFeedPromotions?.();')
  .replace("const label=input.closest('label');if(!label)return;","const label=input.closest('label');if(!label)return;label.classList.add('cv4-search-field');")
  .replace(/https:\/\/(?:www\.)?espacios\.me\/communiverse(?=[/"'?#\s<]|$)/g,'/communiverse')

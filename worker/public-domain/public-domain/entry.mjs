@@ -1,3 +1,5 @@
+import FEED_IMAGE_SIZES from './image-dimensions.txt';
+import {feedPerformanceStyle,reserveFeedImages} from './feed-performance.mjs';
 import ACCOUNT_CLIENT from './account-client.js.txt';
 import JOIN_LINKS from './join-links.js.txt';
 import WORKS_SCROLL from './works-scroll.js.txt';
@@ -32,7 +34,6 @@ import retained from './retained/first-render-gateway.mjs';
 import {portraitData} from './portrait-refresh.mjs';
 import {circlePeople,directoryHTML} from './circles-directory.mjs';
 import {circleLayout} from './circles-layout.mjs';
-import {circleScene} from './circles-scene.mjs';
 import CONSTELLATION_STYLE from './circles-constellation.css.txt';
 import CIRCLE_STYLE from './circles-directory.css.txt';
 import CIRCLE_CLIENT from './circles-directory.js.txt';
@@ -50,7 +51,7 @@ import FAVICON from './retained/transparent-favicon-48.png';
 import TOUCH_ICON from './retained/transparent-apple-touch-icon.png';
 import {publicFallback,snapshotCursor} from './public-fallback.mjs';
 import {OLD,ORIGIN,PREVIEW,PREFIX,RELEASE,CLIENT_BASE,read,clean,internal,accountPath,technical,link,rewrite,canonical,legacyPublicRedirect} from './urls.mjs';
-const refreshedEvents=JSON.parse(EVENT_REFRESH);
+const refreshedEvents=JSON.parse(EVENT_REFRESH),feedImageSizes=JSON.parse(FEED_IMAGE_SIZES);
 const background=(ctx,task)=>ctx.waitUntil(task.catch(error=>console.error('Communiverse notification pending',error.name)));
 const hosts=new Set(['communiverseclubs.com','www.communiverseclubs.com','preview.communiverseclubs.com']);
 const peopleAliases={"hira-e-silsby":"cv-hira-e-silsby","haseeb-wasim":"cv-haseeb-wasim","alison-gonzalez":"cv-alison-gonzalez","abel-thomas":"cv-abel-thomas","louis-mitchell":"cv-louis-mitchell","elferah-saidil":"cv-elferah-saidil","keiffer":"cv-keiffer","hassan-b-mirza":"cv-hassan-b-mirza","luna":"cv-luna","turbooz":"cv-turbooz","abdallah-mahmoudd":"cv-abdallah-mahmoudd","tariq-al-salman":"cv-tariq-al-salman","viktoriya-melny":"cv-viktoriya-melny","shakiba-binchi":"cv-shakiba-binchi"};
@@ -85,7 +86,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  const html=rewrite(await response.text(),u.origin),isEvent=clean(u.pathname)==='/event/',isCircles=['/circles/','/plug/'].includes(clean(u.pathname)),people=isCircles?circlePeople(html,artistWorks):null,featured=['/','/discover/'].includes(clean(u.pathname)),isWorkshops=clean(u.pathname)==='/workshops/';
  if(people&&u.searchParams.has('person')&&!people.some(p=>p.slug===u.searchParams.get('person')))return error(404,'Person not found','Explore the people in Communiverse.');
  let home=null;if(featured){const feedURL=new URL(request.url);feedURL.pathname='/api/feed';feedURL.searchParams.set('surface','home');const result=await homeFeed(new Request(feedURL),readFeed||publicFallback);if(result.ok)home=await result.json();}
- return identityResponse(new HTMLRewriter()
+ return identityResponse(new HTMLRewriter().on('html',{element(e){if(featured)e.setAttribute('data-cv-home','');}}).on('head',{element(e){if(featured)e.append('<style data-cv-feed-performance>'+feedPerformanceStyle+'</style><script type="application/json" id="cv-feed-image-sizes">'+JSON.stringify(feedImageSizes).replaceAll('<','\\u003c')+'</script>',{html:true});}}).on('#cv-feed .cv-pin-media img',{element(e){const key=(e.getAttribute('src')||'').split('?')[0],size=feedImageSizes[key];if(size){e.setAttribute('width',String(size.width));e.setAttribute('height',String(size.height));e.setAttribute('style',(e.getAttribute('style')||'')+';--cv-art-ratio:'+size.width+' / '+size.height);}}})
  .on('head',{element(e){e.append('<style data-cv-records>'+recordStyle+'</style><script defer src="'+CLIENT_BASE+'record-actions.js"></script><style data-cv-discovery>'+discoveryStyle+'</style><script type="application/json" id="cv-discovery-config">'+JSON.stringify(discoveryConfig).replaceAll('<','\\u003c')+'</script>',{html:true});}})
  .on('head',{element(e){e.prepend('<script defer src="'+CLIENT_BASE+'discovery-ui.js"></script>'+(featured?'<script defer src="'+CLIENT_BASE+'feed-discovery.js"></script>':'')+'<script defer src="'+CLIENT_BASE+'navigation.js"></script><script type="application/json" id="cv-runtime-config">'+JSON.stringify({publicOrigin:u.origin,pageBase:'/',apiBase:PREFIX+'/api/',assetBase:PREFIX+'/_',accountOrigin:OLD,accountBase:OLD+PREFIX+'/'})+'</script>'+(u.origin===PREVIEW?'<meta name="robots" content="noindex,nofollow">':''),{html:true});}})
  .on('a[href],form[action]',{element(e){const attr=e.tagName==='form'?'action':'href';const value=e.getAttribute(attr);try{if(e.tagName==='a'&&['/for-founders','/for-brands','/for-startups'].includes(new URL(value,u.origin).pathname.replace(/\/$/,''))){e.remove();return;}}catch{}e.setAttribute(attr,link(value,u.origin));}})
@@ -99,7 +100,7 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  .on('.cv-feed-page',{element(e){if(featured)e.prepend('<section class="cv-home-intro"><h1>Your Communiverse</h1><p>We connect culture, commerce and community. Discover artists and artisans, learn their craft, and collect their work.</p></section>'+featuredArtist(),{html:true});}})
  .on('h1.cv-visually-hidden',{element(e){if(featured)e.remove();}})
  .on('#cv-feed-initial',{element(e){if(home)e.setInnerContent(JSON.stringify(home).replaceAll('<','\\u003c'),{html:true});}})
- .on('#cv-feed',{element(e){if(home)e.setInnerContent(home.items.map((item,i)=>rewrite(homeTile(item),u.origin)+(i===2?workshopPromo(0):i===10?workshopPromo(1):'')).join(''),{html:true});}})
+ .on('#cv-feed',{element(e){if(home)e.setInnerContent(home.items.map((item,i)=>rewrite(reserveFeedImages(homeTile(item),feedImageSizes),u.origin)+(i===2?workshopPromo(0):i===10?workshopPromo(1):'')).join(''),{html:true});}})
  .on('#cv-feed',{element(e){if(featured)e.after(discoveryData(),{html:true});}})
  .on('#cv-circles-page h1',{element(e){e.setInnerContent('Discover clubs');}})
  .on('footer a[href^="mailto:hello@communiverseclubs.com"]',{element(e){e.setInnerContent('hello@communiverseclubs.com');}})
@@ -184,7 +185,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  const alias={'/people':'/circles/?filter=people','/ambassadors':'/circles/?filter=ambassadors'}[p.replace(/\/$/,'')];if(alias){const to=new URL(alias,u.origin);for(const[k,v]of u.searchParams)if(!to.searchParams.has(k))to.searchParams.append(k,v);return redirect(to.href,301);}
  if(u.pathname===CLIENT_BASE+'registrations.js')return new Response(request.method==='HEAD'?null:REGISTRATION_CLIENT,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'navigation.js')return new Response(request.method==='HEAD'?null:browserNavigation,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
- if(u.pathname===CLIENT_BASE+'circles-directory.js')return new Response(request.method==='HEAD'?null:CIRCLE_CLIENT.replace('/* CIRCLE_LAYOUT */',circleLayout.toString()).replace('/* CIRCLE_SCENE */',circleScene.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ if(u.pathname===CLIENT_BASE+'circles-directory.js')return new Response(request.method==='HEAD'?null:CIRCLE_CLIENT.replace('/* CIRCLE_LAYOUT */',circleLayout.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'artwork-experience.js')return new Response(request.method==='HEAD'?null:ARTWORK_CLIENT,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'feed-discovery.js')return new Response(request.method==='HEAD'?null:FEED_DISCOVERY.replace('/* DAILY_INDEX */',featuredArtistIndex.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'workshops.js')return new Response(request.method==='HEAD'?null:WORKSHOP_CLIENT.replace('/* ENQUIRY_BUILDER */',workshopEnquiryMail.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
