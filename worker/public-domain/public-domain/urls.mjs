@@ -6,7 +6,7 @@ export const OLD='https://espacios.me';
 export const ORIGIN='https://communiverseclubs.com';
 export const PREVIEW='https://preview.communiverseclubs.com';
 export const PREFIX='/communiverse';
-export const RELEASE='public-domain-20261029-v27';
+export const RELEASE='public-domain-20261029-v28';
 export const CLIENT_BASE=PREFIX+'/_domain/'+RELEASE+'/';
 const accounts=/^\/(?:workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account)(?:\/|$)/;
 export const read=m=>m==='GET'||m==='HEAD';

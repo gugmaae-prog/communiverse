@@ -207,3 +207,8 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
 }};
 
 export default {async fetch(request,env,ctx){return securityPolicy(seoSupport(accessibilitySupport(await accountSupport(formSupport(await application.fetch(request,env,ctx),request,env),request,env),request),request),request,env);}};
+
+// Read-only public experience profile. Its dispatcher retains all mutations and
+// account traffic on the reviewed v25 implementation. No new form, auth or SEO
+// middleware is enabled by this export.
+export const publicExperience={async fetch(request,env,ctx){return accessibilitySupport(await application.fetch(request,env,ctx),request);}};
