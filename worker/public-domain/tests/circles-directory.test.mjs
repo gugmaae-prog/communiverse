@@ -14,5 +14,5 @@ test('directory removes only the requested circles and preserves every artist an
 test('old artist directory links preserve selection, search and fragments',()=>{
  assert.equal(link('/artists/?artist=artist-gemma-gallagher&q=Gemma#works'),'/circles/?q=Gemma&filter=artists&person=artist-gemma-gallagher#works');
  assert.equal(link('/communiverse/artists/'),'/circles/?filter=artists');
- assert.equal(link('/artist/?id=artist-gemma-gallagher'),'/artist/?id=artist-gemma-gallagher');
+ assert.equal(link('/artist/?id=artist-gemma-gallagher'),'/artists/gemma-gallagher/');
 });

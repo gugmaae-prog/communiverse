@@ -1,3 +1,4 @@
+import {artistPath} from './record-routes.mjs';
 import {platformCopy} from './brand-copy.mjs';
 import {portraitText} from './portrait-refresh.mjs';
 export const OLD='https://espacios.me';
@@ -28,7 +29,7 @@ export function link(value,origin=ORIGIN){
  if(accountPath(u.pathname))return OLD+internal(clean(u.pathname))+u.search+u.hash;
  if(technical(u.pathname))return internal(clean(u.pathname))+u.search+u.hash;
  if(clean(u.pathname).replace(/\/$/,'')==='/artists'){u.pathname='/circles/';u.searchParams.set('filter','artists');if(u.searchParams.has('artist')){u.searchParams.set('person',u.searchParams.get('artist'));u.searchParams.delete('artist');}return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;}
- u.pathname=clean(u.pathname);if(u.pathname.replace(/\/$/,'')==='/discover')u.pathname='/';return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;
+ u.pathname=clean(u.pathname);if(u.pathname.replace(/\/$/,'')==='/artist'&&artistPath(u.searchParams.get('id'))){u.pathname=artistPath(u.searchParams.get('id'));u.searchParams.delete('id');}if(u.pathname.replace(/\/$/,'')==='/discover')u.pathname='/';return value.startsWith('http')?origin+u.pathname+u.search+u.hash:u.pathname+u.search+u.hash;
 }
 export function rewrite(source,origin){
  // Only new, separately versioned client URLs use this transformation.
