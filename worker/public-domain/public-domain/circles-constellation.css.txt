@@ -76,4 +76,4 @@ body:has(.cv-circle-canvas){overflow-x:clip}
 
 .cv-circle-canvas .cv-person.is-selected .cv-person-role{opacity:1}.cv-circle-canvas:not(.cv-is-positioned) #cv-person-detail{position:relative;left:auto;top:auto;width:100%;margin-bottom:28px!important}
 
-body:has(.cv-circle-canvas) #cv-social-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(237,242,248,.96)!important}
+html[data-cv-social] body:has(.cv-circle-canvas) #cv-social-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(237,242,248,.96)!important}

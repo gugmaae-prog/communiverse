@@ -1,0 +1,8 @@
+{
+  "sourceRef": "d99d796436d87e7dc464c906bee30eba2e11ee11",
+  "liveVersion": "3879ee91-5f0f-44db-a412-df034a2f1142",
+  "patches": {
+    "public-fallback.mjs": "b23efef3736b90e461b5c3b9fcbb265d98c877213a6571845a15bd137ef2343f",
+    "registration-delivery.mjs": "3292d487d0b7ea56780340a102015440d977cfa6f98a05e370bb230798db9add"
+  }
+}
