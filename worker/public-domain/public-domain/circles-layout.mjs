@@ -1,6 +1,14 @@
-// Members follow measured, alternating arcs. Added members extend the flow;
-// there is no random sampling, force simulation or scroll-driven positioning.
+// A stable editorial field reserves space for surrounding artwork on wide
+// screens. Narrow views use measured staggered bands and grow down the page.
 export function circleLayout(width,_height,count){
+ if(width>=1280&&count>=8){
+  const diameter=84,w=128,h=132,pad=12,span=width-2*(pad+w/2),left=pad+w/2;
+  const slots=[[0,80],[.136,80],[.47,60],[.864,60],[1,60],[.864,224],[1,314],[.864,492],[1,656],[.526,492],[.39,492],[.254,492],[.126,656],[.5,260]];
+  const nodes=slots.slice(0,count).map(([t,y])=>{const x=left+span*t,top=y-50;return {x,y,left:x-w/2,top,w,h,row:0};});
+  let y=820;const capacity=Math.max(1,Math.floor((width-24+24)/(w+24)));
+  for(let start=14;start<count;start+=capacity){const n=Math.min(capacity,count-start);for(let i=0;i<n;i++){const x=n===1?width/2:left+span*i/(n-1),top=y+(i%2)*28;nodes.push({x,y:top+50,left:x-w/2,top,w,h,row:1+Math.floor((start-14)/capacity)});}y+=h+80;}
+  return {nodes,rows:[],diameter,core:null,height:Math.max(740,...nodes.map(n=>n.top+n.h+24))};
+ }
  const pad=12,mobile=width<700,diameter=mobile?76:96;
  const w=Math.min(mobile?136:148,width-24),h=diameter+76,gap=24,bend=mobile?32:64;
  const capacity=Math.max(1,Math.min(8,Math.floor((width-2*pad+gap)/(w+gap)))),nodes=[],rows=[];

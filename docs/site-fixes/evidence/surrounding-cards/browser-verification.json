@@ -1,0 +1,1118 @@
+{
+  "desktopInitial": {
+    "canvasHeight": 1199,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 152,
+        "id": "cv-haseeb-wasim",
+        "w": 104,
+        "x": 56,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-alison-gonzalez",
+        "w": 104,
+        "x": 212,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-louis-mitchell",
+        "w": 104,
+        "x": 632,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hira-e-silsby",
+        "w": 104,
+        "x": 1124,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-elferah-saidil",
+        "w": 104,
+        "x": 1280,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-keiffer",
+        "w": 104,
+        "x": 1124,
+        "y": 474.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hassan-b-mirza",
+        "w": 104,
+        "x": 1280,
+        "y": 546.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-luna",
+        "w": 104,
+        "x": 1139,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-ms-petunya",
+        "w": 104,
+        "x": 1280,
+        "y": 888.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-chandni-padia",
+        "w": 104,
+        "x": 699,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-tamer-karam",
+        "w": 104,
+        "x": 533.359375,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-sophiko",
+        "w": 104,
+        "x": 366.890625,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-cristina-gabriela",
+        "w": 119.09375,
+        "x": 202.671875,
+        "y": 888.796875
+      },
+      {
+        "h": 210,
+        "id": "artist-gemma-gallagher",
+        "w": 162,
+        "x": 639,
+        "y": 483.796875
+      },
+      {
+        "h": 431,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 280,
+        "x": 831,
+        "y": 682.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 260,
+        "x": 344,
+        "y": 325.046875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 260,
+        "x": 836,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 260,
+        "x": 54,
+        "y": 492.796875
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 1440,
+    "works": 3
+  },
+  "desktopStory": {
+    "canvasHeight": 1085,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 152,
+        "id": "cv-haseeb-wasim",
+        "w": 104,
+        "x": 56,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-alison-gonzalez",
+        "w": 104,
+        "x": 59,
+        "y": 492.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-louis-mitchell",
+        "w": 104,
+        "x": 639,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hira-e-silsby",
+        "w": 104,
+        "x": 1124,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-elferah-saidil",
+        "w": 104,
+        "x": 1280,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-keiffer",
+        "w": 104,
+        "x": 1259,
+        "y": 474.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hassan-b-mirza",
+        "w": 104,
+        "x": 1280,
+        "y": 654.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-luna",
+        "w": 104,
+        "x": 1259,
+        "y": 834.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-ms-petunya",
+        "w": 104,
+        "x": 1280,
+        "y": 1014.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-chandni-padia",
+        "w": 104,
+        "x": 411,
+        "y": 826.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-tamer-karam",
+        "w": 104,
+        "x": 411,
+        "y": 1006.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-sophiko",
+        "w": 104,
+        "x": 279,
+        "y": 1171.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-cristina-gabriela",
+        "w": 119.09375,
+        "x": 131.8984375,
+        "y": 1171.796875
+      },
+      {
+        "h": 210,
+        "id": "artist-gemma-gallagher",
+        "w": 162,
+        "x": 639,
+        "y": 483.796875
+      },
+      {
+        "h": 392,
+        "id": "cv-glass-card cv-scene-art-story",
+        "w": 400,
+        "x": 831,
+        "y": 483.796875
+      },
+      {
+        "h": 431,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 280,
+        "x": 831,
+        "y": 903.796875
+      },
+      {
+        "h": 504,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 420,
+        "x": 191,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 260,
+        "x": 543,
+        "y": 826.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 260,
+        "x": 54,
+        "y": 826.796875
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "story": "Light of Your Soul",
+    "width": 1440,
+    "works": 3
+  },
+  "desktopRestored": {
+    "canvasHeight": 1199,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 152,
+        "id": "cv-haseeb-wasim",
+        "w": 104,
+        "x": 56,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-alison-gonzalez",
+        "w": 104,
+        "x": 212,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-louis-mitchell",
+        "w": 104,
+        "x": 632,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hira-e-silsby",
+        "w": 104,
+        "x": 1124,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-elferah-saidil",
+        "w": 104,
+        "x": 1280,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-keiffer",
+        "w": 104,
+        "x": 1124,
+        "y": 474.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hassan-b-mirza",
+        "w": 104,
+        "x": 1280,
+        "y": 546.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-luna",
+        "w": 104,
+        "x": 1139,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-ms-petunya",
+        "w": 104,
+        "x": 1280,
+        "y": 888.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-chandni-padia",
+        "w": 104,
+        "x": 699,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-tamer-karam",
+        "w": 104,
+        "x": 533.359375,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-sophiko",
+        "w": 104,
+        "x": 366.890625,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-cristina-gabriela",
+        "w": 119.09375,
+        "x": 202.671875,
+        "y": 888.796875
+      },
+      {
+        "h": 210,
+        "id": "artist-gemma-gallagher",
+        "w": 162,
+        "x": 639,
+        "y": 483.796875
+      },
+      {
+        "h": 431,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 280,
+        "x": 831,
+        "y": 682.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 260,
+        "x": 344,
+        "y": 325.046875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 260,
+        "x": 836,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 260,
+        "x": 54,
+        "y": 492.796875
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 1440,
+    "works": 3
+  },
+  "desktopArtists": [
+    {
+      "id": "artist-ms-petunya",
+      "expected": 1,
+      "works": 1,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-chandni-padia",
+      "expected": 11,
+      "works": 11,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-tamer-karam",
+      "expected": 26,
+      "works": 26,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-sophiko",
+      "expected": 2,
+      "works": 2,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-cristina-gabriela",
+      "expected": 5,
+      "works": 5,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-gemma-gallagher",
+      "expected": 3,
+      "works": 3,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    }
+  ],
+  "mobileInitial": {
+    "canvasHeight": 2329,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 132,
+        "id": "cv-haseeb-wasim",
+        "w": 84,
+        "x": 203.5,
+        "y": 614
+      },
+      {
+        "h": 132,
+        "id": "cv-alison-gonzalez",
+        "w": 84,
+        "x": 87.5,
+        "y": 827
+      },
+      {
+        "h": 132,
+        "id": "cv-louis-mitchell",
+        "w": 84,
+        "x": 203.5,
+        "y": 1040
+      },
+      {
+        "h": 132,
+        "id": "cv-hira-e-silsby",
+        "w": 100.1953125,
+        "x": 217.3984375,
+        "y": 1703
+      },
+      {
+        "h": 132,
+        "id": "cv-elferah-saidil",
+        "w": 84,
+        "x": 50,
+        "y": 1703
+      },
+      {
+        "h": 132,
+        "id": "cv-keiffer",
+        "w": 84,
+        "x": 241,
+        "y": 1863
+      },
+      {
+        "h": 132,
+        "id": "cv-hassan-b-mirza",
+        "w": 84,
+        "x": 65.5,
+        "y": 1863
+      },
+      {
+        "h": 132,
+        "id": "cv-luna",
+        "w": 84,
+        "x": 225.5,
+        "y": 2023
+      },
+      {
+        "h": 132,
+        "id": "artist-ms-petunya",
+        "w": 84,
+        "x": 50,
+        "y": 2023
+      },
+      {
+        "h": 132,
+        "id": "artist-chandni-padia",
+        "w": 93.8984375,
+        "x": 236.046875,
+        "y": 2183
+      },
+      {
+        "h": 132,
+        "id": "artist-tamer-karam",
+        "w": 84,
+        "x": 65.5,
+        "y": 2183
+      },
+      {
+        "h": 132,
+        "id": "artist-sophiko",
+        "w": 84,
+        "x": 225.5,
+        "y": 2343
+      },
+      {
+        "h": 132,
+        "id": "artist-cristina-gabriela",
+        "w": 112,
+        "x": 36,
+        "y": 2343
+      },
+      {
+        "h": 172,
+        "id": "artist-gemma-gallagher",
+        "w": 124,
+        "x": 125.5,
+        "y": 414
+      },
+      {
+        "h": 422,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 327,
+        "x": 24,
+        "y": 1253
+      },
+      {
+        "h": 185,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 151.5,
+        "x": 24,
+        "y": 614
+      },
+      {
+        "h": 185,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 151.5,
+        "x": 199.5,
+        "y": 827
+      },
+      {
+        "h": 185,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 151.5,
+        "x": 24,
+        "y": 1040
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 375,
+    "works": 3
+  },
+  "mobileArtists": [
+    {
+      "id": "artist-ms-petunya",
+      "expected": 1,
+      "works": 1,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-chandni-padia",
+      "expected": 11,
+      "works": 11,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-tamer-karam",
+      "expected": 26,
+      "works": 26,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-sophiko",
+      "expected": 2,
+      "works": 2,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-cristina-gabriela",
+      "expected": 5,
+      "works": 5,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    },
+    {
+      "id": "artist-gemma-gallagher",
+      "expected": 3,
+      "works": 3,
+      "collisions": [],
+      "overflow": false,
+      "round": true
+    }
+  ],
+  "mobileFinal": {
+    "canvasHeight": 2060,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 132,
+        "id": "cv-haseeb-wasim",
+        "w": 84,
+        "x": 201.5,
+        "y": 708
+      },
+      {
+        "h": 132,
+        "id": "cv-alison-gonzalez",
+        "w": 84,
+        "x": 241,
+        "y": 1368
+      },
+      {
+        "h": 132,
+        "id": "cv-louis-mitchell",
+        "w": 84,
+        "x": 65.5,
+        "y": 1368
+      },
+      {
+        "h": 132,
+        "id": "cv-hira-e-silsby",
+        "w": 100.1953125,
+        "x": 217.3984375,
+        "y": 1528
+      },
+      {
+        "h": 132,
+        "id": "cv-elferah-saidil",
+        "w": 84,
+        "x": 50,
+        "y": 1528
+      },
+      {
+        "h": 132,
+        "id": "cv-keiffer",
+        "w": 84,
+        "x": 241,
+        "y": 1688
+      },
+      {
+        "h": 132,
+        "id": "cv-hassan-b-mirza",
+        "w": 84,
+        "x": 65.5,
+        "y": 1688
+      },
+      {
+        "h": 132,
+        "id": "cv-luna",
+        "w": 84,
+        "x": 225.5,
+        "y": 1848
+      },
+      {
+        "h": 132,
+        "id": "artist-ms-petunya",
+        "w": 84,
+        "x": 50,
+        "y": 1848
+      },
+      {
+        "h": 132,
+        "id": "artist-chandni-padia",
+        "w": 93.8984375,
+        "x": 236.046875,
+        "y": 2008
+      },
+      {
+        "h": 132,
+        "id": "artist-tamer-karam",
+        "w": 84,
+        "x": 65.5,
+        "y": 2008
+      },
+      {
+        "h": 132,
+        "id": "artist-sophiko",
+        "w": 84,
+        "x": 225.5,
+        "y": 2168
+      },
+      {
+        "h": 132,
+        "id": "artist-cristina-gabriela",
+        "w": 112,
+        "x": 36,
+        "y": 2168
+      },
+      {
+        "h": 172,
+        "id": "artist-gemma-gallagher",
+        "w": 124,
+        "x": 125.5,
+        "y": 298
+      },
+      {
+        "h": 422,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 327,
+        "x": 24,
+        "y": 918
+      },
+      {
+        "h": 182,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 149.5,
+        "x": 24,
+        "y": 498
+      },
+      {
+        "h": 182,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 149.5,
+        "x": 201.5,
+        "y": 498
+      },
+      {
+        "h": 182,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 149.5,
+        "x": 24,
+        "y": 708
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 375,
+    "works": 3
+  },
+  "mobileAxe": {
+    "violations": [],
+    "incomplete": [
+      "color-contrast"
+    ]
+  },
+  "resizedDesktop": {
+    "canvasHeight": 1199,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 152,
+        "id": "cv-haseeb-wasim",
+        "w": 104,
+        "x": 56,
+        "y": 661.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-alison-gonzalez",
+        "w": 104,
+        "x": 342,
+        "y": 639.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-louis-mitchell",
+        "w": 104,
+        "x": 632,
+        "y": 545.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hira-e-silsby",
+        "w": 104,
+        "x": 1124,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-elferah-saidil",
+        "w": 104,
+        "x": 1280,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-keiffer",
+        "w": 104,
+        "x": 1139,
+        "y": 474.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hassan-b-mirza",
+        "w": 104,
+        "x": 1280,
+        "y": 546.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-luna",
+        "w": 104,
+        "x": 1139,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-ms-petunya",
+        "w": 104,
+        "x": 1280,
+        "y": 888.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-chandni-padia",
+        "w": 104,
+        "x": 699,
+        "y": 725.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-tamer-karam",
+        "w": 104,
+        "x": 533.359375,
+        "y": 725.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-sophiko",
+        "w": 104,
+        "x": 366.890625,
+        "y": 819.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-cristina-gabriela",
+        "w": 119.09375,
+        "x": 202.671875,
+        "y": 888.796875
+      },
+      {
+        "h": 210,
+        "id": "artist-gemma-gallagher",
+        "w": 162,
+        "x": 639,
+        "y": 307.796875
+      },
+      {
+        "h": 431,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 280,
+        "x": 831,
+        "y": 639.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 260,
+        "x": 344,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 260,
+        "x": 836,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 260,
+        "x": 54,
+        "y": 316.796875
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 1440,
+    "works": 3
+  },
+  "desktopFinal": {
+    "canvasHeight": 1199,
+    "collisions": [],
+    "lines": 0,
+    "overflow": false,
+    "people": 14,
+    "rects": [
+      {
+        "h": 152,
+        "id": "cv-haseeb-wasim",
+        "w": 104,
+        "x": 56,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-alison-gonzalez",
+        "w": 104,
+        "x": 212,
+        "y": 312.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-louis-mitchell",
+        "w": 104,
+        "x": 632,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hira-e-silsby",
+        "w": 104,
+        "x": 1124,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-elferah-saidil",
+        "w": 104,
+        "x": 1280,
+        "y": 294.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-keiffer",
+        "w": 104,
+        "x": 1124,
+        "y": 474.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-hassan-b-mirza",
+        "w": 104,
+        "x": 1280,
+        "y": 546.796875
+      },
+      {
+        "h": 152,
+        "id": "cv-luna",
+        "w": 104,
+        "x": 1139,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-ms-petunya",
+        "w": 104,
+        "x": 1280,
+        "y": 888.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-chandni-padia",
+        "w": 104,
+        "x": 699,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-tamer-karam",
+        "w": 104,
+        "x": 533.359375,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-sophiko",
+        "w": 104,
+        "x": 366.890625,
+        "y": 724.796875
+      },
+      {
+        "h": 152,
+        "id": "artist-cristina-gabriela",
+        "w": 119.09375,
+        "x": 202.671875,
+        "y": 888.796875
+      },
+      {
+        "h": 210,
+        "id": "artist-gemma-gallagher",
+        "w": 162,
+        "x": 639,
+        "y": 483.796875
+      },
+      {
+        "h": 431,
+        "id": "cv-glass-card cv-scene-about",
+        "w": 280,
+        "x": 831,
+        "y": 682.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-light-of-your-soul",
+        "w": 260,
+        "x": 344,
+        "y": 325.046875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-beloved",
+        "w": 260,
+        "x": 836,
+        "y": 294.796875
+      },
+      {
+        "h": 317,
+        "id": "work-gemma-gallagher-all-along",
+        "w": 260,
+        "x": 54,
+        "y": 492.796875
+      }
+    ],
+    "round": true,
+    "selected": "artist-gemma-gallagher",
+    "width": 1440,
+    "works": 3
+  },
+  "desktopAxe": {
+    "violations": [],
+    "incomplete": [
+      "color-contrast"
+    ]
+  },
+  "hover": {
+    "outline": "rgb(75, 120, 195)",
+    "roleOpacity": "0.998525"
+  },
+  "outsideDismiss": {
+    "panelHidden": true,
+    "people": 14,
+    "selected": null
+  },
+  "clickedAnchor": {
+    "before": {
+      "x": 720,
+      "y": 562.796875
+    },
+    "after": {
+      "x": 720,
+      "y": 562.796875
+    }
+  },
+  "reducedMotion": {
+    "active": true,
+    "animations": 0
+  }
+}
