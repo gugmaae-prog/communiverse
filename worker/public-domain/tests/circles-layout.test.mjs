@@ -1,25 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {circleLayout} from '../public-domain/circles-layout.mjs';
-const viewports=[[296,318],[366,580],[744,730],[820,178],[1256,560],[1000,510]];
-test('every current circle fits its screen with separated, accessible targets',()=>{
- for(const [width,height] of viewports)for(let count=1;count<=14;count++){
-  const p=circleLayout(width,height,count),label=`${width}x${height}/${count}`;
-  assert.equal(p.nodes.length,count,label);assert(!p.height||p.height<=height,label+' overflow');assert(p.diameter>=44,label);
+const widths=[296,327,366,640,744,820,1000,1256,1376];
+test('community arcs preserve usable portraits and separated targets as the community grows',()=>{
+ for(const width of widths)for(const count of [0,1,2,6,14,31,60]){
+  const p=circleLayout(width,178,count),label=`${width}/${count}`;
+  assert.equal(p.nodes.length,count,label);assert(p.diameter>=76,label);
   p.nodes.forEach((a,i)=>{
-   assert(a.x-a.w/2>=0&&a.x+a.w/2<=width&&a.y-a.h/2>=0&&a.y+a.h/2<=height,label+' bounds');
-   for(const b of [...p.nodes.slice(i+1),...(p.core?[p.core]:[])])assert(Math.abs(a.x-b.x)>=(a.w+b.w)/2+7.99||Math.abs(a.y-b.y)>=(a.h+b.h)/2+7.99,label+' touching');
+   assert(a.left>=0&&a.left+a.w<=width&&a.top>=0&&a.top+a.h<=p.height,label+' bounds');
+   for(const b of p.nodes.slice(i+1))assert(Math.abs(a.x-b.x)>=(a.w+b.w)/2+23.99||Math.abs(a.y-b.y)>=(a.h+b.h)/2+23.99,label+' touching');
   });
-  assert.deepEqual(p,circleLayout(width,height,count),'stable on selection');
+  assert.deepEqual(p,circleLayout(width,900,count),'viewport height and selection do not scramble portraits');
  }
 });
-test('six artist positions are staggered on phone and landscape',()=>{
- for(const [w,h] of [[366,580],[820,178]]){
-  const p=circleLayout(w,h,6);
-  assert(new Set(p.nodes.map(n=>Math.round(n.y))).size>=4);
-  assert(new Set(p.nodes.map(n=>Math.round(n.x))).size>=4);
+test('arcs stagger profiles without shrinking an expanding community into the viewport',()=>{
+ for(const width of [366,820,1376]){
+  const p=circleLayout(width,178,14);assert(p.height>178);assert(new Set(p.nodes.map(n=>n.top)).size>=3);assert(p.rows.every(r=>r.bottom>r.top));
+  const grown=circleLayout(width,178,60);assert(grown.height>p.height);assert.deepEqual(grown.nodes.slice(0,8),circleLayout(width,178,31).nodes.slice(0,8));
  }
-});
-test('extremely short accessible windows grow rather than losing circles',()=>{
- const p=circleLayout(296,120,13);assert(p.height>120);assert.equal(p.nodes.length,13);assert(p.diameter>=44);
 });

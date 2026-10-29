@@ -1,0 +1,66 @@
+{
+  "label": "controlled-before",
+  "input": "Six native scrollBy calls: four down 1200px, two up 1000px; two rendered frames after each. No frame-rate claim.",
+  "steps": [
+    {
+      "count": 29,
+      "y": 1200
+    },
+    {
+      "count": 37,
+      "y": 2400
+    },
+    {
+      "count": 45,
+      "y": 3195
+    },
+    {
+      "count": 45,
+      "y": 2783
+    },
+    {
+      "count": 45,
+      "y": 1783
+    },
+    {
+      "count": 45,
+      "y": 783
+    }
+  ],
+  "profile": {
+    "longTasks": [],
+    "shifts": [
+      0.01228352102102102,
+      0.0032548837981862064,
+      0.053674562318666325,
+      0.0036518865056462714,
+      0.04604813622215966,
+      0.06377127961294628,
+      0.00058495995995996,
+      0.004264976446987352,
+      0.029312606928624585,
+      0.008018935602268936,
+      0.08878543543543543,
+      0.003078390890890891,
+      0.009381427260593926,
+      0.0010964089089089087,
+      0.004073556890223557,
+      0.5072255861900312
+    ],
+    "styleWrites": 39,
+    "viewport": {
+      "height": 925,
+      "width": 1440
+    },
+    "works": 45,
+    "y": 783
+  },
+  "metrics": {
+    "LayoutCount": 61,
+    "RecalcStyleCount": 90,
+    "LayoutDuration": 0.020959000000000002,
+    "RecalcStyleDuration": 0.017381999999999998,
+    "ScriptDuration": 0.022740000000000003,
+    "TaskDuration": 0.259894
+  }
+}

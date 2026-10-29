@@ -1,0 +1,23 @@
+{
+  "method": "Six native scrollBy calls: four down 1200px, two up 1000px; two rendered frames after each. No frame-rate claim.",
+  "viewport": {
+    "height": 925,
+    "width": 1440
+  },
+  "baselineCommit": "78092ab",
+  "before": {
+    "layoutCount": 61,
+    "layoutShiftSum": 0.8385065539925506,
+    "styleWrites": 39,
+    "works": 45
+  },
+  "after": {
+    "layoutCount": 26,
+    "layoutShiftSum": 0.06307361945278613,
+    "styleWrites": 31,
+    "works": 45
+  },
+  "layoutShiftReductionPercent": 92.5,
+  "layoutPassReductionPercent": 57.4,
+  "limits": "One controlled local browser run using scrollBy and rendered frames, not a Lighthouse score, full CLS session-window metric, wheel/trackpad benchmark, or FPS guarantee."
+}

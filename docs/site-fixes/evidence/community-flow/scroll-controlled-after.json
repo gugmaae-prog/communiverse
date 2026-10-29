@@ -1,0 +1,53 @@
+{
+  "label": "controlled-after",
+  "input": "Six native scrollBy calls: four down 1200px, two up 1000px; two rendered frames after each. No frame-rate claim.",
+  "steps": [
+    {
+      "count": 29,
+      "y": 1200
+    },
+    {
+      "count": 43,
+      "y": 2400
+    },
+    {
+      "count": 45,
+      "y": 3600
+    },
+    {
+      "count": 45,
+      "y": 3687
+    },
+    {
+      "count": 45,
+      "y": 2687
+    },
+    {
+      "count": 45,
+      "y": 1687
+    }
+  ],
+  "profile": {
+    "longTasks": [],
+    "shifts": [
+      0.0549021938605272,
+      0.0017042292292292294,
+      0.006467196363029696
+    ],
+    "styleWrites": 31,
+    "viewport": {
+      "height": 925,
+      "width": 1440
+    },
+    "works": 45,
+    "y": 1687
+  },
+  "metrics": {
+    "LayoutCount": 26,
+    "RecalcStyleCount": 57,
+    "LayoutDuration": 0.005227000000000001,
+    "RecalcStyleDuration": 0.012149999999999998,
+    "ScriptDuration": 0.019319999999999997,
+    "TaskDuration": 0.17666500000000002
+  }
+}

@@ -1,0 +1,1401 @@
+{
+  "communityChecks": [
+    {
+      "state": "desktop-rest",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 0,
+        "id": "cv-person-detail",
+        "w": 0,
+        "x": 0,
+        "y": 0
+      },
+      "panelHidden": true,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 44,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 216,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 388,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 560,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 732,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 904,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 1076,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 1248,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 108,
+          "y": 656.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 323.1953125,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 538.3984375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 753.59375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 968.796875,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 1184,
+          "y": 656.796875
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [],
+      "width": 1440,
+      "works": 0
+    },
+    {
+      "state": "desktop-gemma",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 430.2265625,
+        "id": "cv-person-detail",
+        "w": 1352,
+        "x": 44,
+        "y": 856.796875
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 44,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 216,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 388,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 560,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 732,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 904,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 1076,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 1248,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 108,
+          "y": 656.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 323.1953125,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 538.3984375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 753.59375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 968.796875,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 1184,
+          "y": 656.796875
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0.9999987594483516
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 1440,
+      "works": 3
+    },
+    {
+      "state": "desktop-art-story",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 580,
+        "id": "cv-person-detail",
+        "w": 1352,
+        "x": 44,
+        "y": 856.796875
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 44,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 216,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 388,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 560,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 732,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 904,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 1076,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 1248,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 108,
+          "y": 656.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 323.1953125,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 538.3984375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 753.59375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 968.796875,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 1184,
+          "y": 656.796875
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 1440,
+      "works": 3
+    },
+    {
+      "state": "desktop-art-deselected",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 430.2265625,
+        "id": "cv-person-detail",
+        "w": 1352,
+        "x": 44,
+        "y": 856.796875
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 44,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 216,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 388,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 560,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 732,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 904,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 1076,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 1248,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 108,
+          "y": 656.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 323.1953125,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 538.3984375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 753.59375,
+          "y": 595.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 968.796875,
+          "y": 615.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 1184,
+          "y": 656.796875
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 1440,
+      "works": 3
+    },
+    {
+      "state": "phone-rest",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 0,
+        "id": "cv-person-detail",
+        "w": 0,
+        "x": 0,
+        "y": 0
+      },
+      "panelHidden": true,
+      "people": [
+        {
+          "h": 152,
+          "id": "cv-haseeb-wasim",
+          "w": 136,
+          "x": 24,
+          "y": 296
+        },
+        {
+          "h": 152,
+          "id": "cv-alison-gonzalez",
+          "w": 136,
+          "x": 215,
+          "y": 328
+        },
+        {
+          "h": 152,
+          "id": "cv-louis-mitchell",
+          "w": 136,
+          "x": 39.5,
+          "y": 544
+        },
+        {
+          "h": 152,
+          "id": "cv-hira-e-silsby",
+          "w": 136,
+          "x": 199.5,
+          "y": 512
+        },
+        {
+          "h": 152,
+          "id": "cv-elferah-saidil",
+          "w": 136,
+          "x": 24,
+          "y": 728
+        },
+        {
+          "h": 152,
+          "id": "cv-keiffer",
+          "w": 136,
+          "x": 215,
+          "y": 760
+        },
+        {
+          "h": 152,
+          "id": "cv-hassan-b-mirza",
+          "w": 136,
+          "x": 39.5,
+          "y": 976
+        },
+        {
+          "h": 152,
+          "id": "cv-luna",
+          "w": 136,
+          "x": 199.5,
+          "y": 944
+        },
+        {
+          "h": 152,
+          "id": "artist-ms-petunya",
+          "w": 136,
+          "x": 24,
+          "y": 1160
+        },
+        {
+          "h": 152,
+          "id": "artist-chandni-padia",
+          "w": 136,
+          "x": 215,
+          "y": 1192
+        },
+        {
+          "h": 152,
+          "id": "artist-tamer-karam",
+          "w": 136,
+          "x": 39.5,
+          "y": 1408
+        },
+        {
+          "h": 152,
+          "id": "artist-sophiko",
+          "w": 136,
+          "x": 199.5,
+          "y": 1376
+        },
+        {
+          "h": 152,
+          "id": "artist-cristina-gabriela",
+          "w": 136,
+          "x": 24,
+          "y": 1592
+        },
+        {
+          "h": 152,
+          "id": "artist-gemma-gallagher",
+          "w": 136,
+          "x": 215,
+          "y": 1624
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [],
+      "width": 375,
+      "works": 0
+    },
+    {
+      "state": "phone-gemma",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 797.0234375,
+        "id": "cv-person-detail",
+        "w": 327,
+        "x": 24,
+        "y": 1804
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 152,
+          "id": "cv-haseeb-wasim",
+          "w": 136,
+          "x": 24,
+          "y": 296
+        },
+        {
+          "h": 152,
+          "id": "cv-alison-gonzalez",
+          "w": 136,
+          "x": 215,
+          "y": 328
+        },
+        {
+          "h": 152,
+          "id": "cv-louis-mitchell",
+          "w": 136,
+          "x": 39.5,
+          "y": 544
+        },
+        {
+          "h": 152,
+          "id": "cv-hira-e-silsby",
+          "w": 136,
+          "x": 199.5,
+          "y": 512
+        },
+        {
+          "h": 152,
+          "id": "cv-elferah-saidil",
+          "w": 136,
+          "x": 24,
+          "y": 728
+        },
+        {
+          "h": 152,
+          "id": "cv-keiffer",
+          "w": 136,
+          "x": 215,
+          "y": 760
+        },
+        {
+          "h": 152,
+          "id": "cv-hassan-b-mirza",
+          "w": 136,
+          "x": 39.5,
+          "y": 976
+        },
+        {
+          "h": 152,
+          "id": "cv-luna",
+          "w": 136,
+          "x": 199.5,
+          "y": 944
+        },
+        {
+          "h": 152,
+          "id": "artist-ms-petunya",
+          "w": 136,
+          "x": 24,
+          "y": 1160
+        },
+        {
+          "h": 152,
+          "id": "artist-chandni-padia",
+          "w": 136,
+          "x": 215,
+          "y": 1192
+        },
+        {
+          "h": 152,
+          "id": "artist-tamer-karam",
+          "w": 136,
+          "x": 39.5,
+          "y": 1408
+        },
+        {
+          "h": 152,
+          "id": "artist-sophiko",
+          "w": 136,
+          "x": 199.5,
+          "y": 1376
+        },
+        {
+          "h": 152,
+          "id": "artist-cristina-gabriela",
+          "w": 136,
+          "x": 24,
+          "y": 1592
+        },
+        {
+          "h": 152,
+          "id": "artist-gemma-gallagher",
+          "w": 136,
+          "x": 215,
+          "y": 1624
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 375,
+      "works": 3
+    },
+    {
+      "state": "phone-final-reduced-motion",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 797.0234375,
+        "id": "cv-person-detail",
+        "w": 327,
+        "x": 24,
+        "y": 1804
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 152,
+          "id": "cv-haseeb-wasim",
+          "w": 136,
+          "x": 24,
+          "y": 296
+        },
+        {
+          "h": 152,
+          "id": "cv-alison-gonzalez",
+          "w": 136,
+          "x": 215,
+          "y": 328
+        },
+        {
+          "h": 152,
+          "id": "cv-louis-mitchell",
+          "w": 136,
+          "x": 39.5,
+          "y": 544
+        },
+        {
+          "h": 152,
+          "id": "cv-hira-e-silsby",
+          "w": 136,
+          "x": 199.5,
+          "y": 512
+        },
+        {
+          "h": 152,
+          "id": "cv-elferah-saidil",
+          "w": 136,
+          "x": 24,
+          "y": 728
+        },
+        {
+          "h": 152,
+          "id": "cv-keiffer",
+          "w": 136,
+          "x": 215,
+          "y": 760
+        },
+        {
+          "h": 152,
+          "id": "cv-hassan-b-mirza",
+          "w": 136,
+          "x": 39.5,
+          "y": 976
+        },
+        {
+          "h": 152,
+          "id": "cv-luna",
+          "w": 136,
+          "x": 199.5,
+          "y": 944
+        },
+        {
+          "h": 152,
+          "id": "artist-ms-petunya",
+          "w": 136,
+          "x": 24,
+          "y": 1160
+        },
+        {
+          "h": 152,
+          "id": "artist-chandni-padia",
+          "w": 136,
+          "x": 215,
+          "y": 1192
+        },
+        {
+          "h": 152,
+          "id": "artist-tamer-karam",
+          "w": 136,
+          "x": 39.5,
+          "y": 1408
+        },
+        {
+          "h": 152,
+          "id": "artist-sophiko",
+          "w": 136,
+          "x": 199.5,
+          "y": 1376
+        },
+        {
+          "h": 152,
+          "id": "artist-cristina-gabriela",
+          "w": 136,
+          "x": 24,
+          "y": 1592
+        },
+        {
+          "h": 152,
+          "id": "artist-gemma-gallagher",
+          "w": 136,
+          "x": 215,
+          "y": 1624
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 375,
+      "works": 3
+    },
+    {
+      "state": "landscape-selected",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 803.0234375,
+        "id": "cv-person-detail",
+        "w": 772,
+        "x": 24,
+        "y": 1320
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 24,
+          "y": 252
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 232,
+          "y": 308.8828125
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 440,
+          "y": 308.8828125
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 648,
+          "y": 252
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 78,
+          "y": 584
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 250,
+          "y": 527.109375
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 422,
+          "y": 527.109375
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 594,
+          "y": 584
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 24,
+          "y": 788
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 232,
+          "y": 844.8828125
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 440,
+          "y": 844.8828125
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 648,
+          "y": 788
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 88,
+          "y": 1120
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 584,
+          "y": 1056
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "Website"
+      ],
+      "width": 820,
+      "works": 3
+    },
+    {
+      "state": "desktop-first-arc-selected",
+      "collisions": [],
+      "overflow": false,
+      "panel": {
+        "h": 430.2265625,
+        "id": "cv-person-detail",
+        "w": 1352,
+        "x": 44,
+        "y": 588.796875
+      },
+      "panelHidden": false,
+      "people": [
+        {
+          "h": 172,
+          "id": "cv-haseeb-wasim",
+          "w": 148,
+          "x": 44,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "cv-alison-gonzalez",
+          "w": 148,
+          "x": 216,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-louis-mitchell",
+          "w": 148,
+          "x": 388,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hira-e-silsby",
+          "w": 148,
+          "x": 560,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-elferah-saidil",
+          "w": 148,
+          "x": 732,
+          "y": 387.484375
+        },
+        {
+          "h": 172,
+          "id": "cv-keiffer",
+          "w": 148,
+          "x": 904,
+          "y": 377.0390625
+        },
+        {
+          "h": 172,
+          "id": "cv-hassan-b-mirza",
+          "w": 148,
+          "x": 1076,
+          "y": 356.140625
+        },
+        {
+          "h": 172,
+          "id": "cv-luna",
+          "w": 148,
+          "x": 1248,
+          "y": 324.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-ms-petunya",
+          "w": 148,
+          "x": 108,
+          "y": 1143.796875
+        },
+        {
+          "h": 172,
+          "id": "artist-chandni-padia",
+          "w": 148,
+          "x": 323.1953125,
+          "y": 1102.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-tamer-karam",
+          "w": 148,
+          "x": 538.3984375,
+          "y": 1082.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-sophiko",
+          "w": 148,
+          "x": 753.59375,
+          "y": 1082.3515625
+        },
+        {
+          "h": 172,
+          "id": "artist-cristina-gabriela",
+          "w": 148,
+          "x": 968.796875,
+          "y": 1102.8359375
+        },
+        {
+          "h": 172,
+          "id": "artist-gemma-gallagher",
+          "w": 148,
+          "x": 1184,
+          "y": 1143.796875
+        }
+      ],
+      "portraits": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "social": [
+        "Instagram",
+        "LinkedIn"
+      ],
+      "width": 1440,
+      "works": 0
+    }
+  ],
+  "portfolioResults": [
+    {
+      "slug": "artist-ms-petunya",
+      "works": 1,
+      "overlaps": [],
+      "overflow": false
+    },
+    {
+      "slug": "artist-chandni-padia",
+      "works": 11,
+      "overlaps": [],
+      "overflow": false
+    },
+    {
+      "slug": "artist-tamer-karam",
+      "works": 26,
+      "overlaps": [],
+      "overflow": false
+    },
+    {
+      "slug": "artist-sophiko",
+      "works": 2,
+      "overlaps": [],
+      "overflow": false
+    },
+    {
+      "slug": "artist-cristina-gabriela",
+      "works": 5,
+      "overlaps": [],
+      "overflow": false
+    },
+    {
+      "slug": "artist-gemma-gallagher",
+      "works": 3,
+      "overlaps": [],
+      "overflow": false
+    }
+  ],
+  "axe": {
+    "incomplete": [
+      {
+        "count": 52,
+        "id": "color-contrast"
+      }
+    ],
+    "violations": []
+  },
+  "firstArcStaysPut": true,
+  "lowerArcsMoveTogether": true,
+  "restoresOnDismiss": true,
+  "outsideClick": "Synthetic MouseEvent on the empty canvas deselects. Native Escape returns focus to the portrait.",
+  "keyboardRail": "ArrowRight moves Light of Your Soul to Beloved and scrolls the rail 157px.",
+  "reducedMotion": {
+    "runningAnimations": 0
+  },
+  "limitations": "Axe requires manual review of translucent surfaces and image contrast; no real-device touch or trackpad frame-rate claim.",
+  "finalRestored": {
+    "collisions": [],
+    "overflow": false,
+    "panel": {
+      "h": 0,
+      "id": "cv-person-detail",
+      "w": 0,
+      "x": 0,
+      "y": 0
+    },
+    "panelHidden": true,
+    "people": [
+      {
+        "h": 172,
+        "id": "cv-haseeb-wasim",
+        "w": 148,
+        "x": 44,
+        "y": 324.796875
+      },
+      {
+        "h": 172,
+        "id": "cv-alison-gonzalez",
+        "w": 148,
+        "x": 216,
+        "y": 356.140625
+      },
+      {
+        "h": 172,
+        "id": "cv-louis-mitchell",
+        "w": 148,
+        "x": 388,
+        "y": 377.0390625
+      },
+      {
+        "h": 172,
+        "id": "cv-hira-e-silsby",
+        "w": 148,
+        "x": 560,
+        "y": 387.484375
+      },
+      {
+        "h": 172,
+        "id": "cv-elferah-saidil",
+        "w": 148,
+        "x": 732,
+        "y": 387.484375
+      },
+      {
+        "h": 172,
+        "id": "cv-keiffer",
+        "w": 148,
+        "x": 904,
+        "y": 377.0390625
+      },
+      {
+        "h": 172,
+        "id": "cv-hassan-b-mirza",
+        "w": 148,
+        "x": 1076,
+        "y": 356.140625
+      },
+      {
+        "h": 172,
+        "id": "cv-luna",
+        "w": 148,
+        "x": 1248,
+        "y": 324.796875
+      },
+      {
+        "h": 172,
+        "id": "artist-ms-petunya",
+        "w": 148,
+        "x": 108,
+        "y": 656.796875
+      },
+      {
+        "h": 172,
+        "id": "artist-chandni-padia",
+        "w": 148,
+        "x": 323.1953125,
+        "y": 615.8359375
+      },
+      {
+        "h": 172,
+        "id": "artist-tamer-karam",
+        "w": 148,
+        "x": 538.3984375,
+        "y": 595.3515625
+      },
+      {
+        "h": 172,
+        "id": "artist-sophiko",
+        "w": 148,
+        "x": 753.59375,
+        "y": 595.3515625
+      },
+      {
+        "h": 172,
+        "id": "artist-cristina-gabriela",
+        "w": 148,
+        "x": 968.796875,
+        "y": 615.8359375
+      },
+      {
+        "h": 172,
+        "id": "artist-gemma-gallagher",
+        "w": 148,
+        "x": 1184,
+        "y": 656.796875
+      }
+    ],
+    "portraits": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "social": [],
+    "width": 1440,
+    "works": 0,
+    "state": "desktop-final-restored"
+  }
+}
