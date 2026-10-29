@@ -1,0 +1,19 @@
+{
+  "sourceRef": "d99d796436d87e7dc464c906bee30eba2e11ee11",
+  "modules": 187,
+  "changedFromActiveCompatibility": [
+    "public-fallback.mjs"
+  ],
+  "publicRelease": "public-domain-20261029-v25",
+  "defaultCursorPassed": true,
+  "legacyCursorPassed": true,
+  "filtersPassed": true,
+  "sourceBoundaryPassed": true,
+  "rollbackRecorded": true,
+  "accountCutover": false,
+  "artworks": 48,
+  "unique": 48,
+  "localCompatibilityDate": "2026-07-28",
+  "productionCompatibilityDate": "2026-10-09",
+  "checkedAt": "2026-10-29T18:10:40.959Z"
+}

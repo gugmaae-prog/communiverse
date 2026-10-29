@@ -14,9 +14,8 @@ function paginated(list,q,size,key){const n=Number(q.get('offset')||0),offset=Nu
 async function feed(q){
  let items=data.works.filter(i=>(!q.get('artist')||i.artist===q.get('artist'))&&(!q.get('region')||i.region===q.get('region'))&&(!q.get('gallery')||i.gallery?.id===q.get('gallery'))&&(!['work','video'].includes(q.get('type'))||i.kind===q.get('type'))&&search([i.title,i.artistName,...(i.tags||[])].join(' '),q.get('q')));
  if(q.get('saved')==='1'||q.get('following')==='1')items=[];
- const filter=JSON.stringify([...q].filter(([k])=>k!=='cursor').sort()),bytes=new TextEncoder().encode(revision+filter+items.map(i=>i.id).join(','));
- const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
- let offset=0;const cursor=q.get('cursor');if(cursor){const m=cursor.match(/^public1:([a-f0-9]{64}):(\d{1,5})$/);if(!m||m[1]!==digest)return{error:'Refresh your feed to see the latest works.',status:410};offset=Number(m[2]);if(offset>items.length)return{error:'Refresh your feed.',status:400};}
+ const filters=[...q].filter(([k])=>k!=='cursor').sort(),fingerprint=async entries=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(revision+JSON.stringify(entries)+items.map(i=>i.id).join(',')))),b=>b.toString(16).padStart(2,'0')).join(''),digest=await fingerprint(filters.filter(([,value])=>value!==''));
+ let offset=0;const cursor=q.get('cursor');if(cursor){const m=cursor.match(/^public1:([a-f0-9]{64}):(\d{1,5})$/);if(!m||(m[1]!==digest&&m[1]!==await fingerprint(filters)))return{error:'Refresh your feed to see the latest works.',status:410};offset=Number(m[2]);if(offset>items.length)return{error:'Refresh your feed.',status:400};}
  return{items:items.slice(offset,offset+16),cursor:offset+16<items.length?'public1:'+digest+':'+(offset+16):null,total:items.length,personalized:false};
 }
 function artists(q){const list=data.artists.filter(a=>(!q.get('id')||a.id===q.get('id'))&&(!q.get('region')||a.region===q.get('region'))&&(!q.get('related')||a.id!==q.get('related'))&&search([a.title,a.city,a.description,...(a.tags||[])].join(' '),q.get('q')));return{artists:list,total:list.length,personalized:false,recommendationBasis:'discovery'};}

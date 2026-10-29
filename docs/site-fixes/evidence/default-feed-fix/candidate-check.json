@@ -1,0 +1,29 @@
+{
+  "pages": [
+    {
+      "path": "/",
+      "first": 16,
+      "total": 48,
+      "unique": 48,
+      "nextPageStatuses": [
+        200,
+        200
+      ]
+    },
+    {
+      "path": "/discover/",
+      "first": 16,
+      "total": 48,
+      "unique": 48,
+      "nextPageStatuses": [
+        200,
+        200
+      ]
+    }
+  ],
+  "legacyCursorStatus": 200,
+  "changedFilterStatus": 410,
+  "accountRedirectPreserved": true,
+  "broaderUiNotPromoted": true,
+  "checkedAt": "2026-10-29T18:24:58.632Z"
+}
