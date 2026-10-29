@@ -74,3 +74,14 @@ body:has(.cv-circle-canvas){overflow-x:clip}
 .cv-circle-canvas .cv-glass-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(245,248,252,.93)!important}
 html[data-cv-social] body:has(.cv-circle-canvas) #cv-social-header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(237,242,248,.96)!important}
 .cv-circle-canvas:not(.cv-is-positioned) #cv-people-list{position:relative}
+
+/* Movement responds to an interaction and always settles; there is no idle loop. */
+@media(prefers-reduced-motion:no-preference){
+ .cv-circle-canvas .cv-person .cv-person-photo{transition:translate 160ms cubic-bezier(.22,1,.36,1),outline-color 140ms ease,box-shadow 160ms ease}
+ .cv-circle-canvas .cv-person:focus-visible .cv-person-photo{translate:0 -3px}
+ .cv-circle-canvas .cv-person:active .cv-person-photo{translate:0 1px}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .cv-circle-canvas .cv-person:hover .cv-person-photo{translate:0 -4px}
+ .cv-circle-canvas .cv-scene-work:hover{translate:0 -2px;transition:translate 160ms ease,box-shadow 160ms ease,border-color 140ms ease}
+}
