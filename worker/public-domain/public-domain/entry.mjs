@@ -1,3 +1,7 @@
+import {formSupport} from './form-support.mjs';
+import FORM_CLIENT from './form-support.js.txt';
+import {guardForm,FORM_ACTIONS,formEndpoint} from './form-security.mjs';
+import {reportAPI} from './report.mjs';
 import {artistPath,artistIdFromSlug,workIdFromSlugs} from './record-routes.mjs';
 import {artistById,catalogue,knownPersonIds,worksPage,artistPage,workPage,selectedCircleHTML,recordStyle} from './record-pages.mjs';
 import RECORD_ACTIONS from './record-actions.js.txt';
@@ -104,12 +108,16 @@ async function adapt(response,request,readFeed){response=brandResponse(legalSupp
  .transform(new Response(html,{status:response.status,headers:h})),request);
 }
 const browserNavigation=`(()=>{'use strict';const old='https://espacios.me',prefix='/communiverse',protectedPath=/^\\/(workspace|sign-in|signin|join|profile|onboarding|confirm|apply|host|auth|account|events\\/host)(\\/|$)/;function target(value){let u;try{u=new URL(value,location.href)}catch{return value}if(![location.origin,old].includes(u.origin))return value;if(u.origin===old&&u.searchParams.get('cv_account')==='1')return value;const p=u.pathname.replace(/^\\/communiverse(?=\\/|$)/,'')||'/';if(p==='/artists/'||p==='/artists'){u.pathname='/circles/';u.searchParams.set('filter','artists');return u.pathname+u.search+u.hash}if(protectedPath.test(p))return old+prefix+p+u.search+u.hash;if(u.origin===old&&u.pathname.startsWith(prefix+'/')&&!/^\\/(api(?:\\/|$)|_)/.test(p))return p+u.search+u.hash;return value}function update(root){for(const a of root.querySelectorAll('#cv-social-header nav a,#cv-marketplace-nav a'))if(a.textContent.trim()==='Artists')a.remove();for(const e of root.querySelectorAll('a[href],form[action]')){const a=e.tagName==='FORM'?'action':'href',v=e.getAttribute(a),n=target(v);if(n!==v)e.setAttribute(a,n)}}document.addEventListener('DOMContentLoaded',()=>{update(document);new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1){if(n.matches('a[href],form[action]')){const a=n.tagName==='FORM'?'action':'href';n.setAttribute(a,target(n.getAttribute(a)))}update(n)}}).observe(document.body,{childList:true,subtree:true})});document.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(!a)return;const n=target(a.href);if(n.startsWith(old+prefix+'/')){e.preventDefault();e.stopImmediatePropagation();location.assign(n)}},true);})();`;
-export default {async fetch(request,env,ctx){const u=new URL(request.url);
+const application={async fetch(request,env,ctx){const u=new URL(request.url);
  env={...env,EMAIL:env.EMAIL||env.REGISTRATION_EMAIL};
+ if(u.pathname===CLIENT_BASE+'form-support.js')return new Response(request.method==='HEAD'?null:FORM_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'record-actions.js')return new Response(request.method==='HEAD'?null:RECORD_ACTIONS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'discovery-ui.js')return new Response(request.method==='HEAD'?null:DISCOVERY_UI,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'legal-links.js')return new Response(request.method==='HEAD'?null:LEGAL_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'identity.js')return new Response(request.method==='HEAD'?null:IDENTITY_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ const isLegacy=['espacios.me','www.espacios.me'].includes(u.hostname)&&u.pathname.startsWith(PREFIX+'/');
+ if(request.method==='POST'&&isLegacy&&FORM_ACTIONS[formEndpoint(request)]&&!['workshop-enquiry','event-rsvp','report'].includes(formEndpoint(request))){try{const blocked=await guardForm(request,env,await readRegistrationBody(request.clone()));if(blocked)return blocked;}catch(e){return Response.json({error:e.status?e.message:'Check your form details.'},{status:e.status||400,headers:headers()});}}
+ if(request.method==='POST'&&isLegacy&&formEndpoint(request)==='report')return reportAPI(request,env);
  if(!hosts.has(u.hostname)){
   if(['espacios.me','www.espacios.me'].includes(u.hostname)&&/^\/communiverse\/api\/account\/(login|register|credentials|recover)\/?$/.test(u.pathname)){const response=await updatedAccountAPI(request,env);if(response.status===201)background(ctx,observeRegistration(request,response.clone(),env,ctx));return response;}
 
@@ -175,3 +183,5 @@ export default {async fetch(request,env,ctx){const u=new URL(request.url);
  if(p!==u.pathname||!p.endsWith('/'))return redirect(u.origin+p+(p.endsWith('/')?'':'/')+u.search,308);
  try{return await adapt(await guest(request,env,ctx,internal(p)),request,r=>guest(r,env,ctx,internal('/api/feed')));}catch(e){console.error('Public domain read unavailable',e.message);return error(503,'We’ll be right back','This part of Communiverse is temporarily unavailable. Please try again shortly.');}
 }};
+
+export default {async fetch(request,env,ctx){return formSupport(await application.fetch(request,env,ctx),request,env);}};
