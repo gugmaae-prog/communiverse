@@ -41,7 +41,7 @@ export async function brandedAccountRoute(request,env,ctx){
 }
 function values(v,env){return typeof v==='string'?accountDestination(v,env):Array.isArray(v)?v.map(x=>values(x,env)):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,values(x,env)])):v;}
 export async function accountSupport(response,request,env){
- if(response.status===101)return response;const u=new URL(request.url);if(!['communiverseclubs.com','preview.communiverseclubs.com','www.communiverseclubs.com'].includes(u.hostname)&&!(u.hostname==='espacios.me'&&u.pathname.startsWith('/communiverse/')))return response;
+ if(response.status===101)return response;const u=new URL(request.url);if(!['communiverseclubs.com','preview.communiverseclubs.com','www.communiverseclubs.com'].includes(u.hostname)&&!(['espacios.me','www.espacios.me'].includes(u.hostname)&&u.pathname.startsWith('/communiverse/')))return response;
  const config=accountConfiguration(env),type=response.headers.get('Content-Type')||'',h=new Headers(response.headers);if(h.has('Location'))h.set('Location',accountDestination(h.get('Location'),env));if(/json|javascript|html/.test(type))for(const k of ['content-length','content-encoding','etag','last-modified'])h.delete(k);
  if(request.method==='HEAD')return new Response(null,{status:response.status,headers:h});
  if(type.includes('application/json'))return new Response(JSON.stringify(values(await response.json(),env)),{status:response.status,headers:h});

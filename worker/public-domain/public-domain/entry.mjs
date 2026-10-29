@@ -119,7 +119,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  if(hosts.has(u.hostname)&&u.pathname==='/sitemap.xml')return sitemap();
  if(hosts.has(u.hostname)&&u.pathname.startsWith('/communiverse/_share/20261029-v1/')&&read(request.method))return env.ASSETS?env.ASSETS.fetch(request):error(404,'Image not found','This image is unavailable.');
  if(communiverseRequest(request)&&privateArtifactPath(u.pathname))return error(404,'Page not found','Explore Communiverse through the links below.');
- if(hosts.has(u.hostname)&&u.pathname==='/api/csp-report')return cspReport(request,env);
+ if(communiverseRequest(request)&&clean(u.pathname)==='/api/csp-report')return cspReport(request,env);
  if(hosts.has(u.hostname)&&u.pathname==='/.well-known/security.txt')return new Response(request.method==='HEAD'?null:securityText('https://communiverseclubs.com'),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
  if(hosts.has(u.hostname)&&u.pathname==='/robots.txt')return new Response(request.method==='HEAD'?null:robots(u.origin),{headers:{'Content-Type':'text/plain; charset=utf-8'}});
  if(u.pathname===CLIENT_BASE+'account-client.js')return new Response(request.method==='HEAD'?null:ACCOUNT_CLIENT,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
