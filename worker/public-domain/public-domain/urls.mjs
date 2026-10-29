@@ -42,7 +42,7 @@ export function rewrite(source,origin){
  .replace(/\/communiverse\/(?!api(?:\/|["'])|_)/g,'/')
  .replace(/(["'])\/communiverse\1/g,(_,q)=>q+'/'+q)
  .replaceAll('__CV_ACCOUNT__',OLD+PREFIX+'/')
- .replace(/(["'])\/communiverse\/([^"'?\s]+\.js)(?=[?'"])/g,(_,q,file)=>q+CLIENT_BASE+file)
+ .replace(/(["'])\/communiverse\/([^"'?\s]+\.js)(?=[?'"])/g,(_,q,file)=>q+(file.startsWith('_domain/')?PREFIX+'/':CLIENT_BASE)+file)
  .replaceAll('\\/communiverse\\/','\\/');
 }
 export function canonical(value){const u=new URL(value);u.pathname=clean(u.pathname);u.hash='';for(const key of [...u.searchParams.keys()])if(!['id','artwork','work','person'].includes(key))u.searchParams.delete(key);u.searchParams.sort();return u.href;}
