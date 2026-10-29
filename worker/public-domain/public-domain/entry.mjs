@@ -34,6 +34,7 @@ import retained from './retained/first-render-gateway.mjs';
 import {portraitData} from './portrait-refresh.mjs';
 import {circlePeople,directoryHTML} from './circles-directory.mjs';
 import {circleLayout} from './circles-layout.mjs';
+import {circleScene} from './circles-scene.mjs';
 import CONSTELLATION_STYLE from './circles-constellation.css.txt';
 import CIRCLE_STYLE from './circles-directory.css.txt';
 import CIRCLE_CLIENT from './circles-directory.js.txt';
@@ -185,7 +186,7 @@ const application={async fetch(request,env,ctx){const u=new URL(request.url);
  const alias={'/people':'/circles/?filter=people','/ambassadors':'/circles/?filter=ambassadors'}[p.replace(/\/$/,'')];if(alias){const to=new URL(alias,u.origin);for(const[k,v]of u.searchParams)if(!to.searchParams.has(k))to.searchParams.append(k,v);return redirect(to.href,301);}
  if(u.pathname===CLIENT_BASE+'registrations.js')return new Response(request.method==='HEAD'?null:REGISTRATION_CLIENT,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'navigation.js')return new Response(request.method==='HEAD'?null:browserNavigation,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
- if(u.pathname===CLIENT_BASE+'circles-directory.js')return new Response(request.method==='HEAD'?null:CIRCLE_CLIENT.replace('/* CIRCLE_LAYOUT */',circleLayout.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
+ if(u.pathname===CLIENT_BASE+'circles-directory.js')return new Response(request.method==='HEAD'?null:CIRCLE_CLIENT.replace('/* CIRCLE_LAYOUT */',circleLayout.toString()).replace('/* CIRCLE_SCENE */',circleScene.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'artwork-experience.js')return new Response(request.method==='HEAD'?null:ARTWORK_CLIENT,{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'feed-discovery.js')return new Response(request.method==='HEAD'?null:FEED_DISCOVERY.replace('/* DAILY_INDEX */',featuredArtistIndex.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});
  if(u.pathname===CLIENT_BASE+'workshops.js')return new Response(request.method==='HEAD'?null:WORKSHOP_CLIENT.replace('/* ENQUIRY_BUILDER */',workshopEnquiryMail.toString()),{headers:{...headers(),'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}});

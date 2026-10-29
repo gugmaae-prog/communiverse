@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {circleLayout} from '../public-domain/circles-layout.mjs';
 const widths=[296,327,366,640,744,820,1000,1256,1376];
-test('community arcs preserve usable portraits and separated targets as the community grows',()=>{
+test('community field preserves usable portraits and separated targets as the community grows',()=>{
  for(const width of widths)for(const count of [0,1,2,6,14,31,60]){
   const p=circleLayout(width,178,count),label=`${width}/${count}`;
   assert.equal(p.nodes.length,count,label);assert(p.diameter>=76,label);
@@ -13,7 +13,7 @@ test('community arcs preserve usable portraits and separated targets as the comm
   assert.deepEqual(p,circleLayout(width,900,count),'viewport height and selection do not scramble portraits');
  }
 });
-test('arcs stagger profiles without shrinking an expanding community into the viewport',()=>{
+test('measured bands stagger profiles without shrinking an expanding community into the viewport',()=>{
  for(const width of [366,820,1376]){
   const p=circleLayout(width,178,14);assert(p.height>178);assert(new Set(p.nodes.map(n=>n.top)).size>=3);assert(p.rows.every(r=>r.bottom>r.top));
   const grown=circleLayout(width,178,60);assert(grown.height>p.height);assert.deepEqual(grown.nodes.slice(0,8),circleLayout(width,178,31).nodes.slice(0,8));
