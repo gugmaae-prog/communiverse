@@ -1,0 +1,223 @@
+[
+  {
+    "id": "artist-gemma-gallagher",
+    "kind": "artist",
+    "title": "Gemma Gallagher",
+    "realName": "Gemma Gallagher",
+    "primaryCraft": "Painting & written word",
+    "description": "Gemma Gallagher is a Belfast-born artist based in Dubai. Her paintings bring together landscape, layered colour and fragments of poetry, exploring how language and memory shape a sense of belonging. Words are written into the surface, covered and revealed again as each painting develops.\n\nHer Resonance collection considers love and human connection through passages drawn from poetry and philosophy. Handwritten words emerge from fields of colour, inviting viewers to spend time with both the paint and the text.\n\nAlongside her studio practice, Gallagher founded Design & Dine and has curated exhibitions connecting Irish and Emirati artists.",
+    "image": "/communiverse/_portraits/20261027-v4/artist-gemma-gallagher-framed-v3-1024.webp",
+    "portrait": {
+      "kind": "photo",
+      "verified": true,
+      "url": "/communiverse/_portraits/20261027-v4/artist-gemma-gallagher-framed-v3-1024.webp",
+      "width": 1024,
+      "height": 1024,
+      "variants": [
+        {
+          "url": "/communiverse/_portraits/20261027-v4/artist-gemma-gallagher-framed-v3-384.webp",
+          "width": 384,
+          "height": 384
+        },
+        {
+          "url": "/communiverse/_portraits/20261027-v4/artist-gemma-gallagher-framed-v3-768.webp",
+          "width": 768,
+          "height": 768
+        },
+        {
+          "url": "/communiverse/_portraits/20261027-v4/artist-gemma-gallagher-framed-v3-1024.webp",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "position": "50% 50%",
+      "source": "https://gemmagallagherart.com/wp-content/uploads/2025/06/6763a7b74da7b2bb503a5948_Gemma-Gallagher-p-1080.webp",
+      "previousHash": "Untitled-design-2",
+      "originalWidth": 1080,
+      "originalHeight": 1078,
+      "processing": "Conventional crop and resize of the existing photograph; no newly generated facial detail.",
+      "framing": {
+        "eyeLevel": 0.33996066384917983,
+        "faceFraction": 0.42982298938940605,
+        "crop": {
+          "left": 124,
+          "top": 38,
+          "width": 742,
+          "height": 742
+        }
+      }
+    },
+    "source": "https://gemmagallagherart.com/",
+    "website": "https://gemmagallagherart.com/",
+    "socials": [
+      {
+        "label": "Instagram · @gem_artist",
+        "url": "https://www.instagram.com/gem_artist/"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Artist website",
+        "url": "https://gemmagallagherart.com/"
+      },
+      {
+        "label": "About Gemma",
+        "url": "https://gemmagallagherart.com/about/"
+      },
+      {
+        "label": "Resonance collection",
+        "url": "https://gemmagallagherart.com/resonance-collection/"
+      }
+    ],
+    "submittedProfile": true,
+    "canHost": false,
+    "ambassador": null,
+    "tags": [
+      "painting",
+      "abstract",
+      "oil painting",
+      "poetry",
+      "landscape",
+      "memory",
+      "connection"
+    ],
+    "region": "uae",
+    "city": "Dubai",
+    "organizer": "Visual artist"
+  },
+  {
+    "id": "work-gemma-gallagher-beloved",
+    "kind": "work",
+    "artist": "artist-gemma-gallagher",
+    "artistName": "Gemma Gallagher",
+    "title": "Beloved",
+    "medium": "Oil and oil pastel on canvas",
+    "size": "140 × 130 cm",
+    "collection": "Resonance",
+    "description": "Layers of red hold handwritten passages from John O’Donohue and Rumi. The painting considers the sense of recognition and belonging that can arise in a close connection with another person.",
+    "image": "/communiverse/_public/media/images/20261027/06563585a36a33434ce58bf6-1280.webp",
+    "imageVariants": [
+      {
+        "url": "/communiverse/_public/media/images/20261027/06563585a36a33434ce58bf6-320.webp",
+        "width": 320,
+        "height": 347
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/06563585a36a33434ce58bf6-720.webp",
+        "width": 720,
+        "height": 780
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/06563585a36a33434ce58bf6-1280.webp",
+        "width": 1280,
+        "height": 1387
+      }
+    ],
+    "source": "https://gemmagallagherart.com/product/beloved/",
+    "artistSource": "https://gemmagallagherart.com/",
+    "originalImage": "https://gemmagallagherart.com/wp-content/uploads/2026/10/Beloved-scaled.jpg",
+    "imageProvenance": "Artist’s official artwork photograph, resized for web delivery without creative alteration.",
+    "submittedWork": true,
+    "organizer": "Gemma Gallagher",
+    "region": "uae",
+    "tags": [
+      "painting",
+      "oil painting",
+      "abstract",
+      "poetry",
+      "Resonance",
+      "connection"
+    ],
+    "descriptionLabel": "About the work"
+  },
+  {
+    "id": "work-gemma-gallagher-all-along",
+    "kind": "work",
+    "artist": "artist-gemma-gallagher",
+    "artistName": "Gemma Gallagher",
+    "title": "All Along",
+    "medium": "Oil and pastel on canvas",
+    "size": "112 × 96 cm",
+    "collection": "Resonance",
+    "description": "Red and violet layers carry passages from John O’Donohue and Ram Dass. The work reflects on love as a capacity within ourselves, one that remains even as relationships change.",
+    "image": "/communiverse/_public/media/images/20261027/87037d0a0437bb4e5a5934c8-1280.webp",
+    "imageVariants": [
+      {
+        "url": "/communiverse/_public/media/images/20261027/87037d0a0437bb4e5a5934c8-320.webp",
+        "width": 320,
+        "height": 373
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/87037d0a0437bb4e5a5934c8-720.webp",
+        "width": 720,
+        "height": 839
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/87037d0a0437bb4e5a5934c8-1280.webp",
+        "width": 1280,
+        "height": 1490
+      }
+    ],
+    "source": "https://gemmagallagherart.com/product/all-along/",
+    "artistSource": "https://gemmagallagherart.com/",
+    "originalImage": "https://gemmagallagherart.com/wp-content/uploads/2026/10/All-Along-scaled.jpg",
+    "imageProvenance": "Artist’s official artwork photograph, resized for web delivery without creative alteration.",
+    "submittedWork": true,
+    "organizer": "Gemma Gallagher",
+    "region": "uae",
+    "tags": [
+      "painting",
+      "oil painting",
+      "abstract",
+      "poetry",
+      "Resonance",
+      "connection"
+    ],
+    "descriptionLabel": "About the work"
+  },
+  {
+    "id": "work-gemma-gallagher-light-of-your-soul",
+    "kind": "work",
+    "artist": "artist-gemma-gallagher",
+    "artistName": "Gemma Gallagher",
+    "title": "Light of Your Soul",
+    "medium": "Oil on canvas",
+    "size": "94 × 80 cm",
+    "collection": "Resonance",
+    "description": "Inspired by John O’Donohue’s Anam Cara, this painting considers how being loved can bring familiar but overlooked parts of ourselves into view. Handwritten text meets vivid, textured colour.",
+    "image": "/communiverse/_public/media/images/20261027/780557dfabf0f4ceeaf88d0f-1280.webp",
+    "imageVariants": [
+      {
+        "url": "/communiverse/_public/media/images/20261027/780557dfabf0f4ceeaf88d0f-320.webp",
+        "width": 320,
+        "height": 378
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/780557dfabf0f4ceeaf88d0f-720.webp",
+        "width": 720,
+        "height": 850
+      },
+      {
+        "url": "/communiverse/_public/media/images/20261027/780557dfabf0f4ceeaf88d0f-1280.webp",
+        "width": 1280,
+        "height": 1511
+      }
+    ],
+    "source": "https://gemmagallagherart.com/product/light-of-your-soul/",
+    "artistSource": "https://gemmagallagherart.com/",
+    "originalImage": "https://gemmagallagherart.com/wp-content/uploads/2026/02/IMG_6979-2-scaled.jpg",
+    "imageProvenance": "Artist’s official artwork photograph, resized for web delivery without creative alteration.",
+    "submittedWork": true,
+    "organizer": "Gemma Gallagher",
+    "region": "uae",
+    "tags": [
+      "painting",
+      "oil painting",
+      "abstract",
+      "poetry",
+      "Resonance",
+      "connection"
+    ],
+    "descriptionLabel": "About the work"
+  }
+]

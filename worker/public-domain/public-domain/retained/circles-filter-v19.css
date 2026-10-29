@@ -1,0 +1,71 @@
+/* People filters are secondary to the shared main navigation. */
+html.cv-mobile-v14[data-cv-social] #main > .filters {
+  display:flex !important;
+  flex-flow:row nowrap !important;
+  justify-content:center !important;
+  align-items:center;
+  width:max-content !important;
+  max-width:100% !important;
+  min-height:44px !important;
+  margin:0 auto 6px !important;
+  padding:0 !important;
+  gap:4px !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
+}
+html.cv-mobile-v14[data-cv-social] #main > .filters button {
+  position:relative;
+  isolation:isolate;
+  flex:0 0 auto !important;
+  min-width:44px !important;
+  min-height:44px !important;
+  margin:0 !important;
+  padding:6px 12px !important;
+  border:0 !important;
+  border-radius:999px;
+  background:transparent !important;
+  box-shadow:none !important;
+  font-size:13px !important;
+  font-weight:400 !important;
+  line-height:1.3 !important;
+  white-space:nowrap;
+  color:var(--cv-social-muted,#566174) !important;
+}
+html.cv-mobile-v14[data-cv-social] #main > .filters button::before {
+  content:"";
+  position:absolute;
+  inset:5px 0;
+  z-index:-1;
+  border-radius:inherit;
+  background:transparent;
+  pointer-events:none;
+}
+html.cv-mobile-v14[data-cv-social] #main > .filters button[aria-pressed=true] {
+  color:var(--cv-social-blue,#1267ff) !important;
+}
+html.cv-mobile-v14[data-cv-social] #main > .filters button[aria-pressed=true]::before {
+  background:color-mix(in srgb,var(--cv-social-blue,#1267ff) 10%,transparent);
+}
+@media (hover:hover) {
+  html.cv-mobile-v14[data-cv-social] #main > .filters button:hover::before {
+    background:color-mix(in srgb,var(--cv-social-blue,#1267ff) 7%,transparent);
+  }
+}
+html.cv-mobile-v14[data-cv-social] #main > .filters button:focus-visible {
+  outline:2px solid var(--cv-social-blue,#1267ff) !important;
+  outline-offset:0;
+}
+@media (max-width:600px) {
+  html.cv-mobile-v14[data-cv-social] #main > .filters {gap:0 !important;}
+  html.cv-mobile-v14[data-cv-social] #main > .filters button {
+    padding:6px 8px !important;
+    font-size:12px !important;
+  }
+}
+@media (max-width:360px) {
+  html.cv-mobile-v14[data-cv-social] #main > .filters button {padding-inline:4px !important;}
+}

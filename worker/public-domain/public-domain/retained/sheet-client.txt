@@ -1,0 +1,69 @@
+/* UI only: preserve native controls, listeners, canonical cells, and ACLs. */
+(()=>{
+ 'use strict';if(window.__cvSheetV10)return;window.__cvSheetV10=true;
+ const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e};
+ const svg=(name)=>{const ns='http://www.w3.org/2000/svg',s=document.createElementNS(ns,'svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('aria-hidden','true');s.setAttribute('focusable','false');s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','1.5');const p=document.createElementNS(ns,'path');p.setAttribute('d',name==='chevron'?'m8 10 4 4 4-4':name==='more'?'M5 12h.01M12 12h.01M19 12h.01':'M5 6h14M5 12h14M5 18h14');s.append(p);return s};
+ function editorSetup(editor){
+  if(editor.dataset.cvsReady)return;editor.dataset.cvsReady='yes';
+  const head=editor.querySelector('.cvt-editor-head'),meta=head?.querySelector('.cvt-meta'),actions=head?.querySelector('.cvt-document-actions'),sheet=editor.querySelector('.cvt-sheet');
+  if(!head||!sheet)return;
+  const history=make('details','cvs-document-history'),historySummary=make('summary','cvt-button cvt-button-quiet','History'),historyBody=make('div','cvs-history-body');
+  history.append(historySummary,historyBody);for(const item of meta?.querySelectorAll('.cvt-created,.cvt-edited')||[])historyBody.append(item);
+  if(historyBody.childElementCount)meta?.append(history);
+  const save=editor.querySelector('.cvt-savebar');if(save)meta?.append(save);
+  const options=actions?.querySelector('.cvt-document-options>summary');if(options){options.textContent='';options.append(svg('more'));options.setAttribute('aria-label','Document options');options.title='Document options';options.classList.add('cvs-icon-control')}
+  const toolbar=make('div','cvs-toolbar'),addActions=sheet.querySelector(':scope>.cvt-actions'),view=sheet.querySelector(':scope>.cvt-sheet-view'),help=sheet.querySelector(':scope>.cvt-sheet-help');
+  if(addActions)toolbar.append(addActions);if(view){const sum=view.querySelector('summary');if(sum)sum.textContent='Filter & sort';toolbar.append(view)}
+  if(help){const helpDetails=make('details','cvs-help');helpDetails.append(make('summary','cvt-button cvt-button-quiet','Help'),help);toolbar.append(helpDetails)}
+  const inspector=make('details','cvs-inspector'),summary=make('summary','cvt-button cvt-button-quiet','Cell details'),panel=make('div','cvs-inspector-body'),heading=make('h3','cvs-inspector-heading','Select a cell'),body=make('div','cvs-inspector-content'),empty=make('p','cvs-inspector-empty','Select a cell to see its recorded history and link.');
+  panel.append(heading,body,empty);inspector.append(summary,panel);toolbar.append(inspector);sheet.prepend(toolbar);
+  let selectedKey='',signature='';
+  function refreshInspector(){
+   const cells=[...sheet.querySelectorAll('td.cvt-cell[data-cell]')],cell=cells.find(c=>c.dataset.cell===selectedKey);
+   if(!cell){selectedKey='';if(signature==='empty')return;signature='empty';heading.textContent='Select a cell';body.replaceChildren();empty.hidden=false;return}
+   cell.classList.add('cvs-selected-cell');
+   const control=cell.querySelector('.cvt-cell-control'),details=cell.querySelector('.cvt-cell-details');
+   const next=(control?.getAttribute('aria-label')||'Selected cell')+'|'+(details?.textContent||'')+'|'+(details?.querySelector('a')?.href||'');
+   if(next===signature)return;signature=next;heading.textContent=control?.getAttribute('aria-label')||'Selected cell';body.replaceChildren();empty.hidden=true;
+   if(details)for(const node of details.children){if(node.tagName==='SUMMARY')continue;const copy=node.cloneNode(true);copy.removeAttribute('id');if(node.tagName==='A')copy.addEventListener('click',event=>{if(event.button||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();node.click()});body.append(copy)}
+   else body.append(make('p','','Recorded history is unavailable.'));
+  }
+  function selectCell(cell){if(!cell)return;selectedKey=cell.dataset.cell;for(const c of sheet.querySelectorAll('.cvs-selected-cell'))if(c!==cell)c.classList.remove('cvs-selected-cell');cell.classList.add('cvs-selected-cell');signature='';refreshInspector()}
+  sheet.addEventListener('focusin',event=>{const cell=event.target.closest('td.cvt-cell');if(cell)selectCell(cell)});
+  sheet.addEventListener('click',event=>{const cell=event.target.closest('td.cvt-cell');if(cell)selectCell(cell)});
+  inspector.addEventListener('toggle',()=>{if(inspector.open)refreshInspector()});
+  editor.__cvsRefresh=refreshInspector;editor.__cvsSelect=(cell)=>{selectCell(cell);inspector.open=true;summary.focus()};
+  // Native details dismiss without turning disclosures into pseudo ARIA menus.
+  editor.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const d=event.target.closest('details[open]');if(d&&(d.classList.contains('cvs-row-menu')||d.classList.contains('cvs-inspector')||d.classList.contains('cvs-help')||d.classList.contains('cvs-document-history'))){d.open=false;d.querySelector('summary')?.focus();event.stopPropagation()}});
+ }
+ function tableSetup(editor){
+  for(const th of editor.querySelectorAll('.cvt-table thead th')){
+   const name=th.querySelector('.cvt-column-name'),type=th.querySelector('.cvt-column-type'),button=th.querySelector('button');
+   if(!name||th.dataset.cvsReady)continue;th.dataset.cvsReady='yes';
+   if(type)type.classList.add('cvt-sr-only');th.title=(name.textContent||'Column')+' · '+(type?.textContent||'');
+   if(button){button.textContent='';button.classList.add('cvs-column-menu');button.title=th.title;button.setAttribute('aria-description',type?.textContent||'');button.append(name);if(type)button.append(type);button.append(svg('chevron'))}
+  }
+  for(const row of editor.querySelectorAll('.cvt-table tbody tr')){
+   const last=row.lastElementChild,remove=last?.querySelector('button'),first=row.querySelector('td.cvt-cell');
+   if(!remove||!first||last.querySelector('.cvs-row-menu'))continue;
+   const menu=make('details','cvs-row-menu'),summary=make('summary','cvs-icon-control'),panel=make('div','cvs-row-menu-body'),show=make('button','cvt-button cvt-button-quiet','Row details');
+   summary.setAttribute('aria-label','Actions for row '+(row.querySelector('th')?.textContent||''));summary.title=summary.getAttribute('aria-label');summary.append(svg('more'));show.type='button';
+   show.addEventListener('click',event=>{event.stopPropagation();menu.open=false;editor.__cvsSelect(first)});panel.append(show,remove);menu.append(summary,panel);last.append(menu);
+   menu.addEventListener('toggle',()=>{if(menu.open){menu.classList.remove('cvs-open-up');const bounds=editor.querySelector('.cvt-table-scroll').getBoundingClientRect();if(panel.getBoundingClientRect().bottom>bounds.bottom)menu.classList.add('cvs-open-up')}});
+  }
+  for(const display of editor.querySelectorAll('.cvt-cell-display'))display.classList.toggle('cvs-empty-value',display.textContent.trim()==='Empty');
+  for(const checkbox of editor.querySelectorAll('td.cvt-cell>input.cvt-cell-control[type=checkbox]')){const label=make('label','cvs-checkbox-target');checkbox.before(label);label.append(checkbox)}
+  editor.__cvsRefresh?.();
+ }
+ let queued=false;
+ function apply(){
+  queued=false;const editors=[...document.querySelectorAll('.cvt-editor[data-kind="sheet"]')];
+  for(const root of document.querySelectorAll('.cvt-tools'))root.classList.toggle('cvs-sheet-document',!!root.querySelector('.cvt-editor[data-kind="sheet"]'));
+  const app=document.querySelector('#cv-ws-app');app?.classList.toggle('cvs-sheet-focused',editors.some(e=>app.contains(e)));
+  for(const editor of editors){editorSetup(editor);tableSetup(editor)}
+ }
+ let frame=0;
+ function schedule(){if(queued)return;queued=true;frame=requestAnimationFrame(apply)}
+ function start(){apply();document.addEventListener('click',event=>{for(const d of document.querySelectorAll('.cvs-sheet-document .cvs-toolbar details[open],.cvs-sheet-document .cvs-document-history[open],.cvs-sheet-document .cvs-row-menu[open],.cvs-sheet-document .cvt-document-options[open]'))if(!d.contains(event.target))d.open=false});const host=document.querySelector('#cv-workspace');if(!host)return;const observer=new MutationObserver(records=>{if(records.some(record=>record.target.parentElement?.closest('.cvt-tools')||record.target instanceof Element&&record.target.closest('.cvt-tools')||[...record.addedNodes,...record.removedNodes].some(node=>node instanceof Element&&(node.matches('.cvt-tools,.cvt-editor')||node.querySelector('.cvt-tools,.cvt-editor')))))schedule();});observer.observe(host,{childList:true,subtree:true,characterData:true});addEventListener('pagehide',event=>{cancelAnimationFrame(frame);queued=false;if(!event.persisted)observer.disconnect();});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();

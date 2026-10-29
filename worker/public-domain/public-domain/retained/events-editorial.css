@@ -1,0 +1,9 @@
+/* The logo is a transparent PNG; it sits directly on the page. */
+.cv-avid-page .avid-host{background:transparent;padding:0;border:0;border-radius:0;box-shadow:none}
+.cv-avid-page .avid-host img{width:110px;height:auto;object-fit:contain}
+#cv-past-story[hidden]{display:none!important}
+#cv-past-story{margin:16px 0 32px}
+#cv-past-story .cv-avid-section-heading{gap:12px}
+@media(max-width:700px){.cv-avid-page .avid-host img{width:90px}}
+@media(max-width:360px){.cv-avid-page .avid-host img{width:80px}}
+@media(prefers-color-scheme:dark){.cv-avid-page .avid-host img{filter:brightness(0) invert(1)}}

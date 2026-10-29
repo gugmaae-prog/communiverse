@@ -1,0 +1,28 @@
+html[data-cv-social] body dialog#cv-welcome-dialog{width:min(600px,calc(100vw - 32px))!important;max-width:600px!important;max-height:calc(100dvh - 32px)!important;margin:auto!important;padding:32px!important;box-sizing:border-box;border:1px solid var(--cv-glass-line,#cbd6e6);border-radius:24px;background:var(--cv-glass-surface,#f8faff);color:var(--cv-glass-ink,#243248);overflow:auto;box-shadow:var(--cv-glass-shadow,0 16px 60px #24324826)}
+#cv-welcome-dialog::backdrop{background:#24324866;backdrop-filter:blur(5px)}
+html[data-cv-social] body #cv-welcome-dialog h2{font-size:28px!important;font-weight:400!important;line-height:1.2;margin:0 44px 12px 0!important;letter-spacing:-.02em}
+#cv-welcome-dialog #cv-welcome-description{font-size:15px;line-height:1.5;margin:0 0 24px;color:var(--cv-glass-muted,#55647a);max-width:42ch}
+#cv-welcome-dialog .cv-welcome-progress{font-size:12px;margin:0 0 16px;color:var(--cv-glass-muted,#55647a)}
+#cv-welcome-dialog .cv-welcome-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+#cv-welcome-dialog .cv-welcome-map>div{padding:16px;border:1px solid var(--cv-glass-line,#cbd6e6);border-radius:18px;min-width:0}
+#cv-welcome-dialog h3{font-size:15px!important;font-weight:400!important;margin:0 0 8px!important}#cv-welcome-dialog .cv-welcome-map p{font-size:13px;line-height:1.5;margin:0;color:var(--cv-glass-muted,#55647a)}
+html[data-cv-social] body #cv-welcome-dialog button{min-height:44px!important;min-width:44px;max-width:100%;border:1px solid var(--cv-glass-line,#cbd6e6);border-radius:999px;padding:10px 16px;font:400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important;background:transparent;color:inherit;cursor:pointer}
+html[data-cv-social] body #cv-welcome-dialog .cv-welcome-primary{background:var(--cv-glass-blue,#245ccc)!important;color:#fff!important;border-color:var(--cv-glass-blue,#245ccc)!important}
+html[data-cv-social] body #cv-welcome-dialog .cv-welcome-close{position:absolute!important;top:20px!important;right:20px!important;width:44px;height:44px;padding:0!important;display:flex;align-items:center;justify-content:center;font-size:22px!important}
+#cv-welcome-dialog .cv-welcome-close svg{width:20px;height:20px}
+#cv-welcome-dialog .cv-welcome-sample{padding:20px;border:1px solid var(--cv-glass-line,#cbd6e6);border-radius:18px;background:var(--cv-glass-soft,#e7eefb);margin:24px 0 12px}
+#cv-welcome-dialog .cv-welcome-sample-label{display:block;font-size:12px;color:var(--cv-glass-muted,#55647a);margin-bottom:16px}
+#cv-welcome-dialog .cv-welcome-task{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:44px;font-size:16px;margin:0}
+html[data-cv-social] body #cv-welcome-dialog input[type=checkbox]{appearance:auto!important;accent-color:var(--cv-glass-blue,#245ccc);width:24px!important;height:24px!important;min-height:24px!important;min-width:24px!important;margin:0!important;flex:0 0 24px;padding:0!important}
+#cv-welcome-dialog .cv-welcome-task.is-done span{text-decoration:line-through}
+#cv-welcome-dialog .cv-welcome-sample-status{font-size:13px;line-height:1.5;margin:12px 0 0}#cv-welcome-dialog .cv-welcome-hint{font-size:12px;line-height:1.5;color:var(--cv-glass-muted,#55647a);margin:12px 0}
+#cv-welcome-dialog .cv-welcome-sample>svg{display:block;width:100%;height:96px;margin-bottom:16px;color:var(--cv-glass-blue,#245ccc)}
+#cv-welcome-dialog .cv-welcome-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}#cv-welcome-dialog .cv-welcome-actions>div{display:flex;gap:8px;min-width:0}
+#cv-welcome-dialog .cv-welcome-feedback{font-size:13px;margin:8px 0}
+html[data-cv-social] body #cv-welcome-dialog [hidden]{display:none!important}
+#cv-welcome-dialog .cv-welcome-destinations{display:grid;gap:12px}html[data-cv-social] body #cv-welcome-dialog .cv-welcome-destinations button{border-radius:18px!important;text-align:left;padding:16px!important;display:grid;gap:4px;width:100%}#cv-welcome-dialog .cv-welcome-destinations span{font-size:13px;color:var(--cv-glass-muted,#55647a)}
+#cv-welcome-dialog :is(button,input,h2):focus-visible{outline:2px solid var(--cv-glass-blue,#245ccc)!important;outline-offset:3px}
+.cv-welcome-replay-wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}.cv-welcome-replay-wrap button{min-height:44px;font-size:14px}.cv-welcome-replay-wrap [role=status]{font-size:13px}
+@media(max-width:480px){html[data-cv-social] body dialog#cv-welcome-dialog{padding:24px 20px!important;width:calc(100vw - 24px)!important}#cv-welcome-dialog .cv-welcome-map{grid-template-columns:1fr;gap:8px;margin:20px 0}#cv-welcome-dialog .cv-welcome-map>div{padding:12px 16px}#cv-welcome-dialog .cv-welcome-map h3{margin-bottom:4px!important}#cv-welcome-dialog .cv-welcome-actions{flex-wrap:wrap}#cv-welcome-dialog .cv-welcome-actions>div{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){#cv-welcome-dialog,#cv-welcome-dialog *{animation:none!important;transition:none!important}}
+@media(forced-colors:active){#cv-welcome-dialog,#cv-welcome-dialog .cv-welcome-sample,#cv-welcome-dialog .cv-welcome-map>div{border-color:CanvasText}}

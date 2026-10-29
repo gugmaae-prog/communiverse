@@ -1,0 +1,94 @@
+/* Communiverse Circles V13: compact, reachable phone navigation and clear paging. */
+
+html.cv-mobile-v13 #cv-social-header nav a.cv13-route-pending {
+  background:color-mix(in srgb,var(--cv-social-blue,#1267ff) 11%,var(--cv-social-card,#fff));
+  color:var(--cv-social-blue,#1267ff);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.cv-mobile-v13 #cv-social-header nav a {
+    transition:background-color 120ms ease-out,color 120ms ease-out;
+  }
+}
+
+@media (max-width: 600px) {
+  /* A single scrollable rail avoids a second row that can hide the current tab. */
+  html.cv-mobile-v13 #cv-social-header {
+    min-height:112px !important;
+  }
+
+  html.cv-mobile-v13 #cv-social-header nav {
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    justify-content:flex-start !important;
+    justify-self:stretch !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:inline proximity;
+  }
+
+  html.cv-mobile-v13 #cv-social-header nav::-webkit-scrollbar {
+    display:none;
+  }
+
+  html.cv-mobile-v13 #cv-social-header nav a {
+    flex:0 0 auto !important;
+    min-width:44px;
+    padding-inline:11px !important;
+    scroll-snap-align:start;
+  }
+
+  html.cv-mobile-v13 .cv-plug.cv-circles-list .cv-plug-browse {
+    display:grid !important;
+    gap:8px;
+    margin-bottom:12px !important;
+  }
+
+  html.cv-mobile-v13 .cv-plug.cv-circles-list .cv-plug-browse > div {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    gap:8px;
+    margin:0;
+  }
+
+  html.cv-mobile-v13 .cv-plug.cv-circles-list .cv-plug-browse button {
+    min-height:44px;
+    padding:8px 12px;
+    border:1px solid var(--cv-social-line,#d7e2ee);
+    border-radius:999px;
+    background:var(--cv-social-card,#fff);
+    color:var(--cv-social-ink,#263953);
+    text-align:center;
+  }
+
+  html.cv-mobile-v13 .cv-plug.cv-circles-list .cv-plug-browse [data-plug-page] {
+    min-width:86px;
+    color:var(--cv-social-muted,#526782);
+    font-size:12px;
+    font-variant-numeric:tabular-nums;
+    text-align:center;
+  }
+}
+
+@media (max-width: 360px) {
+  html.cv-mobile-v13 #cv-social-header {
+    padding-inline:12px !important;
+  }
+
+  html.cv-mobile-v13 #cv-social-header nav a {
+    padding-inline:10px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.cv-mobile-v13 #cv-social-header nav a {
+    transition:none !important;
+  }
+}

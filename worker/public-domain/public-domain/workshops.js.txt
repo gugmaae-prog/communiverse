@@ -1,0 +1,5 @@
+(()=>{'use strict';
+ /* ENQUIRY_BUILDER */
+ const form=document.getElementById('cv-workshop-enquiry-form');if(!form)return;
+ document.querySelectorAll('[data-workshop-choice]').forEach(a=>a.addEventListener('click',event=>{if(event.button||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;event.preventDefault();form.elements.session.value=a.dataset.workshopChoice;history.replaceState(null,'',a.href);document.getElementById('enquire').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});form.elements.session.focus({preventScroll:true});}));
+})();

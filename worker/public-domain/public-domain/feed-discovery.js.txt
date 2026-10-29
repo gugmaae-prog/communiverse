@@ -1,0 +1,38 @@
+(()=>{'use strict';
+ const feed=document.getElementById('cv-feed');if(!feed)return;
+ const template=document.getElementById('cv-workshop-feed-templates');
+ function syncPromotions(){
+  if(!template)return;
+  const mode=document.querySelector('[data-feed-mode][aria-pressed="true"]')?.dataset.feedMode||'all';
+  const region=document.getElementById('cv-feed-region')?.value||'';
+  const allowed=mode==='all'&&!document.getElementById('cv-feed-search')?.value.trim()&&(!region||region==='uae')&&!new URL(location.href).searchParams.has('gallery');
+  const works=[...feed.children].filter(e=>e.matches('.cv-pin[data-id]'));
+  [...template.content.children].forEach((source,index)=>{
+   const id=source.dataset.workshopPromo,existing=feed.querySelector('[data-workshop-promo="'+id+'"]');
+   const anchor=works[[2,10][index]];
+   if(!allowed||!anchor){existing?.remove();return;}
+   const card=existing||source.cloneNode(true);
+   if(anchor.nextElementSibling!==card)anchor.after(card);
+  });
+ }
+ window.CVSyncFeedPromotions=syncPromotions;
+ syncPromotions();
+ const data=document.getElementById('cv-daily-feature-data');
+ if(!data)return;
+ const choices=JSON.parse(data.textContent);
+ const featuredArtistIndex=/* DAILY_INDEX */;
+ let timer;
+ function refreshFeaturedArtist(){
+  clearTimeout(timer);
+  const now=Date.now(),index=featuredArtistIndex(now,choices.length),current=document.getElementById('cv-featured-artist');
+  if(current&&current.dataset.featureIndex!==String(index)){
+   // Avoid replacing a link while someone is keyboard-focused on it.
+   if(current.contains(document.activeElement)){current.addEventListener('focusout',()=>setTimeout(refreshFeaturedArtist,0),{once:true});return;}
+   const t=document.createElement('template');t.innerHTML=choices[index];current.replaceWith(t.content);
+  }
+  const day=86400000,until=day-((now+14400000)%day);
+  timer=setTimeout(refreshFeaturedArtist,until+100);
+ }
+ refreshFeaturedArtist();
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshFeaturedArtist();});
+})();

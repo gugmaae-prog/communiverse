@@ -1,0 +1,71 @@
+.cv-workshops-page,.cv-featured-artist,.cv-artists-feature{color:#243248;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-sizing:border-box;min-width:0}
+.cv-workshops-page *,.cv-featured-artist *{box-sizing:border-box}
+.cv-workshops-page{max-width:1120px;margin:0 auto;padding:38px clamp(20px,4vw,48px) 80px}
+.cv-workshop-kicker{font-size:12px!important;line-height:1.5!important;letter-spacing:.08em;text-transform:uppercase;color:#53637a;margin:0 0 12px!important}
+.cv-workshops-page h1{font-size:clamp(34px,5vw,62px);line-height:1.08;letter-spacing:-.045em;font-weight:500;max-width:15ch;margin:0 0 22px}
+.cv-workshop-hero{padding:12px 0 40px}.cv-workshop-hero>p:not(.cv-workshop-kicker){font-size:18px;line-height:1.7;max-width:55ch;margin:0 0 26px}
+.cv-workshops-page h2,.cv-featured-artist h2,.cv-artists-feature h2{font-size:clamp(24px,3vw,34px);line-height:1.15;font-weight:500;letter-spacing:-.035em;margin:0 0 16px}
+.cv-workshops-page p,.cv-featured-artist p{line-height:1.7;font-size:16px;color:#465a72}
+a.cv-workshop-button,button.cv-workshop-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;max-width:100%;padding:12px 20px;gap:10px;border:1px solid #2457ba!important;border-radius:28px;background:#2457ba!important;color:#fff!important;font:500 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center;text-decoration:none;white-space:normal;cursor:pointer;box-shadow:none}
+a.cv-workshop-button-quiet{color:#214d9c!important;border-color:#bdcee8!important;background:rgba(255,255,255,.55)!important}
+.cv-workshop-offers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.cv-workshop-offer{border:1px solid #fff;border-radius:28px;background:rgba(255,255,255,.64);padding:30px;display:flex;flex-direction:column;align-items:flex-start;min-width:0;scroll-margin-top:160px}
+.cv-workshop-host{display:flex;align-items:center;gap:22px;min-width:0;margin-bottom:28px;color:#243248!important;text-decoration:none!important;font-size:14px;line-height:1.5}
+.cv-workshop-host .cv-person-photo{width:88px;height:88px}.cv-workshop-offer>p{margin:0 0 20px}.cv-workshop-offer>.cv-workshop-button{margin-top:auto}
+.cv-workshops-page .cv-workshop-note{font-size:13px;line-height:1.65;color:#586c83}
+.cv-workshop-plan{padding:48px 0;max-width:65ch}.cv-workshop-plan p{margin-bottom:0}
+.cv-workshop-enquiry{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;padding:36px;border:1px solid #d3dfef;border-radius:28px;background:rgba(255,255,255,.55);scroll-margin-top:160px}.cv-workshop-enquiry>div>a{font-size:14px;overflow-wrap:anywhere;color:#214d9c;display:inline-block;padding-block:10px}
+#cv-workshop-enquiry-form{display:grid;gap:18px;min-width:0}#cv-workshop-enquiry-form label{display:grid;gap:8px;font-size:13px;line-height:1.5;min-width:0}#cv-workshop-enquiry-form :is(input,textarea,select){width:100%;min-width:0;min-height:48px;font-size:16px;line-height:1.5;font-family:inherit;padding:12px;border:1px solid #c6d3e5;border-radius:14px;background:#fff;color:#243248;box-sizing:border-box}#cv-workshop-enquiry-form textarea{resize:vertical}#cv-workshop-enquiry-form :is(input,textarea,select):focus-visible{outline:2px solid #2457ba;outline-offset:3px}.cv-workshop-form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+/* Workshop promotions occupy ordinary artwork-grid cells. */
+html[data-cv-social] #cv-feed>.cv-workshop-pin{min-width:0;align-self:start;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:24px;overflow:visible}
+a.cv-workshop-card{display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0;padding:22px;color:#243248!important;text-decoration:none!important;border-radius:24px;transition:background .18s ease,box-shadow .18s ease}
+.cv-workshop-card .cv-workshop-kicker{font-size:11px!important;letter-spacing:.055em;margin-bottom:20px!important}
+.cv-workshop-card .cv-person-photo{width:80px;height:auto;aspect-ratio:1;flex:0 0 auto;margin:0 0 20px}
+.cv-workshop-card h3{font:500 24px/1.15 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:-.035em;margin:0 0 8px;color:#243248}
+.cv-workshop-card p.cv-workshop-card-host{font-size:13px;line-height:1.5;margin:0 0 18px;color:#53637a}
+.cv-workshop-card p.cv-workshop-card-description{font-size:14px;line-height:1.6;margin:0 0 16px;color:#465a72}
+.cv-workshop-card-link{display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1.5;color:#214d9c;text-decoration:underline;text-underline-offset:4px}
+.cv-featured-artist{max-width:1120px;margin:4px auto 30px;padding:0 8px}
+a.cv-featured-artist-link{display:flex;align-items:center;gap:24px;min-width:0;color:#243248!important;text-decoration:none!important;border-radius:18px;padding:12px 0}
+.cv-featured-artist .cv-person-photo{width:88px;height:auto;aspect-ratio:1;flex:0 0 88px}
+.cv-featured-artist-copy{display:flex;flex-direction:column;min-width:0;gap:6px}
+.cv-featured-artist-copy .cv-workshop-kicker{margin:0!important;font-size:11px!important}
+.cv-featured-artist-copy h2{font-size:clamp(24px,3vw,32px);margin:0;line-height:1.15}
+.cv-featured-artist-role{font-size:14px;line-height:1.5;color:#53637a}
+.cv-featured-artist-cta{margin-left:auto;font-size:14px;line-height:1.5;color:#214d9c;text-decoration:underline;text-underline-offset:4px;min-height:44px;display:flex;align-items:center}
+a.cv-workshop-card:focus-visible,a.cv-featured-artist-link:focus-visible,.cv-workshops-page a:focus-visible,.cv-workshops-page button:focus-visible{outline:3px solid #2457ba;outline-offset:5px}
+@media(hover:hover){a.cv-workshop-card:hover{background:rgba(255,255,255,.95);box-shadow:0 8px 26px rgba(29,46,76,.07)}a.cv-featured-artist-link:hover .cv-featured-artist-cta{text-decoration-thickness:2px}}
+@media(max-width:600px){.cv-featured-artist{padding:0 4px;margin-bottom:22px}a.cv-featured-artist-link{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px 18px}.cv-featured-artist .cv-person-photo{width:72px;grid-row:1/3}.cv-featured-artist-cta{margin:0;grid-column:2;min-height:32px}.cv-featured-artist-role{font-size:13px}}
+@media(prefers-reduced-motion:reduce){a.cv-workshop-card{transition:none!important}}
+/* Artist previews use circle geometry; artworks and full portfolio photographs retain their original shape. */
+html[data-cv-social] .cv-artist-pin-media{aspect-ratio:1!important;width:112px!important;height:auto!important;max-width:100%;border-radius:50%!important;margin-inline:auto;background:#dce5ef;outline:1px solid #b8c8dd;outline-offset:4px}
+html[data-cv-social] .cv-artist-pin-media>img{width:100%!important;height:100%!important;aspect-ratio:1!important;object-fit:cover!important;border-radius:50%!important}
+html[data-cv-social] .cv-artist-pin-caption{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+@media(max-width:900px){.cv-workshop-enquiry{gap:28px;padding:28px}}
+@media(max-width:600px){.cv-workshops-page{padding:28px 20px 56px}.cv-workshop-hero>p:not(.cv-workshop-kicker){font-size:16px}.cv-workshop-offers,.cv-workshop-enquiry{grid-template-columns:1fr;gap:24px}.cv-workshop-offer,.cv-workshop-enquiry{padding:24px}.cv-workshop-form-row{grid-template-columns:1fr}.cv-workshop-plan{padding:36px 0}html[data-cv-social] .cv-artist-pin-media{width:88px!important;height:auto!important}}
+@media(max-width:380px){.cv-workshop-offer,.cv-workshop-enquiry{padding:20px}}
+@media(prefers-reduced-motion:reduce){.cv-workshops-page *,.cv-featured-artist *,.cv-artists-feature *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.cv-artist-workshop-note{padding:28px;margin:0 0 40px;border:1px solid #d3dfef;border-radius:24px;background:rgba(255,255,255,.55)}.cv-artist-workshop-note h2{margin:0 0 12px}.cv-artist-workshop-note p{margin:0 0 20px}
+
+@media(max-width:600px){a.cv-workshop-card{padding:14px}.cv-workshop-card h3{font-size:20px}.cv-workshop-card .cv-workshop-kicker{margin-bottom:16px!important}.cv-workshop-card .cv-person-photo{margin-bottom:16px}}
+@media(max-width:380px){a.cv-workshop-card{padding:12px}.cv-workshop-card h3{font-size:18px}}
+
+/* Shared header remains centred when the logo and account links wrap above it. */
+html[data-cv-social] body #cv-social-header nav[aria-label="Main navigation"]{justify-content:center!important;align-items:center!important;max-width:100%;box-sizing:border-box}
+html[data-cv-social] body #cv-social-header nav[aria-label="Main navigation"] a{flex:0 0 auto!important;justify-content:center;white-space:nowrap}
+@media(max-width:600px){html[data-cv-social] body #cv-social-header nav[aria-label="Main navigation"] a{flex:1 1 0!important;min-width:0!important;padding-inline:clamp(6px,2vw,12px)!important}}
+.cv-featured-artist-cta{justify-content:center;gap:8px;min-height:44px!important;padding:10px 19px;box-sizing:border-box;border:1px solid rgba(255,255,255,.9);border-radius:999px;background:linear-gradient(140deg,rgba(255,255,255,.8),rgba(255,255,255,.35));box-shadow:inset 0 1px 0 #fff,0 5px 18px #233b5b0c;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);text-decoration:none!important;white-space:normal;text-align:center;font-weight:500;transition:background .18s ease,box-shadow .18s ease}
+a.cv-featured-artist-link:hover .cv-featured-artist-cta{background:rgba(255,255,255,.92);box-shadow:inset 0 1px 0 #fff,0 6px 22px #233b5b14}
+a.cv-featured-artist-link:focus-visible{outline:2px solid #2763dc;outline-offset:6px;border-radius:24px}
+@media(max-width:600px){.cv-featured-artist-cta{justify-self:start;font-size:13px;padding:9px 16px}}
+@media(prefers-color-scheme:dark){.cv-featured-artist-cta{color:#d8e7ff;border-color:#a9c7f440;background:linear-gradient(140deg,#ffffff20,#ffffff0a);box-shadow:inset 0 1px 0 #ffffff25}a.cv-featured-artist-link:hover .cv-featured-artist-cta{background:#ffffff24}}
+@media(prefers-reduced-motion:reduce){.cv-featured-artist-cta{transition:none}}
+/* Forms keep a real gap between labels, controls and neighbouring actions. */
+.cv-event-rsvp{max-width:1040px;margin:clamp(24px,5vw,64px) auto;padding:clamp(20px,4vw,40px);border:1px solid rgba(255,255,255,.75);border-radius:28px;background:rgba(255,255,255,.48);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(24px,4vw,48px)}
+.cv-event-rsvp>*{min-width:0}.cv-event-rsvp h2{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:8px 0 16px}.cv-event-rsvp p{line-height:1.65}
+.cv-event-rsvp form{display:grid;gap:18px}.cv-event-rsvp label{display:grid;gap:8px;font-size:14px}.cv-event-rsvp input:not([type="checkbox"]){width:100%;min-width:0;box-sizing:border-box;padding:13px 15px;border:1px solid #cdd6e4;border-radius:14px;background:rgba(255,255,255,.8);color:inherit;font:inherit;min-height:48px}
+form .cv-registration-consent{display:flex!important;align-items:flex-start;gap:12px!important;line-height:1.5;font-size:14px}form .cv-registration-consent input[type="checkbox"]{flex:0 0 20px;width:20px!important;min-height:20px;height:20px;min-width:20px;margin:1px 0 0;padding:0;accent-color:#255ed4}
+.cv-form-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.cv-event-rsvp [role="status"]:empty{display:none}.cv-workshop-button:disabled{opacity:.65;cursor:wait}
+@media(max-width:700px){.cv-event-rsvp{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-color-scheme:dark){.cv-event-rsvp{background:rgba(24,39,60,.6);border-color:rgba(255,255,255,.15)}.cv-event-rsvp input:not([type="checkbox"]){background:#1c293b;border-color:#47566c}}

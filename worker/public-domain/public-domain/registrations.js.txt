@@ -1,0 +1,18 @@
+(()=>{'use strict';
+ const statusFor=form=>form.querySelector('[role="status"]');
+ function connect(form){if(form.dataset.connected)return;form.dataset.connected='true';let requestId=crypto.randomUUID(),done=false;
+ form.addEventListener('input',()=>{if(done){requestId=crypto.randomUUID();done=false;statusFor(form).textContent='';}});
+ form.addEventListener('submit',async event=>{event.preventDefault();if(done||!form.reportValidity()||form.dataset.sending)return;const button=form.querySelector('button[type="submit"]'),status=statusFor(form),label=button.textContent,data=Object.fromEntries(new FormData(form));data.consent=form.elements.consent.checked;data.requestId=requestId;form.dataset.sending='true';button.disabled=true;button.textContent='Sending…';status.textContent='';
+ try{const response=await fetch(form.action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}),result=await response.json();if(!response.ok)throw Error(result.error||'We couldn’t save this right now. Please try again.');status.textContent=result.message;done=true;button.textContent='Sent';}
+ catch(error){status.textContent=error.message||'Please check your connection and try again.';button.textContent=label;}
+ finally{delete form.dataset.sending;button.disabled=false;}
+ });}
+ document.querySelectorAll('form[data-registration]').forEach(connect);
+ if(!/^\/event\/?$/.test(location.pathname))return;
+ const id=new URL(location.href).searchParams.get('id');if(!id)return;
+ fetch('/communiverse/api/event?id='+encodeURIComponent(id),{credentials:'same-origin'}).then(r=>{if(!r.ok)throw Error('Unavailable');return r.json()}).then(({event})=>{
+ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Dubai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());if(!event||event.kind!=='event'||event.city!=='Dubai'||(event.end||event.start||'')<today)return;
+ const section=document.createElement('section');section.className='cv-event-rsvp';section.setAttribute('aria-labelledby','cv-event-rsvp-title');section.innerHTML='<div><p class="cv-workshop-kicker">Going along?</p><h2 id="cv-event-rsvp-title">Let us know you’re coming.</h2><p>Share your plans with Communiverse. Tickets and admission are handled by the event organizer.</p></div><form data-registration="event" method="post" action="/communiverse/api/event-rsvp"><input type="hidden" name="eventId"><div class="cv-workshop-form-row"><label>Your name<input name="name" autocomplete="name" maxlength="80" required></label><label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label></div><label class="cv-registration-consent"><input name="consent" type="checkbox" required> I agree to be contacted about this RSVP.</label><div class="cv-form-trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div><button type="submit" class="cv-workshop-button">Send RSVP</button><p role="status" aria-live="polite"></p></form>';
+ if(/^https:\/\//.test(event.source||'')){const organizer=document.createElement('a');organizer.href=event.source;organizer.className='cv-workshop-button cv-workshop-button-quiet';organizer.textContent='Visit the organizer';organizer.target='_blank';organizer.rel='noopener noreferrer';section.firstElementChild.append(organizer);}section.querySelector('[name="eventId"]').value=event.id;const detail=document.getElementById('cv-event-detail');if(detail){detail.after(section);connect(section.querySelector('form'));}
+ }).catch(()=>{});
+})();

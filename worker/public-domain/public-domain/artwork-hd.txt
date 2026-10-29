@@ -1,0 +1,68 @@
+{
+  "work-cristina-gabriela-the-shelter-within": {
+    "url": "/communiverse/_artworks/20261028-v1/work-cristina-gabriela-the-shelter-within.jpg",
+    "width": 1600,
+    "height": 1952,
+    "source": "https://cdn.shopify.com/s/files/1/0744/5676/0409/files/IMG_8907.heic?v=1783241907",
+    "sha256": "f219029a909c81bf54e9b8c147679684f228cc4b86f967d6177d6321bd346063",
+    "bytes": 391853,
+    "previousWidth": 1280,
+    "previousHeight": 1562,
+    "processing": "Original photograph, unchanged bytes."
+  },
+  "work-cristina-gabriela-truth-path-of-light": {
+    "url": "/communiverse/_artworks/20261028-v1/work-cristina-gabriela-truth-path-of-light.jpg",
+    "width": 1800,
+    "height": 2569,
+    "source": "https://cdn.shopify.com/s/files/1/0744/5676/0409/files/IMG_12863.heic?v=1783274550",
+    "sha256": "12f0c1c3b2f05ef27b5f7069f089447b796e101bb860ff0c17b237de8f7b16a4",
+    "bytes": 606778,
+    "previousWidth": 1280,
+    "previousHeight": 1827,
+    "processing": "Original photograph, unchanged bytes."
+  },
+  "work-gemma-gallagher-light-of-your-soul": {
+    "url": "/communiverse/_artworks/20261028-v1/work-gemma-gallagher-light-of-your-soul.jpg",
+    "width": 2169,
+    "height": 2560,
+    "source": "https://gemmagallagherart.com/wp-content/uploads/2026/02/IMG_6979-2-scaled.jpg",
+    "sha256": "780557dfabf0f4ceeaf88d0ff0ec2641a352825bfa731390fa8b111344df8f60",
+    "bytes": 684035,
+    "previousWidth": 1280,
+    "previousHeight": 1511,
+    "processing": "Original photograph, unchanged bytes."
+  },
+  "work-gemma-gallagher-beloved": {
+    "url": "/communiverse/_artworks/20261028-v1/work-gemma-gallagher-beloved.jpg",
+    "width": 2363,
+    "height": 2560,
+    "source": "https://gemmagallagherart.com/wp-content/uploads/2026/10/Beloved-scaled.jpg",
+    "sha256": "06563585a36a33434ce58bf6668294e9013a86ce67b6f74f66451270902856dd",
+    "bytes": 827516,
+    "previousWidth": 1280,
+    "previousHeight": 1387,
+    "processing": "Original photograph, unchanged bytes."
+  },
+  "work-gemma-gallagher-all-along": {
+    "url": "/communiverse/_artworks/20261028-v1/work-gemma-gallagher-all-along.jpg",
+    "width": 2199,
+    "height": 2560,
+    "source": "https://gemmagallagherart.com/wp-content/uploads/2026/10/All-Along-scaled.jpg",
+    "sha256": "87037d0a0437bb4e5a5934c817f6a1df1f877635c19cbcabd4e169753d4beb6b",
+    "bytes": 947094,
+    "previousWidth": 1280,
+    "previousHeight": 1490,
+    "processing": "Original photograph, unchanged bytes."
+  },
+  "work-shared-memories-ms-petunya": {
+    "url": "/communiverse/_artworks/20261028-v1/work-shared-memories-ms-petunya.png",
+    "width": 2480,
+    "height": 3307,
+    "sha256": "aca1cd3de37ca8629521d110e74d882a02c6f18ecde4fc86601399f41bd35552",
+    "bytes": 7384787,
+    "previousWidth": 1280,
+    "previousHeight": 1707,
+    "processing": "User-supplied original photograph, unchanged bytes.",
+    "openOnly": true
+  }
+}

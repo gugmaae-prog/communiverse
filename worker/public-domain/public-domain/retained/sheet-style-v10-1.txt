@@ -1,0 +1,82 @@
+/* Notion-inspired density; Communiverse colours and native controls. */
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused>.cv-ws-heading,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused>.cv-ws-tabs,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused>.cv-ws-tools{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cv5-management-header{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cv5-management-tabs{margin-bottom:16px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cv5-management-status:empty{display:none}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document>.cvt-header{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-breadcrumbs{margin-block:0 12px;gap:8px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document>.cvt-status:empty{display:none}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor[data-kind=sheet]{border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;background:transparent!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px 16px!important;align-items:start!important;margin-bottom:20px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head>.cvt-field{grid-column:1;margin:0!important;min-width:0}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head>.cvt-field>span{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head input[name=title]{font-size:28px!important;font-weight:500!important;line-height:1.3!important;min-height:48px!important;height:auto!important;border:1px solid transparent!important;background:transparent!important;border-radius:8px!important;padding:4px 0!important;box-shadow:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head input[name=title]:focus{border-color:var(--cv-glass-blue)!important;background:var(--cvt-surface)!important;padding-inline:8px!important;outline:2px solid var(--cv-focus)!important;outline-offset:2px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head .cvt-field-error:empty{display:none}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-meta{grid-column:1/3;grid-row:2;display:flex!important;flex-wrap:wrap;align-items:center;gap:8px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-scope{font-size:12px;padding:4px 10px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-savebar{margin:0!important;padding:0 8px!important;font-size:12px;min-height:0!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-document-actions{grid-column:2;grid-row:1;align-items:center;margin:0!important;gap:8px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-document-actions>.cvt-button{padding-inline:14px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-button{min-height:44px!important;font-size:14px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-icon-control{width:44px!important;height:44px!important;min-width:44px!important;padding:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border:0!important;background:transparent!important;border-radius:50%!important;cursor:pointer;list-style:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-icon-control::after{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-icon-control svg,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-column-menu svg{width:18px;height:18px;flex:none;stroke-linecap:round}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document summary::-webkit-details-marker{display:none}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document summary::marker{content:''}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 12px;position:relative;z-index:3}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar>.cvt-actions{margin:0!important;gap:8px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar>.cvt-sheet-view{margin:0!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar details>summary:not(.cvs-icon-control),html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-document-history>summary{padding:8px 12px!important;border:0!important;background:transparent!important;border-radius:12px!important;min-height:44px!important;gap:8px!important;font-size:14px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar details[open]>summary,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-document-history[open]>summary{background:var(--cvt-soft)!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-help,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-document-history,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-sheet-view,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-row-menu{position:relative}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-help>.cvt-sheet-help,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-history-body,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector-body,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-row-menu-body{position:absolute;top:calc(100% + 4px);left:0;z-index:20;min-width:260px;width:max-content;max-width:min(440px,calc(100vw - 40px));background:var(--cvt-surface)!important;border:1px solid var(--cvt-border);border-radius:16px;box-shadow:var(--cv-glass-shadow);padding:16px!important;margin:0!important;color:var(--cvt-ink);font-size:13px;line-height:1.6;max-height:60dvh;overflow:auto}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query{min-width:320px;display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query .cvt-field{min-width:0;margin:0}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-query-help,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query>[role=alert]{grid-column:1/-1}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-history-body p,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector-body p{margin:0 0 8px;overflow-wrap:anywhere}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector-heading{margin:0 0 12px;font-size:15px;font-weight:500}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector-content a{display:inline-flex;align-items:center;min-height:44px;color:var(--cv-glass-blue)}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-row-menu-body{left:auto;right:0;min-width:180px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-row-menu.cvs-open-up>.cvs-row-menu-body{top:auto;bottom:calc(100% + 4px)}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-row-menu-body>.cvt-button{display:flex;width:100%;justify-content:start;border:0!important;box-shadow:none;background:transparent!important;border-radius:8px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table-scroll{max-width:100%;border:1px solid var(--cvt-border)!important;border-radius:12px!important;background:var(--cvt-surface)!important;scroll-padding:44px 8px;margin:0!important;max-height:65dvh;overflow:auto}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table{border-collapse:separate!important;border-spacing:0!important;min-width:max-content!important;width:100%!important;background:transparent!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table thead th{position:sticky;top:0;z-index:2;background:var(--cvt-soft)!important;padding:0!important;border:0!important;border-right:1px solid var(--cvt-border)!important;border-bottom:1px solid var(--cvt-border)!important;vertical-align:middle!important;font-weight:400!important;height:44px!important;min-height:44px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table thead th:first-child,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table thead th:last-child{padding:0 12px!important;font-size:12px!important;color:var(--cvt-muted);min-width:52px!important;width:52px!important;text-align:center}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table thead th:last-child{width:68px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-column-menu{display:flex!important;align-items:center;justify-content:space-between;gap:8px!important;padding:0 12px!important;border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;width:100%!important;min-height:44px!important;font-size:14px!important;color:var(--cvt-ink)!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-column-name{display:inline!important;white-space:nowrap;font-size:14px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table tbody th,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table tbody td{padding:0!important;border:0!important;border-right:1px solid var(--cvt-border)!important;border-bottom:1px solid var(--cvt-border)!important;vertical-align:top!important;background:transparent!important;min-height:44px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table tbody th{padding:12px!important;font-size:12px;line-height:20px;font-weight:400;color:var(--cvt-muted);text-align:center}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table tbody td:last-child{padding:0 8px!important;text-align:center}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell{min-width:190px!important;width:220px;position:relative}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-control{display:block!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;width:100%!important;min-width:0!important;min-height:44px!important;padding:10px 12px!important;font-size:16px!important;line-height:24px!important;margin:0!important;outline-offset:-2px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell:focus-within,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-selected-cell{background:var(--cvt-soft)!important;box-shadow:inset 0 0 0 2px var(--cv-glass-blue)!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-control:focus-visible{outline:2px solid var(--cv-glass-blue)!important;outline-offset:-2px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-checkbox-target{min-height:44px;display:grid;place-items:center;cursor:pointer;margin:0!important;padding:12px!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-checkbox-target>input[type=checkbox]{width:20px!important;height:20px!important;min-height:20px!important;margin:0!important;padding:0!important;accent-color:var(--cv-glass-blue)}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-error:empty{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-error:not(:empty){padding:0 12px 8px;display:block}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-details,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-empty-value{display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-extras{margin:0!important;padding:0 12px!important;min-height:0!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-extras:has(>.cvt-cell-details:only-child){padding:0!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-extras:not(:has(>:not(.cvt-cell-details):not(.cvs-empty-value))){display:none!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-display{font-size:12px}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table tbody tr:last-child>*{border-bottom:0!important}
+html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-sheet-count{font-size:12px;margin-block:12px}
+@media(max-width:700px){
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused{padding-top:12px}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-editor-head input[name=title]{font-size:26px!important}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-document-actions{grid-column:1;grid-row:3;justify-content:start}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-meta{grid-column:1;grid-row:2}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-meta{position:relative}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-document-history{position:static}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar details[open]{position:static}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-help>.cvt-sheet-help,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-inspector-body{left:0;right:0;top:100%;width:100%;max-width:100%;min-width:0}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-toolbar .cvt-sheet-query{grid-template-columns:1fr}
+ html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvs-history-body{min-width:240px;width:min(320px,calc(100vw - 40px))}
+}
+@media(forced-colors:active){html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell:focus-within{outline:2px solid Highlight}html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-table-scroll,html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document .cvt-cell-control{border-color:CanvasText!important}}
+@media(prefers-reduced-motion:reduce){html.cv-polish-v5 body #cv-ws-app.cvs-sheet-focused .cvs-sheet-document *{scroll-behavior:auto!important}}
