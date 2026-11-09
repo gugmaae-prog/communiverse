@@ -182,10 +182,7 @@
       "bytes": 159590,
       "sha256": "54d6ba6c5a914837bb64340ad9c4f8540a217109368fddee3224daf997686464",
       "exact_match": true,
-      "headers": [
-        "content-type: image/jpeg",
-        "x-communiverse-repair: media-finish-20261109"
-      ]
+      "pinned": false
     },
     {
       "name": "avidImage",
@@ -194,10 +191,7 @@
       "bytes": 182122,
       "sha256": "4ee410fea2b86c8925ec9feee4b36bc3b305b8a84df350240f351e881d55bf27",
       "exact_match": true,
-      "headers": [
-        "content-type: image/jpeg",
-        "x-communiverse-repair: media-finish-20261109"
-      ]
+      "pinned": false
     }
   ],
   "preserved": {
@@ -205,5 +199,22 @@
     "account_pause": true,
     "data_and_provider_bindings": true,
     "no_schema_migrations": true
+  },
+  "live_media": {
+    "checked_at": "2026-11-09T16:14:22.246658+00:00",
+    "total": 188,
+    "summary": {
+      "200": 188
+    },
+    "primary_total": 79,
+    "primary_failures": 0
+  },
+  "browser_acceptance": {
+    "all_16_portraits_decode": true,
+    "sophiko_curro_tasveer_previews_decode": true,
+    "hira_profile_works": true,
+    "luna_film_retained_without_broken_poster": true,
+    "account_controls_unavailable": true,
+    "no_browser_console_errors": true
   }
 }
