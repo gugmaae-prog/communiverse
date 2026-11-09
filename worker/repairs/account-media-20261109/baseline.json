@@ -1,0 +1,9 @@
+{
+  "worker": "communiverse-workspace-ux-v3-20261009",
+  "version_id": "6bb81c45-be64-40da-b09a-62e8e6f08316",
+  "source_part": "public-release.mjs",
+  "module": "modules/public-worker.mjs",
+  "size": 19217969,
+  "sha256": "87370e2eb8aad872779d481ea60dcde3251e2c876048f6383c0cbe319808d5fb",
+  "preserved_assets": "Existing 403-file static asset bundle; no asset re-upload."
+}
