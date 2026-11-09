@@ -1,0 +1,9 @@
+node_modules/
+.work/
+build/
+modules/public-worker.mjs
+modules/optimized-worker.mjs
+*.multipart
+.env*
+__pycache__/
+*.pyc

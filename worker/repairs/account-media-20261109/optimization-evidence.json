@@ -1,0 +1,29 @@
+{
+  "baseline_version": "6bb81c45-be64-40da-b09a-62e8e6f08316",
+  "baseline_sha256": "87370e2eb8aad872779d481ea60dcde3251e2c876048f6383c0cbe319808d5fb",
+  "optimized_sha256": "8f4c36c419606b89677d858c4a2cd435d69cc7d99d568068926c54daae7d12ac",
+  "transforms": [
+    "portraitText",
+    "portraitText2"
+  ],
+  "change": "Precompute the same immutable JSON and raw/escaped URL replacement pairs once; retain sequential replaceAll order.",
+  "equivalence_tests": {
+    "passed": 4,
+    "retained_html_strings": 14,
+    "retained_cache_json_strings": 2,
+    "eager_catalogues": [
+      "cache",
+      "cache2",
+      "catalogue"
+    ],
+    "edge_inputs": "all raw/escaped portrait URLs, repeated URLs, serialized portrait metadata, combined strings, Unicode and empty/unrelated strings"
+  },
+  "local_startup_profile": {
+    "wrangler": "4.159.0",
+    "baseline_active_ms": 483.1,
+    "optimized_active_ms": 57.1,
+    "baseline_gc_ms": 28.6,
+    "optimized_gc_ms": 8.8,
+    "limitation": "Measured locally through prebuilt Wrangler upload bundles; not production startup-time guarantees."
+  }
+}

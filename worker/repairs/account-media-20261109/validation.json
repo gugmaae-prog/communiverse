@@ -1,0 +1,209 @@
+{
+  "verified_date": "2026-11-09",
+  "worker": "communiverse-workspace-ux-v3-20261009",
+  "version_id": "5708a309-7858-4d25-8047-005e0c84d6ec",
+  "deployment_id": "ef948f1a-48ce-466c-a839-18ab21088aa5",
+  "baseline_version_id": "6bb81c45-be64-40da-b09a-62e8e6f08316",
+  "cloudflare_startup_ms": 224,
+  "artifact_sha256": "24199b4ce198a198eb9105c55bdcff76cf46eca9dcc4fe8c3b325477bdf52905",
+  "focused_tests": 5,
+  "baseline_equivalence_tests": 4,
+  "candidate_media": {
+    "checked": 188,
+    "success": 188,
+    "failures": 0
+  },
+  "live_routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 567732,
+      "old_account_claim": false
+    },
+    {
+      "path": "/circles/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 610715,
+      "old_account_claim": false
+    },
+    {
+      "path": "/works/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 510827,
+      "old_account_claim": false
+    },
+    {
+      "path": "/clubs/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 455896,
+      "old_account_claim": false
+    },
+    {
+      "path": "/events/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 454767,
+      "old_account_claim": false
+    },
+    {
+      "path": "/workshops/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 462623,
+      "old_account_claim": false
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "type": "text/html",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 431597,
+      "old_account_claim": false
+    },
+    {
+      "path": "/how-it-works/",
+      "status": 200,
+      "type": "text/html",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 426131,
+      "old_account_claim": false
+    },
+    {
+      "path": "/contact/",
+      "status": 200,
+      "type": "text/html",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 426916,
+      "old_account_claim": false
+    },
+    {
+      "path": "/exhibitions/wetex-2026/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 176490,
+      "old_account_claim": false
+    },
+    {
+      "path": "/events/avid-learning-poetry-night/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 132824,
+      "old_account_claim": false
+    },
+    {
+      "path": "/sign-in/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    },
+    {
+      "path": "/join/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    },
+    {
+      "path": "/workspace/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    },
+    {
+      "path": "/profile/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    },
+    {
+      "path": "/onboarding/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    },
+    {
+      "path": "/account/",
+      "status": 503,
+      "type": "text/html; charset=utf-8",
+      "location": null,
+      "repair": "media-finish-20261109",
+      "bytes": 1650,
+      "old_account_claim": false
+    }
+  ],
+  "catalogue": {
+    "people": 16,
+    "works": 63,
+    "comparison_originals_labeled_unavailable": 9,
+    "luna_poster_omitted": true
+  },
+  "exact_original_checks": [
+    {
+      "name": "contactImage",
+      "path": "/media/H11U2dbWXHrKYYOEoiUkp5cJjw.jpg",
+      "status": 200,
+      "bytes": 159590,
+      "sha256": "54d6ba6c5a914837bb64340ad9c4f8540a217109368fddee3224daf997686464",
+      "exact_match": true,
+      "headers": [
+        "content-type: image/jpeg",
+        "x-communiverse-repair: media-finish-20261109"
+      ]
+    },
+    {
+      "name": "avidImage",
+      "path": "/communiverse/_events/avid-20261022-v1/photo-4.jpg",
+      "status": 200,
+      "bytes": 182122,
+      "sha256": "4ee410fea2b86c8925ec9feee4b36bc3b305b8a84df350240f351e881d55bf27",
+      "exact_match": true,
+      "headers": [
+        "content-type: image/jpeg",
+        "x-communiverse-repair: media-finish-20261109"
+      ]
+    }
+  ],
+  "preserved": {
+    "static_asset_bundle_files": 403,
+    "account_pause": true,
+    "data_and_provider_bindings": true,
+    "no_schema_migrations": true
+  }
+}

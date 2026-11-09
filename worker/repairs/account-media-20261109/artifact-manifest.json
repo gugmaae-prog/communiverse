@@ -1,0 +1,8 @@
+{
+  "staged_version_id": "5708a309-7858-4d25-8047-005e0c84d6ec",
+  "baseline_version_id": "6bb81c45-be64-40da-b09a-62e8e6f08316",
+  "artifact": "build/repaired-worker.mjs",
+  "artifact_sha256": "24199b4ce198a198eb9105c55bdcff76cf46eca9dcc4fe8c3b325477bdf52905",
+  "cloudflare_startup_ms": 224,
+  "build_reproduced_exactly": true
+}
