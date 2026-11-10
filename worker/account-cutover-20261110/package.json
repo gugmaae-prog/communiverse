@@ -1,0 +1,16 @@
+{
+  "name": "communiverse-account-cutover-20261110",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.16" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "miniflare": "5.20261109.0-beta",
+    "wrangler": "4.159.0"
+  }
+}
