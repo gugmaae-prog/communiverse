@@ -1,0 +1,11 @@
+{
+  "name": "communiverse-idrive-media-20261111",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.16" },
+  "scripts": {
+    "test": "node --test gateway.test.mjs",
+    "build": "node build.mjs"
+  },
+  "devDependencies": { "esbuild": "0.28.2" }
+}
