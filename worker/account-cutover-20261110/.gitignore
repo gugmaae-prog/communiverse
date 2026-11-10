@@ -1,0 +1,4 @@
+node_modules/
+build/
+modules/enabled-worker.mjs
+modules/public-worker.mjs.gz
