@@ -10,7 +10,9 @@ export const tables = [
   'cv_google_identities', 'cv_google_flows', 'cv_google_pending',
   'cv_identity_profiles', 'cv_login_links', 'cv_member_preferences',
   'cv_profile_details', 'cv_identity_contacts', 'cv_profile_connections',
-  'cv_profile_link_flows', 'cv_welcome_progress',
+  'cv_profile_link_flows', 'cv_welcome_progress', 'cv_sessions',
+  'cv_staff_sessions', 'cv_artist_accounts', 'cv_profile_rate_limits',
+  'cv_join_limits',
 ];
 
 async function token() {
