@@ -1,0 +1,20 @@
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
+import { createHash } from 'node:crypto';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+import { optimizeBaseline } from '../repairs/account-media-20261109/scripts/optimize-baseline.mjs';
+
+const base = new URL('./', import.meta.url);
+const captured = gunzipSync(await readFile(new URL('modules/public-worker.mjs.gz', base)));
+const expected = '87370e2eb8aad872779d481ea60dcde3251e2c876048f6383c0cbe319808d5fb';
+if (createHash('sha256').update(captured).digest('hex') !== expected) throw Error('Captured public Worker changed');
+await mkdir(new URL('build/', base), { recursive: true });
+await writeFile(new URL('build/optimized-public-worker.mjs', base), optimizeBaseline(captured));
+const require = createRequire(import.meta.url);
+const { build } = require('esbuild');
+const outfile = fileURLToPath(new URL('build/media-worker.mjs', base));
+await build({ entryPoints: [fileURLToPath(new URL('entry.mjs', base))], outfile, bundle: true, format: 'esm', platform: 'browser', target: 'es2022', minify: true, external: ['cloudflare:workers'] });
+const digest = createHash('sha256').update(await readFile(outfile)).digest('hex');
+await writeFile(new URL('build/sha256.txt', base), digest + '\n');
+console.log(JSON.stringify({ sha256: digest, bytes: (await readFile(outfile)).length }));
