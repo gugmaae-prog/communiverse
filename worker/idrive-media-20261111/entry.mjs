@@ -25,9 +25,14 @@ export default {
       } catch { /* Use the current verified public asset route if IDrive is unavailable. */ }
     }
     const response = mediaType(unavailableMedia(await application.fetch(request, env, ctx), request), request);
-    const headers = new Headers(response.headers);
-    headers.set('X-Communiverse-Release', 'idrive-media-20261111');
-    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+    const contentType = response.headers.get('content-type') || '';
+    const publicHTML = response.status === 200 && publicHosts.has(url.hostname) && contentType.toLowerCase().includes('text/html');
+    const visible = publicHTML
+      ? new HTMLRewriter().on('.cv-account-unavailable', { element(element) { element.remove(); } }).transform(response)
+      : response;
+    const headers = new Headers(visible.headers);
+    headers.set('X-Communiverse-Release', 'idrive-media-20261111-header');
+    return new Response(visible.body, { status: visible.status, statusText: visible.statusText, headers });
   },
   async scheduled(controller, env, ctx) {
     if (application.scheduled) return application.scheduled(controller, env, ctx);
