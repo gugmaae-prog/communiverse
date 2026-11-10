@@ -8,6 +8,8 @@ Migrations `001_private_account_schema.sql` and `002_session_and_assignment_sche
 
 At 2026-11-10T23:29:36Z, a fresh Cloudflare D1 SQL export of the 20 named tables was downloaded to ignored local `build/` and converted to JSON. The transactional import completed in Supabase. Source and destination counts match for all 20 tables; account, member, and staff records match by ordered digest, including their password-hash fields. The source held 8 accounts, 11 members, 13 staff, and 11 unexpired account sessions. The import did not edit D1. Verification details without personal data are in `verification.json`.
 
+A second D1 export after the import confirmed that all 20 source tables were byte-equivalent at the row level to the first export. The generated SQL/JSON holding private account data is ignored by Git and restricted to mode 0600 locally.
+
 The Cloudflare Worker and site routing have not changed. The normal public home and Circles pages return 200; sign-in, join, and workspace still return 503. Supabase now holds a private copy of the account data, but the Worker has no Supabase account backend yet.
 
 ## Remaining cutover work

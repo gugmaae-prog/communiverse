@@ -6,6 +6,7 @@
   "schema": "communiverse",
   "tablesImported": 20,
   "tableCountsMatch": true,
+  "sourceRowsUnchangedOnSecondExport": true,
   "accountDigestMatch": true,
   "memberDigestMatch": true,
   "staffDigestMatch": true,
