@@ -1,0 +1,23 @@
+{
+  "source": "communiverse-waitlist",
+  "sourceDatabaseId": "6126080a-3d53-4043-baa5-3d2ebb4781bb",
+  "sourceCapturedAt": "2026-11-10T23:29:36.977284Z",
+  "supabaseProjectRef": "ypkfganbwdvcjrcxygta",
+  "schema": "communiverse",
+  "tablesImported": 20,
+  "tableCountsMatch": true,
+  "accountDigestMatch": true,
+  "memberDigestMatch": true,
+  "staffDigestMatch": true,
+  "accountRows": 8,
+  "memberRows": 11,
+  "staffRows": 13,
+  "accountSessionRows": 11,
+  "orphanAccountSessions": 0,
+  "schemaTables": 21,
+  "rlsEnabledTables": 21,
+  "anonymousSelectableTables": 0,
+  "authenticatedSelectableTables": 0,
+  "liveWorkerChanged": false,
+  "liveSignInReady": false
+}
