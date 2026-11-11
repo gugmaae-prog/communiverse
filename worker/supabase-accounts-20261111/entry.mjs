@@ -116,18 +116,23 @@ async function api(request, env, action) {
     const { data: before } = await client.auth.getUser(access);
     const { data, error } = await client.auth.refreshSession({ refresh_token: refresh });
     if (error || !before.user || !data.user || before.user.id !== data.user.id || !data.session) return json({ error: 'This link is invalid or expired.' }, 400);
+    let authenticatedSession = data.session;
     if (action === 'reset') {
       const password = String(body.password || '');
       if (password.length < 12 || password.length > 128) return json({ error: 'Use a password of at least 12 characters.' }, 400);
+      const { data: established, error: sessionError } = await client.auth.setSession({ access_token: data.session.access_token, refresh_token: data.session.refresh_token });
+      if (sessionError || !established.session) return json({ error: 'This link is invalid or expired.' }, 400);
+      authenticatedSession = established.session;
       const { error: updateError } = await client.auth.updateUser({ password });
       if (updateError) return json({ error: 'The password could not be changed. Please request a new link.' }, 400);
     }
-    return json({ next: '/account/' }, 200, authCookies(data.session));
+    return json({ next: '/account/' }, 200, authCookies(authenticatedSession));
   }
   if (action === 'forgot') {
     const address = email(body.email);
     if (!address.includes('@')) return json({ error: 'Enter a valid email address.' }, 400);
-    await client.auth.resetPasswordForEmail(address, { redirectTo: RESET_URL });
+    const { error } = await client.auth.resetPasswordForEmail(address, { redirectTo: RESET_URL });
+    if (error) return json({ error: 'Recovery email is temporarily unavailable. Please try again later.' }, 503);
     return json({ message: 'If that email has an account, we have sent a recovery link.' });
   }
   if (action === 'logout') {
