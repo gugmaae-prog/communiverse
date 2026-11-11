@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
+import { webcrypto } from 'node:crypto';
 
 const source = await readFile(new URL('../build/espacios-mail-patched.mjs', import.meta.url), 'utf8');
 const section = (start, end) => source.slice(source.indexOf(start), source.indexOf(end, source.indexOf(start)));
@@ -23,4 +24,25 @@ assert.match(source, /handoff\.hash = new URLSearchParams/);
 assert.match(source, /response\.headers\.set\("Referrer-Policy", "no-referrer"\)/);
 const sendMail = section('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail');
 assert.equal((sendMail.match(/if \(!skipLog\) await env\.DB\.prepare/g) || []).length, 4);
-console.log('Mail hook redirect and copy checks passed');
+const resend = section('async function sendCommuniverseResendEmail', 'function renderSupabaseAuthEmail');
+const calls = [];
+const deliveryContext = {
+  crypto: webcrypto,
+  TextEncoder,
+  AbortSignal,
+  fetch: async (url, options) => {
+    calls.push({ url, options });
+    return new Response(JSON.stringify({ id: 'email_test_id' }), { status: 200 });
+  },
+};
+runInNewContext(resend, deliveryContext);
+const input = { action: 'signup', tokenHash: 'private-confirmation-token-hash', email: 'member@example.com' };
+const rendered = { subject: 'Confirm your account', html: '<p>Confirm</p>', text: 'Confirm' };
+assert.equal(await deliveryContext.sendCommuniverseResendEmail({ CV_RESEND_API_KEY: 'test-key' }, input, rendered), 'email_test_id');
+assert.equal(calls[0].url, 'https://api.resend.com/emails');
+assert.equal(calls[0].options.headers.authorization, 'Bearer test-key');
+assert.ok(calls[0].options.headers['idempotency-key'].startsWith('cv-auth-'));
+assert.ok(!calls[0].options.headers['idempotency-key'].includes(input.tokenHash));
+assert.deepEqual(JSON.parse(calls[0].options.body).to, ['member@example.com']);
+assert.equal(JSON.parse(calls[0].options.body).from, 'Communiverse <accounts@auth.communiverseclubs.com>');
+console.log('Mail hook redirect, copy, and Resend delivery checks passed');

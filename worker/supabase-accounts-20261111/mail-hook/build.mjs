@@ -34,6 +34,28 @@ replaceOne('function supabaseAuthEmailCopy(action) {', `function supabaseAuthEma
       ? { subject: "Confirm your Communiverse account", title: "Confirm your email", copy: "Confirm your email to finish creating your Communiverse account.", button: "Confirm and continue" }
       : { subject: "Reset your Communiverse password", title: "Reset your password", copy: "Use this secure link to choose a new Communiverse password.", button: "Reset password" };
   }`);
+replaceOne('function renderSupabaseAuthEmail(input) {', `async function sendCommuniverseResendEmail(env, input, rendered) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input.action + ":" + input.tokenHash));
+  const idempotencyKey = "cv-auth-" + Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { authorization: "Bearer " + env.CV_RESEND_API_KEY, "content-type": "application/json", "idempotency-key": idempotencyKey },
+    body: JSON.stringify({
+      from: "Communiverse <accounts@auth.communiverseclubs.com>",
+      reply_to: "hello@espacios.me",
+      to: [input.email],
+      subject: rendered.subject,
+      html: rendered.html,
+      text: rendered.text
+    }),
+    signal: AbortSignal.timeout(8000)
+  });
+  if (!response.ok) throw new Error("Communiverse email provider rejected delivery (" + response.status + ")");
+  const result = await response.json().catch(() => ({}));
+  if (!result.id) throw new Error("Communiverse email provider did not confirm delivery");
+  return result.id;
+}
+function renderSupabaseAuthEmail(input) {`);
 replaceOne('const copy = supabaseAuthEmailCopy(input.action);', 'const copy = supabaseAuthEmailCopy(input.action, input.redirectTo);\n  const brand = isCommuniverseAuthRedirect(input.redirectTo, input.action) ? "Communiverse" : "Espacios Mail";');
 replaceOne('const copy = supabaseAuthEmailCopy(parsed.data.type);', 'const copy = supabaseAuthEmailCopy(parsed.data.type, parsed.data.redirect_to);');
 replaceOne('text-transform:uppercase">Espacios Mail</p>', 'text-transform:uppercase">${brand}</p>');
@@ -41,6 +63,7 @@ replaceOne('Espacios Mail \\xB7 Secure workspace access</p>', '${brand} \\xB7 Se
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', 'FromEmailAddress: "Espacios Mail <hello@espacios.me>",', 'FromEmailAddress: `${isCommuniverseAuthRedirect(input.redirectTo, input.action) ? "Communiverse" : "Espacios Mail"} <hello@espacios.me>`,');
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', 'fromName: "Espacios Mail",\n        replyTo: "hello@espacios.me",\n        subject: rendered.subject,', 'fromName: isCommuniverseAuthRedirect(input.redirectTo, input.action) ? "Communiverse" : "Espacios Mail",\n        replyTo: "hello@espacios.me",\n        subject: rendered.subject,');
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', 'const logId = uid("txn_email");\n  await env.DB.prepare(', 'const logId = uid("txn_email");\n  const skipLog = isCommuniverseAuthRedirect(input.redirectTo, input.action);\n  if (!skipLog) await env.DB.prepare(');
+replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', '  if (!skipLog) await env.DB.prepare(\n    `INSERT INTO transactional_email_log\n     (id, workspace_id, to_email, message_type, status, metadata_json)\n     VALUES (?, NULL, ?, ?, \'queued\', ?)`\n  ).bind(logId, input.email, `auth_${input.action}`, JSON.stringify({ provider: "supabase_auth_hook" })).run();\n  try {', '  if (!skipLog) await env.DB.prepare(\n    `INSERT INTO transactional_email_log\n     (id, workspace_id, to_email, message_type, status, metadata_json)\n     VALUES (?, NULL, ?, ?, \'queued\', ?)`\n  ).bind(logId, input.email, `auth_${input.action}`, JSON.stringify({ provider: "supabase_auth_hook" })).run();\n  if (skipLog && env.CV_RESEND_API_KEY) return `resend:${await sendCommuniverseResendEmail(env, input, rendered)}`;\n  try {');
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', `    await env.DB.prepare(\n      "UPDATE transactional_email_log SET status='sent', ses_message_id=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`, `    if (!skipLog) await env.DB.prepare(\n      "UPDATE transactional_email_log SET status='sent', ses_message_id=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`);
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', `        await env.DB.prepare(\n          "UPDATE transactional_email_log SET status='sent', ses_message_id=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`, `        if (!skipLog) await env.DB.prepare(\n          "UPDATE transactional_email_log SET status='sent', ses_message_id=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`);
 replaceInside('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail', `    await env.DB.prepare(\n      "UPDATE transactional_email_log SET status='failed', error=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`, `    if (!skipLog) await env.DB.prepare(\n      "UPDATE transactional_email_log SET status='failed', error=?, completed_at=CURRENT_TIMESTAMP WHERE id=?"`);
