@@ -5,8 +5,8 @@ import { join } from 'node:path';
 
 const ACCOUNT = 'b1b843ec85bc39a3a4d370ba4f84f17a';
 const WORKER = 'espacios-mail';
-const BASELINE = 'd3b3ce4f-b9ae-4fec-ac3b-819a919f8eee';
-const DEPLOYMENT = 'd9495a75-c854-4d99-9597-0b935d7ce1b4';
+const BASELINE = 'fd895d3f-e09c-472b-9f32-a2cee5ba745a';
+const DEPLOYMENT = '3351723c-a40a-4333-b296-f385049ad5bf';
 const base = new URL('./', import.meta.url);
 const mode = process.argv[2];
 if (mode !== 'apply' && mode !== 'rollback') throw Error('Use apply or rollback');
@@ -36,7 +36,7 @@ const code = mode === 'apply'
   ? await readFile(new URL('../build/espacios-mail-patched.mjs', base))
   : (await import('node:zlib')).gunzipSync(await readFile(new URL('espacios-mail-baseline.mjs.gz', base)));
 const digest = createHash('sha256').update(code).digest('hex');
-if (mode === 'apply' && digest !== 'c30a30bf778a2359cdf57abe36a643c193fd291851f7488f0f038ed003b47743') throw Error('Patched Mail code changed');
+if (mode === 'apply' && digest !== 'c66ca9f71caff612ce0889750b3dd2b0ff70a87049a2b51e47f3ef3ff1fe4afe') throw Error('Patched Mail code changed');
 if (mode === 'rollback' && digest !== '61cca1da12155adba664478d3ba3a2f343db94c36b3b7d16e0e19c897db10cb2') throw Error('Mail baseline changed');
 const form = new FormData();
 form.append('metadata', new Blob([JSON.stringify({ main_module: 'worker.js' })], { type: 'application/json' }), 'metadata');
