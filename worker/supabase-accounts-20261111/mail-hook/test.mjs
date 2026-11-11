@@ -21,4 +21,6 @@ assert.match(context.supabaseAuthEmailCopy('recovery', reset).subject, /Communiv
 assert.match(context.supabaseAuthEmailCopy('signup').subject, /Espacios Mail/);
 assert.match(source, /handoff\.hash = new URLSearchParams/);
 assert.match(source, /response\.headers\.set\("Referrer-Policy", "no-referrer"\)/);
+const sendMail = section('async function sendSupabaseAuthEmail', '__name(sendSupabaseAuthEmail');
+assert.equal((sendMail.match(/if \(!skipLog\) await env\.DB\.prepare/g) || []).length, 4);
 console.log('Mail hook redirect and copy checks passed');
