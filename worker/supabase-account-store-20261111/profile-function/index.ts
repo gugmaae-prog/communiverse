@@ -19,22 +19,25 @@ const reply = (body: object, status = 200) => new Response(JSON.stringify(body),
 });
 
 type User = { id: string; email?: string; email_confirmed_at?: string; user_metadata?: Record<string, unknown> };
-type Profile = { username: string; id: string; first_name: string; city: string; craft: string; kind: string };
+type Profile = { username: string; id: string; first_name: string; city: string; craft: string; kind: string; phone: string; contact_email: string; login_kind: string };
 
 async function ensureProfile(user: User, requested?: string): Promise<Profile> {
   const email = clean(user.email, 254).toLowerCase();
   if (!email || !user.email_confirmed_at) throw new Error('email_unverified');
   return await sql.begin(async tx => {
-    await tx`select pg_advisory_xact_lock(hashtext(${email}))`;
     const existing = await tx<Profile[]>`
-      select p.username,m.id,m.first_name,m.city,m.craft,m.kind
+      select p.username,m.id,m.first_name,m.city,m.craft,m.kind,m.phone,
+        coalesce(p.contact_email,m.email) as contact_email,p.login_kind
       from communiverse.cv_auth_profiles p
       join communiverse.cv_members m on m.id=p.member_id
       where p.auth_user_id=${user.id}::uuid for update of p,m`;
     if (existing[0]) return existing[0];
+    // A synthetic Auth identity must never claim a legacy member by email.
+    if (email.endsWith('@accounts.communiverse.invalid')) throw new Error('incomplete_profile');
+    await tx`select pg_advisory_xact_lock(hashtext(${email}))`;
 
-    let members = await tx<{ id: string; first_name: string; city: string; craft: string; kind: string }[]>`
-      select id,first_name,city,craft,kind from communiverse.cv_members
+    let members = await tx<{ id: string; first_name: string; city: string; craft: string; kind: string; phone: string }[]>`
+      select id,first_name,city,craft,kind,phone from communiverse.cv_members
       where lower(email)=${email} for update`;
     const legacy = members[0]
       ? await tx<{ username: string }[]>`
@@ -55,16 +58,16 @@ async function ensureProfile(user: User, requested?: string): Promise<Profile> {
       const firstName = clean(user.user_metadata?.first_name, 80) || suggested;
       // Public metadata is editable by the account owner; artist status is curated.
       const kind = 'member';
-      members = await tx<{ id: string; first_name: string; city: string; craft: string; kind: string }[]>`
+      members = await tx<{ id: string; first_name: string; city: string; craft: string; kind: string; phone: string }[]>`
         insert into communiverse.cv_members
           (id,request_key,email,phone,first_name,city,craft,kind,status,email_verified_at,confirmation_hash,confirmation_expires_at)
         values (${memberId},${`supabase:${user.id}`},${email},'',${firstName},'','',${kind},'active',${new Date().toISOString()},'','')
-        returning id,first_name,city,craft,kind`;
+        returning id,first_name,city,craft,kind,phone`;
     }
     await tx`
       insert into communiverse.cv_auth_profiles(auth_user_id,member_id,username)
       values (${user.id}::uuid,${members[0].id},${suggested})`;
-    return { username: suggested, ...members[0] };
+    return { username: suggested, contact_email: email, login_kind: 'email', ...members[0] };
   });
 }
 
@@ -88,12 +91,21 @@ Deno.serve(async request => {
       const city = clean(body.city, 100);
       const craft = clean(body.craft, 160);
       if (!firstName) return reply({ error: 'A name is required' }, 400);
-      const updated = await sql<Profile[]>`
-        update communiverse.cv_members
-        set first_name=${firstName},city=${city},craft=${craft}
-        where id=${profile.id}
-        returning id,first_name,city,craft,kind`;
-      return reply({ profile: { username: profile.username, ...updated[0] } });
+      const contactEmail = clean(body.email, 254).toLowerCase();
+      const phone = clean(body.phone, 24).replace(/[\s()-]/g, '');
+      if (profile.login_kind === 'username' && (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail) || !/^\+[1-9]\d{7,14}$/.test(phone))) return reply({ error: 'Enter a valid email and phone with country code' }, 400);
+      const updated = await sql.begin(async tx => {
+        const member = await tx<Profile[]>`
+          update communiverse.cv_members
+          set first_name=${firstName},city=${city},craft=${craft},phone=${profile.login_kind === 'username' ? phone : profile.phone}
+          where id=${profile.id}
+          returning id,first_name,city,craft,kind,phone`;
+        if (profile.login_kind === 'username') await tx`
+          update communiverse.cv_auth_profiles set contact_email=${contactEmail},updated_at=now()
+          where auth_user_id=${user.id}::uuid`;
+        return { username: profile.username, login_kind: profile.login_kind, contact_email: profile.login_kind === 'username' ? contactEmail : profile.contact_email, ...member[0] };
+      });
+      return reply({ profile: updated });
     }
     return reply({ profile });
   } catch (cause) {
@@ -101,6 +113,7 @@ Deno.serve(async request => {
     if (code === 'email_unverified') return reply({ error: 'Confirm your email first' }, 403);
     if (code === 'username_required') return reply({ error: 'Choose a username', code }, 409);
     if (code === 'username_taken' || code === '23505') return reply({ error: 'That username is taken', code: 'username_taken' }, 409);
+    if (code === 'incomplete_profile') return reply({ error: 'Your account needs repair before it can be used' }, 503);
     console.error('Communiverse profile operation failed', (cause as { code?: string })?.code || 'unknown');
     return reply({ error: 'Your profile is temporarily unavailable' }, 503);
   }

@@ -6,8 +6,8 @@ import { join } from 'node:path';
 const base = new URL('./', import.meta.url);
 const ACCOUNT = 'b1b843ec85bc39a3a4d370ba4f84f17a';
 const WORKER = 'communiverse-workspace-ux-v3-20261009';
-const ACTIVE = 'aec9fa7e-82fc-4ba0-be03-75eb50cc688e';
-const DEPLOYMENT = 'b4b0d2b0-8f2a-4b02-83a6-cae09a47910d';
+const ACTIVE = 'ad2cd8ed-a439-4acb-bc5d-bc78a19cecb4';
+const DEPLOYMENT = 'f70922c7-4759-4598-8144-e3b8a9e0511d';
 async function api(path, init = {}) {
   const config = await readFile(join(homedir(), '.wrangler/config/default.toml'), 'utf8');
   const token = config.match(/^oauth_token\s*=\s*"([^"]+)"/m)?.[1];
@@ -37,8 +37,10 @@ if (!latestId) throw Error('Latest Worker version unavailable for secret inherit
 const latest = await api(`/accounts/${ACCOUNT}/workers/scripts/${WORKER}/versions/${latestId}`);
 const sourceSecrets = source.resources.bindings.filter(b => b.type === 'secret_text').map(b => b.name).sort();
 const latestSecrets = latest.resources.bindings.filter(b => b.type === 'secret_text').map(b => b.name).sort();
-if (JSON.stringify(sourceSecrets) !== JSON.stringify(latestSecrets)) throw Error('Latest version has different secret bindings');
+const requiredSecrets = sourceSecrets;
+if (JSON.stringify(requiredSecrets) !== JSON.stringify(latestSecrets)) throw Error('Latest version has unexpected secret bindings');
 const bindings = source.resources.bindings.map(binding => binding.type === 'secret_text' ? { name: binding.name, type: 'inherit', version_id: 'latest' } : binding);
+if (!bindings.some(b => b.name === 'CV_ACCOUNT_GATEWAY_SECRET')) throw Error('Account gateway secret is unavailable');
 if (bindings.find(b => b.name === 'CV_ACCOUNT_CUTOVER_READY')?.text !== 'false') throw Error('Public account pause binding changed');
 const digest = createHash('sha256').update(code).digest('hex');
 const metadata = {
@@ -48,7 +50,7 @@ const metadata = {
   migration_tag: source.resources.script_runtime.migration_tag,
   keep_assets: true,
   bindings,
-  annotations: { 'workers/tag': 'communiverse-supabase-accounts-20261111', 'workers/message': 'Supabase Auth account candidate; preserve D1 pause and public media' },
+  annotations: { 'workers/tag': 'communiverse-supabase-accounts-20261111', 'workers/message': 'Username account candidate; preserve D1 pause and public media' },
 };
 const form = new FormData();
 form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }), 'metadata');
