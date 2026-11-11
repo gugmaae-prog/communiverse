@@ -100,13 +100,18 @@ async function api(request, env, action) {
     const address = email(body.email), username = clean(body.username, 40).toLowerCase(), firstName = clean(body.first_name, 80), password = String(body.password || '');
     if (!address.includes('@') || !HANDLE.test(username) || !firstName || password.length < 12 || password.length > 128 || password !== body.confirm_password || body.consent !== 'yes') return json({ error: 'Check the account details and try again.' }, 400);
     const { error } = await client.auth.signUp({ email: address, password, options: { emailRedirectTo: CONFIRM_URL, data: { username, first_name: firstName, communiverse: true } } });
-    if (error) return json({ error: error.message === 'Email rate limit exceeded' ? 'Please try again later.' : 'Your account could not be created. Try again.' }, 400);
+    if (error) {
+      if (error.status === 429 || error.message === 'Email rate limit exceeded') return json({ error: 'Please try again later.' }, 429);
+      if (error.status >= 500) return json({ error: 'Signup is temporarily unavailable. Please try again later.' }, 503);
+      return json({ error: 'Your account could not be created. Try again.' }, 400);
+    }
     return json({ message: 'Check your email to confirm your account. Then return to sign in.' });
   }
   if (action === 'login') {
     const address = email(body.email), password = String(body.password || '');
     if (!address.includes('@') || !password) return json({ error: 'Check your email and password.' }, 401);
     const { data, error } = await client.auth.signInWithPassword({ email: address, password });
+    if (error?.status >= 500) return json({ error: 'Sign in is temporarily unavailable. Please try again later.' }, 503);
     if (error || !data.session) return json({ error: 'Check your email and password, or confirm your email first.' }, 401);
     return json({ next: '/account/' }, 200, authCookies(data.session));
   }
