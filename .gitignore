@@ -54,3 +54,6 @@ Thumbs.db
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local Supabase CLI state
+/supabase/.temp/
