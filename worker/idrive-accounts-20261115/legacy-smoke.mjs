@@ -1,0 +1,28 @@
+import { readFile } from 'node:fs/promises';
+import { randomBytes, pbkdf2Sync, randomUUID } from 'node:crypto';
+const base = new URL('./', import.meta.url);
+const stage = JSON.parse(await readFile(new URL('build/stage-result.json', base), 'utf8'));
+const token = (await readFile(new URL('build/bridge-token', base), 'utf8')).trim();
+const call = async (action, value) => {
+  const r = await fetch(`${stage.url}/cv-auth/${action}`, { method: 'POST', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body: JSON.stringify(value) });
+  return { status: r.status, data: await r.json() };
+};
+const expect = (label, got, wanted) => { if (got !== wanted) throw Error(`${label}: expected ${wanted}, got ${got}`); console.log(`${label}: ${got}`); };
+const username = `cvlegacy${randomBytes(5).toString('hex')}`;
+const member_id = randomUUID();
+const password = `Qa!${randomBytes(16).toString('hex')}`;
+const salt = randomBytes(24).toString('hex');
+const hash = pbkdf2Sync(password, salt, 100000, 32, 'sha256').toString('hex');
+const imported = await call('import', { username, member_id, staff_id: null, first_name: 'Legacy', email: `${username}@example.invalid`, phone: '+971500000000', status: 'hidden', password: { hash, salt, iterations: 100000 } });
+expect('legacy import', imported.status, 200);
+const wrong = await call('login', { username, password: 'wrong-password' });
+expect('legacy wrong password', wrong.status, 401);
+const login = await call('login', { username, password });
+expect('legacy login', login.status, 200);
+if (!login.data.recovery_code) throw Error('Legacy login did not issue recovery code');
+const session = await call('session', { token: login.data.token });
+expect('legacy session', session.status, 200);
+if (session.data.profile.member_id !== member_id) throw Error('Legacy member ID changed');
+const again = await call('login', { username, password });
+expect('legacy upgraded login', again.status, 200);
+if (again.data.recovery_code) throw Error('Legacy recovery code reissued');
