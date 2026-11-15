@@ -4,8 +4,8 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `291e9549-b0b1-4eb2-a304-99389aed8607`, deployment `6bb027d4-60cd-4273-a243-f20d4f82d75a`
-- Rollback version: `9cd65616-55af-422c-b00d-15171dfa37fc` at 0% in that deployment
+- Released version: `645d3578-5308-4705-a8bb-1fe7f7631c12`, deployment `a5ac7910-a7bf-4969-8672-3fd84b518105`
+- Rollback version: `291e9549-b0b1-4eb2-a304-99389aed8607` at 0% in that deployment
 - Private account service: `espacios-ai-router` version `b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
@@ -20,6 +20,9 @@
 - Supabase project `ypkfganbwdvcjrcxygta` is `INACTIVE` and SQL is unavailable. Available Auth audit logs for Nov 11 show 14 signup IDs and 14 matching deletion IDs; Nov 10 and Nov 12–15 show no signup events. Thus no additional retained signup identity was observed. This is log evidence, not a direct database inventory.
 
 ## Verification
+
+- November 16 logo release: exact lettering was extracted from the supplied JPEG into a transparent wordmark; the simplified monogram remains sharp at favicon size. The shared public header, footer, Join and Sign in pages, root favicon, Apple touch icon and generic-page sharing image now use the versioned assets under `/communiverse/_brand/20261116-v1/`. The submitted JPEG SHA-256 is `d1f2bd25ab315107417822e534640caee24035f64e139b7548a8686ac346d7e5`.
+- The logo candidate was staged at 0% and visually checked on Circles at desktop and phone sizes, including an open artist card, and on the Join page. Normal public traffic returned the new branding on ten main routes, and the share image returned PNG 200. The public Circles page loaded both brand marks and fit within the viewport at 1280×720 and 320×667, including with Curro selected at the latter size.
 
 - Private service health returned 200 with IDrive readable.
 - Private service smoke: unauthorized 401; signup 200; duplicate 409; wrong password 401; login 200; session 200; profile 200; recovery 200; previous session 401; previous password 401; new password 200; one-use code 401; logout 200 and revoked session 401.
@@ -45,4 +48,4 @@
 
 ## Rollback
 
-For the public Worker, deploy `9cd65616-55af-422c-b00d-15171dfa37fc` at 100% and `291e9549-b0b1-4eb2-a304-99389aed8607` at 0%. This restores the unified header and previous Circles tap behavior. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `291e9549-b0b1-4eb2-a304-99389aed8607` at 100% and `645d3578-5308-4705-a8bb-1fe7f7631c12` at 0%. This restores the prior orange logo while retaining account access and the previous Circles tap behavior. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.

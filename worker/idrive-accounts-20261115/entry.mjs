@@ -1,6 +1,10 @@
 import application, { RegistrationDelivery, isPublicExperience } from '../idrive-media-20261111/entry.mjs';
 import keifferPortrait from './portraits/keiffer-384.webp';
 import lunaPortrait from './portraits/luna-384.webp';
+import brandMark from './brand/mark.svg';
+import brandWordmark from './brand/wordmark.png';
+import brandTouchIcon from './brand/apple-touch-icon.png';
+import brandShareImage from './brand/share.png';
 
 export { RegistrationDelivery, isPublicExperience };
 
@@ -11,6 +15,12 @@ const LEGACY_ROUTER_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/nav
 const LEGACY_IDENTITY_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/identity\.js$/;
 const NAV_ASSET_VERSION = 'cv-auth-nav-20261115-v3';
 const PORTRAIT_ASSET_VERSION = 'cv-portrait-20261115-v1';
+const BRAND_PREFIX = '/communiverse/_brand/20261116-v1/';
+const BRAND_MARK = `${BRAND_PREFIX}mark.svg`;
+const BRAND_WORDMARK = `${BRAND_PREFIX}wordmark.png`;
+const BRAND_TOUCH = `${BRAND_PREFIX}apple-touch-icon.png`;
+const BRAND_SHARE = `${BRAND_PREFIX}share.png`;
+const OLD_BRAND_MARK = '/communiverse/_brand/20261020-v22/logo-96.png';
 const PORTRAIT_PREFIX = '/communiverse/_optimized-portraits/20261115-v1/';
 const PORTRAIT_ROUTES = new Map([
   [`${PORTRAIT_PREFIX}keiffer-384.webp`, keifferPortrait],
@@ -22,6 +32,14 @@ const PORTRAIT_ORIGINALS = new Map([
 ]);
 const portraitBytes = dataUrl => Uint8Array.from(atob(dataUrl.slice(dataUrl.indexOf(',') + 1)), character => character.charCodeAt(0));
 const PORTRAIT_BYTES = new Map([...PORTRAIT_ROUTES].map(([path, data]) => [path, portraitBytes(data)]));
+const BRAND_BYTES = new Map([
+  [BRAND_MARK, { bytes: new TextEncoder().encode(brandMark), type: 'image/svg+xml' }],
+  [BRAND_WORDMARK, { bytes: portraitBytes(brandWordmark), type: 'image/png' }],
+  [BRAND_TOUCH, { bytes: portraitBytes(brandTouchIcon), type: 'image/png' }],
+  [BRAND_SHARE, { bytes: portraitBytes(brandShareImage), type: 'image/png' }],
+  ['/favicon.png', { bytes: portraitBytes(brandTouchIcon), type: 'image/png' }],
+  ['/apple-touch-icon.png', { bytes: portraitBytes(brandTouchIcon), type: 'image/png' }],
+]);
 const HANDLE = /^[a-z0-9][a-z0-9._-]{2,39}$/;
 const htmlEscape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const cookieValue = (request, name) => request.headers.get('cookie')?.match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`))?.[1] || '';
@@ -80,6 +98,14 @@ const style = `<style>
 :root{color-scheme:light;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1c2b43;background:#eaf1f9}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(circle at 53% 8%,#f8fbff 0,#eaf1f9 52%,#e4edf7 100%);display:flex;flex-direction:column}a{color:inherit;text-decoration:none}button,input{font:inherit}.cv-auth-header{height:76px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 clamp(18px,3vw,48px);border-bottom:1px solid #ffffffa8}.cv-auth-logo{font-size:20px;font-weight:640;letter-spacing:-.05em}.cv-auth-logo:before{content:"";display:inline-block;width:24px;height:24px;vertical-align:-5px;margin-right:10px;border-radius:50%;background:radial-gradient(circle,#fff4d3 0 14%,#ff9b63 35%,#ffcbad 55%,#f7c5aa 70%,transparent 72%)}.cv-auth-nav{display:flex;gap:6px;align-items:center;padding:5px;background:#ffffffaa;border:1px solid #fff;border-radius:999px;box-shadow:0 10px 30px #38507011}.cv-auth-nav a{padding:10px 15px;border-radius:999px;font-size:13px}.cv-auth-nav a:hover,.cv-auth-nav a:focus-visible{background:#dfeafc}.cv-auth-right{justify-self:end;display:flex;gap:10px;align-items:center}.cv-auth-right a{font-size:13px}.cv-auth-pill,.cv-auth-button{background:#2860ce;color:white!important;border-radius:999px;border:1px solid #2355b7;padding:11px 17px;box-shadow:inset 0 1px #ffffff66,0 5px 14px #17429c1c;cursor:pointer}.cv-auth-button{width:100%;font-weight:610;padding:14px 20px}.cv-auth-main{width:min(100%,1180px);margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,460px);gap:clamp(30px,7vw,100px);align-items:center;padding:46px 28px 70px}.cv-auth-copy h1{font-size:clamp(44px,6vw,84px);line-height:.98;letter-spacing:-.07em;font-weight:540;max-width:600px;margin:0 0 28px}.cv-auth-copy p{font-size:clamp(16px,1.4vw,21px);line-height:1.55;color:#53627a;max-width:480px}.cv-auth-card{background:#ffffffb9;border:1px solid #fff;border-radius:30px;padding:clamp(24px,4vw,42px);box-shadow:0 28px 80px #24456a19;backdrop-filter:blur(24px)}.cv-auth-card h2{font-size:25px;letter-spacing:-.045em;font-weight:580;margin:0 0 8px}.cv-auth-card>p{font-size:14px;color:#62718a;line-height:1.5;margin:0 0 24px}.cv-auth-card form{display:grid;gap:15px}.cv-auth-card label{display:grid;gap:7px;font-size:13px;font-weight:560}.cv-auth-card input{width:100%;min-height:48px;border:1px solid #cdd8e8;border-radius:13px;padding:0 14px;background:#f9fbff;color:#1c2b43;outline:none}.cv-auth-card input:focus{border-color:#4b78d9;box-shadow:0 0 0 3px #4b78d920}.cv-auth-card input[type=checkbox]{width:17px;min-height:17px}.cv-auth-card .check{display:flex;align-items:flex-start;gap:10px;font-weight:400;line-height:1.5;color:#526078}.cv-auth-card .fine{font-size:12px;line-height:1.5;color:#6d7d93}.cv-auth-card .fine a{text-decoration:underline;text-underline-offset:2px}.cv-auth-status{min-height:20px;font-size:13px;line-height:1.5;color:#b13c45;margin:0;overflow-wrap:anywhere}.cv-auth-status.success{color:#256b52}.cv-auth-switch{font-size:13px;color:#64728a;margin-top:22px}.cv-auth-switch a{color:#2058bc;font-weight:600}.cv-auth-profile{display:grid;gap:16px}.cv-auth-profile dl{display:grid;grid-template-columns:100px 1fr;gap:10px 18px;font-size:14px}.cv-auth-profile dt{color:#65738a}.cv-auth-profile dd{margin:0;overflow-wrap:anywhere}.cv-auth-footer{padding:20px clamp(18px,3vw,48px);border-top:1px solid #cbd8e7;display:flex;justify-content:space-between;gap:16px;color:#52617a;font-size:12px}.cv-auth-footer nav{display:flex;gap:20px}@media(max-width:720px){.cv-auth-header{grid-template-columns:1fr auto;height:auto;min-height:68px}.cv-auth-nav{display:none}.cv-auth-main{grid-template-columns:1fr;padding:38px 18px 48px;gap:16px}.cv-auth-copy h1{font-size:42px;margin-bottom:14px}.cv-auth-copy p{font-size:15px}.cv-auth-card{border-radius:24px}.cv-auth-footer{flex-wrap:wrap}}@media(max-width:390px){.cv-auth-right{gap:6px}.cv-auth-right a{font-size:12px}.cv-auth-pill{padding:9px 12px}}@media(prefers-reduced-motion:no-preference){.cv-auth-card{animation:rise .4s ease-out both}@keyframes rise{from{opacity:.5;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}}
 </style>`;
 const sharedHeaderStyle = `<style data-cv-shared-header>
+/* The source lettering is kept intact in a transparent asset. */
+#cv-social-header .cv-universe-logo .cv-brand-name,#cv-social-header .cv-auth-logo span,.cv-footer .cv-footer-brand span,.cv-auth-footer>a span{display:block!important;width:190px;height:24px;flex:none;overflow:hidden;font-size:0!important;line-height:0!important;color:transparent!important;background:url('${BRAND_WORDMARK}') left center/contain no-repeat!important}
+#cv-social-header .cv-universe-logo img.cv-brand-mark,#cv-social-header .cv-auth-logo img,.cv-footer .cv-footer-brand img{object-fit:contain!important;filter:none!important}
+.cv-auth-footer>a{display:inline-flex;align-items:center;gap:8px;min-width:0}.cv-auth-footer>a img{object-fit:contain;flex:none}
+html[data-theme="dark"] #cv-social-header .cv-universe-logo .cv-brand-name,html[data-theme="dark"] .cv-footer .cv-footer-brand span,html[data-theme="dark"] #cv-social-header .cv-universe-logo img.cv-brand-mark,html[data-theme="dark"] .cv-footer .cv-footer-brand img{filter:invert(1)!important}
+@media(max-width:600px){#cv-social-header .cv-universe-logo .cv-brand-name,#cv-social-header .cv-auth-logo span,.cv-footer .cv-footer-brand span,.cv-auth-footer>a span{width:145px;height:20px}}
+@media(max-width:360px){#cv-social-header .cv-universe-logo .cv-brand-name,#cv-social-header .cv-auth-logo span,.cv-footer .cv-footer-brand span,.cv-auth-footer>a span{width:115px;height:17px}}
+@media(max-height:500px){body:has(.cv-circle-canvas) .cv-footer .cv-footer-brand span{display:none!important}}
 /* The retained exhibition header has OS-dark rules, while the public shell stays light. */
 @media(prefers-color-scheme:dark){html[data-cv-social][data-cv-design]:not([data-theme="dark"]) #cv-social-header{color:#243248!important}html[data-cv-social][data-cv-design]:not([data-theme="dark"]) #cv-social-header :is(.cv-universe-logo,.cv-account-link){color:#243248!important}html[data-cv-social][data-cv-design]:not([data-theme="dark"]) #cv-social-header nav{background:rgba(255,255,255,.88)!important;border-color:rgba(73,100,143,.19)!important}html[data-cv-social][data-cv-design]:not([data-theme="dark"]) #cv-social-header nav a{color:#243248!important}html[data-cv-social][data-cv-design]:not([data-theme="dark"]) #cv-social-header nav a[aria-current="page"]{background:#e2ebfb!important;color:#174ba9!important}}
 #cv-social-header .cv-account a.cv-account-join{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #2558bc;border-radius:999px;background:#2b61ce;color:#fff!important;font-weight:600;box-shadow:inset 0 1px #ffffff66,0 5px 14px #17429c1c}
@@ -95,7 +121,7 @@ const sharedHeaderStyle = `<style data-cv-shared-header>
 @media(max-width:720px){.cv-auth-header{height:126px;min-height:126px;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:62px 54px;padding:0 16px 10px;column-gap:8px}.cv-auth-logo{grid-column:1;grid-row:1;font-size:19px}.cv-auth-right{grid-column:2;grid-row:1}.cv-auth-nav{display:flex;grid-column:1/-1;grid-row:2;justify-self:stretch;justify-content:space-between;width:100%;padding:5px}.cv-auth-nav a{flex:1;padding:8px 4px;font-size:13px}}
 @media(max-width:360px){.cv-auth-logo{font-size:17px;gap:5px}.cv-auth-logo img{width:27px;height:27px}.cv-auth-right a{font-size:12px;padding:7px 5px}.cv-auth-right a.cv-account-join{padding:7px 10px}#cv-social-header .cv-account a.cv-account-join{padding:7px 10px}}
 </style>`;
-const shell = (title, intro, card) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>${htmlEscape(title)} | Communiverse</title>${style}${sharedHeaderStyle}</head><body><header class="cv-auth-header" id="cv-social-header"><a class="cv-auth-skip" href="#cv-auth-main">Skip to content</a><a class="cv-auth-logo" href="/" aria-label="Communiverse home"><img src="/communiverse/_brand/20261020-v22/logo-96.png" width="34" height="34" alt="" decoding="async"><span>Communiverse</span></a><nav class="cv-auth-nav" aria-label="Main navigation"><a href="/">Discover</a><a href="/events/">Events</a><a href="/clubs/">Clubs</a><a href="/circles/">Circles</a></nav><div class="cv-auth-right cv-account"><a class="cv-account-link" href="/sign-in/">Sign in</a><a class="cv-auth-pill cv-account-join" href="/join/">Join</a></div></header><main class="cv-auth-main" id="cv-auth-main"><div class="cv-auth-copy"><h1>${htmlEscape(title)}</h1><p>${htmlEscape(intro)}</p></div><section class="cv-auth-card">${card}</section></main><footer class="cv-auth-footer"><a href="/">Communiverse</a><nav><a href="/works/">Works</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></footer></body></html>`;
+const shell = (title, intro, card) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><link rel="icon" type="image/svg+xml" href="${BRAND_MARK}"><link rel="apple-touch-icon" sizes="180x180" href="${BRAND_TOUCH}"><title>${htmlEscape(title)} | Communiverse</title>${style}${sharedHeaderStyle}</head><body><header class="cv-auth-header" id="cv-social-header"><a class="cv-auth-skip" href="#cv-auth-main">Skip to content</a><a class="cv-auth-logo" href="/" aria-label="Communiverse home"><img src="${BRAND_MARK}" width="34" height="34" alt="" decoding="async"><span>Communiverse</span></a><nav class="cv-auth-nav" aria-label="Main navigation"><a href="/">Discover</a><a href="/events/">Events</a><a href="/clubs/">Clubs</a><a href="/circles/">Circles</a></nav><div class="cv-auth-right cv-account"><a class="cv-account-link" href="/sign-in/">Sign in</a><a class="cv-auth-pill cv-account-join" href="/join/">Join</a></div></header><main class="cv-auth-main" id="cv-auth-main"><div class="cv-auth-copy"><h1>${htmlEscape(title)}</h1><p>${htmlEscape(intro)}</p></div><section class="cv-auth-card">${card}</section></main><footer class="cv-auth-footer"><a href="/"><img src="${BRAND_MARK}" width="26" height="26" alt=""><span>Communiverse</span></a><nav><a href="/works/">Works</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></footer></body></html>`;
 const page = (html, status = 200, cookies = []) => {
   const headers = new Headers({ 'content-type': 'text/html; charset=utf-8', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer', 'x-content-type-options': 'nosniff' });
   for (const value of cookies) headers.append('set-cookie', value);
@@ -207,6 +233,10 @@ export default {
     const targetHost = HOSTS.has(url.hostname) || (env.CV_LOCAL_ACCOUNT_TEST === 'true' && (url.hostname === '127.0.0.1' || url.hostname === 'localhost'));
     if (targetHost) {
       const path = url.pathname;
+      if ((request.method === 'GET' || request.method === 'HEAD') && BRAND_BYTES.has(path)) {
+        const { bytes, type } = BRAND_BYTES.get(path);
+        return new Response(request.method === 'HEAD' ? null : bytes, { headers: { 'content-type': type, 'cache-control': path.startsWith(BRAND_PREFIX) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400', 'x-content-type-options': 'nosniff', 'content-length': String(bytes.byteLength) } });
+      }
       if ((request.method === 'GET' || request.method === 'HEAD') && PORTRAIT_BYTES.has(path)) {
         const bytes = PORTRAIT_BYTES.get(path);
         return new Response(request.method === 'HEAD' ? null : bytes, { headers: { 'content-type': 'image/webp', 'cache-control': 'public, max-age=31536000, immutable', 'x-content-type-options': 'nosniff', 'content-length': String(bytes.byteLength) } });
@@ -250,10 +280,14 @@ export default {
     if (!targetHost || response.status !== 200 || !contentType.includes('text/html')) return response;
     const signed = !!cookieValue(request, '__Host-cv-account');
     const actions = signed ? '<a class="cv-account-link" href="/account/">My circle</a>' : '<a class="cv-account-link" href="/sign-in/">Sign in</a><a class="cv-account-join" href="/join/">Join</a>';
+    const shareImage = ['/', '/events/', '/clubs/', '/circles/', '/works/'].includes(url.pathname) ? `<meta property="og:image" content="https://communiverseclubs.com${BRAND_SHARE}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://communiverseclubs.com${BRAND_SHARE}">` : '';
     const transformed = new HTMLRewriter()
-      .on('head', { element(element) { element.append('<style data-cv-account-nav>#cv-social-header .cv-account{gap:4px}#cv-social-header .cv-account a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:6px 8px;box-sizing:border-box;text-decoration:none}@media(max-width:600px){#cv-social-header .cv-account a{font-size:12px}}</style>' + sharedHeaderStyle, { html: true }); } })
+      .on('head', { element(element) { element.append('<style data-cv-account-nav>#cv-social-header .cv-account{gap:4px}#cv-social-header .cv-account a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:6px 8px;box-sizing:border-box;text-decoration:none}@media(max-width:600px){#cv-social-header .cv-account a{font-size:12px}}</style>' + sharedHeaderStyle + shareImage, { html: true }); } })
+      .on('link[rel="icon"]', { element(element) { element.setAttribute('href', BRAND_MARK); element.setAttribute('type', 'image/svg+xml'); element.setAttribute('sizes', 'any'); } })
+      .on('link[rel="apple-touch-icon"]', { element(element) { element.setAttribute('href', BRAND_TOUCH); element.setAttribute('sizes', '180x180'); } })
       .on('img[src]', { element(element) {
         const src = element.getAttribute('src');
+        if (src === OLD_BRAND_MARK) element.setAttribute('src', BRAND_MARK);
         const optimized = PORTRAIT_ORIGINALS.get(src);
         if (optimized) { element.setAttribute('src', optimized); element.removeAttribute('srcset'); }
         if (element.getAttribute('data-cv-avatar') === 'orbit' && element.hasAttribute('srcset')) element.setAttribute('sizes', '(max-width: 600px) 64px, 100px');

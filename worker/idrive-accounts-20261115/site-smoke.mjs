@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 const base = 'https://communiverseclubs.com';
-const override = 'communiverse-workspace-ux-v3-20261009="291e9549-b0b1-4eb2-a304-99389aed8607"';
+const override = 'communiverse-workspace-ux-v3-20261009="645d3578-5308-4705-a8bb-1fe7f7631c12"';
 const common = process.argv.includes('--public') ? {} : { 'Cloudflare-Workers-Version-Overrides': override };
 const id = randomBytes(6).toString('hex');
 const username = `cvsitest${id}`;
