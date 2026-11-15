@@ -4,8 +4,8 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `9cd65616-55af-422c-b00d-15171dfa37fc`, deployment `b317da71-b729-4027-ba83-5a6daadff470`
-- Rollback version: `10012db0-36a4-417c-8628-52495b5d6e60` at 0% in that deployment
+- Released version: `291e9549-b0b1-4eb2-a304-99389aed8607`, deployment `6bb027d4-60cd-4273-a243-f20d4f82d75a`
+- Rollback version: `9cd65616-55af-422c-b00d-15171dfa37fc` at 0% in that deployment
 - Private account service: `espacios-ai-router` version `b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
@@ -31,6 +31,7 @@
 - Performance and recovery follow-up: the verified 1024px Keiffer and Luna portraits were resized to 384px WebP, and Circles' existing 384px artist variants now use sizes that match the visible circles. In a 390px headless Chrome cold-load run, Circles resource transfer fell from about 1.40 MB to 0.63 MB; this is a transfer reduction, not a guaranteed load-time or Core Web Vitals result. The original portraits remain available at their original URLs. The IDrive service now issues a new one-time recovery code atomically when an old code is consumed.
 - The private service smoke passed signup, login, session, profile, recovery with a replacement code, old-session revocation, one-use code rejection and logout. The staged public site smoke passed join, sign-in, route aliases, signup, profile, logout, login and recovery with a replacement code. On normal public traffic, real Chrome loaded all 16 Circles portraits and Sophiko's visible artwork, selected her card without page overflow on portrait and landscape phones, and clicked from the home page to the sign-in form.
 - Header follow-up: Join, Sign in and the other account pages now use the public brand mark, lighter wordmark and full navigation, including the second navigation row on phones. Public pages use the same blue Join action. The staged preview had no horizontal overflow at 320px; Circles retained 16 people and no page overflow at 320px and 667×375. Public browser clicks from Circles to Sign in and from Sign in to Join succeeded. Nine normal public routes returned 200 with the shared header style.
+- Device color and Circles motion follow-up: a retained exhibition CSS rule applied dark navigation and text to a light public header whenever the OS preferred dark mode. The shared header now overrides that rule while preserving an explicit exhibition dark theme. The Circles tap handler now commits selection immediately instead of showing a separate 120 ms pulse followed by a 32 ms delay. Staged browser checks under emulated dark mode found a light navigation/header, all 16 circles visible at 389×843 and 667×375, one-tap switching with the selected centre within 1 px, and no page overflow. Normal public HTML served both fixes; a public browser under emulated dark mode computed the light header/nav colors. The staged click was verified; the public click tool timed out, so no public click-through result is claimed for this follow-up.
 
 ## Operational limits
 
@@ -44,4 +45,4 @@
 
 ## Rollback
 
-For the public Worker, deploy `10012db0-36a4-417c-8628-52495b5d6e60` at 100% and `9cd65616-55af-422c-b00d-15171dfa37fc` at 0%. This restores the prior account and portrait release while removing the shared header styling. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `9cd65616-55af-422c-b00d-15171dfa37fc` at 100% and `291e9549-b0b1-4eb2-a304-99389aed8607` at 0%. This restores the unified header and previous Circles tap behavior. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
