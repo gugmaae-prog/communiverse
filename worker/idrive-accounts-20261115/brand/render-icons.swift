@@ -56,3 +56,5 @@ NSGraphicsContext.restoreGraphicsState()
 try! icon.representation(using: .png, properties: [:])!.write(to: root.appendingPathComponent("apple-touch-icon.png"))
 render("share.png", width: 1200, height: 630,
     markRect: NSRect(x: 325, y: 40, width: 550, height: 550))
+render("logo.png", width: 750, height: 750,
+    markRect: NSRect(x: 0, y: 0, width: 750, height: 750))

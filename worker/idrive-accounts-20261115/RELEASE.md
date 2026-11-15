@@ -4,8 +4,8 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `645d3578-5308-4705-a8bb-1fe7f7631c12`, deployment `a5ac7910-a7bf-4969-8672-3fd84b518105`
-- Rollback version: `291e9549-b0b1-4eb2-a304-99389aed8607` at 0% in that deployment
+- Released version: `ecf5ed17-86ae-4578-bd83-51ae38c4fb3f`, deployment `d642b136-8e87-4e29-a2bd-5a9ae5606dab`
+- Rollback version: `645d3578-5308-4705-a8bb-1fe7f7631c12` at 0% in that deployment
 - Private account service: `espacios-ai-router` version `b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
@@ -21,6 +21,7 @@
 
 ## Verification
 
+- PNG follow-up: exported the supplied black-square logo as `brand/logo.png` (750×750) and the transparent monogram as `brand/mark.png` (750×650). The public `/logo.png` download and the versioned `/communiverse/_brand/20261116-v2/mark.png` both returned PNG 200. Header and footer now load the PNG mark; favicon and Apple touch icon use square PNG, while the wordmark and sharing image remain PNG. The SVG is retained only as the monogram's editable source. Staged desktop and phone previews loaded both marks; ordinary public browser traffic loaded the PNG marks with no page scroll at 1280×720.
 - November 16 logo release: exact lettering was extracted from the supplied JPEG into a transparent wordmark; the simplified monogram remains sharp at favicon size. The shared public header, footer, Join and Sign in pages, root favicon, Apple touch icon and generic-page sharing image now use the versioned assets under `/communiverse/_brand/20261116-v1/`. The submitted JPEG SHA-256 is `d1f2bd25ab315107417822e534640caee24035f64e139b7548a8686ac346d7e5`.
 - The logo candidate was staged at 0% and visually checked on Circles at desktop and phone sizes, including an open artist card, and on the Join page. Normal public traffic returned the new branding on ten main routes, and the share image returned PNG 200. The public Circles page loaded both brand marks and fit within the viewport at 1280×720 and 320×667, including with Curro selected at the latter size.
 
@@ -48,4 +49,4 @@
 
 ## Rollback
 
-For the public Worker, deploy `291e9549-b0b1-4eb2-a304-99389aed8607` at 100% and `645d3578-5308-4705-a8bb-1fe7f7631c12` at 0%. This restores the prior orange logo while retaining account access and the previous Circles tap behavior. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `645d3578-5308-4705-a8bb-1fe7f7631c12` at 100% and `ecf5ed17-86ae-4578-bd83-51ae38c4fb3f` at 0%. This restores the SVG monogram while retaining account access and the same Circles behavior. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
