@@ -4,8 +4,8 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `9b01c918-0470-4c45-8622-2da1848707f0`, deployment `8a3bf4b1-43b3-4bca-bcd0-986d2a8091b4`
-- Rollback version: `ad2cd8ed-a439-4acb-bc5d-bc78a19cecb4` at 0% in that deployment
+- Released version: `8b9e7e68-150d-4896-aa1f-2f23169a9aa3`, deployment `083f51db-5495-4364-b5aa-ec18a1ecccde`
+- Rollback version: `82162bee-789c-4996-a4b7-2c814e39811a` at 0% in that deployment
 - Private account service: `espacios-ai-router` version `212c1b07-2df1-4aee-89f1-5f771a4d0b57`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
@@ -26,6 +26,8 @@
 - Synthetic hidden legacy account: import 200, wrong password 401, first login 200 with recovery code, original member ID preserved, second login 200 with no second code.
 - Staged public Worker at 0%: join 200, Circles 200 with `x-communiverse-release: idrive-accounts-20261115`, signup/profile/logout succeeded through the site.
 - Normal public traffic after release: signup, account, profile, logout, login, recovery, old session invalidation, wrong password and new password all passed; Circles and sign-in returned 200. Existing IDrive public media bridge health returned 200.
+- Follow-up navigation repair: `/sign-in`, `/signin`, `/login`, `/account/login`, and legacy Communiverse login paths now redirect to `/sign-in/`. A paused-account script had removed the header links; the replacement preserves account navigation while continuing to pause D1 workspace actions. Older public-domain JavaScript had rewritten live header links to `espacios.me`; both `v25` and `v69` navigation assets now keep account links on `communiverseclubs.com` with cache-busted URLs.
+- After publishing the follow-up repair, real Chrome clicks from Discover, Events, Clubs, and Circles reached the sign-in form; mobile 320px and 390px widths and 667×375 landscape were checked. Normal public traffic without a version override passed home/mobile, Events/desktop, and Circles/landscape browser clicks.
 
 ## Operational limits
 
@@ -37,4 +39,4 @@
 
 ## Rollback
 
-For the public Worker, deploy `ad2cd8ed-a439-4acb-bc5d-bc78a19cecb4` at 100% and `9b01c918-0470-4c45-8622-2da1848707f0` at 0%. This restores the prior public code but also its inactive Supabase-backed sign-in. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `82162bee-789c-4996-a4b7-2c814e39811a` at 100% and `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 0%. This restores the last verified Circles sign-in route, though legacy navigation on the home, Events and Clubs pages can still rewrite Sign in to `espacios.me`. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.

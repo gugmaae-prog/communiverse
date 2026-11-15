@@ -3,6 +3,10 @@ import application, { RegistrationDelivery, isPublicExperience } from '../idrive
 export { RegistrationDelivery, isPublicExperience };
 
 const HOSTS = new Set(['communiverseclubs.com', 'www.communiverseclubs.com']);
+const LEGACY_NAV_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/_render\/events-framing-20261027-v6\/client\.js$/;
+const LEGACY_JOIN_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/_public\/20261008-marketplace-1b-join\.js$/;
+const LEGACY_ROUTER_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/navigation\.js$/;
+const NAV_ASSET_VERSION = 'cv-auth-nav-20261115-v3';
 const HANDLE = /^[a-z0-9][a-z0-9._-]{2,39}$/;
 const htmlEscape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const cookieValue = (request, name) => request.headers.get('cookie')?.match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`))?.[1] || '';
@@ -125,6 +129,47 @@ async function idriveApi(request, env, action) {
   return json({ error: 'Not found.' }, 404);
 }
 
+// The retained public bundle still injects a pause script for the old D1 account
+// routes. Keep its disabled workspace controls, but let the new account routes work.
+const pausedAccountScript = `(function(){
+  'use strict';
+  const gated='[data-heart],[data-follow],[data-follow-circle],[data-record-save],[data-feed-mode="saved"],[data-feed-mode="following"],[data-artist-view="following"],[data-circle-view="following"]';
+  const active=/^\\/(?:sign-in|signin|login|join|account)(?:\\/|$)/;
+  const oldPrivate=/^\\/(?:workspace|profile|onboarding|confirm|apply|host|auth)(?:\\/|$)/;
+  function pausedLink(link){
+    try{
+      const url=new URL(link.getAttribute('href'),location.href);
+      if(url.origin!==location.origin)return false;
+      const path=url.pathname.replace(/^\\/communiverse(?=\\/|$)/,'')||'/';
+      return !active.test(path)&&(oldPrivate.test(path)||/^\\/events\\/host(?:\\/|$)/.test(path));
+    }catch{return false}
+  }
+  function disable(node){node.disabled=true;node.setAttribute('aria-disabled','true');node.title='This feature is temporarily unavailable';node.dataset.cvAccountPaused='true'}
+  function accountDestination(link){
+    if(!link?.matches?.('#cv-social-header .cv-account a'))return null;
+    const label=link.textContent.trim().toLowerCase();
+    if(label==='sign in')return '/sign-in/';
+    if(label==='join')return '/join/';
+    if(label==='my circle')return '/account/';
+    return null;
+  }
+  function repairAccountLinks(root){
+    const links=[...root.matches?.('#cv-social-header .cv-account a')?[root]:[],...root.querySelectorAll?.('#cv-social-header .cv-account a')||[]];
+    for(const link of links){const path=accountDestination(link);if(path&&link.getAttribute('href')!==path)link.setAttribute('href',path)}
+  }
+  function scan(root){
+    repairAccountLinks(root);
+    if(root.matches?.(gated))disable(root);
+    for(const node of root.querySelectorAll?.(gated)||[])disable(node);
+    if(root.matches?.('a[href]')&&pausedLink(root)){root.remove();return}
+    for(const link of root.querySelectorAll?.('a[href]')||[])if(pausedLink(link))link.remove();
+  }
+  window.CV_URLS=Object.freeze({...window.CV_URLS,accountAvailable:false,accountBase:location.origin+'/account/',accountOrigin:location.origin});
+  document.addEventListener('click',event=>{const account=event.target.closest?.('#cv-social-header .cv-account a'),path=accountDestination(account);if(path&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey&&event.button===0){event.preventDefault();event.stopImmediatePropagation();location.assign(path);return}const node=event.target.closest?.(gated+',a[href]');if(node&&(node.matches(gated)||node.matches('a[href]')&&pausedLink(node))){event.preventDefault();event.stopImmediatePropagation()}},true);
+  new MutationObserver(changes=>{for(const change of changes){if(change.type==='attributes'){scan(change.target);continue}for(const node of change.addedNodes)if(node.nodeType===1)scan(node)}}).observe(document,{childList:true,subtree:true,attributes:true,attributeFilter:['href']});
+  document.addEventListener('DOMContentLoaded',()=>scan(document));
+})();`;
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -132,6 +177,10 @@ export default {
     if (targetHost) {
       const path = url.pathname;
       try {
+        if (request.method === 'GET' && ['/sign-in', '/signin', '/signin/', '/login', '/login/', '/account/login', '/account/login/', '/communiverse/login', '/communiverse/login/', '/communiverse/sign-in', '/communiverse/sign-in/', '/communiverse/account/login', '/communiverse/account/login/'].includes(path)) return redirect('/sign-in/');
+        if (request.method === 'GET' && path === '/join') return redirect('/join/');
+        if (request.method === 'GET' && path === '/account') return redirect('/account/');
+        if (request.method === 'GET' && path === '/account/forgot') return redirect('/account/forgot/');
         if (request.method === 'GET' && path === '/join/') return joinPage();
         if (request.method === 'GET' && path === '/sign-in/') return signInPage();
         if (request.method === 'GET' && path === '/account/forgot/') return forgotPage();
@@ -146,10 +195,30 @@ export default {
     }
     const response = await application.fetch(request, env, ctx);
     const contentType = response.headers.get('content-type') || '';
+    if (targetHost && response.status === 200 && contentType.includes('javascript') && [LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT].some(pattern => pattern.test(url.pathname))) {
+      const source = await response.text();
+      const branded = LEGACY_NAV_CLIENT.test(url.pathname)
+        ? source.replaceAll('https://espacios.me/communiverse/sign-in/', 'https://communiverseclubs.com/sign-in/').replaceAll('https://espacios.me/communiverse/join/', 'https://communiverseclubs.com/join/')
+        : LEGACY_JOIN_CLIENT.test(url.pathname)
+          ? source.replaceAll('https://espacios.me/communiverse/', 'https://communiverseclubs.com/')
+          : source.replace('|sign-in|signin|join|', '|').replace('|account|', '|');
+      if (branded === source) console.error('Legacy account links were not found in the client asset', url.pathname);
+      const headers = new Headers(response.headers);
+      headers.delete('content-length');
+      headers.delete('etag');
+      headers.set('cache-control', 'public, max-age=31536000, immutable');
+      headers.set('x-communiverse-auth-nav', NAV_ASSET_VERSION);
+      return new Response(branded, { status: response.status, headers });
+    }
     if (!targetHost || response.status !== 200 || !contentType.includes('text/html')) return response;
     const signed = !!cookieValue(request, '__Host-cv-account');
     const actions = signed ? '<a class="cv-account-link" href="/account/">My circle</a>' : '<a class="cv-account-link" href="/sign-in/">Sign in</a><a class="cv-account-join" href="/join/">Join</a>';
-    const transformed = new HTMLRewriter().on('.cv-account', { element(element) { element.setInnerContent(actions, { html: true }); } }).transform(response);
+    const transformed = new HTMLRewriter()
+      .on('head', { element(element) { element.append('<style data-cv-account-nav>#cv-social-header .cv-account{gap:4px}#cv-social-header .cv-account a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:6px 8px;box-sizing:border-box;text-decoration:none}@media(max-width:600px){#cv-social-header .cv-account a{font-size:12px}}</style>', { html: true }); } })
+      .on('script[src]', { element(element) { const src = element.getAttribute('src'); if ([LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT].some(pattern => pattern.test(src || ''))) element.setAttribute('src', `${src}?v=${NAV_ASSET_VERSION}`); } })
+      .on('script[data-cv-account-paused]', { element(element) { element.setInnerContent(pausedAccountScript, { html: true }); } })
+      .on('.cv-account', { element(element) { element.setInnerContent(actions, { html: true }); } })
+      .transform(response);
     const headers = new Headers(transformed.headers);
     headers.set('x-communiverse-release', 'idrive-accounts-20261115');
     return new Response(transformed.body, { status: transformed.status, headers });

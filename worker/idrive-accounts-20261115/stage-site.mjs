@@ -6,8 +6,8 @@ import { join } from 'node:path';
 const base = new URL('./', import.meta.url);
 const ACCOUNT = 'b1b843ec85bc39a3a4d370ba4f84f17a';
 const WORKER = 'communiverse-workspace-ux-v3-20261009';
-const ACTIVE = 'ad2cd8ed-a439-4acb-bc5d-bc78a19cecb4';
-const DEPLOYMENT = 'f70922c7-4759-4598-8144-e3b8a9e0511d';
+const ACTIVE = '8b9e7e68-150d-4896-aa1f-2f23169a9aa3';
+const DEPLOYMENT = '083f51db-5495-4364-b5aa-ec18a1ecccde';
 const SERVICE_VERSION = '212c1b07-2df1-4aee-89f1-5f771a4d0b57';
 const SERVICE_URL = 'https://212c1b07-espacios-ai-router.thekeifferjapeth.workers.dev';
 async function api(path, init = {}) {
@@ -48,8 +48,10 @@ const stage = JSON.parse(await readFile(new URL('build/stage-result.json', base)
 if (stage.version !== SERVICE_VERSION || stage.url !== SERVICE_URL) throw Error('Private account service candidate changed');
 const bridgeToken = (await readFile(new URL('build/bridge-token', base), 'utf8')).trim();
 if (!/^[a-f0-9]{96}$/.test(bridgeToken)) throw Error('Private account service token is invalid');
-bindings.push({ name: 'CV_IDRIVE_AUTH_TOKEN', type: 'secret_text', text: bridgeToken });
-bindings.push({ name: 'CV_IDRIVE_AUTH_URL', type: 'plain_text', text: SERVICE_URL });
+if (!bindings.some(b => b.name === 'CV_IDRIVE_AUTH_TOKEN')) bindings.push({ name: 'CV_IDRIVE_AUTH_TOKEN', type: 'secret_text', text: bridgeToken });
+const urlBinding = bindings.find(b => b.name === 'CV_IDRIVE_AUTH_URL');
+if (urlBinding && urlBinding.text !== SERVICE_URL) throw Error('Private account service URL changed');
+if (!urlBinding) bindings.push({ name: 'CV_IDRIVE_AUTH_URL', type: 'plain_text', text: SERVICE_URL });
 const digest = createHash('sha256').update(code).digest('hex');
 const metadata = {
   main_module: 'account-worker.mjs',
@@ -58,7 +60,7 @@ const metadata = {
   migration_tag: source.resources.script_runtime.migration_tag,
   keep_assets: true,
   bindings,
-  annotations: { 'workers/tag': 'communiverse-idrive-accounts-20261115', 'workers/message': 'IDrive E2 account candidate; preserve D1 pause and public media' },
+  annotations: { 'workers/tag': 'communiverse-idrive-accounts-20261115', 'workers/message': 'Preserve account storage, route aliases and branded navigation' },
 };
 const form = new FormData();
 form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }), 'metadata');

@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 const base = 'https://communiverseclubs.com';
-const override = 'communiverse-workspace-ux-v3-20261009="9b01c918-0470-4c45-8622-2da1848707f0"';
+const override = 'communiverse-workspace-ux-v3-20261009="8b9e7e68-150d-4896-aa1f-2f23169a9aa3"';
 const common = process.argv.includes('--public') ? {} : { 'Cloudflare-Workers-Version-Overrides': override };
 const id = randomBytes(6).toString('hex');
 const username = `cvsitest${id}`;
@@ -10,6 +10,14 @@ const request = (path, data, cookie) => fetch(base + path, { method: data ? 'POS
 const join = await request('/join/');
 expect('join page', join.status, 200);
 if (!(await join.text()).includes('Create an account')) throw Error('Join form missing');
+const signIn = await request('/sign-in/');
+expect('sign-in page', signIn.status, 200);
+if (!(await signIn.text()).includes('Sign in')) throw Error('Sign-in form missing');
+for (const alias of ['/sign-in', '/signin', '/login', '/login/', '/account/login', '/communiverse/account/login']) {
+  const redirect = await request(alias);
+  expect(`${alias} redirect`, redirect.status, 303);
+  if (redirect.headers.get('location') !== '/sign-in/') throw Error(`${alias}: wrong redirect destination`);
+}
 const created = await request('/account/api/signup', { username, first_name: 'Test', email: `${username}@example.invalid`, phone: '+971500000000', password, confirm_password: password, consent: 'yes' });
 expect('site signup', created.status, 200);
 const result = await created.json();
