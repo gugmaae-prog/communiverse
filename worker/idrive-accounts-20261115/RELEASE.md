@@ -4,8 +4,8 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `10012db0-36a4-417c-8628-52495b5d6e60`, deployment `be171dd2-1137-40ab-a94c-b78a1aa81972`
-- Rollback version: `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 0% in that deployment
+- Released version: `9cd65616-55af-422c-b00d-15171dfa37fc`, deployment `b317da71-b729-4027-ba83-5a6daadff470`
+- Rollback version: `10012db0-36a4-417c-8628-52495b5d6e60` at 0% in that deployment
 - Private account service: `espacios-ai-router` version `b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
@@ -30,6 +30,7 @@
 - After publishing the follow-up repair, real Chrome clicks from Discover, Events, Clubs, and Circles reached the sign-in form; mobile 320px and 390px widths and 667×375 landscape were checked. Normal public traffic without a version override passed home/mobile, Events/desktop, and Circles/landscape browser clicks.
 - Performance and recovery follow-up: the verified 1024px Keiffer and Luna portraits were resized to 384px WebP, and Circles' existing 384px artist variants now use sizes that match the visible circles. In a 390px headless Chrome cold-load run, Circles resource transfer fell from about 1.40 MB to 0.63 MB; this is a transfer reduction, not a guaranteed load-time or Core Web Vitals result. The original portraits remain available at their original URLs. The IDrive service now issues a new one-time recovery code atomically when an old code is consumed.
 - The private service smoke passed signup, login, session, profile, recovery with a replacement code, old-session revocation, one-use code rejection and logout. The staged public site smoke passed join, sign-in, route aliases, signup, profile, logout, login and recovery with a replacement code. On normal public traffic, real Chrome loaded all 16 Circles portraits and Sophiko's visible artwork, selected her card without page overflow on portrait and landscape phones, and clicked from the home page to the sign-in form.
+- Header follow-up: Join, Sign in and the other account pages now use the public brand mark, lighter wordmark and full navigation, including the second navigation row on phones. Public pages use the same blue Join action. The staged preview had no horizontal overflow at 320px; Circles retained 16 people and no page overflow at 320px and 667×375. Public browser clicks from Circles to Sign in and from Sign in to Join succeeded. Nine normal public routes returned 200 with the shared header style.
 
 ## Operational limits
 
@@ -43,4 +44,4 @@
 
 ## Rollback
 
-For the public Worker, deploy `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 100% and `10012db0-36a4-417c-8628-52495b5d6e60` at 0%. This restores the verified sign-in navigation but also the prior larger portrait delivery and previous private account service URL. Keep both IDrive service versions and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `10012db0-36a4-417c-8628-52495b5d6e60` at 100% and `9cd65616-55af-422c-b00d-15171dfa37fc` at 0%. This restores the prior account and portrait release while removing the shared header styling. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
