@@ -185,9 +185,10 @@ async function action(env, name, b, ip) {
     const hash = await sha(code);
     if (!row.value?.recovery_hash || !constantEqual(row.value.recovery_hash, hash)) throw error('invalid_recovery', 401);
     const salt = random(24);
-    const account = { ...row.value, password: { algorithm: 'pbkdf2-chain-6x100000', salt, hash: await derive(env, password, salt) }, recovery_hash: null, epoch: (row.value.epoch || 0) + 1 };
+    const recovery_code = random(24);
+    const account = { ...row.value, password: { algorithm: 'pbkdf2-chain-6x100000', salt, hash: await derive(env, password, salt) }, recovery_hash: await sha(recovery_code), epoch: (row.value.epoch || 0) + 1 };
     await writeRecord(env, key, account, row.etag);
-    return { token: await issueSession(env, account, key) };
+    return { token: await issueSession(env, account, key), recovery_code };
   }
   const current = await session(env, String(b.token || ''));
   if (name === 'session') return { profile: publicProfile(current.account) };

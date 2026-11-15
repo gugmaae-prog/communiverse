@@ -2,7 +2,7 @@
 
 Communiverse is an art-led community and workspace: discover art and people, coordinate Work, talk in Connect, and use Cosmos and in-house Tools against the same permission-checked records.
 
-Live: [Communiverse](https://espacios.me/communiverse/) · [Workspace](https://espacios.me/communiverse/workspace/).
+Live public site: [Communiverse](https://communiverseclubs.com/) · [Circles](https://communiverseclubs.com/circles/) · [Sign in](https://communiverseclubs.com/sign-in/). The legacy Workspace is paused; see the [current account release](worker/idrive-accounts-20261115/RELEASE.md) for the deployed boundary and rollback.
 
 This is the full-stack operating and design guide. Read it before changing public pages, Workspace, Work, Connect, Manage Communiverse, Tools, profiles or either Cosmos entry point. Design requirements are not automatically delivered features; the status and acceptance sections identify the boundary.
 

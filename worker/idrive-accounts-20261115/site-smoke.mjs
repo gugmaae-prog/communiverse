@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 const base = 'https://communiverseclubs.com';
-const override = 'communiverse-workspace-ux-v3-20261009="8b9e7e68-150d-4896-aa1f-2f23169a9aa3"';
+const override = 'communiverse-workspace-ux-v3-20261009="10012db0-36a4-417c-8628-52495b5d6e60"';
 const common = process.argv.includes('--public') ? {} : { 'Cloudflare-Workers-Version-Overrides': override };
 const id = randomBytes(6).toString('hex');
 const username = `cvsitest${id}`;
@@ -40,6 +40,8 @@ if (!loginCookie) throw Error('Login cookie missing');
 const changedPassword = `Qb!${randomBytes(16).toString('hex')}`;
 const recovered = await request('/account/api/recover', { username, recovery_code: result.recovery_code, password: changedPassword, confirm_password: changedPassword });
 expect('site recovery', recovered.status, 200);
+const replacement = await recovered.json();
+if (!/^[a-f0-9]{48}$/.test(replacement.recovery_code || '') || replacement.recovery_code === result.recovery_code) throw Error('Site recovery did not return a replacement code');
 const revoked = await request('/account/', undefined, loginCookie);
 expect('prior session revoked', revoked.status, 303);
 const oldLogin = await request('/account/api/login', { username, password });

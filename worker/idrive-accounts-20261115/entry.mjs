@@ -1,4 +1,6 @@
 import application, { RegistrationDelivery, isPublicExperience } from '../idrive-media-20261111/entry.mjs';
+import keifferPortrait from './portraits/keiffer-384.webp';
+import lunaPortrait from './portraits/luna-384.webp';
 
 export { RegistrationDelivery, isPublicExperience };
 
@@ -6,7 +8,20 @@ const HOSTS = new Set(['communiverseclubs.com', 'www.communiverseclubs.com']);
 const LEGACY_NAV_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/_render\/events-framing-20261027-v6\/client\.js$/;
 const LEGACY_JOIN_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/_public\/20261008-marketplace-1b-join\.js$/;
 const LEGACY_ROUTER_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/navigation\.js$/;
+const LEGACY_IDENTITY_CLIENT = /^\/communiverse\/_domain\/public-domain-[^/]+\/identity\.js$/;
 const NAV_ASSET_VERSION = 'cv-auth-nav-20261115-v3';
+const PORTRAIT_ASSET_VERSION = 'cv-portrait-20261115-v1';
+const PORTRAIT_PREFIX = '/communiverse/_optimized-portraits/20261115-v1/';
+const PORTRAIT_ROUTES = new Map([
+  [`${PORTRAIT_PREFIX}keiffer-384.webp`, keifferPortrait],
+  [`${PORTRAIT_PREFIX}luna-384.webp`, lunaPortrait],
+]);
+const PORTRAIT_ORIGINALS = new Map([
+  ['/communiverse/_circles/20261022-v1/keiffer-1024.webp', `${PORTRAIT_PREFIX}keiffer-384.webp`],
+  ['/communiverse/_circles/20261022-v1/luna-1024.webp', `${PORTRAIT_PREFIX}luna-384.webp`],
+]);
+const portraitBytes = dataUrl => Uint8Array.from(atob(dataUrl.slice(dataUrl.indexOf(',') + 1)), character => character.charCodeAt(0));
+const PORTRAIT_BYTES = new Map([...PORTRAIT_ROUTES].map(([path, data]) => [path, portraitBytes(data)]));
 const HANDLE = /^[a-z0-9][a-z0-9._-]{2,39}$/;
 const htmlEscape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const cookieValue = (request, name) => request.headers.get('cookie')?.match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`))?.[1] || '';
@@ -176,6 +191,10 @@ export default {
     const targetHost = HOSTS.has(url.hostname) || (env.CV_LOCAL_ACCOUNT_TEST === 'true' && (url.hostname === '127.0.0.1' || url.hostname === 'localhost'));
     if (targetHost) {
       const path = url.pathname;
+      if ((request.method === 'GET' || request.method === 'HEAD') && PORTRAIT_BYTES.has(path)) {
+        const bytes = PORTRAIT_BYTES.get(path);
+        return new Response(request.method === 'HEAD' ? null : bytes, { headers: { 'content-type': 'image/webp', 'cache-control': 'public, max-age=31536000, immutable', 'x-content-type-options': 'nosniff', 'content-length': String(bytes.byteLength) } });
+      }
       try {
         if (request.method === 'GET' && ['/sign-in', '/signin', '/signin/', '/login', '/login/', '/account/login', '/account/login/', '/communiverse/login', '/communiverse/login/', '/communiverse/sign-in', '/communiverse/sign-in/', '/communiverse/account/login', '/communiverse/account/login/'].includes(path)) return redirect('/sign-in/');
         if (request.method === 'GET' && path === '/join') return redirect('/join/');
@@ -195,19 +214,21 @@ export default {
     }
     const response = await application.fetch(request, env, ctx);
     const contentType = response.headers.get('content-type') || '';
-    if (targetHost && response.status === 200 && contentType.includes('javascript') && [LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT].some(pattern => pattern.test(url.pathname))) {
+    if (targetHost && response.status === 200 && contentType.includes('javascript') && [LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT, LEGACY_IDENTITY_CLIENT].some(pattern => pattern.test(url.pathname))) {
       const source = await response.text();
-      const branded = LEGACY_NAV_CLIENT.test(url.pathname)
+      const branded = LEGACY_IDENTITY_CLIENT.test(url.pathname)
+        ? source.replace("img.sizes=size==='orbit'?'(max-width:600px) 160px, 220px'", "img.sizes=size==='orbit'?'(max-width:600px) 64px, 100px'")
+        : LEGACY_NAV_CLIENT.test(url.pathname)
         ? source.replaceAll('https://espacios.me/communiverse/sign-in/', 'https://communiverseclubs.com/sign-in/').replaceAll('https://espacios.me/communiverse/join/', 'https://communiverseclubs.com/join/')
         : LEGACY_JOIN_CLIENT.test(url.pathname)
           ? source.replaceAll('https://espacios.me/communiverse/', 'https://communiverseclubs.com/')
           : source.replace('|sign-in|signin|join|', '|').replace('|account|', '|');
-      if (branded === source) console.error('Legacy account links were not found in the client asset', url.pathname);
+      if (branded === source) console.error('Expected legacy client setting was not found', url.pathname);
       const headers = new Headers(response.headers);
       headers.delete('content-length');
       headers.delete('etag');
       headers.set('cache-control', 'public, max-age=31536000, immutable');
-      headers.set('x-communiverse-auth-nav', NAV_ASSET_VERSION);
+      headers.set('x-communiverse-auth-nav', LEGACY_IDENTITY_CLIENT.test(url.pathname) ? PORTRAIT_ASSET_VERSION : NAV_ASSET_VERSION);
       return new Response(branded, { status: response.status, headers });
     }
     if (!targetHost || response.status !== 200 || !contentType.includes('text/html')) return response;
@@ -215,7 +236,13 @@ export default {
     const actions = signed ? '<a class="cv-account-link" href="/account/">My circle</a>' : '<a class="cv-account-link" href="/sign-in/">Sign in</a><a class="cv-account-join" href="/join/">Join</a>';
     const transformed = new HTMLRewriter()
       .on('head', { element(element) { element.append('<style data-cv-account-nav>#cv-social-header .cv-account{gap:4px}#cv-social-header .cv-account a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:6px 8px;box-sizing:border-box;text-decoration:none}@media(max-width:600px){#cv-social-header .cv-account a{font-size:12px}}</style>', { html: true }); } })
-      .on('script[src]', { element(element) { const src = element.getAttribute('src'); if ([LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT].some(pattern => pattern.test(src || ''))) element.setAttribute('src', `${src}?v=${NAV_ASSET_VERSION}`); } })
+      .on('img[src]', { element(element) {
+        const src = element.getAttribute('src');
+        const optimized = PORTRAIT_ORIGINALS.get(src);
+        if (optimized) { element.setAttribute('src', optimized); element.removeAttribute('srcset'); }
+        if (element.getAttribute('data-cv-avatar') === 'orbit' && element.hasAttribute('srcset')) element.setAttribute('sizes', '(max-width: 600px) 64px, 100px');
+      } })
+      .on('script[src]', { element(element) { const src = element.getAttribute('src'); if (LEGACY_IDENTITY_CLIENT.test(src || '')) element.setAttribute('src', `${src}?v=${PORTRAIT_ASSET_VERSION}`); else if ([LEGACY_NAV_CLIENT, LEGACY_JOIN_CLIENT, LEGACY_ROUTER_CLIENT].some(pattern => pattern.test(src || ''))) element.setAttribute('src', `${src}?v=${NAV_ASSET_VERSION}`); } })
       .on('script[data-cv-account-paused]', { element(element) { element.setInnerContent(pausedAccountScript, { html: true }); } })
       .on('.cv-account', { element(element) { element.setInnerContent(actions, { html: true }); } })
       .transform(response);

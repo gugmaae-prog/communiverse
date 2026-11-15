@@ -35,6 +35,7 @@ const profile = await call('profile', { token: login.data.token, first_name: 'Up
 expect('profile', profile.status, 200);
 const recovery = await call('recover', { username, recovery_code: signup.data.recovery_code, password: nextPassword });
 expect('recovery', recovery.status, 200);
+if (!/^[a-f0-9]{48}$/.test(recovery.data?.recovery_code || '') || recovery.data.recovery_code === signup.data.recovery_code) throw Error('Recovery did not issue a replacement one-time code');
 const oldSession = await call('session', { token: login.data.token });
 expect('old session revoked', oldSession.status, 401);
 const oldPassword = await call('login', { username, password });

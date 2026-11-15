@@ -4,9 +4,9 @@
 
 - Public host: `https://communiverseclubs.com/`
 - Public Worker: `communiverse-workspace-ux-v3-20261009`
-- Released version: `8b9e7e68-150d-4896-aa1f-2f23169a9aa3`, deployment `083f51db-5495-4364-b5aa-ec18a1ecccde`
-- Rollback version: `82162bee-789c-4996-a4b7-2c814e39811a` at 0% in that deployment
-- Private account service: `espacios-ai-router` version `212c1b07-2df1-4aee-89f1-5f771a4d0b57`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
+- Released version: `10012db0-36a4-417c-8628-52495b5d6e60`, deployment `be171dd2-1137-40ab-a94c-b78a1aa81972`
+- Rollback version: `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 0% in that deployment
+- Private account service: `espacios-ai-router` version `b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2`, accessed only by version URL and bearer binding. The shared router's normal traffic remains on `ba0e47e8-5153-4ca5-8d13-46677e68861c`.
 - IDrive E2: `espacios-store-f`, prefix `communiverse-private/20261115/`; account and session bodies use AES-GCM with an independent Cloudflare-held root.
 - Username/password, unverified contact email and phone, one-time recovery code, profile updates, session revocation and logout no longer call Supabase at runtime.
 - `CV_ACCOUNT_CUTOVER_READY=false` remains in the public Worker. This release restores account access; legacy D1 workspace/community writes are still paused.
@@ -28,6 +28,8 @@
 - Normal public traffic after release: signup, account, profile, logout, login, recovery, old session invalidation, wrong password and new password all passed; Circles and sign-in returned 200. Existing IDrive public media bridge health returned 200.
 - Follow-up navigation repair: `/sign-in`, `/signin`, `/login`, `/account/login`, and legacy Communiverse login paths now redirect to `/sign-in/`. A paused-account script had removed the header links; the replacement preserves account navigation while continuing to pause D1 workspace actions. Older public-domain JavaScript had rewritten live header links to `espacios.me`; both `v25` and `v69` navigation assets now keep account links on `communiverseclubs.com` with cache-busted URLs.
 - After publishing the follow-up repair, real Chrome clicks from Discover, Events, Clubs, and Circles reached the sign-in form; mobile 320px and 390px widths and 667×375 landscape were checked. Normal public traffic without a version override passed home/mobile, Events/desktop, and Circles/landscape browser clicks.
+- Performance and recovery follow-up: the verified 1024px Keiffer and Luna portraits were resized to 384px WebP, and Circles' existing 384px artist variants now use sizes that match the visible circles. In a 390px headless Chrome cold-load run, Circles resource transfer fell from about 1.40 MB to 0.63 MB; this is a transfer reduction, not a guaranteed load-time or Core Web Vitals result. The original portraits remain available at their original URLs. The IDrive service now issues a new one-time recovery code atomically when an old code is consumed.
+- The private service smoke passed signup, login, session, profile, recovery with a replacement code, old-session revocation, one-use code rejection and logout. The staged public site smoke passed join, sign-in, route aliases, signup, profile, logout, login and recovery with a replacement code. On normal public traffic, real Chrome loaded all 16 Circles portraits and Sophiko's visible artwork, selected her card without page overflow on portrait and landscape phones, and clicked from the home page to the sign-in form.
 
 ## Operational limits
 
@@ -36,7 +38,9 @@
 - Contact email and phone are stored as unverified details. No confirmation or recovery messages are sent.
 - Account objects and rate-limit objects have no storage lifecycle rule yet. Configure retention or cleanup before long-term growth.
 - The local ignored `build/bridge-token` and `build/vault-root` files are required for service version updates. Preserve them securely; never commit them. The staging script refuses a partial secret set and reuses both existing values.
+- This is not yet a fully functional Workspace release: normal public requests to `/workspace/` and `/profile/` returned 503 on November 15. The legacy D1 workspace/community write gate remains false. The IDrive account service does not replace the D1 query and write layer for those features.
+- The mobile Circles cold-load run after release measured about 3.57 seconds to first byte and 4.68 seconds to largest contentful paint from this test environment, despite the smaller portrait transfer. The remaining latency is not resolved by this release; do not describe the whole site as fast based on the image savings alone.
 
 ## Rollback
 
-For the public Worker, deploy `82162bee-789c-4996-a4b7-2c814e39811a` at 100% and `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 0%. This restores the last verified Circles sign-in route, though legacy navigation on the home, Events and Clubs pages can still rewrite Sign in to `espacios.me`. Keep the IDrive service version and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.
+For the public Worker, deploy `8b9e7e68-150d-4896-aa1f-2f23169a9aa3` at 100% and `10012db0-36a4-417c-8628-52495b5d6e60` at 0%. This restores the verified sign-in navigation but also the prior larger portrait delivery and previous private account service URL. Keep both IDrive service versions and stored accounts intact for a forward repair. Recheck ordinary public traffic after any rollback.

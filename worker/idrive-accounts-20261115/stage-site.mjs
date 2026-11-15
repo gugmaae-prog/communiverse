@@ -6,10 +6,11 @@ import { join } from 'node:path';
 const base = new URL('./', import.meta.url);
 const ACCOUNT = 'b1b843ec85bc39a3a4d370ba4f84f17a';
 const WORKER = 'communiverse-workspace-ux-v3-20261009';
-const ACTIVE = '8b9e7e68-150d-4896-aa1f-2f23169a9aa3';
-const DEPLOYMENT = '083f51db-5495-4364-b5aa-ec18a1ecccde';
-const SERVICE_VERSION = '212c1b07-2df1-4aee-89f1-5f771a4d0b57';
-const SERVICE_URL = 'https://212c1b07-espacios-ai-router.thekeifferjapeth.workers.dev';
+const ACTIVE = '10012db0-36a4-417c-8628-52495b5d6e60';
+const DEPLOYMENT = 'be171dd2-1137-40ab-a94c-b78a1aa81972';
+const SERVICE_VERSION = 'b92fae7e-8fcf-4673-aaf5-4ee93c9d1da2';
+const SERVICE_URL = 'https://b92fae7e-espacios-ai-router.thekeifferjapeth.workers.dev';
+const CURRENT_SERVICE_URL = SERVICE_URL;
 async function api(path, init = {}) {
   const config = await readFile(join(homedir(), '.wrangler/config/default.toml'), 'utf8');
   const token = config.match(/^oauth_token\s*=\s*"([^"]+)"/m)?.[1];
@@ -50,8 +51,8 @@ const bridgeToken = (await readFile(new URL('build/bridge-token', base), 'utf8')
 if (!/^[a-f0-9]{96}$/.test(bridgeToken)) throw Error('Private account service token is invalid');
 if (!bindings.some(b => b.name === 'CV_IDRIVE_AUTH_TOKEN')) bindings.push({ name: 'CV_IDRIVE_AUTH_TOKEN', type: 'secret_text', text: bridgeToken });
 const urlBinding = bindings.find(b => b.name === 'CV_IDRIVE_AUTH_URL');
-if (urlBinding && urlBinding.text !== SERVICE_URL) throw Error('Private account service URL changed');
-if (!urlBinding) bindings.push({ name: 'CV_IDRIVE_AUTH_URL', type: 'plain_text', text: SERVICE_URL });
+if (urlBinding?.text !== CURRENT_SERVICE_URL) throw Error('Current private account service URL changed');
+urlBinding.text = SERVICE_URL;
 const digest = createHash('sha256').update(code).digest('hex');
 const metadata = {
   main_module: 'account-worker.mjs',
